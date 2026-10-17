@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tanaman.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Contact Us - RylVa Green</title>
+</head>
+<body>
+    <!-- navbar bawaan rylva green -->
+    <header>
+        <nav class="container-navbar">
+            <div class="logo-container">
+                <img src="img/flower.svg" alt="Logo RylVa Green" class="logo">
+                <p class="logo-text">RylVa Green</p>
+            </div>
+            <ul class="nav-list">
+                <li><a href="Landing_page.html" class="nav-options">HOME</a></li>
+                <li><a href="katalog.html" class="nav-options">PRODUCT</a></li>
+                <li><a href="#" class="nav-options">PLANT CARE</a></li>
+                <li><a href="Contact.html" class="nav-options home-btn menuaktif">CONTACT</a></li>
+                <li><a href="#" class="nav-options btn-shop">SHOP NOW</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="maincontact">
+        <!-- bagian banner atas -->
+        <section class="herokontak">
+            <div class="herokontakoverlay">
+                <span class="badgeteks">Learn More For Our Blog</span>
+                <h1 class="judulkontak">Contact Us</h1>
+                <p class="subkontak">Reach out to RylVa Green for any inquiries, plant care tips, or support.</p>
+            </div>
+        </section>
+
+        <!-- kartu informasi kontak tumpang tindih -->
+        <section class="infokartu">
+            <div class="bungkuskartu">
+                <!-- kartu terang (kiri) -->
+                <div class="itemkartu kartuterang">
+                    <div class="ikonkartu"><i class="fa-solid fa-phone"></i></div>
+                    <h3>(+62) 896 5611 0902</h3>
+                    <p>Call us for fast response regarding your plant orders or consultation.</p>
+                    <a href="https://wa.me/6289656110902?text=Halo%20RylVa!%0ASaya%20mau%20konsultasi%20tanaman." class="linkkartu" target="_blank">
+                        <i class="fa-solid fa-circle-play"></i> Tanya RylVa Green
+                    </a>
+                </div>
+
+                <!-- kartu gelap (tengah) -->
+                <div class="itemkartu kartugelap">
+                    <div class="ikonkartu ikonputih"><i class="fa-solid fa-envelope"></i></div>
+                    <h3>rylvagreen@gmail.com</h3>
+                    <p>Send us an email anytime. We usually reply within 24 hours on workdays.</p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rylvagreen@gmail.com&su=Konsultasi%20Tanaman&body=Halo%20RylVa!" target="_blank" class="linkkartu linkputih">
+                        <i class="fa-solid fa-circle-play"></i>
+                    Email RylVa Green
+                    </a>
+                </div>
+
+                <!-- kartu terang (kanan) -->
+                <div class="itemkartu kartuterang">
+                    <div class="ikonkartu"><i class="fa-solid fa-location-dot"></i></div>
+                    <h3>Bandung, ID</h3>
+                    <p>Visit our local nursery in Bandung, West Java for direct plant picking.</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Bandung,+Jawa+Barat" class="linkkartu" target="_blank"><i class="fa-solid fa-circle-play"></i> Buka Peta RylVa</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- bagian detail dan formulir -->
+        <section class="detailkontak">
+            <!-- kolom kiri: waktu & peta -->
+            <div class="kolomkiri">
+                <h2 class="judulkolom">Our Working Time</h2>
+                <p class="teksdeskripsi">We are open and ready to help you during these hours.</p>
+                
+                <ul class="daftarkerja">
+                    <li><i class="fa-solid fa-clock"></i> Monday - Friday : 8AM - 5PM</li>
+                    <li><i class="fa-solid fa-clock"></i> Saturday : 9AM - 3PM</li>
+                    <li><i class="fa-solid fa-xmark"></i> Sunday (Closed)</li>
+                </ul>
+
+                <h2 class="judulkolom" style="margin-top: 40px;">Location :</h2>
+                <div class="bungkuspeta">
+                    <!-- embed iframe peta -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126748.56347862248!2d107.57311709235512!3d-6.903444341687337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
+                        width="100%" 
+                        height="250" 
+                        style="border:0; border-radius: 12px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- kolom kanan: formulir -->
+            <div class="kolomkanan">
+                <div class="bungkusform">
+                    <span class="tagform">Contact Us</span>
+                    <h2 class="judulform">Get In Touch !</h2>
+                    
+                    <form action="#" class="formkontak">
+                        <div class="grupinput">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Email" required>
+                        </div>
+                        <div class="grupinput">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Name" required>
+                        </div>
+                        <div class="grupinput">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" placeholder="Message" required></textarea>
+                        </div>
+                        <button type="submit" class="tombolsubmit">Submit Button</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer rylva green -->
+    <footer class="footer-new">
+        <p>&copy; 2026 RylVa Green. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Tiktok</a>
+            <a href="#">YouTube</a>
+        </div>
+    </footer>
+</body>
+</html>
