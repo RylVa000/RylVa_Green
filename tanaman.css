@@ -641,6 +641,11 @@ body {
     color: var(--background-color);
 }
 
+.privacy{
+    color: var(--background-color);
+    text-decoration: none;
+}
+
 .social-icons {
     display: flex;
     gap: 20px;
@@ -654,7 +659,7 @@ body {
     transition: opacity 0.3s;
 }
 
-.social-icons a:hover {
+.social-icons a:hover .privacy:hover{
     opacity: 0.8;
 }
 
@@ -951,4 +956,92 @@ body {
 .tombolsubmit:hover {
     background-color: var(--primary-color);
     color: #fff;
+}
+
+/* ================================================== */
+/* PRIVACY AND POLICY PAGE */
+/* ================================================== */
+.headerprivasi {
+    background:var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 100px 20px 60px 20px;
+}
+
+.headerprivasi h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.tanggalupdate {
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+/* area pembungkus teks utama */
+.kontenprivasi {
+    background-color: white;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    color: #374151;
+    line-height: 1.7; /* jarak antar baris sedikit dilebarkan */
+}
+
+/* tipografi dan jarak */
+.teksintro {
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+}
+
+.judulbagian {
+    color: #111827;
+    font-size: 1.5rem;
+    margin-top: 45px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.subjudul {
+    color: #1f2937;
+    font-size: 1.2rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.isikebijakan {
+    margin-bottom: 15px;
+}
+
+.daftarkebijakan {
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+
+.daftarkebijakan li {
+    margin-bottom: 10px;
+}
+
+.daftarkebijakan strong {
+    color: #111827;
+}
+
+/* responsivitas layar hp */
+@media (max-width: 600px) {
+    .headerprivasi {
+        padding: 80px 15px 40px 15px;
+    }
+    
+    .headerprivasi h1 {
+        font-size: 2rem;
+    }
+
+    .kontenprivasi {
+        padding: 30px 15px;
+    }
+
+    .judulbagian {
+        font-size: 1.3rem;
+    }
 }
