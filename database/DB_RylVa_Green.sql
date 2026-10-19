@@ -28,6 +28,7 @@ USE `RylVa_Green`;
 
 -- 1. Tabel: akun_pengguna
 -- Merepresentasikan data induk seluruh akun pengguna (Pelanggan, Admin, SuperAdmin)
+DROP TABLE IF EXISTS `akun_pengguna`;
 CREATE TABLE `akun_pengguna` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal unik akun pengguna',
   `peran` ENUM('CUSTOMER', 'ADMIN', 'SUPERADMIN') NOT NULL DEFAULT 'CUSTOMER' COMMENT 'Peran tunggal pengguna sesuai BR-19 (satu akun satu peran)',
@@ -62,6 +63,7 @@ CREATE TABLE `akun_pengguna` (
 
 -- 2. Tabel: identitas_eksternal
 -- Merepresentasikan penautan akun pelanggan dengan penyedia identitas pihak ketiga (Google OIDC)
+DROP TABLE IF EXISTS `identitas_eksternal`;
 CREATE TABLE `identitas_eksternal` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal identitas eksternal',
   `akun_pengguna_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi akun pengguna yang ditautkan',
@@ -75,13 +77,13 @@ CREATE TABLE `identitas_eksternal` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_identitas_eksternal_penyedia_subjek` (`nama_penyedia`, `subjek_penyedia_id`),
   UNIQUE KEY `uk_identitas_eksternal_akun_penyedia` (`akun_pengguna_id`, `nama_penyedia`),
-  CONSTRAINT `fk_identitas_eksternal_akun_pengguna` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `chk_identitas_eksternal_email_terverifikasi` CHECK (`status_email_terverifikasi` = 1)
+  CONSTRAINT `fk_identitas_eksternal_akun_pengguna` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan penautan akun pelanggan dengan login eksternal Google OIDC setelah kepemilikan akun terverifikasi';
 
 -- 3. Tabel: sesi_login
 -- Merepresentasikan penyimpanan sesi login berbasis database MySQL untuk pelanggan dan staf (Bagian 15.2 & 15.6)
+DROP TABLE IF EXISTS `sesi_login`;
 CREATE TABLE `sesi_login` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal baris sesi login',
   `hash_id_sesi` CHAR(64) NOT NULL COMMENT 'Hash SHA-256 dari ID sesi cookie (__Host-rg_sid / __Host-rg_staff)',
@@ -109,6 +111,7 @@ CREATE TABLE `sesi_login` (
 
 -- 4. Tabel: kode_verifikasi
 -- Merepresentasikan kode OTP verifikasi email, token reset kata sandi, aktivasi Admin, dan konfirmasi penautan Google
+DROP TABLE IF EXISTS `kode_verifikasi`;
 CREATE TABLE `kode_verifikasi` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal kode verifikasi',
   `akun_pengguna_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi akun pengguna pemilik kode/token',
@@ -131,6 +134,7 @@ CREATE TABLE `kode_verifikasi` (
 
 -- 5. Tabel: alamat_pengguna
 -- Merepresentasikan daftar alamat pengiriman tersimpan milik pelanggan (maksimum P-26 = 5 alamat per akun)
+DROP TABLE IF EXISTS `alamat_pengguna`;
 CREATE TABLE `alamat_pengguna` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal alamat pengguna',
   `akun_pengguna_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi akun pelanggan pemilik alamat',
@@ -153,14 +157,13 @@ CREATE TABLE `alamat_pengguna` (
   PRIMARY KEY (`id`),
   KEY `idx_alamat_pengguna_akun_aktif` (`akun_pengguna_id`, `status_aktif`, `status_alamat_utama`),
   KEY `idx_alamat_pengguna_kode_pos` (`kode_pos`),
-  CONSTRAINT `fk_alamat_pengguna_akun_pengguna` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `chk_alamat_pengguna_lintang` CHECK (`titik_lintang` IS NULL OR (`titik_lintang` BETWEEN -90.0000000 AND 90.0000000)),
-  CONSTRAINT `chk_alamat_pengguna_bujur` CHECK (`titik_bujur` IS NULL OR (`titik_bujur` BETWEEN -180.0000000 AND 180.0000000))
+  CONSTRAINT `fk_alamat_pengguna_akun_pengguna` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan buku alamat pengiriman pelanggan beserta titik koordinat peta untuk layanan kurir';
 
 -- 6. Tabel: batas_laju_permintaan
 -- Merepresentasikan penghitung pembatasan laju (rate limiting RL-01 s.d. RL-15) berbasis MySQL (Bagian 15.3)
+DROP TABLE IF EXISTS `batas_laju_permintaan`;
 CREATE TABLE `batas_laju_permintaan` (
   `kunci_batas_laju` CHAR(64) NOT NULL COMMENT 'Hash SHA-256 dari kombinasi kode endpoint RL-xx dan subjek (IP, email, akun, atau sesi)',
   `awal_jendela_waktu` INT UNSIGNED NOT NULL COMMENT 'Detik epoch awal jendela waktu tetap (fixed window)',
@@ -174,6 +177,7 @@ CREATE TABLE `batas_laju_permintaan` (
 
 -- 7. Tabel: log_peristiwa_keamanan
 -- Merepresentasikan pencatatan peristiwa keamanan aplikasi (login gagal, CSRF, rate limit, IDOR, webhook ditolak) sesuai Bagian 15.10
+DROP TABLE IF EXISTS `log_peristiwa_keamanan`;
 CREATE TABLE `log_peristiwa_keamanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal catatan peristiwa keamanan',
   `id_permintaan` VARCHAR(64) NOT NULL COMMENT 'ID korelasi permintaan HTTP (request_id) untuk penelusuran insiden',
@@ -200,6 +204,7 @@ CREATE TABLE `log_peristiwa_keamanan` (
 
 -- 8. Tabel: kategori_produk
 -- Merepresentasikan master hierarki kategori florist dan gardening goods (Bagian 27.1, 27.2, 27.4)
+DROP TABLE IF EXISTS `kategori_produk`;
 CREATE TABLE `kategori_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal kategori produk',
   `kategori_induk_id` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT 'Referensi kategori induk untuk mendukung struktur pohon subkategori',
@@ -223,6 +228,7 @@ CREATE TABLE `kategori_produk` (
 
 -- 9. Tabel: produk
 -- Merepresentasikan data induk produk (florist siap jual, buket kustom, tanaman hias, gardening goods, paket berkebun)
+DROP TABLE IF EXISTS `produk`;
 CREATE TABLE `produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal produk',
   `sku` VARCHAR(64) NOT NULL COMMENT 'Kode SKU unik tingkat produk induk',
@@ -265,15 +271,13 @@ CREATE TABLE `produk` (
   KEY `idx_produk_harga_terlaris` (`status_produk`, `harga_dasar_rupiah`, `jumlah_unit_terjual`),
   KEY `fk_produk_dibuat_oleh` (`dibuat_oleh_akun_id`),
   CONSTRAINT `fk_produk_kategori_utama` FOREIGN KEY (`kategori_utama_id`) REFERENCES `kategori_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_produk_dibuat_oleh` FOREIGN KEY (`dibuat_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_produk_stok_tidak_negatif` CHECK (`jumlah_stok_jual` >= 0),
-  CONSTRAINT `chk_produk_dimensi_positif` CHECK (`berat_gram` > 0 AND `panjang_milimeter` > 0 AND `lebar_milimeter` > 0 AND `tinggi_milimeter` > 0),
-  CONSTRAINT `chk_produk_harga_diskon_valid` CHECK (`harga_diskon_rupiah` IS NULL OR `harga_diskon_rupiah` <= `harga_dasar_rupiah`)
+  CONSTRAINT `fk_produk_dibuat_oleh` FOREIGN KEY (`dibuat_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan master produk florist, buket kustom, tanaman hias, gardening goods, dan paket berkebun';
 
 -- 10. Tabel: relasi_produk_kategori
 -- Merepresentasikan pemetaan banyak-ke-banyak (many-to-many) antara produk dan kategori (Bagian 27.2 & 27.4)
+DROP TABLE IF EXISTS `relasi_produk_kategori`;
 CREATE TABLE `relasi_produk_kategori` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal relasi produk-kategori',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk yang dihubungkan ke kategori',
@@ -290,6 +294,7 @@ CREATE TABLE `relasi_produk_kategori` (
 
 -- 11. Tabel: varian_produk
 -- Merepresentasikan SKU varian komersial produk yang memiliki harga, dimensi, satuan, atau stok tersendiri (Bagian 27.2 & 27.4)
+DROP TABLE IF EXISTS `varian_produk`;
 CREATE TABLE `varian_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal varian produk',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk induk pemilik varian',
@@ -315,14 +320,13 @@ CREATE TABLE `varian_produk` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_varian_produk_sku` (`sku_varian`),
   KEY `idx_varian_produk_induk_status` (`produk_id`, `status_varian`, `urutan_tampil`),
-  CONSTRAINT `fk_varian_produk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_varian_produk_stok_tidak_negatif` CHECK (`jumlah_stok_varian` >= 0),
-  CONSTRAINT `chk_varian_produk_harga_diskon_valid` CHECK (`harga_diskon_rupiah` IS NULL OR `harga_diskon_rupiah` <= `harga_rupiah`)
+  CONSTRAINT `fk_varian_produk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan varian komersial/SKU produk (ukuran pot, volume media tanam, ukuran tanaman) beserta harga dan stoknya';
 
 -- 12. Tabel: gambar_produk
 -- Merepresentasikan galeri foto produk (wajib 1 sampai 8 foto per produk sesuai Bagian 5 & 12.2)
+DROP TABLE IF EXISTS `gambar_produk`;
 CREATE TABLE `gambar_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal gambar produk',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk pemilik gambar',
@@ -339,13 +343,13 @@ CREATE TABLE `gambar_produk` (
   KEY `idx_gambar_produk_urutan` (`produk_id`, `status_gambar_utama`, `urutan_tampil`),
   KEY `fk_gambar_produk_varian` (`varian_produk_id`),
   CONSTRAINT `fk_gambar_produk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_gambar_produk_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_gambar_produk_urutan` CHECK (`urutan_tampil` BETWEEN 1 AND 8)
+  CONSTRAINT `fk_gambar_produk_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan daftar foto galeri produk dan varian (1-8 foto per produk)';
 
 -- 13. Tabel: atribut_produk
 -- Merepresentasikan definisi atribut fleksibel untuk filter, spesifikasi deskriptif, maupun pembentuk varian (Bagian 27.2 & 27.4)
+DROP TABLE IF EXISTS `atribut_produk`;
 CREATE TABLE `atribut_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal definisi atribut produk',
   `kode_atribut` VARCHAR(50) NOT NULL COMMENT 'Kode unik atribut (mis. UKURAN_POT, VOLUME_MEDIA, WARNA, KEBUTUHAN_CAHAYA, LUBANG_DRAINASE)',
@@ -366,6 +370,7 @@ CREATE TABLE `atribut_produk` (
 
 -- 14. Tabel: pilihan_atribut_produk
 -- Merepresentasikan daftar opsi terkontrol untuk atribut bertipe pilihan (mis. 15 cm, 20 cm, Keramik, Teduh) (Bagian 27.4)
+DROP TABLE IF EXISTS `pilihan_atribut_produk`;
 CREATE TABLE `pilihan_atribut_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pilihan atribut',
   `atribut_produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi atribut induk pemilik opsi pilihan',
@@ -383,6 +388,7 @@ CREATE TABLE `pilihan_atribut_produk` (
 
 -- 15. Tabel: nilai_atribut_produk
 -- Merepresentasikan nilai atribut deskriptif (spesifikasi non-varian) yang melekat pada suatu produk (Bagian 27.4)
+DROP TABLE IF EXISTS `nilai_atribut_produk`;
 CREATE TABLE `nilai_atribut_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal nilai atribut produk',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk pemilik spesifikasi',
@@ -404,6 +410,7 @@ CREATE TABLE `nilai_atribut_produk` (
 
 -- 16. Tabel: nilai_atribut_varian
 -- Merepresentasikan kombinasi nilai atribut pembeda untuk setiap varian produk (Bagian 27.4)
+DROP TABLE IF EXISTS `nilai_atribut_varian`;
 CREATE TABLE `nilai_atribut_varian` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal nilai atribut varian',
   `varian_produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi varian produk',
@@ -422,6 +429,7 @@ CREATE TABLE `nilai_atribut_varian` (
 
 -- 17. Tabel: komponen_paket_berkebun
 -- Merepresentasikan susunan item komponen penyusun untuk produk berjenis PAKET_BERKEBUN / starter kit (Bagian 27.1, 27.2, 27.3)
+DROP TABLE IF EXISTS `komponen_paket_berkebun`;
 CREATE TABLE `komponen_paket_berkebun` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal komponen paket berkebun',
   `produk_paket_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk induk yang berjenis PAKET_BERKEBUN',
@@ -438,9 +446,7 @@ CREATE TABLE `komponen_paket_berkebun` (
   KEY `fk_komponen_paket_varian_komponen` (`varian_komponen_id`),
   CONSTRAINT `fk_komponen_paket_produk_paket` FOREIGN KEY (`produk_paket_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_komponen_paket_produk_komponen` FOREIGN KEY (`produk_komponen_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_komponen_paket_varian_komponen` FOREIGN KEY (`varian_komponen_id`) REFERENCES `varian_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_komponen_paket_bukan_diri_sendiri` CHECK (`produk_paket_id` <> `produk_komponen_id`),
-  CONSTRAINT `chk_komponen_paket_kuantitas_positif` CHECK (`kuantitas_komponen` > 0)
+  CONSTRAINT `fk_komponen_paket_varian_komponen` FOREIGN KEY (`varian_komponen_id`) REFERENCES `varian_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan rincian komponen penyusun paket berkebun (starter kit) untuk alokasi stok komponen secara atomik';
 
@@ -450,6 +456,7 @@ CREATE TABLE `komponen_paket_berkebun` (
 
 -- 18. Tabel: lokasi_stok
 -- Merepresentasikan master lokasi fisik penyimpanan barang dagangan dan bahan florist (Bagian 27.3 & 27.4)
+DROP TABLE IF EXISTS `lokasi_stok`;
 CREATE TABLE `lokasi_stok` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal lokasi stok',
   `kode_lokasi` VARCHAR(32) NOT NULL COMMENT 'Kode unik lokasi penyimpanan (mis. TOKO-UTAMA, GUDANG-KEBUN, NURSERY-01)',
@@ -467,6 +474,7 @@ CREATE TABLE `lokasi_stok` (
 
 -- 19. Tabel: stok_varian_produk
 -- Merepresentasikan saldo stok barang dagangan per produk/varian dan per lokasi penyimpanan (Bagian 27.3 & 27.4)
+DROP TABLE IF EXISTS `stok_varian_produk`;
 CREATE TABLE `stok_varian_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal baris saldo stok lokasi',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk barang dagangan',
@@ -482,13 +490,13 @@ CREATE TABLE `stok_varian_produk` (
   KEY `fk_stok_varian_produk_varian` (`varian_produk_id`),
   CONSTRAINT `fk_stok_varian_produk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_stok_varian_produk_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_stok_varian_produk_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_stok_varian_saldo_tidak_negatif` CHECK (`jumlah_stok_saldo` >= 0 AND `jumlah_stok_direservasi` >= 0)
+  CONSTRAINT `fk_stok_varian_produk_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan saldo stok jual dan stok tercadang per produk/varian pada setiap lokasi penyimpanan';
 
 -- 20. Tabel: batch_persediaan
 -- Merepresentasikan pencatatan nomor lot/batch dan tanggal kedaluwarsa (FEFO) untuk benih, pupuk, dan media tanam (Bagian 27.2 & 27.4)
+DROP TABLE IF EXISTS `batch_persediaan`;
 CREATE TABLE `batch_persediaan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal batch persediaan',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk pemilik batch',
@@ -510,13 +518,13 @@ CREATE TABLE `batch_persediaan` (
   KEY `fk_batch_persediaan_lokasi` (`lokasi_stok_id`),
   CONSTRAINT `fk_batch_persediaan_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_batch_persediaan_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_batch_persediaan_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_batch_persediaan_sisa_tidak_negatif` CHECK (`jumlah_tersisa_batch` >= 0)
+  CONSTRAINT `fk_batch_persediaan_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan informasi batch/lot dan tanggal kedaluwarsa (FEFO) untuk benih, pupuk, dan produk berkebun';
 
 -- 21. Tabel: riwayat_perubahan_stok_produk
 -- Merepresentasikan buku besar (ledger append-only) seluruh mutasi stok barang dagangan (Bagian 11.2, A.4, 26.7, 27.4)
+DROP TABLE IF EXISTS `riwayat_perubahan_stok_produk`;
 CREATE TABLE `riwayat_perubahan_stok_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID urut entri buku besar stok produk',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk yang mengalami perubahan stok',
@@ -547,9 +555,7 @@ CREATE TABLE `riwayat_perubahan_stok_produk` (
   CONSTRAINT `fk_riwayat_stok_produk_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_riwayat_stok_produk_batch` FOREIGN KEY (`batch_persediaan_id`) REFERENCES `batch_persediaan` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_riwayat_stok_produk_pelaku` FOREIGN KEY (`pelaku_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_riwayat_stok_produk_penyetuju` FOREIGN KEY (`disetujui_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_riwayat_stok_produk_delta_bukan_nol` CHECK (`perubahan_kuantitas` <> 0),
-  CONSTRAINT `chk_riwayat_stok_produk_saldo_positif` CHECK (`saldo_setelah_mutasi` >= 0)
+  CONSTRAINT `fk_riwayat_stok_produk_penyetuju` FOREIGN KEY (`disetujui_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Buku besar (ledger append-only) untuk seluruh perubahan stok barang dagangan florist dan gardening goods';
 
@@ -559,6 +565,7 @@ CREATE TABLE `riwayat_perubahan_stok_produk` (
 
 -- 22. Tabel: bahan_produksi
 -- Merepresentasikan master bahan baku perangkai buket yang terpisah dari stok barang dagangan (Bagian 11.1, 26.3, 27.3)
+DROP TABLE IF EXISTS `bahan_produksi`;
 CREATE TABLE `bahan_produksi` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal bahan produksi buket',
   `kode_bahan` VARCHAR(50) NOT NULL COMMENT 'Kode SKU unik bahan produksi florist (mis. BHN-MAWAR-MERAH, BHN-KERTAS-CELLO)',
@@ -575,13 +582,13 @@ CREATE TABLE `bahan_produksi` (
   `diperbarui_pada` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Waktu pembaruan terakhir baris (UTC)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_bahan_produksi_kode` (`kode_bahan`),
-  KEY `idx_bahan_produksi_kelompok_status` (`kelompok_bahan`, `status_aktif`),
-  CONSTRAINT `chk_bahan_produksi_stok_tidak_negatif` CHECK (`jumlah_stok_bahan` >= 0.00)
+  KEY `idx_bahan_produksi_kelompok_status` (`kelompok_bahan`, `status_aktif`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan master bahan baku produksi buket (terpisah dari stok barang dagangan sesuai Bagian 11.1 & 27.3)';
 
 -- 23. Tabel: stok_bahan_produksi
 -- Merepresentasikan saldo stok bahan produksi buket per lokasi penyimpanan (penyelarasan Bagian 26.3 & 27.4)
+DROP TABLE IF EXISTS `stok_bahan_produksi`;
 CREATE TABLE `stok_bahan_produksi` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal saldo bahan per lokasi',
   `bahan_produksi_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi bahan produksi buket',
@@ -593,13 +600,13 @@ CREATE TABLE `stok_bahan_produksi` (
   UNIQUE KEY `uk_stok_bahan_produksi_lokasi` (`bahan_produksi_id`, `lokasi_stok_id`),
   KEY `fk_stok_bahan_produksi_lokasi` (`lokasi_stok_id`),
   CONSTRAINT `fk_stok_bahan_produksi_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_stok_bahan_produksi_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_stok_bahan_lokasi_tidak_negatif` CHECK (`jumlah_stok_saldo` >= 0.00 AND `jumlah_stok_dialokasikan` >= 0.00)
+  CONSTRAINT `fk_stok_bahan_produksi_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan saldo stok bahan produksi buket pada setiap lokasi penyimpanan';
 
 -- 24. Tabel: riwayat_perubahan_stok_bahan
 -- Merepresentasikan buku besar (ledger append-only) perubahan stok bahan produksi buket (Bagian 26.3, 26.6, 27.4)
+DROP TABLE IF EXISTS `riwayat_perubahan_stok_bahan`;
 CREATE TABLE `riwayat_perubahan_stok_bahan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID urut entri buku besar stok bahan produksi',
   `bahan_produksi_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi bahan produksi yang mengalami perubahan stok',
@@ -621,14 +628,13 @@ CREATE TABLE `riwayat_perubahan_stok_bahan` (
   KEY `fk_riwayat_stok_bahan_pelaku` (`pelaku_akun_id`),
   CONSTRAINT `fk_riwayat_stok_bahan_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_riwayat_stok_bahan_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_riwayat_stok_bahan_pelaku` FOREIGN KEY (`pelaku_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_riwayat_stok_bahan_delta_bukan_nol` CHECK (`perubahan_kuantitas` <> 0.00),
-  CONSTRAINT `chk_riwayat_stok_bahan_saldo_positif` CHECK (`saldo_setelah_mutasi` >= 0.00)
+  CONSTRAINT `fk_riwayat_stok_bahan_pelaku` FOREIGN KEY (`pelaku_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Buku besar (ledger append-only) untuk seluruh mutasi stok bahan produksi buket';
 
 -- 25. Tabel: kategori_pilihan_buket
 -- Merepresentasikan kelompok/kategori opsi kustomisasi buket (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `kategori_pilihan_buket`;
 CREATE TABLE `kategori_pilihan_buket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal kategori pilihan kustomisasi buket',
   `kode_kategori_pilihan` VARCHAR(50) NOT NULL COMMENT 'Kode unik kelompok pilihan (mis. BUNGA_UTAMA, WARNA_WRAP, PITA, HIASAN_TAMBAHAN)',
@@ -650,6 +656,7 @@ CREATE TABLE `kategori_pilihan_buket` (
 
 -- 26. Tabel: opsi_pilihan_buket
 -- Merepresentasikan daftar pilihan spesifik di dalam setiap kategori pilihan buket (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `opsi_pilihan_buket`;
 CREATE TABLE `opsi_pilihan_buket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal opsi pilihan buket',
   `kategori_pilihan_buket_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi kategori pilihan buket induk (sesuai Bagian 26.4)',
@@ -672,6 +679,7 @@ CREATE TABLE `opsi_pilihan_buket` (
 
 -- 27. Tabel: kategori_pilihan_produk
 -- Merepresentasikan penghubung antara produk buket dengan kategori pilihan yang diizinkan pada produk tersebut (Bagian 26.3)
+DROP TABLE IF EXISTS `kategori_pilihan_produk`;
 CREATE TABLE `kategori_pilihan_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pemetaan kategori pilihan ke produk',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk buket yang mendukung kustomisasi',
@@ -686,13 +694,13 @@ CREATE TABLE `kategori_pilihan_produk` (
   UNIQUE KEY `uk_kategori_pilihan_produk_pasangan` (`produk_id`, `kategori_pilihan_buket_id`),
   KEY `fk_kategori_pilihan_produk_kategori_buket` (`kategori_pilihan_buket_id`),
   CONSTRAINT `fk_kategori_pilihan_produk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_kategori_pilihan_produk_kategori_buket` FOREIGN KEY (`kategori_pilihan_buket_id`) REFERENCES `kategori_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_kategori_pilihan_produk_batas` CHECK (`batas_maksimum_pilihan` >= `batas_minimum_pilihan`)
+  CONSTRAINT `fk_kategori_pilihan_produk_kategori_buket` FOREIGN KEY (`kategori_pilihan_buket_id`) REFERENCES `kategori_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menghubungkan produk buket kustom dengan kategori pilihan yang boleh dikonfigurasi pelanggan';
 
 -- 28. Tabel: kebutuhan_bahan_opsi_buket
 -- Merepresentasikan pemetaan setiap opsi pilihan buket ke kebutuhan bahan produksi dan kuantitasnya (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `kebutuhan_bahan_opsi_buket`;
 CREATE TABLE `kebutuhan_bahan_opsi_buket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pemetaan kebutuhan bahan opsi buket',
   `opsi_pilihan_buket_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi opsi pilihan buket (sesuai Bagian 26.4)',
@@ -705,13 +713,13 @@ CREATE TABLE `kebutuhan_bahan_opsi_buket` (
   UNIQUE KEY `uk_kebutuhan_bahan_opsi_pasangan` (`opsi_pilihan_buket_id`, `bahan_produksi_id`),
   KEY `fk_kebutuhan_bahan_opsi_bahan` (`bahan_produksi_id`),
   CONSTRAINT `fk_kebutuhan_bahan_opsi_opsi` FOREIGN KEY (`opsi_pilihan_buket_id`) REFERENCES `opsi_pilihan_buket` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_kebutuhan_bahan_opsi_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_kebutuhan_bahan_opsi_positif` CHECK (`kuantitas_bahan_per_opsi` > 0.00)
+  CONSTRAINT `fk_kebutuhan_bahan_opsi_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Memetakan setiap opsi pilihan buket ke jenis dan kuantitas bahan produksi yang diperlukan';
 
 -- 29. Tabel: resep_buket
 -- Merepresentasikan resep komposisi bahan dasar untuk produk buket standar maupun template buket per ukuran/varian (Bagian 27.3 & 27.4)
+DROP TABLE IF EXISTS `resep_buket`;
 CREATE TABLE `resep_buket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal resep dasar buket',
   `produk_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi produk buket',
@@ -734,6 +742,7 @@ CREATE TABLE `resep_buket` (
 
 -- 30. Tabel: detail_resep_buket
 -- Merepresentasikan rincian bahan produksi dasar yang dibutuhkan oleh suatu resep buket (Bagian 27.4)
+DROP TABLE IF EXISTS `detail_resep_buket`;
 CREATE TABLE `detail_resep_buket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal detail resep buket',
   `resep_buket_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi resep buket induk',
@@ -745,8 +754,7 @@ CREATE TABLE `detail_resep_buket` (
   UNIQUE KEY `uk_detail_resep_buket_bahan` (`resep_buket_id`, `bahan_produksi_id`),
   KEY `fk_detail_resep_buket_bahan` (`bahan_produksi_id`),
   CONSTRAINT `fk_detail_resep_buket_resep` FOREIGN KEY (`resep_buket_id`) REFERENCES `resep_buket` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_detail_resep_buket_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_detail_resep_kuantitas_positif` CHECK (`kuantitas_bahan` > 0.00)
+  CONSTRAINT `fk_detail_resep_buket_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan rincian kuantitas bahan produksi untuk setiap resep dasar buket';
 
@@ -756,6 +764,7 @@ CREATE TABLE `detail_resep_buket` (
 
 -- 31. Tabel: keranjang
 -- Merepresentasikan keranjang belanja pelanggan (tidak mengurangi stok, retensi 30 hari tanpa aktivitas sesuai P-25)
+DROP TABLE IF EXISTS `keranjang`;
 CREATE TABLE `keranjang` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal keranjang belanja',
   `akun_pengguna_id` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT 'Referensi akun pelanggan pemilik keranjang (nullable untuk sinkronisasi keranjang tamu sebelum digabung, Bagian 26.5)',
@@ -774,6 +783,7 @@ CREATE TABLE `keranjang` (
 
 -- 32. Tabel: item_keranjang_belanja
 -- Merepresentasikan baris item produk/varian di dalam keranjang belanja (mendukung satu produk dengan konfigurasi buket berbeda, Bagian 26.2 & 26.8)
+DROP TABLE IF EXISTS `item_keranjang_belanja`;
 CREATE TABLE `item_keranjang_belanja` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal baris item keranjang belanja',
   `keranjang_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi keranjang belanja induk',
@@ -791,13 +801,13 @@ CREATE TABLE `item_keranjang_belanja` (
   KEY `fk_item_keranjang_varian` (`varian_produk_id`),
   CONSTRAINT `fk_item_keranjang_keranjang` FOREIGN KEY (`keranjang_id`) REFERENCES `keranjang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_item_keranjang_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_item_keranjang_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `chk_item_keranjang_kuantitas_p05` CHECK (`kuantitas` BETWEEN 1 AND 20)
+  CONSTRAINT `fk_item_keranjang_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan baris item produk dan varian di keranjang belanja dengan dukungan multi-konfigurasi buket kustom';
 
 -- 33. Tabel: konfigurasi_buket_keranjang
 -- Merepresentasikan konfigurasi buket kustom yang sedang dirancang pada baris item keranjang belanja (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `konfigurasi_buket_keranjang`;
 CREATE TABLE `konfigurasi_buket_keranjang` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal konfigurasi buket di keranjang',
   `item_keranjang_belanja_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi baris item keranjang belanja (sesuai Bagian 26.4)',
@@ -817,6 +827,7 @@ CREATE TABLE `konfigurasi_buket_keranjang` (
 
 -- 34. Tabel: pilihan_buket_keranjang
 -- Merepresentasikan rincian opsi kustomisasi buket yang dipilih pada konfigurasi keranjang (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `pilihan_buket_keranjang`;
 CREATE TABLE `pilihan_buket_keranjang` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pilihan opsi buket di keranjang',
   `konfigurasi_buket_keranjang_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi konfigurasi buket keranjang (sesuai Bagian 26.4)',
@@ -831,13 +842,13 @@ CREATE TABLE `pilihan_buket_keranjang` (
   KEY `fk_pilihan_buket_keranjang_opsi` (`opsi_pilihan_buket_id`),
   CONSTRAINT `fk_pilihan_buket_keranjang_konfigurasi` FOREIGN KEY (`konfigurasi_buket_keranjang_id`) REFERENCES `konfigurasi_buket_keranjang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_pilihan_buket_keranjang_kategori` FOREIGN KEY (`kategori_pilihan_buket_id`) REFERENCES `kategori_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_pilihan_buket_keranjang_opsi` FOREIGN KEY (`opsi_pilihan_buket_id`) REFERENCES `opsi_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_pilihan_buket_keranjang_kuantitas` CHECK (`kuantitas_opsi` > 0)
+  CONSTRAINT `fk_pilihan_buket_keranjang_opsi` FOREIGN KEY (`opsi_pilihan_buket_id`) REFERENCES `opsi_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan daftar rincian opsi kustomisasi buket yang dipilih pelanggan saat masih di keranjang';
 
 -- 35. Tabel: daftar_keinginan
 -- Merepresentasikan daftar produk impian (wishlist) milik pelanggan terdaftar (Bagian 26.7 & 27.6 P3)
+DROP TABLE IF EXISTS `daftar_keinginan`;
 CREATE TABLE `daftar_keinginan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal daftar keinginan pelanggan',
   `akun_pengguna_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi akun pelanggan pemilik daftar keinginan',
@@ -852,6 +863,7 @@ CREATE TABLE `daftar_keinginan` (
 
 -- 36. Tabel: item_daftar_keinginan
 -- Merepresentasikan produk/varian yang disimpan pelanggan di dalam daftar keinginan (Bagian 26.7)
+DROP TABLE IF EXISTS `item_daftar_keinginan`;
 CREATE TABLE `item_daftar_keinginan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal item daftar keinginan',
   `daftar_keinginan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi daftar keinginan induk',
@@ -871,6 +883,7 @@ CREATE TABLE `item_daftar_keinginan` (
 
 -- 37. Tabel: slot_pengiriman
 -- Merepresentasikan jadwal rentang waktu pengiriman harian (PAGI 08-12, SIANG 12-16, SORE 16-20 WIB sesuai P-08)
+DROP TABLE IF EXISTS `slot_pengiriman`;
 CREATE TABLE `slot_pengiriman` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal slot pengiriman',
   `kode_slot` ENUM('PAGI', 'SIANG', 'SORE') NOT NULL COMMENT 'Kode mesin slot pengiriman sesuai Lampiran A.3',
@@ -890,6 +903,7 @@ CREATE TABLE `slot_pengiriman` (
 
 -- 38. Tabel: tanggal_tutup
 -- Merepresentasikan kalender hari tutup operasional toko yang tidak dapat dipilih sebagai tanggal kirim (Bagian 5, 12.6, A.4)
+DROP TABLE IF EXISTS `tanggal_tutup`;
 CREATE TABLE `tanggal_tutup` (
   `tanggal_libur` DATE NOT NULL COMMENT 'Tanggal toko tutup (Primary Key sesuai Lampiran A.4 closed_dates)',
   `keterangan_tutup` VARCHAR(255) NOT NULL COMMENT 'Alasan atau nama hari libur tutup operasional toko',
@@ -904,6 +918,7 @@ CREATE TABLE `tanggal_tutup` (
 
 -- 39. Tabel: zona_layanan_kurir
 -- Merepresentasikan jangkauan wilayah, penyedia kurir, kategori layanan (Instan/Same-Day vs Reguler), dan tarif (D-06, Bagian 26.7)
+DROP TABLE IF EXISTS `zona_layanan_kurir`;
 CREATE TABLE `zona_layanan_kurir` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal zona dan layanan kurir',
   `kode_kurir` VARCHAR(50) NOT NULL COMMENT 'Kode penyedia kurir (mis. GOSEND, GRABEXPRESS, JNE, SICEPAT)',
@@ -925,8 +940,7 @@ CREATE TABLE `zona_layanan_kurir` (
   `diperbarui_pada` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Waktu pembaruan terakhir baris (UTC)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_zona_layanan_kurir_wilayah` (`kode_kurir`, `kode_layanan`, `provinsi_tujuan`, `kota_kabupaten_tujuan`, `kecamatan_tujuan`, `kode_pos_tujuan`),
-  KEY `idx_zona_kurir_pencarian` (`status_aktif`, `kota_kabupaten_tujuan`, `mendukung_produk_mudah_layu`),
-  CONSTRAINT `chk_zona_kurir_mudah_layu` CHECK (`mendukung_produk_mudah_layu` = 0 OR `kategori_kecepatan_layanan` IN ('INSTAN', 'SAME_DAY'))
+  KEY `idx_zona_kurir_pencarian` (`status_aktif`, `kota_kabupaten_tujuan`, `mendukung_produk_mudah_layu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan cakupan wilayah layanan kurir, kelayakan untuk Produk Mudah Layu, dukungan COD, dan tarif dasar';
 
@@ -936,6 +950,7 @@ CREATE TABLE `zona_layanan_kurir` (
 
 -- 40. Tabel: pesanan
 -- Merepresentasikan transaksi utama pesanan pelanggan, status pesanan/pembayaran, snapshot alamat, dan jadwal kirim (Bagian 5, 6.4, 8, A.4)
+DROP TABLE IF EXISTS `pesanan`;
 CREATE TABLE `pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pesanan',
   `nomor_pesanan` VARCHAR(20) NOT NULL COMMENT 'Nomor pesanan unik acak format RV-YYMMDD-XXXXXX (BR-22, Bagian 6.4)',
@@ -990,16 +1005,13 @@ CREATE TABLE `pesanan` (
   KEY `idx_pesanan_selesai_otomatis` (`status_pesanan`, `waktu_batas_jendela_komplain`),
   KEY `fk_pesanan_pemilik_penanganan` (`pemilik_penanganan_akun_id`),
   CONSTRAINT `fk_pesanan_akun_pengguna` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_pesanan_pemilik_penanganan` FOREIGN KEY (`pemilik_penanganan_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_pesanan_total_konsisten` CHECK (`total_tagihan_rupiah` = `subtotal_produk_rupiah` + `biaya_pengiriman_rupiah`),
-  CONSTRAINT `chk_pesanan_refund_maksimal` CHECK (`total_dana_dikembalikan_rupiah` <= `total_tagihan_rupiah`),
-  CONSTRAINT `chk_pesanan_alasan_batal_wajib` CHECK (`status_pesanan` <> 'DIBATALKAN' OR `alasan_pembatalan_kode` IS NOT NULL),
-  CONSTRAINT `chk_pesanan_atribut_ph_wajib` CHECK (`status_pesanan` <> 'PERLU_PENANGANAN' OR (`kode_perlu_penanganan` IS NOT NULL AND `status_sebelum_penanganan` IS NOT NULL))
+  CONSTRAINT `fk_pesanan_pemilik_penanganan` FOREIGN KEY (`pemilik_penanganan_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan transaksi pesanan pelanggan, status 3 dimensi, snapshot alamat, biaya, jadwal kirim, dan penanganan PH-xx';
 
 -- 41. Tabel: item_pesanan
 -- Merepresentasikan baris item pesanan sekaligus snapshot produk, varian, satuan, dan harga saat pembelian (Bagian 5, 26.7, 27.4)
+DROP TABLE IF EXISTS `item_pesanan`;
 CREATE TABLE `item_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal baris item pesanan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan induk',
@@ -1032,14 +1044,13 @@ CREATE TABLE `item_pesanan` (
   CONSTRAINT `fk_item_pesanan_pesanan` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_item_pesanan_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_item_pesanan_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_item_pesanan_substitusi` FOREIGN KEY (`produk_pengganti_substitusi_id`) REFERENCES `produk` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_item_pesanan_kuantitas_positif` CHECK (`kuantitas` > 0),
-  CONSTRAINT `chk_item_pesanan_subtotal_valid` CHECK (`subtotal_baris_rupiah` = `harga_satuan_final_snapshot` * `kuantitas`)
+  CONSTRAINT `fk_item_pesanan_substitusi` FOREIGN KEY (`produk_pengganti_substitusi_id`) REFERENCES `produk` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan baris item pesanan beserta snapshot permanen nama, SKU, varian, satuan, dan harga saat pembelian';
 
 -- 42. Tabel: konfigurasi_buket_pesanan
 -- Merepresentasikan snapshot konfigurasi buket kustom yang melekat pada baris item pesanan (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `konfigurasi_buket_pesanan`;
 CREATE TABLE `konfigurasi_buket_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal konfigurasi buket pada pesanan',
   `item_pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi baris item pesanan induk',
@@ -1061,6 +1072,7 @@ CREATE TABLE `konfigurasi_buket_pesanan` (
 
 -- 43. Tabel: pilihan_buket_pesanan
 -- Merepresentasikan snapshot setiap opsi kustomisasi buket yang dipilih pelanggan pada pesanan (Bagian 26.3 & 26.4)
+DROP TABLE IF EXISTS `pilihan_buket_pesanan`;
 CREATE TABLE `pilihan_buket_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal snapshot opsi buket pesanan',
   `konfigurasi_buket_pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi konfigurasi buket pesanan induk (sesuai Bagian 26.4)',
@@ -1079,13 +1091,13 @@ CREATE TABLE `pilihan_buket_pesanan` (
   KEY `fk_pilihan_buket_pesanan_opsi` (`opsi_pilihan_buket_id`),
   CONSTRAINT `fk_pilihan_buket_pesanan_konfigurasi` FOREIGN KEY (`konfigurasi_buket_pesanan_id`) REFERENCES `konfigurasi_buket_pesanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_pilihan_buket_pesanan_kategori` FOREIGN KEY (`kategori_pilihan_buket_id`) REFERENCES `kategori_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_pilihan_buket_pesanan_opsi` FOREIGN KEY (`opsi_pilihan_buket_id`) REFERENCES `opsi_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_pilihan_buket_pesanan_kuantitas` CHECK (`kuantitas_opsi` > 0)
+  CONSTRAINT `fk_pilihan_buket_pesanan_opsi` FOREIGN KEY (`opsi_pilihan_buket_id`) REFERENCES `opsi_pilihan_buket` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan snapshot rincian opsi pilihan buket dan harga tambahannya pada pesanan';
 
 -- 44. Tabel: kebutuhan_bahan_buket_pesanan
 -- Merepresentasikan rincian kebutuhan bahan produksi yang dihitung server untuk buket dalam pesanan (Bagian 26.3 & 26.6)
+DROP TABLE IF EXISTS `kebutuhan_bahan_buket_pesanan`;
 CREATE TABLE `kebutuhan_bahan_buket_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal kebutuhan bahan buket pesanan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan terkait',
@@ -1106,13 +1118,13 @@ CREATE TABLE `kebutuhan_bahan_buket_pesanan` (
   KEY `fk_kebutuhan_bahan_pesanan_bahan` (`bahan_produksi_id`),
   CONSTRAINT `fk_kebutuhan_bahan_pesanan_pesanan` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_kebutuhan_bahan_pesanan_konfigurasi` FOREIGN KEY (`konfigurasi_buket_pesanan_id`) REFERENCES `konfigurasi_buket_pesanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_kebutuhan_bahan_pesanan_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_kebutuhan_bahan_pesanan_positif` CHECK (`total_kuantitas_bahan_dibutuhkan` > 0.00)
+  CONSTRAINT `fk_kebutuhan_bahan_pesanan_bahan` FOREIGN KEY (`bahan_produksi_id`) REFERENCES `bahan_produksi` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Mencatat perhitungan kebutuhan bahan produksi untuk merangkai buket dalam pesanan';
 
 -- 45. Tabel: produksi_buket_pesanan
 -- Merepresentasikan pekerjaan perangkaian/produksi buket oleh staf florist untuk suatu pesanan (Bagian 26.3 & 26.6)
+DROP TABLE IF EXISTS `produksi_buket_pesanan`;
 CREATE TABLE `produksi_buket_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pekerjaan produksi buket',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan induk',
@@ -1147,6 +1159,7 @@ CREATE TABLE `produksi_buket_pesanan` (
 
 -- 46. Tabel: riwayat_status_produksi_buket
 -- Merepresentasikan catatan riwayat perubahan status pekerjaan produksi buket secara append-only (Bagian 26.3 & 26.6)
+DROP TABLE IF EXISTS `riwayat_status_produksi_buket`;
 CREATE TABLE `riwayat_status_produksi_buket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal riwayat status produksi buket',
   `produksi_buket_pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pekerjaan produksi buket induk',
@@ -1165,6 +1178,7 @@ CREATE TABLE `riwayat_status_produksi_buket` (
 
 -- 47. Tabel: reservasi_stok_pesanan
 -- Merepresentasikan pencadangan stok sementara per metode pembayaran (P-40) dan status komitnya (D-02, D-17, Bagian 11.A, A.4)
+DROP TABLE IF EXISTS `reservasi_stok_pesanan`;
 CREATE TABLE `reservasi_stok_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal reservasi stok pesanan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan yang mencadangkan stok',
@@ -1195,13 +1209,13 @@ CREATE TABLE `reservasi_stok_pesanan` (
   CONSTRAINT `fk_reservasi_stok_item_pesanan` FOREIGN KEY (`item_pesanan_id`) REFERENCES `item_pesanan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_reservasi_stok_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_reservasi_stok_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_reservasi_stok_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_reservasi_stok_kuantitas_positif` CHECK (`kuantitas_direservasi` > 0)
+  CONSTRAINT `fk_reservasi_stok_lokasi` FOREIGN KEY (`lokasi_stok_id`) REFERENCES `lokasi_stok` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan reservasi stok sementara per metode pembayaran (P-40) untuk mencegah overselling saat checkout';
 
 -- 48. Tabel: riwayat_status_pesanan
 -- Merepresentasikan catatan riwayat seluruh transisi status pesanan formal T-01 s.d. T-20 secara append-only (Bagian 8.7, 8.10, A.4)
+DROP TABLE IF EXISTS `riwayat_status_pesanan`;
 CREATE TABLE `riwayat_status_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal riwayat transisi status pesanan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan yang mengalami perubahan status',
@@ -1227,6 +1241,7 @@ CREATE TABLE `riwayat_status_pesanan` (
 
 -- 49. Tabel: catatan_pesanan
 -- Merepresentasikan catatan internal staf maupun pencatatan bukti persetujuan pelanggan pada pesanan (Bagian 5, 9.7, A.4)
+DROP TABLE IF EXISTS `catatan_pesanan`;
 CREATE TABLE `catatan_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal catatan pesanan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan pemilik catatan',
@@ -1250,6 +1265,7 @@ CREATE TABLE `catatan_pesanan` (
 
 -- 50. Tabel: percobaan_pembayaran_pesanan
 -- Merepresentasikan setiap percobaan transaksi pembayaran pesanan ke payment gateway (maksimum P-03 = 5 percobaan per pesanan)
+DROP TABLE IF EXISTS `percobaan_pembayaran_pesanan`;
 CREATE TABLE `percobaan_pembayaran_pesanan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal percobaan pembayaran pesanan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan yang dibayar',
@@ -1276,13 +1292,13 @@ CREATE TABLE `percobaan_pembayaran_pesanan` (
   KEY `idx_percobaan_pembayaran_status` (`pesanan_id`, `status_percobaan`),
   KEY `fk_percobaan_pembayaran_konfirmasi_cod` (`dikonfirmasi_cod_oleh_akun_id`),
   CONSTRAINT `fk_percobaan_pembayaran_pesanan` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_percobaan_pembayaran_konfirmasi_cod` FOREIGN KEY (`dikonfirmasi_cod_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_percobaan_pembayaran_batas_p03` CHECK (`nomor_urut_percobaan` BETWEEN 1 AND 5)
+  CONSTRAINT `fk_percobaan_pembayaran_konfirmasi_cod` FOREIGN KEY (`dikonfirmasi_cod_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan setiap percobaan pembayaran pesanan ke payment gateway maupun konfirmasi pembayaran COD';
 
 -- 51. Tabel: peristiwa_pembayaran
 -- Merepresentasikan log penerimaan webhook payment gateway untuk penegakan idempotensi dan pembuktian sengketa (Bagian 7.3, SEC-06, A.4, A.6)
+DROP TABLE IF EXISTS `peristiwa_pembayaran`;
 CREATE TABLE `peristiwa_pembayaran` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal peristiwa webhook pembayaran',
   `percobaan_pembayaran_pesanan_id` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT 'Referensi percobaan pembayaran terkait bila ditemukan di database (sesuai Bagian 26.4)',
@@ -1305,6 +1321,7 @@ CREATE TABLE `peristiwa_pembayaran` (
 
 -- 52. Tabel: rekonsiliasi_pembayaran_harian
 -- Merepresentasikan pencocokan transaksi harian pukul 02:00 WIB (Bagian 7.9) dan penyelesaian rekonsiliasi manual SuperAdmin (Bagian 13.5)
+DROP TABLE IF EXISTS `rekonsiliasi_pembayaran_harian`;
 CREATE TABLE `rekonsiliasi_pembayaran_harian` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal item rekonsiliasi pembayaran',
   `tanggal_periode_transaksi` DATE NOT NULL COMMENT 'Tanggal transaksi yang direkonsiliasi',
@@ -1333,8 +1350,7 @@ CREATE TABLE `rekonsiliasi_pembayaran_harian` (
   CONSTRAINT `fk_rekonsiliasi_pesanan` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_rekonsiliasi_percobaan` FOREIGN KEY (`percobaan_pembayaran_pesanan_id`) REFERENCES `percobaan_pembayaran_pesanan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_rekonsiliasi_superadmin` FOREIGN KEY (`diselesaikan_oleh_superadmin_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_rekonsiliasi_penyetuju_kedua` FOREIGN KEY (`disetujui_kedua_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_rekonsiliasi_dua_pejabat_berbeda` CHECK (`disetujui_kedua_oleh_akun_id` IS NULL OR `disetujui_kedua_oleh_akun_id` <> `diselesaikan_oleh_superadmin_id`)
+  CONSTRAINT `fk_rekonsiliasi_penyetuju_kedua` FOREIGN KEY (`disetujui_kedua_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan hasil rekonsiliasi pembayaran harian dan penyelesaian manual oleh SuperAdmin (Bagian 7.9 & 13.5)';
 
@@ -1344,6 +1360,7 @@ CREATE TABLE `rekonsiliasi_pembayaran_harian` (
 
 -- 53. Tabel: pengiriman
 -- Merepresentasikan setiap pengiriman paket pesanan (satu pesanan dapat memiliki lebih dari satu pengiriman bila kirim ulang T-16)
+DROP TABLE IF EXISTS `pengiriman`;
 CREATE TABLE `pengiriman` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pengiriman paket',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan yang dikirim',
@@ -1375,14 +1392,13 @@ CREATE TABLE `pengiriman` (
   KEY `fk_pengiriman_diperiksa_oleh` (`diperiksa_oleh_akun_id`),
   CONSTRAINT `fk_pengiriman_pesanan` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_pengiriman_diserahkan_oleh` FOREIGN KEY (`diserahkan_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_pengiriman_diperiksa_oleh` FOREIGN KEY (`diperiksa_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_pengiriman_kendala_wajib` CHECK (`status_pengiriman` <> 'TERKENDALA' OR `alasan_kendala_pengiriman` IS NOT NULL),
-  CONSTRAINT `chk_pengiriman_resi_wajib_saat_kirim` CHECK (`status_pengiriman` = 'BELUM_DISERAHKAN' OR `nomor_resi_atau_referensi` IS NOT NULL)
+  CONSTRAINT `fk_pengiriman_diperiksa_oleh` FOREIGN KEY (`diperiksa_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan data pengiriman paket, kurir, nomor resi, bukti serah terima, dan penanganan retur (Bagian 9)';
 
 -- 54. Tabel: foto_pengiriman
 -- Merepresentasikan berkas foto bukti kondisi paket saat diserahkan ke kurir maupun bukti tiba di tujuan (Bagian 9.3, P-27, A.4)
+DROP TABLE IF EXISTS `foto_pengiriman`;
 CREATE TABLE `foto_pengiriman` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal foto bukti pengiriman',
   `pengiriman_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pengiriman induk pemilik foto',
@@ -1401,6 +1417,7 @@ CREATE TABLE `foto_pengiriman` (
 
 -- 55. Tabel: peristiwa_pengiriman
 -- Merepresentasikan riwayat pelacakan perjalanan paket dari webhook kurir, polling berkala, atau pembaruan Admin (Bagian 9.4 & 26.7)
+DROP TABLE IF EXISTS `peristiwa_pengiriman`;
 CREATE TABLE `peristiwa_pengiriman` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal peristiwa pelacakan pengiriman',
   `pengiriman_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pengiriman yang dilacak',
@@ -1428,6 +1445,7 @@ CREATE TABLE `peristiwa_pengiriman` (
 
 -- 56. Tabel: permintaan_pembatalan
 -- Merepresentasikan pengajuan pembatalan pesanan pasca-pembayaran yang memerlukan keputusan Admin (Bagian 5, 10.1, 10.2, A.4)
+DROP TABLE IF EXISTS `permintaan_pembatalan`;
 CREATE TABLE `permintaan_pembatalan` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal permintaan pembatalan',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan yang diajukan untuk dibatalkan',
@@ -1454,6 +1472,7 @@ CREATE TABLE `permintaan_pembatalan` (
 
 -- 57. Tabel: pengembalian_dana
 -- Merepresentasikan transaksi refund yang terpisah dari pembatalan pesanan, dilengkapi kontrol maker-checker (Bagian 5, 10.3, BR-16, BR-17, A.4)
+DROP TABLE IF EXISTS `pengembalian_dana`;
 CREATE TABLE `pengembalian_dana` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal pengembalian dana (refund)',
   `nomor_referensi_refund` VARCHAR(40) NOT NULL COMMENT 'Nomor dokumen internal pengembalian dana',
@@ -1492,14 +1511,13 @@ CREATE TABLE `pengembalian_dana` (
   CONSTRAINT `fk_pengembalian_dana_pesanan` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_pengembalian_dana_percobaan` FOREIGN KEY (`percobaan_pembayaran_pesanan_id`) REFERENCES `percobaan_pembayaran_pesanan` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_pengembalian_dana_pengaju` FOREIGN KEY (`diajukan_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_pengembalian_dana_penyetuju` FOREIGN KEY (`disetujui_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_pengembalian_dana_total_positif` CHECK (`total_nominal_refund_rupiah` > 0 AND `total_nominal_refund_rupiah` = `nominal_refund_produk_rupiah` + `nominal_refund_ongkir_rupiah`),
-  CONSTRAINT `chk_pengembalian_dana_maker_checker` CHECK (`jenis_persetujuan` = 'OTOMATIS_SISTEM' OR `disetujui_oleh_akun_id` IS NULL OR `diajukan_oleh_akun_id` IS NULL OR `disetujui_oleh_akun_id` <> `diajukan_oleh_akun_id`)
+  CONSTRAINT `fk_pengembalian_dana_penyetuju` FOREIGN KEY (`disetujui_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan transaksi pengembalian dana (refund), validasi maker-checker (BR-17), dan enkripsi rekening tujuan';
 
 -- 58. Tabel: komplain
 -- Merepresentasikan pengajuan komplain pasca-penerimaan dalam jendela 24 jam (P-11) beserta resolusi dan banding (Bagian 10.4, A.4)
+DROP TABLE IF EXISTS `komplain`;
 CREATE TABLE `komplain` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal komplain pesanan',
   `nomor_tiket_komplain` VARCHAR(30) NOT NULL COMMENT 'Nomor referensi tiket komplain pelanggan',
@@ -1537,8 +1555,7 @@ CREATE TABLE `komplain` (
   CONSTRAINT `fk_komplain_item_pesanan` FOREIGN KEY (`item_pesanan_id`) REFERENCES `item_pesanan` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_komplain_akun_pengguna` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_komplain_pemutus_admin` FOREIGN KEY (`diputuskan_oleh_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_komplain_pemutus_superadmin` FOREIGN KEY (`pemutus_banding_superadmin_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `chk_komplain_banding_maks_satu_kali` CHECK (`jumlah_pengajuan_banding` <= 1)
+  CONSTRAINT `fk_komplain_pemutus_superadmin` FOREIGN KEY (`pemutus_banding_superadmin_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan komplain pasca-penerimaan (jendela P-11), penetapan tanggung jawab 10.7, dan banding satu kali (P-17)';
 
@@ -1549,6 +1566,7 @@ ALTER TABLE `pengembalian_dana`
 
 -- 59. Tabel: foto_komplain
 -- Merepresentasikan berkas foto bukti komplain dari pelanggan (minimal 2, maksimum 5 foto sesuai P-27, kecuali kategori TIDAK_DITERIMA)
+DROP TABLE IF EXISTS `foto_komplain`;
 CREATE TABLE `foto_komplain` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal foto bukti komplain',
   `komplain_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi komplain induk pemilik foto bukti',
@@ -1559,13 +1577,13 @@ CREATE TABLE `foto_komplain` (
   `dibuat_pada` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Waktu pengunggahan foto bukti (UTC)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_foto_komplain_urutan` (`komplain_id`, `urutan_foto`),
-  CONSTRAINT `fk_foto_komplain_komplain` FOREIGN KEY (`komplain_id`) REFERENCES `komplain` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `chk_foto_komplain_batas_p27` CHECK (`urutan_foto` BETWEEN 1 AND 5)
+  CONSTRAINT `fk_foto_komplain_komplain` FOREIGN KEY (`komplain_id`) REFERENCES `komplain` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan referensi berkas foto bukti komplain pelanggan (2-5 foto sesuai P-27)';
 
 -- 60. Tabel: ulasan_produk
 -- Merepresentasikan ulasan dan penilaian bintang dari pelanggan atas item pesanan yang telah berstatus SELESAI (Bagian 26.7)
+DROP TABLE IF EXISTS `ulasan_produk`;
 CREATE TABLE `ulasan_produk` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal ulasan produk',
   `pesanan_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi pesanan yang telah selesai',
@@ -1588,8 +1606,7 @@ CREATE TABLE `ulasan_produk` (
   CONSTRAINT `fk_ulasan_produk_item` FOREIGN KEY (`item_pesanan_id`) REFERENCES `item_pesanan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_ulasan_produk_produk` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_ulasan_produk_varian` FOREIGN KEY (`varian_produk_id`) REFERENCES `varian_produk` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_ulasan_produk_akun` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `chk_ulasan_produk_bintang` CHECK (`nilai_bintang` BETWEEN 1 AND 5)
+  CONSTRAINT `fk_ulasan_produk_akun` FOREIGN KEY (`akun_pengguna_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan ulasan dan penilaian produk dari pelanggan yang telah menyelesaikan pesanan';
 
@@ -1599,6 +1616,7 @@ CREATE TABLE `ulasan_produk` (
 
 -- 61. Tabel: antrean_keluar
 -- Merepresentasikan tabel transactional outbox untuk pengiriman email/pesan agar atomik dengan perubahan status (Lampiran A.4, A.8, A.11, 26.7)
+DROP TABLE IF EXISTS `antrean_keluar`;
 CREATE TABLE `antrean_keluar` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal baris antrean keluar (outbox)',
   `kode_templat_notifikasi` ENUM('N_01', 'N_02', 'N_03', 'N_04', 'N_05', 'N_06', 'N_07', 'N_08', 'N_09', 'N_10', 'N_11', 'N_12', 'N_13', 'N_14', 'N_15', 'N_16', 'N_17', 'N_18', 'N_19', 'N_20') NOT NULL COMMENT 'Kode katalog notifikasi N-01 s.d. N-20 sesuai Bagian 14',
@@ -1625,6 +1643,7 @@ CREATE TABLE `antrean_keluar` (
 
 -- 62. Tabel: notifikasi
 -- Merepresentasikan kotak masuk notifikasi dan peringatan dasbor bagi pelanggan, Admin, dan SuperAdmin (Bagian 14, A.4, 26.7)
+DROP TABLE IF EXISTS `notifikasi`;
 CREATE TABLE `notifikasi` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal notifikasi pengguna',
   `akun_pengguna_id` BIGINT UNSIGNED NOT NULL COMMENT 'Referensi akun penerima notifikasi (sesuai Bagian 26.4)',
@@ -1649,6 +1668,7 @@ CREATE TABLE `notifikasi` (
 
 -- 63. Tabel: pengaturan_sistem
 -- Merepresentasikan konfigurasi Register Parameter P-01 s.d. P-46 yang hanya dapat diubah SuperAdmin (Bagian 13.4, 19, A.3, A.4)
+DROP TABLE IF EXISTS `pengaturan_sistem`;
 CREATE TABLE `pengaturan_sistem` (
   `kunci_parameter` VARCHAR(100) NOT NULL COMMENT 'Kunci stabil parameter pada kode (mis. payment.window_minutes, sesuai catatan Lampiran A.3)',
   `kode_register_parameter` VARCHAR(10) NOT NULL COMMENT 'Kode identifikasi dokumen (P-01 s.d. P-46 pada Bagian 19)',
@@ -1669,6 +1689,7 @@ CREATE TABLE `pengaturan_sistem` (
 
 -- 64. Tabel: log_audit
 -- Merepresentasikan catatan audit imutabel (append-only) dengan rantai hash SHA-256 atas seluruh tindakan penting (Bagian 3.3, 13.3, SEC-14, A.4)
+DROP TABLE IF EXISTS `log_audit`;
 CREATE TABLE `log_audit` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID monoton urut entri audit log',
   `waktu_kejadian` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Waktu UTC tindakan terjadi',
@@ -1697,6 +1718,7 @@ CREATE TABLE `log_audit` (
 
 -- 65. Tabel: persetujuan_operasi_sensitif
 -- Merepresentasikan mekanisme persetujuan kedua (dual-control D-18 & SEC-15) untuk koreksi status terminal 8.9, reset MFA SuperAdmin 13.2, dan operasi darurat 13.6
+DROP TABLE IF EXISTS `persetujuan_operasi_sensitif`;
 CREATE TABLE `persetujuan_operasi_sensitif` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID internal permintaan operasi sensitif',
   `jenis_operasi` ENUM('KOREKSI_STATUS_TERMINAL_T19', 'RESET_MFA_SUPERADMIN', 'REKONSILIASI_TANPA_API', 'PENYESUAIAN_STOK_DI_ATAS_P23', 'PROSEDUR_DARURAT_SISTEM') NOT NULL COMMENT 'Kategori operasi sensitif yang mewajibkan penyetuju kedua berbeda orang (D-18)',
@@ -1716,13 +1738,13 @@ CREATE TABLE `persetujuan_operasi_sensitif` (
   KEY `fk_persetujuan_sensitif_pengaju` (`pengaju_akun_id`),
   KEY `fk_persetujuan_sensitif_penyetuju` (`penyetuju_kedua_akun_id`),
   CONSTRAINT `fk_persetujuan_sensitif_pengaju` FOREIGN KEY (`pengaju_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_persetujuan_sensitif_penyetuju` FOREIGN KEY (`penyetuju_kedua_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `chk_persetujuan_sensitif_dua_orang_berbeda` CHECK (`penyetuju_kedua_akun_id` IS NULL OR `penyetuju_kedua_akun_id` <> `pengaju_akun_id`)
+  CONSTRAINT `fk_persetujuan_sensitif_penyetuju` FOREIGN KEY (`penyetuju_kedua_akun_id`) REFERENCES `akun_pengguna` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Menyimpan catatan persetujuan kedua (dual-control D-18) untuk koreksi status terminal 8.9 dan prosedur darurat 13.6';
 
 -- 66. Tabel: kunci_pekerjaan_terjadwal
 -- Merepresentasikan kunci terdistribusi (job_locks Bagian 15.2) dan pemantauan 21 pekerjaan cron PHP CLI (Lampiran A.8)
+DROP TABLE IF EXISTS `kunci_pekerjaan_terjadwal`;
 CREATE TABLE `kunci_pekerjaan_terjadwal` (
   `nama_pekerjaan` VARCHAR(64) NOT NULL COMMENT 'Nama unik pekerjaan terjadwal sesuai Lampiran A.8 (mis. expire-orders, expire-stock-reservations)',
   `jadwal_cron_ekspresi` VARCHAR(64) NOT NULL COMMENT 'Deskripsi jadwal eksekusi cron (mis. Tiap menit, Tiap 5 menit, 02:00 WIB)',
@@ -1745,6 +1767,7 @@ CREATE TABLE `kunci_pekerjaan_terjadwal` (
 DELIMITER $$
 
 -- 11.1 Trigger Otomatisasi Rantai Hash SHA-256 pada Tabel log_audit (Bagian 13.3 & A.4)
+DROP TRIGGER IF EXISTS `trg_log_audit_sebelum_insert`$$
 CREATE TRIGGER `trg_log_audit_sebelum_insert`
 BEFORE INSERT ON `log_audit`
 FOR EACH ROW
@@ -1780,6 +1803,7 @@ BEGIN
 END$$
 
 -- 11.2 Trigger Larangan UPDATE dan DELETE pada log_audit (Bagian 3.3, 13.3, BR-12, SEC-14)
+DROP TRIGGER IF EXISTS `trg_log_audit_cegah_ubah`$$
 CREATE TRIGGER `trg_log_audit_cegah_ubah`
 BEFORE UPDATE ON `log_audit`
 FOR EACH ROW
@@ -1788,6 +1812,7 @@ BEGIN
     SET MESSAGE_TEXT = 'PELANGGARAN_KEAMANAN_BR12: Entri log_audit bersifat append-only dan tidak boleh diubah oleh siapa pun.';
 END$$
 
+DROP TRIGGER IF EXISTS `trg_log_audit_cegah_hapus`$$
 CREATE TRIGGER `trg_log_audit_cegah_hapus`
 BEFORE DELETE ON `log_audit`
 FOR EACH ROW
@@ -1797,6 +1822,7 @@ BEGIN
 END$$
 
 -- 11.3 Trigger Larangan UPDATE dan DELETE pada riwayat_perubahan_stok_produk (Bagian 5, 11.1, A.4)
+DROP TRIGGER IF EXISTS `trg_riwayat_stok_produk_cegah_ubah`$$
 CREATE TRIGGER `trg_riwayat_stok_produk_cegah_ubah`
 BEFORE UPDATE ON `riwayat_perubahan_stok_produk`
 FOR EACH ROW
@@ -1805,6 +1831,7 @@ BEGIN
     SET MESSAGE_TEXT = 'PELANGGARAN_BUKU_BESAR_STOK: Buku besar riwayat_perubahan_stok_produk bersifat append-only; gunakan entri koreksi baru.';
 END$$
 
+DROP TRIGGER IF EXISTS `trg_riwayat_stok_produk_cegah_hapus`$$
 CREATE TRIGGER `trg_riwayat_stok_produk_cegah_hapus`
 BEFORE DELETE ON `riwayat_perubahan_stok_produk`
 FOR EACH ROW
@@ -1814,6 +1841,7 @@ BEGIN
 END$$
 
 -- 11.4 Trigger Larangan UPDATE dan DELETE pada riwayat_perubahan_stok_bahan (Bagian 26.6 & 27.3)
+DROP TRIGGER IF EXISTS `trg_riwayat_stok_bahan_cegah_ubah`$$
 CREATE TRIGGER `trg_riwayat_stok_bahan_cegah_ubah`
 BEFORE UPDATE ON `riwayat_perubahan_stok_bahan`
 FOR EACH ROW
@@ -1822,6 +1850,7 @@ BEGIN
     SET MESSAGE_TEXT = 'PELANGGARAN_BUKU_BESAR_BAHAN: Buku besar riwayat_perubahan_stok_bahan bersifat append-only; gunakan entri koreksi baru.';
 END$$
 
+DROP TRIGGER IF EXISTS `trg_riwayat_stok_bahan_cegah_hapus`$$
 CREATE TRIGGER `trg_riwayat_stok_bahan_cegah_hapus`
 BEFORE DELETE ON `riwayat_perubahan_stok_bahan`
 FOR EACH ROW
@@ -1831,6 +1860,7 @@ BEGIN
 END$$
 
 -- 11.5 Trigger Larangan UPDATE dan DELETE pada riwayat_status_pesanan (Bagian 8.9, 8.10, A.4)
+DROP TRIGGER IF EXISTS `trg_riwayat_status_pesanan_cegah_ubah`$$
 CREATE TRIGGER `trg_riwayat_status_pesanan_cegah_ubah`
 BEFORE UPDATE ON `riwayat_status_pesanan`
 FOR EACH ROW
@@ -1839,6 +1869,7 @@ BEGIN
     SET MESSAGE_TEXT = 'PELANGGARAN_RIWAYAT_PESANAN: Riwayat transisi status pesanan bersifat append-only; koreksi wajib melalui T-19.';
 END$$
 
+DROP TRIGGER IF EXISTS `trg_riwayat_status_pesanan_cegah_hapus`$$
 CREATE TRIGGER `trg_riwayat_status_pesanan_cegah_hapus`
 BEFORE DELETE ON `riwayat_status_pesanan`
 FOR EACH ROW
@@ -1848,6 +1879,7 @@ BEGIN
 END$$
 
 -- 11.6 Trigger Larangan UPDATE dan DELETE pada riwayat_status_produksi_buket (Bagian 26.6)
+DROP TRIGGER IF EXISTS `trg_riwayat_status_produksi_cegah_ubah`$$
 CREATE TRIGGER `trg_riwayat_status_produksi_cegah_ubah`
 BEFORE UPDATE ON `riwayat_status_produksi_buket`
 FOR EACH ROW
@@ -1856,6 +1888,7 @@ BEGIN
     SET MESSAGE_TEXT = 'PELANGGARAN_RIWAYAT_PRODUKSI: Riwayat status produksi buket bersifat append-only.';
 END$$
 
+DROP TRIGGER IF EXISTS `trg_riwayat_status_produksi_cegah_hapus`$$
 CREATE TRIGGER `trg_riwayat_status_produksi_cegah_hapus`
 BEFORE DELETE ON `riwayat_status_produksi_buket`
 FOR EACH ROW
@@ -1865,6 +1898,7 @@ BEGIN
 END$$
 
 -- 11.7 Trigger Larangan UPDATE dan DELETE pada catatan_pesanan (Lampiran A.4)
+DROP TRIGGER IF EXISTS `trg_catatan_pesanan_cegah_ubah`$$
 CREATE TRIGGER `trg_catatan_pesanan_cegah_ubah`
 BEFORE UPDATE ON `catatan_pesanan`
 FOR EACH ROW
@@ -1873,6 +1907,7 @@ BEGIN
     SET MESSAGE_TEXT = 'PELANGGARAN_CATATAN_PESANAN: Catatan pesanan dan bukti kesepakatan pelanggan bersifat append-only.';
 END$$
 
+DROP TRIGGER IF EXISTS `trg_catatan_pesanan_cegah_hapus`$$
 CREATE TRIGGER `trg_catatan_pesanan_cegah_hapus`
 BEFORE DELETE ON `catatan_pesanan`
 FOR EACH ROW
@@ -1882,6 +1917,7 @@ BEGIN
 END$$
 
 -- 11.8 Trigger Proteksi Penghapusan Produk yang Pernah Ditransaksikan (BR-15 & AC-39)
+DROP TRIGGER IF EXISTS `trg_produk_cegah_hapus_bertransaksi`$$
 CREATE TRIGGER `trg_produk_cegah_hapus_bertransaksi`
 BEFORE DELETE ON `produk`
 FOR EACH ROW
@@ -1891,6 +1927,110 @@ BEGIN
   IF v_jumlah_transaksi > 0 THEN
     SIGNAL SQLSTATE '45000'
       SET MESSAGE_TEXT = 'PELANGGARAN_BR15: Produk yang memiliki riwayat pesanan tidak boleh dihapus permanen; ubah status_produk menjadi NONAKTIF.';
+  END IF;
+END$$
+
+
+-- 11.9 Trigger Validasi Komponen Paket Berkebun (Pengganti CHECK yang memicu MySQL #3823 pada Foreign Key)
+DROP TRIGGER IF EXISTS `trg_komponen_paket_validasi_insert`$$
+CREATE TRIGGER `trg_komponen_paket_validasi_insert`
+BEFORE INSERT ON `komponen_paket_berkebun`
+FOR EACH ROW
+BEGIN
+  IF NEW.`produk_paket_id` = NEW.`produk_komponen_id` THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'VALIDASI_PAKET_BERKEBUN: Produk paket tidak boleh merujuk dirinya sendiri sebagai komponen.';
+  END IF;
+  IF NEW.`kuantitas_komponen` = 0 THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'VALIDASI_PAKET_BERKEBUN: Kuantitas komponen dalam paket wajib lebih besar dari 0.';
+  END IF;
+END$$
+
+DROP TRIGGER IF EXISTS `trg_komponen_paket_validasi_update`$$
+CREATE TRIGGER `trg_komponen_paket_validasi_update`
+BEFORE UPDATE ON `komponen_paket_berkebun`
+FOR EACH ROW
+BEGIN
+  IF NEW.`produk_paket_id` = NEW.`produk_komponen_id` THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'VALIDASI_PAKET_BERKEBUN: Produk paket tidak boleh merujuk dirinya sendiri sebagai komponen.';
+  END IF;
+  IF NEW.`kuantitas_komponen` = 0 THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'VALIDASI_PAKET_BERKEBUN: Kuantitas komponen dalam paket wajib lebih besar dari 0.';
+  END IF;
+END$$
+
+-- 11.10 Trigger Validasi Maker-Checker pada Pengembalian Dana / Refund (BR-17, bebas konflik FK #3823)
+DROP TRIGGER IF EXISTS `trg_pengembalian_dana_maker_checker_insert`$$
+CREATE TRIGGER `trg_pengembalian_dana_maker_checker_insert`
+BEFORE INSERT ON `pengembalian_dana`
+FOR EACH ROW
+BEGIN
+  IF NEW.`total_nominal_refund_rupiah` = 0 OR NEW.`total_nominal_refund_rupiah` <> (NEW.`nominal_refund_produk_rupiah` + NEW.`nominal_refund_ongkir_rupiah`) THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'VALIDASI_REFUND_BR16: Total nominal refund wajib positif dan sama dengan jumlah refund produk + ongkir.';
+  END IF;
+  IF NEW.`jenis_persetujuan` <> 'OTOMATIS_SISTEM'
+     AND NEW.`diajukan_oleh_akun_id` IS NOT NULL
+     AND NEW.`disetujui_oleh_akun_id` IS NOT NULL
+     AND NEW.`diajukan_oleh_akun_id` = NEW.`disetujui_oleh_akun_id` THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'PELANGGARAN_MAKER_CHECKER_BR17: Pengaju refund tidak boleh menyetujui refund yang diajukannya sendiri.';
+  END IF;
+END$$
+
+DROP TRIGGER IF EXISTS `trg_pengembalian_dana_maker_checker_update`$$
+CREATE TRIGGER `trg_pengembalian_dana_maker_checker_update`
+BEFORE UPDATE ON `pengembalian_dana`
+FOR EACH ROW
+BEGIN
+  IF NEW.`total_nominal_refund_rupiah` = 0 OR NEW.`total_nominal_refund_rupiah` <> (NEW.`nominal_refund_produk_rupiah` + NEW.`nominal_refund_ongkir_rupiah`) THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'VALIDASI_REFUND_BR16: Total nominal refund wajib positif dan sama dengan jumlah refund produk + ongkir.';
+  END IF;
+  IF NEW.`jenis_persetujuan` <> 'OTOMATIS_SISTEM'
+     AND NEW.`diajukan_oleh_akun_id` IS NOT NULL
+     AND NEW.`disetujui_oleh_akun_id` IS NOT NULL
+     AND NEW.`diajukan_oleh_akun_id` = NEW.`disetujui_oleh_akun_id` THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'PELANGGARAN_MAKER_CHECKER_BR17: Pengaju refund tidak boleh menyetujui refund yang diajukannya sendiri.';
+  END IF;
+END$$
+
+-- 11.11 Trigger Validasi Dual-Control Persetujuan Kedua (D-18, bebas konflik FK #3823)
+DROP TRIGGER IF EXISTS `trg_persetujuan_sensitif_dual_control`$$
+CREATE TRIGGER `trg_persetujuan_sensitif_dual_control`
+BEFORE UPDATE ON `persetujuan_operasi_sensitif`
+FOR EACH ROW
+BEGIN
+  IF NEW.`penyetuju_kedua_akun_id` IS NOT NULL AND NEW.`penyetuju_kedua_akun_id` = NEW.`pengaju_akun_id` THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'PELANGGARAN_DUAL_CONTROL_D18: Penyetuju kedua wajib orang yang berbeda dari pengaju operasi sensitif.';
+  END IF;
+END$$
+
+-- 11.12 Trigger Proteksi Saldo Stok Produk Tidak Boleh Negatif (BR-05 & Bagian 11.1)
+DROP TRIGGER IF EXISTS `trg_produk_cegah_stok_negatif`$$
+CREATE TRIGGER `trg_produk_cegah_stok_negatif`
+BEFORE UPDATE ON `produk`
+FOR EACH ROW
+BEGIN
+  IF NEW.`jumlah_stok_jual` < 0 THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'PELANGGARAN_STOK_BR05: Saldo jumlah_stok_jual pada produk tidak boleh bernilai negatif.';
+  END IF;
+END$$
+
+DROP TRIGGER IF EXISTS `trg_varian_produk_cegah_stok_negatif`$$
+CREATE TRIGGER `trg_varian_produk_cegah_stok_negatif`
+BEFORE UPDATE ON `varian_produk`
+FOR EACH ROW
+BEGIN
+  IF NEW.`jumlah_stok_varian` < 0 THEN
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'PELANGGARAN_STOK_BR05: Saldo jumlah_stok_varian tidak boleh bernilai negatif.';
   END IF;
 END$$
 
