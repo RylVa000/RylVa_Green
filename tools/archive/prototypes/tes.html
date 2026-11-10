@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konva.js Bouquet Builder Prototype</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Konva.js -->
+  <script src="https://unpkg.com/konva@9.3.6/konva.min.js"></script>
+  
+  <style>
+    body { font-family: sans-serif; background-color: #FBF7F4; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col md:flex-row">
+    
+    <!-- Area Kanvas Konva -->
+    <div class="flex-1 bg-[#FAFAFA] relative flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-gray-200">
+      <!-- Container yang akan digantikan oleh Konva Canvas -->
+      <div id="bouquet-canvas" class="bg-white rounded-xl shadow-inner border border-gray-100 overflow-hidden"></div>
+      
+      <!-- Petunjuk Interaksi -->
+      <div class="absolute top-6 left-6 pointer-events-none">
+        <p class="text-sm font-semibold text-gray-700">Kanvas Perakitan</p>
+        <p class="text-xs text-gray-500">Klik dan seret bunga untuk menyusun.</p>
+      </div>
+    </div>
+
+    <!-- Panel Kontrol (Meniru Sesi Kanan di Mockup Anda) -->
+    <div class="w-full md:w-72 bg-white p-6 flex flex-col gap-6">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-800">Pilih Bunga</h2>
+        <p class="text-xs text-gray-500 mb-4">Tambahkan item ke dalam buket Anda.</p>
+        
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="tambahkanBunga('rose')" class="flex flex-col items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-red-400 hover:bg-red-50 transition-colors">
+            <div class="w-8 h-8 rounded-full bg-red-400"></div>
+            <span class="text-xs font-medium">Mawar Merah</span>
+          </button>
+          
+          <button onclick="tambahkanBunga('lily')" class="flex flex-col items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-pink-300 hover:bg-pink-50 transition-colors">
+            <div class="w-8 h-8 rounded-full bg-pink-300"></div>
+            <span class="text-xs font-medium">Lily Pink</span>
+          </button>
+          
+          <button onclick="tambahkanBunga('sunflower')" class="flex flex-col items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-yellow-400 hover:bg-yellow-50 transition-colors">
+            <div class="w-8 h-8 rounded-full bg-yellow-400"></div>
+            <span class="text-xs font-medium">Matahari</span>
+          </button>
+          
+          <button onclick="tambahkanBunga('leaf')" class="flex flex-col items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-green-500 hover:bg-green-50 transition-colors">
+            <div class="w-8 h-8 rounded-[4px_16px_4px_16px] bg-green-500"></div>
+            <span class="text-xs font-medium">Daun Hias</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="mt-auto pt-6 border-t border-gray-100">
+        <button onclick="bersihkanKanvas()" class="w-full py-2.5 text-sm font-semibold text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
+          Hapus Semua
+        </button>
+      </div>
+    </div>
+    
+  </div>
+
+  <script>
+    // Konfigurasi Ukuran Kanvas
+    const canvasWidth = 400;
+    const canvasHeight = 500;
+
+    // 1. Inisialisasi Stage Konva
+    const stage = new Konva.Stage({
+      container: 'bouquet-canvas',
+      width: canvasWidth,
+      height: canvasHeight
+    });
+
+    // 2. Pembuatan Layer
+    // Kita butuh 2 layer untuk ilusi optik:
+    // - layerBunga: Berada di belakang (untuk tangkai dan kelopak)
+    // - layerBungkus: Berada di depan (kertas buket) menutupi tangkai
+    const layerBunga = new Konva.Layer();
+    const layerBungkus = new Konva.Layer();
+    
+    stage.add(layerBunga);
+    stage.add(layerBungkus);
+
+    // 3. Menggambar Kertas Pembungkus Buket (Berada di layer depan)
+    function buatPembungkus()
+    {
+      const kertasBuket = new Konva.Line({
+        points: [
+          100, 300, // Kiri atas kertas
+          300, 300, // Kanan atas kertas
+          240, 480, // Kanan bawah (diikat)
+          160, 480  // Kiri bawah (diikat)
+        ],
+        fill: '#C8D6C9', // Warna mint pastel
+        stroke: '#A5D6A7',
+        strokeWidth: 2,
+        closed: true,
+        shadowColor: 'black',
+        shadowBlur: 10,
+        shadowOpacity: 0.1,
+        shadowOffsetY: 5,
+        listening: false // Mencegah kertas ikut terseret saat menggeser bunga
+      });
+      
+      const pitaBuket = new Konva.Rect({
+        x: 180,
+        y: 420,
+        width: 40,
+        height: 15,
+        fill: '#D2B48C', // Warna pita coklat
+        cornerRadius: 4,
+        listening: false
+      });
+
+      layerBungkus.add(kertasBuket);
+      layerBungkus.add(pitaBuket);
+    }
+    
+    buatPembungkus();
+
+    // 4. Fungsi Menambahkan Bunga ke Kanvas
+    function tambahkanBunga(tipe)
+    {
+      // Posisi awal saat bunga ditambahkan (acak sedikit agar tidak menumpuk persis)
+      const startX = 150 + Math.random() * 100;
+      const startY = 150 + Math.random() * 50;
+      
+      // Membuat grup agar kelopak dan tangkai menyatu saat diseret
+      const grupBunga = new Konva.Group({
+        x: startX,
+        y: startY,
+        draggable: true // Mengaktifkan fitur drag-and-drop
+      });
+
+      // Memberikan efek kursor saat dihover
+      grupBunga.on('mouseenter', function ()
+      {
+        stage.container().style.cursor = 'grab';
+      });
+      
+      grupBunga.on('mouseleave', function ()
+      {
+        stage.container().style.cursor = 'default';
+      });
+      
+      grupBunga.on('mousedown', function ()
+      {
+        stage.container().style.cursor = 'grabbing';
+        // Membawa bunga yang diklik ke tumpukan paling atas di dalam layerBunga
+        this.moveToTop(); 
+      });
+      
+      grupBunga.on('mouseup', function ()
+      {
+        stage.container().style.cursor = 'grab';
+      });
+
+      // Menggambar Tangkai
+      const tangkai = new Konva.Line({
+        points: [0, 0, 0, 200], // Menjuntai ke bawah
+        stroke: '#81C784',
+        strokeWidth: 6,
+        lineCap: 'round'
+      });
+      grupBunga.add(tangkai);
+
+      // Menggambar Kelopak/Daun berdasarkan tipe
+      let kelopak;
+      
+      if (tipe === 'rose')
+      {
+        kelopak = new Konva.Circle({
+          x: 0,
+          y: 0,
+          radius: 35,
+          fill: '#EF5350',
+          shadowColor: 'black',
+          shadowBlur: 5,
+          shadowOpacity: 0.2,
+          shadowOffsetY: 2
+        });
+      }
+      else if (tipe === 'lily')
+      {
+        kelopak = new Konva.Star({
+          x: 0,
+          y: 0,
+          numPoints: 5,
+          innerRadius: 20,
+          outerRadius: 40,
+          fill: '#F48FB1',
+          shadowColor: 'black',
+          shadowBlur: 5,
+          shadowOpacity: 0.2
+        });
+      }
+      else if (tipe === 'sunflower')
+      {
+        kelopak = new Konva.Star({
+          x: 0,
+          y: 0,
+          numPoints: 12,
+          innerRadius: 20,
+          outerRadius: 35,
+          fill: '#FFEE58',
+          shadowColor: 'black',
+          shadowBlur: 5,
+          shadowOpacity: 0.2
+        });
+        
+        const tengahMatahari = new Konva.Circle({
+          x: 0,
+          y: 0,
+          radius: 15,
+          fill: '#795548'
+        });
+        
+        grupBunga.add(kelopak);
+        grupBunga.add(tengahMatahari);
+        kelopak = null; // Menghindari add dua kali di bawah
+      }
+      else if (tipe === 'leaf')
+      {
+        kelopak = new Konva.Ellipse({
+          x: 0,
+          y: 0,
+          radiusX: 20,
+          radiusY: 45,
+          fill: '#66BB6A',
+          rotation: 45
+        });
+      }
+
+      if (kelopak)
+      {
+        grupBunga.add(kelopak);
+      }
+
+      // Membatasi pergerakan drag agar tidak keluar dari kanvas
+      grupBunga.on('dragmove', function ()
+      {
+        const posisiKini = this.position();
+        let sumbuX = posisiKini.x;
+        let sumbuY = posisiKini.y;
+
+        // Batas sederhana
+        if (sumbuX < 50) sumbuX = 50;
+        if (sumbuX > canvasWidth - 50) sumbuX = canvasWidth - 50;
+        if (sumbuY < 50) sumbuY = 50;
+        if (sumbuY > canvasHeight - 100) sumbuY = canvasHeight - 100;
+
+        this.position({ x: sumbuX, y: sumbuY });
+      });
+
+      layerBunga.add(grupBunga);
+    }
+
+    // 5. Fungsi Membersihkan Kanvas
+    function bersihkanKanvas()
+    {
+      layerBunga.destroyChildren(); // Menghapus semua bunga
+    }
+    
+  </script>
+</body>
+</html>

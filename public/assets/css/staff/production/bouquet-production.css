@@ -1,0 +1,567 @@
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: established RylVa Green · signature: material readiness before florist work · states: queue, configuration, detail, editing, validation, confirmation, saving, success, empty, loading, error · v2.0.0 */
+/* Hallmark · pre-emit critique: reuse established cards and separate production status from material readiness; action rows have dedicated space. */
+
+.bouquet-main,
+.bouquet-main h1,
+.bouquet-main h2,
+.bouquet-main h3,
+.bouquet-main h4
+{
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.bouquet-main > .product-heading
+{
+  margin-bottom: var(--space-lg);
+}
+
+.bouquet-main .back-button
+{
+  margin-top: 0;
+}
+
+#bouquet-breadcrumb
+{
+  flex-wrap: wrap;
+}
+
+.bouquet-panel,
+.bouquet-editor,
+.bouquet-stack,
+.bouquet-ingredient-list,
+.bouquet-option-fields,
+.bouquet-action-list,
+.bouquet-preview-selections
+{
+  display: grid;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.bouquet-panel
+{
+  margin-top: 0;
+  align-content: start;
+}
+
+.bouquet-panel > p,
+.bouquet-panel > h2,
+.bouquet-panel > h3,
+.bouquet-panel > h4,
+.bouquet-panel .product-field,
+.bouquet-dialog .product-field
+{
+  margin: 0;
+}
+
+.bouquet-stack
+{
+  gap: var(--space-2xs);
+}
+
+.bouquet-summary .queue-tab
+{
+  text-align: left;
+  white-space: normal;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  background: var(--queue-surface);
+}
+
+.bouquet-summary .queue-tab[aria-pressed="true"]
+{
+  background: var(--queue-success-soft);
+}
+
+.bouquet-attention-count strong
+{
+  color: var(--queue-warning-ink);
+}
+
+.bouquet-alert,
+.bouquet-list-meta,
+.bouquet-section-heading,
+.bouquet-savebar
+{
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.bouquet-alert
+{
+  margin-block: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--queue-warning-ink);
+  border-radius: var(--radius-input);
+  color: var(--queue-warning-ink);
+  background: var(--queue-warning-soft);
+}
+
+.bouquet-alert p
+{
+  flex: 1;
+}
+
+.bouquet-alert .icon
+{
+  flex: none;
+}
+
+.bouquet-toolbar
+{
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(200px, 1fr);
+  align-items: end;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+}
+
+.bouquet-toolbar .product-field
+{
+  margin: 0;
+}
+
+.bouquet-list-meta
+{
+  justify-content: space-between;
+  padding: 0 var(--space-lg) var(--space-md);
+}
+
+.bouquet-table
+{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--queue-body);
+  text-align: left;
+}
+
+.bouquet-table th,
+.bouquet-table td
+{
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-rule);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.bouquet-table th
+{
+  overflow-wrap: normal;
+  color: var(--color-muted);
+  background: var(--color-paper-2);
+  font-weight: 500;
+  font-size: var(--queue-small);
+}
+
+.bouquet-table .queue-text-button
+{
+  justify-self: start;
+  padding-inline: 0;
+}
+
+.bouquet-workspaces + .bouquet-sheet
+{
+  margin-top: var(--space-md);
+}
+
+.bouquet-table td:last-child
+{
+  min-width: 100px;
+}
+
+.bouquet-table td:first-child
+{
+  min-width: 140px;
+}
+
+.bouquet-table .queue-button
+{
+  white-space: nowrap;
+}
+
+.bouquet-badge
+{
+  width: fit-content;
+  gap: var(--space-2xs);
+  white-space: normal;
+}
+
+.bouquet-badge .icon
+{
+  flex: none;
+}
+
+.bouquet-detail-layout
+{
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  align-items: start;
+  gap: var(--space-lg);
+}
+
+.bouquet-job-history
+{
+  margin-top: var(--space-md);
+}
+
+.bouquet-history-row
+{
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.bouquet-history-row p
+{
+  margin-block: var(--space-2xs);
+}
+
+.bouquet-choices
+{
+  padding-left: var(--space-lg);
+}
+
+.bouquet-action-list > .queue-button
+{
+  justify-content: center;
+}
+
+.bouquet-help
+{
+  font-size: var(--queue-small);
+  color: var(--color-muted);
+}
+
+.bouquet-empty
+{
+  padding: var(--space-lg);
+}
+
+.bouquet-sheet + .product-note
+{
+  margin-top: var(--space-md);
+}
+
+.bouquet-editor-nav
+{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border-block: 1px solid var(--color-rule);
+  background: var(--color-paper);
+}
+
+.bouquet-editor > section,
+.bouquet-readonly > section
+{
+  scroll-margin-top: 80px;
+}
+
+.bouquet-two-fields,
+.bouquet-group-fields,
+.bouquet-ingredient-row
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  align-items: start;
+}
+
+.bouquet-group-fields
+{
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+}
+
+.bouquet-ingredient-row
+{
+  grid-template-columns: minmax(0, 2fr) minmax(120px, 1fr) auto;
+  align-items: end;
+}
+
+.bouquet-section-heading
+{
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.bouquet-group
+{
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--color-rule);
+}
+
+.bouquet-option
+{
+  margin-block: var(--space-md);
+  border-block: 1px solid var(--color-rule);
+}
+
+.bouquet-option summary
+{
+  min-height: 52px;
+  padding-block: var(--space-md);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.bouquet-option summary span
+{
+  margin-left: var(--space-sm);
+  font-size: var(--queue-small);
+  font-weight: 400;
+}
+
+.bouquet-option-fields
+{
+  padding-bottom: var(--space-md);
+}
+
+.bouquet-preview-selections
+{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.bouquet-preview-selections fieldset,
+.bouquet-readonly
+{
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.bouquet-preview-selections legend
+{
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.bouquet-choice
+{
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.bouquet-choice input
+{
+  width: 20px;
+  height: 20px;
+  flex: none;
+  accent-color: var(--primary);
+}
+
+.bouquet-preview-price
+{
+  margin-block: var(--space-md);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bouquet-readonly
+{
+  display: grid;
+  gap: var(--space-md);
+}
+
+.bouquet-readonly button
+{
+  display: none;
+}
+
+.bouquet-savebar
+{
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  flex-wrap: wrap;
+  padding: var(--space-md);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-input);
+  background: var(--queue-surface);
+}
+
+.bouquet-savebar p
+{
+  flex: 1;
+}
+
+.bouquet-save-error
+{
+  color: var(--queue-critical-ink);
+  padding: var(--space-md);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-input);
+  background: var(--queue-critical-soft);
+}
+
+.bouquet-validation
+{
+  display: block;
+}
+
+.bouquet-validation ul
+{
+  padding-left: var(--space-lg);
+}
+
+.bouquet-dialog
+{
+  max-height: calc(100dvh - 32px);
+  scroll-padding-bottom: 90px;
+}
+
+#bouquet-dialog-body
+{
+  display: grid;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+}
+
+.bouquet-dialog p
+{
+  margin-top: 0;
+  line-height: 1.6;
+}
+
+.bouquet-dialog .product-dialog-actions
+{
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding-block: var(--space-md);
+  background: var(--queue-surface);
+}
+
+.bouquet-main :is(a, button, input, select, summary):focus-visible
+{
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1199px)
+{
+  .bouquet-detail-layout
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bouquet-detail-layout > section:last-child
+  {
+    grid-row: 1;
+  }
+
+  .bouquet-table thead
+  {
+    display: none;
+  }
+
+  .bouquet-table,
+  .bouquet-table tbody,
+  .bouquet-table tr
+  {
+    display: block;
+  }
+
+  .bouquet-table tr
+  {
+    border-top: 1px solid var(--color-rule);
+    padding: var(--space-md);
+  }
+
+  .bouquet-table td
+  {
+    display: grid;
+    grid-template-columns: minmax(110px, 1fr) minmax(0, 2fr);
+    gap: var(--space-sm);
+    border: 0;
+    padding: var(--space-xs) 0;
+  }
+
+  .bouquet-table td::before
+  {
+    content: attr(data-label);
+    color: var(--color-muted);
+    font-size: var(--queue-small);
+  }
+
+  .bouquet-table td:last-child,
+  .bouquet-table td:first-child
+  {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 767px)
+{
+  .bouquet-summary
+  {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bouquet-toolbar,
+  .bouquet-two-fields,
+  .bouquet-group-fields,
+  .bouquet-preview-selections
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bouquet-alert,
+  .bouquet-section-heading
+  {
+    align-items: start;
+    flex-wrap: wrap;
+  }
+
+  .bouquet-alert p
+  {
+    flex-basis: 80%;
+  }
+
+  .bouquet-alert > button
+  {
+    margin-left: auto;
+  }
+
+  .bouquet-ingredient-row
+  {
+    grid-template-columns: minmax(0, 1fr) minmax(90px, 1fr);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .bouquet-ingredient-row > .product-field:first-child
+  {
+    grid-column: 1 / -1;
+  }
+
+  .bouquet-savebar
+  {
+    gap: var(--space-xs);
+  }
+
+  .bouquet-savebar p
+  {
+    flex-basis: 100%;
+  }
+
+  .bouquet-savebar .queue-button
+  {
+    flex: 1;
+  }
+
+  .bouquet-editor > section,
+  .bouquet-readonly > section
+  {
+    scroll-margin-top: 130px;
+  }
+}

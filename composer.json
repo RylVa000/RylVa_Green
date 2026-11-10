@@ -1,0 +1,22 @@
+{
+  "name": "rylva-green/storefront-php-native",
+  "description": "Aplikasi Web Penjualan Florist, Buket Kustom, Tanaman Hias, dan Gardening Goods (Spesifikasi v2.6 Final)",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "paragonie/sodium_compat": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "RylvaGreen\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RylvaGreen\\Tests\\": "tests/"
+    }
+  }
+}

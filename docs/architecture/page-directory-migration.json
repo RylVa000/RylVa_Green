@@ -1,0 +1,167 @@
+{
+  "moved": [
+    {
+      "from": "public/staff-login.html",
+      "to": "public/pages/auth/staff-login.html"
+    },
+    {
+      "from": "public/admin-dashboard.html",
+      "to": "public/pages/staff/admin-dashboard.html"
+    },
+    {
+      "from": "public/orders-queue.html",
+      "to": "public/pages/staff/orders-queue.html"
+    },
+    {
+      "from": "public/products.html",
+      "to": "public/pages/staff/products.html"
+    },
+    {
+      "from": "public/categories-attributes.html",
+      "to": "public/pages/staff/categories-attributes.html"
+    },
+    {
+      "from": "public/production-materials.html",
+      "to": "public/pages/staff/production-materials.html"
+    },
+    {
+      "from": "public/bouquet-production.html",
+      "to": "public/pages/staff/bouquet-production.html"
+    },
+    {
+      "from": "public/customers.html",
+      "to": "public/pages/staff/customers.html"
+    },
+    {
+      "from": "public/closure-calendar.html",
+      "to": "public/pages/staff/closure-calendar.html"
+    },
+    {
+      "from": "public/operational-report.html",
+      "to": "public/pages/staff/operational-report.html"
+    },
+    {
+      "from": "public/staff-profile.html",
+      "to": "public/pages/staff/staff-profile.html"
+    },
+    {
+      "from": "public/staff-notifications.html",
+      "to": "public/pages/staff/staff-notifications.html"
+    },
+    {
+      "from": "public/staff-help.html",
+      "to": "public/pages/staff/staff-help.html"
+    },
+    {
+      "from": "public/staff-status.html",
+      "to": "public/pages/staff/staff-status.html"
+    },
+    {
+      "from": "public/audit-log.html",
+      "to": "public/pages/superadmin/audit-log.html"
+    },
+    {
+      "from": "public/financial-report.html",
+      "to": "public/pages/superadmin/financial-report.html"
+    },
+    {
+      "from": "public/payment-reconciliation.html",
+      "to": "public/pages/superadmin/payment-reconciliation.html"
+    },
+    {
+      "from": "public/sensitive-approvals.html",
+      "to": "public/pages/superadmin/sensitive-approvals.html"
+    },
+    {
+      "from": "public/staff-accounts.html",
+      "to": "public/pages/superadmin/staff-accounts.html"
+    },
+    {
+      "from": "public/system-parameters.html",
+      "to": "public/pages/superadmin/system-parameters.html"
+    }
+  ],
+  "updated": [
+    "public/pages/auth/staff-login.html",
+    "public/pages/staff/admin-dashboard.html",
+    "public/pages/staff/bouquet-production.html",
+    "public/pages/staff/categories-attributes.html",
+    "public/pages/staff/closure-calendar.html",
+    "public/pages/staff/customers.html",
+    "public/pages/staff/operational-report.html",
+    "public/pages/staff/orders-queue.html",
+    "public/pages/staff/production-materials.html",
+    "public/pages/staff/products.html",
+    "public/pages/staff/staff-help.html",
+    "public/pages/staff/staff-notifications.html",
+    "public/pages/staff/staff-profile.html",
+    "public/pages/staff/staff-status.html",
+    "public/pages/superadmin/audit-log.html",
+    "public/pages/superadmin/financial-report.html",
+    "public/pages/superadmin/payment-reconciliation.html",
+    "public/pages/superadmin/sensitive-approvals.html",
+    "public/pages/superadmin/staff-accounts.html",
+    "public/pages/superadmin/system-parameters.html",
+    "public/assets/js/shared/admin-audit-nav.js",
+    "public/assets/js/shared/admin-settings-nav.js",
+    "public/assets/js/staff/accounts/staff-accounts.js",
+    "public/assets/js/staff/calendar/closure-calendar.js",
+    "public/assets/js/staff/catalog/products-data.js",
+    "public/assets/js/staff/catalog/products.js",
+    "public/assets/js/staff/catalog/taxonomy.js",
+    "public/assets/js/staff/customers/customers.js",
+    "public/assets/js/staff/inventory/materials.js",
+    "public/assets/js/staff/orders/order-corrections.js",
+    "public/assets/js/staff/production/bouquet-production.js",
+    "public/assets/js/staff/reports/operational-report.js",
+    "public/assets/js/staff/superadmin/audit-data.js",
+    "public/assets/js/staff/superadmin/audit-log.js",
+    "public/assets/js/staff/superadmin/superadmin-review.js",
+    "public/assets/js/staff/superadmin/system-parameters-data.js",
+    "public/assets/js/staff/superadmin/system-parameters.js",
+    "public/assets/js/staff/support/staff-help.js",
+    "public/assets/js/staff/support/staff-profile.js",
+    "public/assets/js/staff/support/staff-status.js",
+    "public/assets/js/staff/support/staff-support-data.js",
+    "tests/e2e/browser/verify-audit-states.cjs",
+    "tests/e2e/browser/verify-bouquet-decimal.cjs",
+    "tests/e2e/browser/verify-bouquet-production.cjs",
+    "tests/e2e/browser/verify-closure-calendar.cjs",
+    "tests/e2e/browser/verify-closure-readonly.cjs",
+    "tests/e2e/browser/verify-customers.cjs",
+    "tests/e2e/browser/verify-dashboard.cjs",
+    "tests/e2e/browser/verify-material-fixes.cjs",
+    "tests/e2e/browser/verify-materials.cjs",
+    "tests/e2e/browser/verify-order-signals.cjs",
+    "tests/e2e/browser/verify-orders.cjs",
+    "tests/e2e/browser/verify-product-controls.cjs",
+    "tests/e2e/browser/verify-products-empty.cjs",
+    "tests/e2e/browser/verify-products.cjs",
+    "tests/e2e/browser/verify-system-edges.cjs",
+    "tests/e2e/browser/verify-workflows.cjs",
+    "docs/coverage/audit-log-coverage.md",
+    "docs/coverage/bouquet-production-coverage.md",
+    "docs/coverage/categories-attributes-coverage.md",
+    "docs/coverage/closure-calendar-coverage.md",
+    "docs/coverage/customers-coverage.md",
+    "docs/coverage/materials-coverage.md",
+    "docs/coverage/operational-report-coverage.md",
+    "docs/coverage/orders-workflows-coverage.md",
+    "docs/coverage/products-coverage.md",
+    "docs/coverage/staff-accounts-coverage.md",
+    "docs/coverage/staff-auth-coverage.md",
+    "docs/coverage/staff-support-coverage.md",
+    "docs/coverage/staff-ui-completion.md",
+    "docs/coverage/superadmin-review-coverage.md",
+    "docs/coverage/system-parameters-coverage.md",
+    "docs/design/surfaces/audit-log-surface.md",
+    "docs/design/surfaces/bouquet-production-surface.md",
+    "docs/design/surfaces/closure-calendar-surface.md",
+    "docs/design/surfaces/customers-surface.md",
+    "docs/design/surfaces/materials-surface.md",
+    "docs/design/surfaces/orders-queue-surface.md",
+    "docs/design/surfaces/products-surface.md",
+    "docs/design/surfaces/staff-accounts-surface.md",
+    "docs/design/surfaces/system-parameters-surface.md"
+  ]
+}

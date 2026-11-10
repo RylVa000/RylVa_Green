@@ -1,0 +1,22 @@
+{
+  "staff-login.html": "pages/auth/staff-login.html",
+  "admin-dashboard.html": "pages/staff/admin-dashboard.html",
+  "orders-queue.html": "pages/staff/orders-queue.html",
+  "products.html": "pages/staff/products.html",
+  "categories-attributes.html": "pages/staff/categories-attributes.html",
+  "production-materials.html": "pages/staff/production-materials.html",
+  "bouquet-production.html": "pages/staff/bouquet-production.html",
+  "customers.html": "pages/staff/customers.html",
+  "closure-calendar.html": "pages/staff/closure-calendar.html",
+  "operational-report.html": "pages/staff/operational-report.html",
+  "staff-profile.html": "pages/staff/staff-profile.html",
+  "staff-notifications.html": "pages/staff/staff-notifications.html",
+  "staff-help.html": "pages/staff/staff-help.html",
+  "staff-status.html": "pages/staff/staff-status.html",
+  "audit-log.html": "pages/superadmin/audit-log.html",
+  "financial-report.html": "pages/superadmin/financial-report.html",
+  "payment-reconciliation.html": "pages/superadmin/payment-reconciliation.html",
+  "sensitive-approvals.html": "pages/superadmin/sensitive-approvals.html",
+  "staff-accounts.html": "pages/superadmin/staff-accounts.html",
+  "system-parameters.html": "pages/superadmin/system-parameters.html"
+}

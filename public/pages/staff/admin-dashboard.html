@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FBF7F4">
+  <meta name="description" content="Dashboard operasional RylVa Green untuk memantau antrean pesanan, pengiriman, pembayaran, dan stok toko.">
+  <title>Dashboard Admin | RylVa Green</title>
+  <link rel="stylesheet" href="../../assets/css/staff/dashboard/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/shared/admin-controls.css">
+  <script src="../../assets/js/shared/admin-controls.js" defer></script>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (window.tailwind)
+    {
+      tailwind.config = {
+        corePlugins: {
+          preflight: false
+        },
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['var(--font-body)']
+            },
+            colors: {
+              'primary-dark': 'var(--primary-dark)',
+              'primary': 'var(--primary)',
+              'primary-light': 'var(--primary-light)',
+              'neutral-soft': 'var(--neutral-soft)',
+              'background': 'var(--background)',
+              'card-background': 'var(--card-background)',
+              'muted-ink': 'var(--color-muted)'
+            }
+          }
+        }
+      };
+    }
+  </script>
+</head>
+<body>
+
+  <!-- SVG Symbols -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbol-library" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24">
+      <path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/>
+      <path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/>
+      <path d="M9 21v-7h6v7"/>
+    </symbol>
+    <symbol id="i-box" viewBox="0 0 24 24">
+      <path d="m12 2 9 5-9 5-9-5 9-5Zm-9 5v10l9 5 9-5V7M12 12v10"/>
+    </symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24">
+      <path d="M12 12c-3-2-3-5 0-7 3 2 3 5 0 7Zm0 0c1-4 4-5 7-3-1 3-4 4-7 3Zm0 0c4 1 5 4 3 7-3-1-4-4-3-7Zm0 0c-1 4-4 5-7 3 1-3 4-4 7-3Zm0 0c-4-1-5-4-3-7 3 1 4 4 3 7Z"/>
+      <path d="M12 19v3"/>
+    </symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24">
+      <path d="M7 3h10l3 3v15H4V6l3-3Z"/>
+      <path d="M8 10h8M8 14h8M8 18h5"/>
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3"/>
+      <path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5v1h-4"/>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2"/>
+      <path d="M7 3v4m10-4v4M3 10h18"/>
+    </symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/>
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <path d="M10 3h4l.7 2.2 1.9.8 2-.9 2.8 2.8-.9 2 .8 1.9L23 12.5v4l-2.2.7-.8 1.9.9 2-2.8 2.8-2-.9-1.9.8L13.5 26h-4l-.7-2.2-1.9-.8-2 .9-2.8-2.8.9-2-.8-1.9L0 16.5v-4l2.2-.7.8-1.9-.9-2L4.9 5l2 .9 1.9-.8L9.5 3Z" transform="translate(0 -2) scale(.92)"/>
+      <circle cx="12" cy="12" r="3"/>
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m14 6-6 6 6 6"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M5 5 19 19M19 5 5 19"/>
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7"/>
+      <path d="m16 16 5 5"/>
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 9h18c0-1-3-2-3-9ZM10 21h4"/>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M4 12h16m-6-6 6 6-6 6"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M12 3 2 21h20L12 3Z"/>
+      <path d="M12 9v5m0 3v.1"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="m8 12 2.5 2.5L16 9"/>
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 11v6m0-10v.1"/>
+    </symbol>
+    <symbol id="i-help" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.7 1.5-1.7 2.7M12 17v.1"/>
+    </symbol>
+  </svg>
+
+  <a href="#Operasional" class="skip-link">Lewati navigasi</a>
+  
+  <div id="mobile-backdrop" class="mobile-backdrop hidden" aria-hidden="true"></div>
+  
+  <div class="app-shell">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar -translate-x-full" aria-label="Navigasi utama">
+      <div class="brand-row">
+        <a href="#Operasional" class="brand-lockup" aria-label="RylVa Green, Operasional">
+          <span class="brand-mark">
+            <svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg>
+          </span>
+          <span class="sidebar-label">
+            <strong class="brand-name">RylVa Green.</strong>
+            <small class="brand-caption">Plant &amp; Florist</small>
+          </span>
+        </a>
+        <button id="sidebar-toggle" class="icon-button collapse-button" type="button" aria-label="Kecilkan sidebar" aria-expanded="true" aria-controls="sidebar-nav">
+          <svg id="collapse-icon" class="icon icon--small" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button id="mobile-close" class="icon-button mobile-control" type="button" aria-label="Tutup menu">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      
+      <div class="workspace sidebar-extra">
+        <div class="workspace-card">
+          <svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>
+          <span class="sidebar-label">
+            <strong>Gudang Pusat</strong>
+            <small>Ruang kerja toko</small>
+          </span>
+        </div>
+      </div>
+      
+      <nav id="sidebar-nav" class="sidebar-nav" aria-label="Menu admin">
+        <a href="#Operasional" class="nav-item" title="Operasional" aria-current="page">
+          <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+          <span class="sidebar-label">Operasional</span>
+        </a>
+        <a href="../staff/orders-queue.html" class="nav-item" title="Manajemen Pesanan">
+          <svg class="icon" aria-hidden="true"><use href="#i-orders"/></svg>
+          <span class="sidebar-label">Manajemen Pesanan</span>
+        </a>
+        <a href="../staff/products.html" class="nav-item" title="Produk & Varian">
+          <svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>
+          <span class="sidebar-label">Produk &amp; Varian</span>
+        </a>
+        <a href="../staff/production-materials.html" class="nav-item" title="Bahan Produksi">
+          <svg class="icon" aria-hidden="true"><use href="#i-flower"/></svg>
+          <span class="sidebar-label">Bahan Produksi</span>
+        </a>
+        <a href="../staff/bouquet-production.html" class="nav-item" data-role-link title="Buket &amp; Produksi">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-flower"/>
+          </svg>
+          <span class="sidebar-label">Buket &amp; Produksi</span>
+        </a>
+        <a href="../staff/customers.html" class="nav-item" data-role-link title="Pelanggan">
+          <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+          <span class="sidebar-label">Pelanggan</span>
+        </a>
+        <a href="../staff/closure-calendar.html" class="nav-item" data-role-link title="Kalender Tutup">
+          <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="sidebar-label">Kalender Tutup</span>
+        </a>
+        <a href="../superadmin/financial-report.html" class="nav-item" title="Laporan Keuangan" data-superadmin-only style="display:none">
+          <svg class="icon" aria-hidden="true"><use href="#i-audit"/></svg>
+          <span class="sidebar-label">Laporan Keuangan</span>
+        </a>
+        <a href="../superadmin/audit-log.html" class="nav-item" title="Audit Log" data-audit-link data-role-link>
+          <svg class="icon" aria-hidden="true"><use href="#i-audit"/></svg>
+          <span class="sidebar-label">Audit Log</span>
+        </a>
+        <a href="../superadmin/system-parameters.html?role=superadmin" class="nav-item" title="Pengaturan Sistem" data-superadmin-only style="display:none">
+          <svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg>
+          <span class="sidebar-label">Pengaturan Sistem</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-foot">
+        <div class="help-block sidebar-extra">
+          <svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>
+          <strong>Butuh Bantuan?</strong>
+          <p>Panduan operasional untuk tim RylVa Green.</p>
+        </div>
+        <div class="profile-row">
+          <span class="profile-avatar">AR</span>
+          <span class="sidebar-label">
+            <strong id="profile-name">Admin RylVa</strong>
+            <small>Gudang Pusat</small>
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="workspace-main">
+      <header class="topbar">
+        <div class="topbar-leading">
+          <button id="mobile-open" class="icon-button mobile-control" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar">
+            <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+          </button>
+          <p class="breadcrumb">Ruang kerja <span aria-hidden="true">/</span><strong>Operasional</strong></p>
+        </div>
+        <div class="topbar-account">
+          <span id="preview-role" class="role-caption">Pratinjau Admin</span>
+          <span aria-label="Contoh notifikasi">
+            <svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>
+          </span>
+          <span class="profile-avatar" aria-label="Admin RylVa">AR</span>
+        </div>
+      </header>
+
+      <main id="Operasional" class="dashboard">
+        
+        <section id="ringkasan" class="page-heading" aria-labelledby="page-title">
+          <div>
+            <h1 id="page-title">Prioritas operasional</h1>
+            <p>Selesaikan pengiriman hari ini dan tugas yang melewati tenggat.</p>
+          </div>
+          <div class="heading-actions">
+            <span class="date-label">
+              <svg class="icon icon--small" aria-hidden="true"><use href="#i-calendar"/></svg>
+              28 Oktober 2026, WIB
+            </span>
+            <a href="../staff/orders-queue.html" class="button-primary">Lihat pesanan</a>
+          </div>
+        </section>
+        
+        <div role="alert" class="attention-strip">
+          <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+          <p><strong>Perlu perhatian sekarang:</strong> 1 refund melewati tenggat dan 4 produk berada di ambang stok rendah.</p>
+          <a href="#tasks-title" class="text-link">Lihat prioritas</a>
+        </div>
+        
+        <section class="stat-section" aria-labelledby="overview-title">
+          <h2 id="overview-title">Situasi hari ini</h2>
+          <div class="stat-strip">
+            <article class="stat">
+              <h3>Siap diproses</h3>
+              <strong class="stat-value tabular">12</strong>
+              <p>
+                <span>Antrean</span>
+                <span>menunggu tindakan</span>
+              </p>
+            </article>
+            <article class="stat">
+              <h3>Kirim hari ini</h3>
+              <strong class="stat-value tabular">8</strong>
+              <p>
+                <span>Hari ini</span>
+                <span>jatuh tempo, WIB</span>
+              </p>
+            </article>
+            <article class="stat">
+              <h3>Pembayaran ditinjau</h3>
+              <strong class="stat-value tabular">3</strong>
+              <p id="payment-metric-caption">
+                <span>Periksa</span>
+                <span>dan eskalasi kasus</span>
+              </p>
+            </article>
+            <article class="stat">
+              <h3>Peringatan stok rendah</h3>
+              <strong class="stat-value tabular">4</strong>
+              <p>
+                <span>Perlu perhatian</span>
+                <span>≤ 5 unit, P-22</span>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <div class="work-grid">
+          <section id="pesanan" class="orders-section" aria-labelledby="orders-title">
+            <div class="section-heading">
+              <div>
+                <div class="heading-with-count">
+                  <h2 id="orders-title">Antrean pesanan</h2>
+                  <span id="order-count" class="count-label">6 pesanan</span>
+                </div>
+                <p>Jadwal kirim dan status yang perlu ditindaklanjuti.</p>
+              </div>
+              <a href="#pesanan" class="text-link">Lihat semua</a>
+            </div>
+            
+            <div class="orders-toolbar">
+              <label class="search-field" for="search-orders">
+                <svg class="icon icon--small" aria-hidden="true"><use href="#i-search"/></svg>
+                <input id="search-orders" type="search" placeholder="Cari pesanan…" aria-label="Cari pesanan">
+              </label>
+              <div class="filter-tabs" role="tablist" aria-label="Filter pesanan">
+                <button type="button" class="filter-tab" data-filter="all" role="tab" aria-selected="true">Semua</button>
+                <button type="button" class="filter-tab" data-filter="Siap Diproses" role="tab" aria-selected="false">Siap diproses</button>
+                <button type="button" class="filter-tab" data-filter="Sedang Disiapkan" role="tab" aria-selected="false">Disiapkan</button>
+                <button type="button" class="filter-tab" data-filter="Dikirim" role="tab" aria-selected="false">Dikirim</button>
+              </div>
+            </div>
+            
+            <div class="orders-table-wrap">
+              <table class="orders-table" aria-label="Pesanan terbaru">
+                <thead>
+                  <tr>
+                    <th scope="col">No. pesanan</th>
+                    <th scope="col">Pelanggan</th>
+                    <th scope="col">Jadwal kirim</th>
+                    <th scope="col">Pesanan / Bayar / Kirim</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table">
+                  <tr class="order-row">
+                    <td>
+                      <strong class="order-number tabular">RV-261028-7K4M9P</strong>
+                      <span class="order-secondary">Buket custom</span>
+                      <span class="order-secondary order-customer-fallback">Siti Rahmawati</span>
+                    </td>
+                    <td>Siti Rahmawati</td>
+                    <td>
+                      <span class="order-date">28 Okt 2026</span>
+                      <span class="order-secondary">Siang, 12.00 hingga 16.00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-success">Siap Diproses</span>
+                        <span class="status-badge status-success">QRIS, Berhasil</span>
+                        <span class="status-badge status-info">Belum diserahkan</span>
+                      </div>
+                    </td>
+                    <td class="order-total tabular">Rp 425.000</td>
+                  </tr>
+                  
+                  <tr class="order-row">
+                    <td>
+                      <strong class="order-number tabular">RV-261028-X5A8T2</strong>
+                      <span class="order-secondary">Monstera deliciosa</span>
+                      <span class="order-secondary order-customer-fallback">Budi Santoso</span>
+                    </td>
+                    <td>Budi Santoso</td>
+                    <td>
+                      <span class="order-date">28 Okt 2026</span>
+                      <span class="order-secondary">Sore, 16.00 hingga 20.00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-success">Siap Diproses</span>
+                        <span class="status-badge status-info">COD, Menunggu / UNPAID</span>
+                        <span class="status-badge status-info">Belum diserahkan</span>
+                      </div>
+                    </td>
+                    <td class="order-total tabular">Rp 315.000</td>
+                  </tr>
+                  
+                  <tr class="order-row">
+                    <td>
+                      <strong class="order-number tabular">RV-261028-B6C3N7</strong>
+                      <span class="order-secondary">Paket berkebun</span>
+                      <span class="order-secondary order-customer-fallback">Nadia Putri</span>
+                    </td>
+                    <td>Nadia Putri</td>
+                    <td>
+                      <span class="order-date">29 Okt 2026</span>
+                      <span class="order-secondary">Pagi, 08.00 hingga 12.00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-info">Sedang Disiapkan</span>
+                        <span class="status-badge status-success">Transfer, Berhasil</span>
+                        <span class="status-badge status-info">Belum diserahkan</span>
+                      </div>
+                    </td>
+                    <td class="order-total tabular">Rp 780.000</td>
+                  </tr>
+                  
+                  <tr class="order-row">
+                    <td>
+                      <strong class="order-number tabular">RV-261028-R8V5D2</strong>
+                      <span class="order-secondary">Pot terakota</span>
+                      <span class="order-secondary order-customer-fallback">Dimas Pratama</span>
+                    </td>
+                    <td>Dimas Pratama</td>
+                    <td>
+                      <span class="order-date">29 Okt 2026</span>
+                      <span class="order-secondary">Siang, 12.00 hingga 16.00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-success">Siap Diproses</span>
+                        <span class="status-badge status-info">COD, Menunggu / UNPAID</span>
+                        <span class="status-badge status-info">Belum diserahkan</span>
+                      </div>
+                    </td>
+                    <td class="order-total tabular">Rp 245.000</td>
+                  </tr>
+                  
+                  <tr class="order-row">
+                    <td>
+                      <strong class="order-number tabular">RV-261028-M3Q7S4</strong>
+                      <span class="order-secondary">Buket mawar</span>
+                      <span class="order-secondary order-customer-fallback">Maya Lestari</span>
+                    </td>
+                    <td>Maya Lestari</td>
+                    <td>
+                      <span class="order-date">30 Okt 2026</span>
+                      <span class="order-secondary">Siang, 12.00 hingga 16.00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-info">Sedang Disiapkan</span>
+                        <span class="status-badge status-success">VA, Berhasil</span>
+                        <span class="status-badge status-info">Belum diserahkan</span>
+                      </div>
+                    </td>
+                    <td class="order-total tabular">Rp 560.000</td>
+                  </tr>
+                  
+                  <tr class="order-row">
+                    <td>
+                      <strong class="order-number tabular">RV-261028-T9Y2F6</strong>
+                      <span class="order-secondary">Media tanam</span>
+                      <span class="order-secondary order-customer-fallback">Rizky Firmansyah</span>
+                    </td>
+                    <td>Rizky Firmansyah</td>
+                    <td>
+                      <span class="order-date">30 Okt 2026</span>
+                      <span class="order-secondary">Sore, 16.00 hingga 20.00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-info">Dikirim</span>
+                        <span class="status-badge status-success">QRIS, Berhasil</span>
+                        <span class="status-badge status-error">
+                          <svg class="icon icon--small" aria-hidden="true"><use href="#i-alert"/></svg>Terkendala
+                        </span>
+                        <small class="shipping-reason">Alasan: Penerima tidak ada</small>
+                      </div>
+                    </td>
+                    <td class="order-total tabular">Rp 390.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div id="orders-cards" class="orders-cards">
+              <article class="mobile-order">
+                <div class="mobile-order-head">
+                  <div>
+                    <strong class="tabular">RV-261028-7K4M9P</strong>
+                    <p>Buket custom<br>Siti Rahmawati</p>
+                  </div>
+                  <strong class="tabular">Rp 425.000</strong>
+                </div>
+                <p>28 Okt 2026<br>Siang, 12.00 hingga 16.00</p>
+                <dl>
+                  <div>
+                    <dt class="sr-only">Status pesanan</dt>
+                    <dd><span class="status-badge status-success">Siap Diproses</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pembayaran</dt>
+                    <dd><span class="status-badge status-success">QRIS, Berhasil</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pengiriman</dt>
+                    <dd><span class="status-badge status-info">Belum diserahkan</span></dd>
+                  </div>
+                </dl>
+              </article>
+              
+              <article class="mobile-order">
+                <div class="mobile-order-head">
+                  <div>
+                    <strong class="tabular">RV-261028-X5A8T2</strong>
+                    <p>Monstera deliciosa<br>Budi Santoso</p>
+                  </div>
+                  <strong class="tabular">Rp 315.000</strong>
+                </div>
+                <p>28 Okt 2026<br>Sore, 16.00 hingga 20.00</p>
+                <dl>
+                  <div>
+                    <dt class="sr-only">Status pesanan</dt>
+                    <dd><span class="status-badge status-success">Siap Diproses</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pembayaran</dt>
+                    <dd><span class="status-badge status-info">COD, Menunggu / UNPAID</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pengiriman</dt>
+                    <dd><span class="status-badge status-info">Belum diserahkan</span></dd>
+                  </div>
+                </dl>
+              </article>
+              
+              <article class="mobile-order">
+                <div class="mobile-order-head">
+                  <div>
+                    <strong class="tabular">RV-261028-B6C3N7</strong>
+                    <p>Paket berkebun<br>Nadia Putri</p>
+                  </div>
+                  <strong class="tabular">Rp 780.000</strong>
+                </div>
+                <p>29 Okt 2026<br>Pagi, 08.00 hingga 12.00</p>
+                <dl>
+                  <div>
+                    <dt class="sr-only">Status pesanan</dt>
+                    <dd><span class="status-badge status-info">Sedang Disiapkan</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pembayaran</dt>
+                    <dd><span class="status-badge status-success">Transfer, Berhasil</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pengiriman</dt>
+                    <dd><span class="status-badge status-info">Belum diserahkan</span></dd>
+                  </div>
+                </dl>
+              </article>
+              
+              <article class="mobile-order">
+                <div class="mobile-order-head">
+                  <div>
+                    <strong class="tabular">RV-261028-R8V5D2</strong>
+                    <p>Pot terakota<br>Dimas Pratama</p>
+                  </div>
+                  <strong class="tabular">Rp 245.000</strong>
+                </div>
+                <p>29 Okt 2026<br>Siang, 12.00 hingga 16.00</p>
+                <dl>
+                  <div>
+                    <dt class="sr-only">Status pesanan</dt>
+                    <dd><span class="status-badge status-success">Siap Diproses</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pembayaran</dt>
+                    <dd><span class="status-badge status-info">COD, Menunggu / UNPAID</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pengiriman</dt>
+                    <dd><span class="status-badge status-info">Belum diserahkan</span></dd>
+                  </div>
+                </dl>
+              </article>
+              
+              <article class="mobile-order">
+                <div class="mobile-order-head">
+                  <div>
+                    <strong class="tabular">RV-261028-M3Q7S4</strong>
+                    <p>Buket mawar<br>Maya Lestari</p>
+                  </div>
+                  <strong class="tabular">Rp 560.000</strong>
+                </div>
+                <p>30 Okt 2026<br>Siang, 12.00 hingga 16.00</p>
+                <dl>
+                  <div>
+                    <dt class="sr-only">Status pesanan</dt>
+                    <dd><span class="status-badge status-info">Sedang Disiapkan</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pembayaran</dt>
+                    <dd><span class="status-badge status-success">VA, Berhasil</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pengiriman</dt>
+                    <dd><span class="status-badge status-info">Belum diserahkan</span></dd>
+                  </div>
+                </dl>
+              </article>
+              
+              <article class="mobile-order">
+                <div class="mobile-order-head">
+                  <div>
+                    <strong class="tabular">RV-261028-T9Y2F6</strong>
+                    <p>Media tanam<br>Rizky Firmansyah</p>
+                  </div>
+                  <strong class="tabular">Rp 390.000</strong>
+                </div>
+                <p>30 Okt 2026<br>Sore, 16.00 hingga 20.00</p>
+                <dl>
+                  <div>
+                    <dt class="sr-only">Status pesanan</dt>
+                    <dd><span class="status-badge status-info">Dikirim</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pembayaran</dt>
+                    <dd><span class="status-badge status-success">QRIS, Berhasil</span></dd>
+                  </div>
+                  <div>
+                    <dt class="sr-only">Status pengiriman</dt>
+                    <dd><span class="status-badge status-error"><svg class="icon icon--small" aria-hidden="true"><use href="#i-alert"/></svg>Terkendala</span></dd>
+                  </div>
+                </dl>
+                <p class="shipping-reason">Alasan pengiriman: Penerima tidak ada</p>
+              </article>
+            </div>
+            
+            <div class="orders-footer">
+              <span id="order-summary" aria-live="polite">Menampilkan 6 dari 6 pesanan contoh</span>
+              <button id="clear-filter" class="clear-filter" type="button">Hapus filter</button>
+            </div>
+          </section>
+          
+          <div class="right-column">
+            <section aria-labelledby="tasks-title">
+              <div class="section-heading">
+                <div>
+                  <h2 id="tasks-title">Perlu ditindaklanjuti</h2>
+                  <p>Urut menurut tenggat.</p>
+                </div>
+                <span class="count-label">4 tugas</span>
+              </div>
+              <div class="urgent-task">
+                <div class="urgent-title">
+                  <h3>Pembatalan / refund</h3>
+                  <span class="deadline">Lewat 15 menit</span>
+                </div>
+                <p>Admin RylVa, Tinjau keputusan dan bukti pesanan.</p>
+              </div>
+              <ul class="task-list">
+                <li>
+                  <span>
+                    <strong>PH-06, Selisih stok</strong>
+                    <small>Sisa 45 menit</small>
+                  </span>
+                  <span class="task-action">Tangani</span>
+                </li>
+                <li>
+                  <span>
+                    <strong>Pengiriman terkendala</strong>
+                    <small>Sisa 1 jam</small>
+                  </span>
+                  <span class="task-action">Periksa</span>
+                </li>
+                <li>
+                  <span>
+                    <strong>Komplain terbuka</strong>
+                    <small>Sisa 2 jam</small>
+                  </span>
+                  <span class="task-action">Tinjau</span>
+                </li>
+              </ul>
+            </section>
+            
+            <section aria-labelledby="payment-review-title">
+              <div class="section-heading">
+                <div>
+                  <h2 id="payment-review-title">Pembayaran ditinjau</h2>
+                  <p>Tiga kasus menunggu pemeriksaan.</p>
+                </div>
+                <svg class="icon icon--small" aria-hidden="true"><use href="#i-info"/></svg>
+              </div>
+              <ul class="review-list">
+                <li>
+                  <span>
+                    <strong>DEMO-004</strong>
+                    <small>PH-03, Nominal tidak cocok</small>
+                  </span>
+                  <span>Periksa</span>
+                </li>
+                <li>
+                  <span>
+                    <strong>DEMO-005</strong>
+                    <small>PH-02, Pembayaran terlambat</small>
+                  </span>
+                  <span>Periksa</span>
+                </li>
+                <li>
+                  <span>
+                    <strong>DEMO-006</strong>
+                    <small>Selisih rekonsiliasi</small>
+                  </span>
+                  <span>Eskalasi</span>
+                </li>
+              </ul>
+              <p id="payment-review-note" class="review-note">Rekonsiliasi manual diteruskan ke SuperAdmin.</p>
+            </section>
+          </div>
+        </div>
+
+        <div class="stock-grid">
+          <section id="inventory" aria-labelledby="inventory-title">
+            <div class="section-heading">
+              <div>
+                <h2 id="inventory-title">Peta stok</h2>
+                <p>Merchandise dan bahan produksi dipantau terpisah.</p>
+              </div>
+              <svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>
+            </div>
+            
+            <div class="stock-summary">
+              <p>
+                <strong class="tabular">368</strong>unit
+                <small>Merchandise</small>
+              </p>
+              <p>
+                <strong class="tabular">186</strong>unit
+                <small>Bahan buket</small>
+              </p>
+            </div>
+            <p class="stock-domain-note">Dua domain stok aktif</p>
+            
+            <div class="stock-domain-head">
+              <h3>Stok merchandise</h3>
+              <span>Tersedia / kapasitas</span>
+            </div>
+            
+            <div class="stock-rows">
+              <div class="stock-row">
+                <div class="stock-row-head">
+                  <span>Tanaman hias varian</span>
+                  <strong class="tabular">144 / 180</strong>
+                </div>
+                <div class="stock-track" style="--stock-level:80%" role="meter" aria-label="Tanaman hias varian" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-valuetext="144 / 180">
+                  <span></span>
+                </div>
+              </div>
+              <div class="stock-row">
+                <div class="stock-row-head">
+                  <span>Pot</span>
+                  <strong class="tabular">88 / 110</strong>
+                </div>
+                <div class="stock-track" style="--stock-level:80%" role="meter" aria-label="Pot" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-valuetext="88 / 110">
+                  <span></span>
+                </div>
+              </div>
+              <div class="stock-row">
+                <div class="stock-row-head">
+                  <span>Media tanam</span>
+                  <strong class="tabular">75 / 100</strong>
+                </div>
+                <div class="stock-track" style="--stock-level:75%" role="meter" aria-label="Media tanam" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" aria-valuetext="75 / 100">
+                  <span></span>
+                </div>
+              </div>
+              <div class="stock-row">
+                <div class="stock-row-head">
+                  <span>Alat berkebun</span>
+                  <strong class="tabular">61 / 82</strong>
+                </div>
+                <div class="stock-track" style="--stock-level:74.4%" role="meter" aria-label="Alat berkebun" aria-valuemin="0" aria-valuemax="100" aria-valuenow="74.4" aria-valuetext="61 / 82">
+                  <span></span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="stock-materials">
+              <div class="stock-domain-head">
+                <h3>Bahan produksi buket</h3>
+                <span class="tabular">186 / 300</span>
+              </div>
+              <div class="stock-track" style="--stock-level:62%" role="meter" aria-label="Bahan produksi buket" aria-valuemin="0" aria-valuemax="300" aria-valuenow="186">
+                <span></span>
+              </div>
+              <p>Bunga potong, kertas wrapping, pita, dan pelengkap.</p>
+            </div>
+          </section>
+          
+          <section class="restock-section" aria-labelledby="restock-title">
+            <div class="section-heading">
+              <div>
+                <h2 id="restock-title">Prioritas restok</h2>
+                <p>Empat varian perlu diperiksa sebelum stok habis.</p>
+              </div>
+              <svg class="icon icon--small" aria-hidden="true"><use href="#i-alert"/></svg>
+            </div>
+            
+            <p class="stock-threshold">P-22, ambang 5 unit</p>
+            <ul class="restock-list">
+              <li>
+                <span>Monstera<code class="sku">DEMO-M01</code></span>
+                <strong class="tabular">2 pot</strong>
+              </li>
+              <li>
+                <span>Sirih gading<code class="sku">DEMO-S01</code></span>
+                <strong class="tabular">3 pot</strong>
+              </li>
+              <li>
+                <span>Pot terakota<code class="sku">DEMO-P01</code></span>
+                <strong class="tabular">4 unit</strong>
+              </li>
+              <li>
+                <span>Media tanam<code class="sku">DEMO-T01</code></span>
+                <strong class="tabular">1 sak</strong>
+              </li>
+            </ul>
+            
+            <div class="restock-totals">
+              <div>
+                <strong class="tabular">2</strong>
+                <span>Varian tanaman</span>
+              </div>
+              <div>
+                <strong class="tabular">2</strong>
+                <span>Barang pendukung</span>
+              </div>
+            </div>
+            <p class="stock-rule">Stok tersedia ≤ 5 unit per produk.</p>
+          </section>
+        </div>
+        
+        <footer class="dashboard-footer">
+          <span>RylVa Green, Tumbuh bersama setiap hari.</span>
+          <span>Pratinjau desain, Data ilustrasi</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const role = urlParams.get('role') === 'superadmin' ? 'superadmin' : 'admin';
+    
+    if (role === 'superadmin')
+    {
+      document.querySelectorAll('[data-superadmin-only]').forEach(function (element)
+      {
+        element.style.display = '';
+      });
+      document.getElementById('profile-name').textContent = 'SuperAdmin RylVa';
+      document.getElementById('preview-role').textContent = 'Pratinjau SuperAdmin';
+      document.querySelectorAll('a[href="../staff/orders-queue.html"]').forEach(function (link)
+      {
+        link.href = '../staff/orders-queue.html?role=superadmin';
+      });
+      document.querySelectorAll('a[href="../staff/products.html"]').forEach(function (link)
+      {
+        link.href = '../staff/products.html?role=superadmin';
+      });
+      document.querySelectorAll('a[href="../staff/production-materials.html"], a[href="../staff/customers.html"], a[href="../staff/closure-calendar.html"], a[href="../staff/bouquet-production.html"]').forEach(function (link)
+      {
+        link.href = link.getAttribute('href') + '?role=superadmin';
+      });
+      document.querySelector('#payment-metric-caption span:last-child').textContent = 'dan rekonsiliasi';
+      document.getElementById('payment-review-note').textContent = 'Rekonsiliasi manual hanya oleh SuperAdmin dengan bukti dan audit.';
+    }
+    
+    const orders = [
+      {
+        no: 'RV-261028-7K4M9P',
+        customer: 'Siti Rahmawati',
+        date: '28 Okt 2026',
+        slot: 'Siang, 12.00 hingga 16.00',
+        order: 'Siap Diproses',
+        payment: 'Berhasil',
+        method: 'QRIS',
+        shipping: 'Belum diserahkan',
+        total: 425000
+      },
+      {
+        no: 'RV-261028-X5A8T2',
+        customer: 'Budi Santoso',
+        date: '28 Okt 2026',
+        slot: 'Sore, 16.00 hingga 20.00',
+        order: 'Siap Diproses',
+        payment: 'Menunggu',
+        method: 'COD',
+        shipping: 'Belum diserahkan',
+        total: 315000
+      },
+      {
+        no: 'RV-261028-B6C3N7',
+        customer: 'Nadia Putri',
+        date: '29 Okt 2026',
+        slot: 'Pagi, 08.00 hingga 12.00',
+        order: 'Sedang Disiapkan',
+        payment: 'Berhasil',
+        method: 'Transfer',
+        shipping: 'Belum diserahkan',
+        total: 780000
+      },
+      {
+        no: 'RV-261028-R8V5D2',
+        customer: 'Dimas Pratama',
+        date: '29 Okt 2026',
+        slot: 'Siang, 12.00 hingga 16.00',
+        order: 'Siap Diproses',
+        payment: 'Menunggu',
+        method: 'COD',
+        shipping: 'Belum diserahkan',
+        total: 245000
+      },
+      {
+        no: 'RV-261028-M3Q7S4',
+        customer: 'Maya Lestari',
+        date: '30 Okt 2026',
+        slot: 'Siang, 12.00 hingga 16.00',
+        order: 'Sedang Disiapkan',
+        payment: 'Berhasil',
+        method: 'VA',
+        shipping: 'Belum diserahkan',
+        total: 560000
+      },
+      {
+        no: 'RV-261028-T9Y2F6',
+        customer: 'Rizky Firmansyah',
+        date: '30 Okt 2026',
+        slot: 'Sore, 16.00 hingga 20.00',
+        order: 'Dikirim',
+        payment: 'Berhasil',
+        method: 'QRIS',
+        shipping: 'Terkendala',
+        shippingReason: 'Penerima tidak ada',
+        total: 390000
+      }
+    ];
+    
+    function formatRupiah(value)
+    {
+      return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
+    }
+    
+    function getPaymentLabel(order)
+    {
+      if (order.method === 'COD')
+      {
+        return 'COD, Menunggu / UNPAID';
+      }
+      return order.method + ', ' + order.payment;
+    }
+    
+    function renderStatusBadge(label, kind)
+    {
+      const alertIcon = kind === 'error' ? '<svg class="icon icon--small" aria-hidden="true"><use href="#i-alert"/></svg>' : '';
+      return `<span class="status-badge status-${kind}">${alertIcon}${label}</span>`;
+    }
+    
+    const productNames = ['Buket custom', 'Monstera deliciosa', 'Paket berkebun', 'Pot terakota', 'Buket mawar', 'Media tanam'];
+    const searchInput = document.getElementById('search-orders');
+    const filterTabs = Array.from(document.querySelectorAll('.filter-tab'));
+    let activeFilter = 'all';
+
+    function renderBadgeGroup(order)
+    {
+      const orderStatusKind = order.order === 'Siap Diproses' ? 'success' : 'info';
+      const paymentStatusKind = order.payment === 'Berhasil' ? 'success' : (order.method === 'COD' ? 'info' : 'warning');
+      const shippingStatusKind = order.shipping === 'Terkendala' ? 'error' : 'info';
+      
+      let badgeHtml = `
+        <div class="status-stack">
+          ${renderStatusBadge(order.order, orderStatusKind)}
+          ${renderStatusBadge(getPaymentLabel(order), paymentStatusKind)}
+          ${renderStatusBadge(order.shipping, shippingStatusKind)}
+      `;
+      
+      if (order.shippingReason)
+      {
+        badgeHtml += `<small class="shipping-reason">Alasan: ${order.shippingReason}</small>`;
+      }
+      
+      badgeHtml += `</div>`;
+      return badgeHtml;
+    }
+
+    function renderOrders()
+    {
+      const searchQuery = (searchInput.value || '').trim().toLocaleLowerCase('id-ID');
+      
+      const visibleOrders = orders.map(function (order, index)
+      {
+        return { ...order, product: productNames[index] };
+      }).filter(function (order)
+      {
+        const isFilterMatch = activeFilter === 'all' || order.order === activeFilter;
+        const isQueryMatch = !searchQuery || `${order.no} ${order.customer} ${order.product}`.toLocaleLowerCase('id-ID').includes(searchQuery);
+        
+        return isFilterMatch && isQueryMatch;
+      });
+
+      const tableBody = document.getElementById('orders-table');
+      const mobileCards = document.getElementById('orders-cards');
+      
+      if (visibleOrders.length > 0)
+      {
+        tableBody.innerHTML = visibleOrders.map(function (order)
+        {
+          return `
+            <tr class="order-row">
+              <td>
+                <strong class="order-number tabular">${order.no}</strong>
+                <span class="order-secondary">${order.product}</span>
+                <span class="order-secondary order-customer-fallback">${order.customer}</span>
+              </td>
+              <td>${order.customer}</td>
+              <td>
+                <span class="order-date">${order.date}</span>
+                <span class="order-secondary">${order.slot}</span>
+              </td>
+              <td>${renderBadgeGroup(order)}</td>
+              <td class="order-total tabular">${formatRupiah(order.total)}</td>
+            </tr>
+          `;
+        }).join('');
+
+        mobileCards.innerHTML = visibleOrders.map(function (order)
+        {
+          const orderStatusKind = order.order === 'Siap Diproses' ? 'success' : 'info';
+          const paymentStatusKind = order.payment === 'Berhasil' ? 'success' : (order.method === 'COD' ? 'info' : 'warning');
+          const shippingStatusKind = order.shipping === 'Terkendala' ? 'error' : 'info';
+          
+          let cardHtml = `
+            <article class="mobile-order">
+              <div class="mobile-order-head">
+                <div>
+                  <strong class="tabular">${order.no}</strong>
+                  <p>${order.product}<br>${order.customer}</p>
+                </div>
+                <strong class="tabular">${formatRupiah(order.total)}</strong>
+              </div>
+              <p>${order.date}<br>${order.slot}</p>
+              <dl>
+                <div>
+                  <dt class="sr-only">Status pesanan</dt>
+                  <dd>${renderStatusBadge(order.order, orderStatusKind)}</dd>
+                </div>
+                <div>
+                  <dt class="sr-only">Status pembayaran</dt>
+                  <dd>${renderStatusBadge(getPaymentLabel(order), paymentStatusKind)}</dd>
+                </div>
+                <div>
+                  <dt class="sr-only">Status pengiriman</dt>
+                  <dd>${renderStatusBadge(order.shipping, shippingStatusKind)}</dd>
+                </div>
+              </dl>
+          `;
+          
+          if (order.shippingReason)
+          {
+            cardHtml += `<p class="shipping-reason">Alasan pengiriman: ${order.shippingReason}</p>`;
+          }
+          
+          cardHtml += `</article>`;
+          return cardHtml;
+        }).join('');
+      }
+      else
+      {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state">
+              Tidak ada pesanan yang cocok.
+            </td>
+          </tr>
+        `;
+        mobileCards.innerHTML = `
+          <p class="empty-state">
+            Tidak ada pesanan yang cocok.
+          </p>
+        `;
+      }
+
+      document.getElementById('order-count').textContent = `${visibleOrders.length} pesanan`;
+      document.getElementById('order-summary').textContent = `Menampilkan ${visibleOrders.length} dari ${orders.length} pesanan contoh`;
+    }
+    
+    filterTabs.forEach(function (tab)
+    {
+      tab.addEventListener('click', function ()
+      {
+        activeFilter = tab.dataset.filter;
+        
+        filterTabs.forEach(function (item)
+        {
+          const isSelected = item === tab;
+          item.setAttribute('aria-selected', String(isSelected));
+          item.classList.toggle('border-transparent', !isSelected);
+          item.classList.toggle('text-primary', isSelected);
+        });
+        
+        renderOrders();
+      });
+    });
+    
+    searchInput.addEventListener('input', renderOrders);
+    
+    document.getElementById('clear-filter').addEventListener('click', function ()
+    {
+      searchInput.value = '';
+      filterTabs[0].click();
+    });
+    
+    renderOrders();
+
+    // Sidebar & Mobile Menu Logic
+    const sidebarElement = document.getElementById('sidebar');
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+    const mobileOpenBtn = document.getElementById('mobile-open');
+    const mobileCloseBtn = document.getElementById('mobile-close');
+    const backdropElement = document.getElementById('mobile-backdrop');
+    
+    function toggleMobileMenu(isOpen)
+    {
+      sidebarElement.classList.toggle('-translate-x-full', !isOpen);
+      backdropElement.classList.toggle('hidden', !isOpen);
+      mobileOpenBtn.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('menu-open', isOpen);
+      
+      if (isOpen)
+      {
+        mobileCloseBtn.focus();
+      }
+      else
+      {
+        mobileOpenBtn.focus();
+      }
+    }
+    
+    sidebarToggleBtn.addEventListener('click', function ()
+    {
+      const isCollapsed = sidebarElement.classList.toggle('sidebar-collapsed');
+      sidebarToggleBtn.setAttribute('aria-expanded', String(!isCollapsed));
+      sidebarToggleBtn.setAttribute('aria-label', isCollapsed ? 'Besarkan sidebar' : 'Kecilkan sidebar');
+    });
+    
+    mobileOpenBtn.addEventListener('click', function ()
+    {
+      toggleMobileMenu(true);
+    });
+    
+    mobileCloseBtn.addEventListener('click', function ()
+    {
+      toggleMobileMenu(false);
+    });
+    
+    backdropElement.addEventListener('click', function ()
+    {
+      toggleMobileMenu(false);
+    });
+    
+    sidebarElement.querySelectorAll('nav a').forEach(function (link)
+    {
+      link.addEventListener('click', function ()
+      {
+        if (window.innerWidth < 1024)
+        {
+          toggleMobileMenu(false);
+        }
+      });
+    });
+    
+    document.addEventListener('keydown', function (event)
+    {
+      if (event.key === 'Escape' && mobileOpenBtn.getAttribute('aria-expanded') === 'true')
+      {
+        toggleMobileMenu(false);
+      }
+    });
+    
+    window.addEventListener('resize', function ()
+    {
+      if (window.innerWidth >= 1024 && mobileOpenBtn.getAttribute('aria-expanded') === 'true')
+      {
+        toggleMobileMenu(false);
+      }
+    });
+
+    const navControls = function ()
+    {
+      return Array.from(sidebarElement.querySelectorAll('a, button')).filter(function (el)
+      {
+        return el.getClientRects().length > 0;
+      });
+    };
+    
+    document.addEventListener('keydown', function (event)
+    {
+      if (event.key !== 'Tab' || mobileOpenBtn.getAttribute('aria-expanded') !== 'true')
+      {
+        return;
+      }
+      
+      const controls = navControls();
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      
+      if (event.shiftKey && document.activeElement === first)
+      {
+        event.preventDefault();
+        last.focus();
+      }
+      else if (!event.shiftKey && document.activeElement === last)
+      {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+    
+    filterTabs.forEach(function (tab, index)
+    {
+      tab.addEventListener('keydown', function (event)
+      {
+        let next = index;
+        
+        if (event.key === 'ArrowRight')
+        {
+          next = (index + 1) % filterTabs.length;
+        }
+        else if (event.key === 'ArrowLeft')
+        {
+          next = (index + filterTabs.length - 1) % filterTabs.length;
+        }
+        else if (event.key === 'Home')
+        {
+          next = 0;
+        }
+        else if (event.key === 'End')
+        {
+          next = filterTabs.length - 1;
+        }
+        else
+        {
+          return;
+        }
+        
+        event.preventDefault();
+        filterTabs[next].click();
+        filterTabs[next].focus();
+      });
+    });
+  </script>
+  <script src="../../assets/js/shared/admin-audit-nav.js" defer></script>
+  <script src="../../assets/js/shared/admin-settings-nav.js" defer></script>
+</body>
+</html>

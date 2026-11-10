@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pratinjau alur masuk dan aktivasi akun staf RylVa Green.">
+    <title>Masuk staf | RylVa Green</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="../../assets/css/staff/orders/orders-queue.css">
+    <link rel="stylesheet" href="../../assets/css/staff/auth/staff-auth.css">
+    <script src="../../assets/js/staff/auth/staff-auth.js" defer>
+    </script>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="symbol-library" aria-hidden="true">
+      <symbol id="auth-leaf" viewBox="0 0 24 24">
+        <path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/>
+        <path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/>
+      </symbol>
+      <symbol id="auth-shield" viewBox="0 0 24 24">
+        <path d="M12 3 20 6v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3Z"/>
+        <path d="m8.5 12 2.2 2.2 4.8-5"/>
+      </symbol>
+      <symbol id="auth-arrow" viewBox="0 0 24 24">
+        <path d="m14 6-6 6 6 6"/>
+      </symbol>
+      <symbol id="auth-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 11v6m0-10v.1"/>
+      </symbol>
+    </svg>
+    <a class="auth-skip" href="#auth-content">Lewati ke isi</a>
+    <div class="auth-shell">
+      <main id="auth-content" class="auth-main" tabindex="-1">
+        <div class="auth-layout">
+          <section class="auth-panel" aria-labelledby="auth-title">
+            <header class="auth-header">
+              <a class="auth-brand" href="../auth/staff-login.html" aria-label="RylVa Green, login staf">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#auth-leaf"/>
+                </svg>
+                <span>
+                  <strong>RylVa Green.</strong>
+                  <small>Plant &amp; Florist</small>
+                </span>
+              </a>
+              <span class="auth-header-label">Akses staf</span>
+            </header>
+            <button id="auth-help-toggle" class="auth-help-toggle" type="button" aria-controls="auth-help" aria-expanded="false" disabled>
+              <svg class="icon" aria-hidden="true">
+                <use href="#auth-info"/>
+              </svg>
+              <span>Butuh bantuan</span>
+              <svg class="icon auth-help-chevron" aria-hidden="true">
+                <use href="#auth-arrow"/>
+              </svg>
+            </button>
+            <div class="auth-demo" role="note">
+              <svg class="icon icon--small" aria-hidden="true">
+                <use href="#auth-info"/>
+              </svg>
+              <p>
+                <strong>Pratinjau desain.</strong> Gunakan data contoh saja. Login, email, dan MFA belum terhubung.
+              </p>
+            </div>
+            <noscript>
+              <p class="auth-notice">Aktifkan JavaScript untuk mencoba pratinjau alur ini.</p>
+            </noscript>
+            <div id="auth-view">
+              <h1 id="auth-title">Masuk sebagai staf</h1>
+              <p>Gunakan akun Admin atau SuperAdmin yang telah diaktifkan.</p>
+            </div>
+          </section>
+          <aside id="auth-help" class="auth-help" aria-labelledby="help-title" hidden>
+            <div class="auth-help-header">
+              <h2 id="help-title">Butuh bantuan masuk?</h2>
+              <button id="auth-help-close" class="queue-text-button" type="button">Tutup</button>
+            </div>
+            <p>Akun staf dibuat melalui undangan dari SuperAdmin.</p>
+            <ul>
+              <li>Belum menerima undangan? Hubungi SuperAdmin.</li>
+              <li>Siapkan aplikasi autentikator untuk tahap verifikasi.</li>
+              <li>Jangan bagikan kata sandi atau kode verifikasi.</li>
+            </ul>
+            <button class="queue-text-button auth-help-link" type="button" data-view="help">Lihat bantuan akses</button>
+          </aside>
+        </div>
+        <details class="auth-preview">
+          <summary>Pilihan pratinjau</summary>
+          <p>Buka tampilan contoh untuk meninjau setiap bagian alur.</p>
+          <div class="auth-preview-links">
+            <a href="?view=login">Login</a>
+            <a href="?view=mfa">Verifikasi MFA</a>
+            <a href="?view=backup-code">Kode cadangan</a>
+            <a href="?view=activation">Aktivasi</a>
+            <a href="?view=expired">Undangan kedaluwarsa</a>
+            <a href="?view=unavailable">Undangan tidak tersedia</a>
+            <a href="?view=recovery">Lupa kata sandi</a>
+            <a href="?view=reset-password">Buat kata sandi baru</a>
+            <a href="?view=help">Bantuan akses</a>
+            <a href="?view=blocked">Percobaan ditunda</a>
+            <a href="?view=session-expired">Sesi berakhir</a>
+            <a href="?view=network-error">Gangguan koneksi</a>
+            <a href="?view=credentials-error">Kredensial salah</a>
+            <a href="?view=mfa-error">Kode MFA salah</a>
+          </div>
+        </details>
+      </main>
+      <footer class="auth-footer">RylVa Green · Akses internal staf</footer>
+    </div>
+  </body>
+</html>

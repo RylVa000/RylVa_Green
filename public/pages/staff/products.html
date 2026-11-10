@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kelola katalog, varian, harga, dan stok barang dagangan RylVa Green.">
+  <title>Produk & Varian | RylVa Green</title>
+  <link rel="stylesheet" href="../../assets/css/staff/orders/orders-queue.css">
+  <link rel="stylesheet" href="../../assets/css/staff/orders/order-workflows.css">
+  <link rel="stylesheet" href="../../assets/css/staff/catalog/products.css">
+  <link rel="stylesheet" href="../../assets/css/shared/admin-controls.css">
+  <script src="../../assets/js/shared/admin-controls.js" defer></script>
+  <script src="../../assets/js/staff/catalog/products-data.js" defer></script>
+  <script src="../../assets/js/staff/catalog/products.js" defer></script>
+  <script src="../../assets/js/staff/catalog/products-editor.js" defer></script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbol-library" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24">
+      <path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/>
+      <path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="m3 10 9-7 9 7v10H3V10ZM9 21v-7h6v7"/>
+    </symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24">
+      <path d="M7 3h10l3 3v15H4V6l3-3ZM8 10h8M8 14h8M8 18h5"/>
+    </symbol>
+    <symbol id="i-box" viewBox="0 0 24 24">
+      <path d="m12 2 9 5-9 5-9-5 9-5ZM3 7v10l9 5 9-5V7M12 12v10"/>
+    </symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24">
+      <path d="M12 12c-3-2-3-5 0-7 3 2 3 5 0 7Zm0 0c1-4 4-5 7-3-1 3-4 4-7 3Zm0 0c4 1 5 4 3 7-3-1-4-4-3-7Zm0 0c-1 4-4 5-7 3 1-3 4-4 7-3Zm0 0c-4-1-5-4-3-7 3 1 4 4 3 7ZM12 19v3"/>
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3"/>
+      <path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5v1h-4"/>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2"/>
+      <path d="M7 3v4m10-4v4M3 10h18"/>
+    </symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/>
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <path d="m9 3-.7 2.1-2 .9-2.1-.8L2 9l1.8 1.4v2.2L2 14l2.2 3.8 2.1-.8 2 .9L9 20h4l.7-2.1 2-.9 2.1.8L20 14l-1.8-1.4v-2.2L20 9l-2.2-3.8-2.1.8-2-.9L13 3H9Z"/>
+      <circle cx="11" cy="11.5" r="3"/>
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m14 6-6 6 6 6"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M5 5 19 19M19 5 5 19"/>
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="10.5" cy="10.5" r="6.5"/>
+      <path d="m16 16 5 5"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M12 3 2 21h20L12 3ZM12 9v5m0 3v.1"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24">
+      <path d="M3 6h18M6 12h12M9 18h6"/>
+    </symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24">
+      <path d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 14 6M4 12a8 8 0 0 0 14 6"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 12 4 4L19 6"/>
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 11v6m0-10v.1"/>
+    </symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24">
+      <path d="M3 5h11v12H3V5Zm11 5h4l3 4v3h-7"/>
+      <circle cx="6.5" cy="18" r="2"/>
+      <circle cx="17.5" cy="18" r="2"/>
+    </symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24">
+      <path d="M8 5 9.5 3h5L16 5h5v15H3V5h5Z"/>
+      <circle cx="12" cy="12.5" r="4"/>
+    </symbol>
+    <symbol id="i-help" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.7 1.5-1.7 2.7M12 17v.1"/>
+    </symbol>
+  </svg>
+
+  <a href="#queue-main" class="skip-link">Lewati navigasi</a>
+  <div id="mobile-backdrop" class="mobile-backdrop hidden" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar -translate-x-full" aria-label="Navigasi utama">
+      <div class="brand-row">
+        <a href="../staff/admin-dashboard.html" class="brand-lockup" data-role-link aria-label="RylVa Green, Operasional">
+          <span class="brand-mark">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-leaf"/>
+            </svg>
+          </span>
+          <span class="sidebar-label">
+            <strong class="brand-name">RylVa Green.</strong>
+            <small class="brand-caption">Plant &amp; Florist</small>
+          </span>
+        </a>
+        <button id="sidebar-toggle" class="icon-button collapse-button" type="button" aria-label="Kecilkan sidebar" aria-expanded="true" aria-controls="sidebar-nav">
+          <svg id="collapse-icon" class="icon icon--small" aria-hidden="true">
+            <use href="#i-chevron"/>
+          </svg>
+        </button>
+        <button id="mobile-close" class="icon-button mobile-control" type="button" aria-label="Tutup menu">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-close"/>
+          </svg>
+        </button>
+      </div>
+      <div class="workspace sidebar-extra">
+        <div class="workspace-card">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-box"/>
+          </svg>
+          <span class="sidebar-label">
+            <strong>Gudang Pusat</strong>
+            <small>Ruang kerja toko</small>
+          </span>
+        </div>
+      </div>
+      <nav id="sidebar-nav" class="sidebar-nav" aria-label="Menu admin">
+        <a href="../staff/admin-dashboard.html" class="nav-item" data-role-link title="Operasional">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-home"/>
+          </svg>
+          <span class="sidebar-label">Operasional</span>
+        </a>
+        <a href="../staff/orders-queue.html" class="nav-item" data-role-link title="Manajemen Pesanan">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-orders"/>
+          </svg>
+          <span class="sidebar-label">Manajemen Pesanan</span>
+        </a>
+        <a href="../staff/products.html" class="nav-item" data-role-link title="Produk &amp; Varian" aria-current="page">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-box"/>
+          </svg>
+          <span class="sidebar-label">Produk &amp; Varian</span>
+        </a>
+        <a href="../staff/production-materials.html" class="nav-item" data-role-link title="Bahan Produksi">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-flower"/>
+          </svg>
+          <span class="sidebar-label">Bahan Produksi</span>
+        </a>
+        <a href="../staff/bouquet-production.html" class="nav-item" data-role-link title="Buket &amp; Produksi">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-flower"/>
+          </svg>
+          <span class="sidebar-label">Buket &amp; Produksi</span>
+        </a>
+        <a href="../staff/customers.html" class="nav-item" data-role-link title="Pelanggan">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-users"/>
+          </svg>
+          <span class="sidebar-label">Pelanggan</span>
+        </a>
+        <a href="../staff/closure-calendar.html" class="nav-item" data-role-link title="Kalender Tutup">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-calendar"/>
+          </svg>
+          <span class="sidebar-label">Kalender Tutup</span>
+        </a>
+        <a href="../superadmin/financial-report.html" class="nav-item" title="Laporan Keuangan" data-superadmin-only hidden>
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-audit"/>
+          </svg>
+          <span class="sidebar-label">Laporan Keuangan</span>
+        </a>
+        <a href="../superadmin/audit-log.html" class="nav-item" title="Audit Log" data-audit-link data-role-link>
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-audit"/>
+          </svg>
+          <span class="sidebar-label">Audit Log</span>
+        </a>
+        <a href="../superadmin/system-parameters.html?role=superadmin" class="nav-item" title="Pengaturan Sistem" data-superadmin-only hidden>
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-settings"/>
+          </svg>
+          <span class="sidebar-label">Pengaturan Sistem</span>
+        </a>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="help-block sidebar-extra">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-help"/>
+          </svg>
+          <strong>Butuh Bantuan?</strong>
+          <p>Panduan operasional untuk tim RylVa Green.</p>
+        </div>
+        <div class="profile-row">
+          <span class="profile-avatar" aria-hidden="true">AR</span>
+          <span class="sidebar-label">
+            <strong id="profile-name">Admin RylVa</strong>
+            <small>Gudang Pusat</small>
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="workspace-main">
+      <header class="topbar queue-topbar">
+        <div class="topbar-leading">
+          <button id="mobile-open" class="icon-button mobile-control" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-menu"/>
+            </svg>
+          </button>
+          <nav id="product-breadcrumb" class="breadcrumb product-breadcrumb" aria-label="Breadcrumb">
+            <a href="../staff/admin-dashboard.html">Ruang kerja</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Produk &amp; Varian</span>
+          </nav>
+        </div>
+        <div class="topbar-account">
+          <span id="preview-role" class="role-caption">Pratinjau Admin</span>
+          <span class="profile-avatar" aria-label="Admin RylVa">AR</span>
+        </div>
+      </header>
+
+      <main id="queue-main" class="queue-main product-main">
+        <div class="product-heading">
+          <div>
+            <h1 id="product-page-title" tabindex="-1">Produk &amp; Varian</h1>
+            <p id="product-page-intro">Kelola katalog dan ketersediaan setiap SKU di satu tempat.</p>
+          </div>
+          <div class="product-heading-actions" id="catalog-actions">
+            <label class="location-control" for="stock-location">
+              Lokasi stok
+              <select id="stock-location">
+                <option value="pusat">Gudang Pusat</option>
+                <option value="toko">Etalase Toko</option>
+              </select>
+            </label>
+            <button class="queue-button queue-button--primary" type="button" data-action="new-product">
+              <svg class="icon icon--small" aria-hidden="true">
+                <use href="#i-plus"/>
+              </svg>
+              Tambah produk
+            </button>
+          </div>
+        </div>
+
+        <p id="product-feedback" class="product-feedback" role="status" tabindex="-1" hidden></p>
+
+        <section id="catalog-view" aria-label="Katalog dan persediaan">
+          <nav class="product-workspaces" aria-label="Ruang kerja produk">
+            <button type="button" data-workspace="catalog" aria-current="page">Daftar produk</button>
+            <button type="button" data-workspace="movements">Mutasi stok</button>
+            <button type="button" data-workspace="approvals">
+              Persetujuan stok
+              <span id="approval-count" class="product-count">1</span>
+            </button>
+          </nav>
+
+          <div id="catalog-list-view">
+            <section class="catalog-summary" aria-label="Ringkasan katalog">
+              <button type="button" class="catalog-stat" data-summary="active">
+                <span>Produk aktif</span>
+                <strong id="active-product-count">6</strong>
+                <small>Dari <span id="all-product-count">8</span> produk</small>
+              </button>
+              <div class="catalog-stat">
+                <span>Varian aktif</span>
+                <strong id="active-variant-count">11</strong>
+                <small>SKU yang dapat dijual</small>
+              </div>
+              <button type="button" class="catalog-stat catalog-stat--warning" data-summary="low">
+                <span>Stok menipis</span>
+                <strong id="low-stock-count">5</strong>
+                <small>1 sampai 5 unit per SKU</small>
+              </button>
+              <button type="button" class="catalog-stat catalog-stat--critical" data-summary="empty">
+                <span>Stok habis</span>
+                <strong id="empty-stock-count">1</strong>
+                <small>Perlu isi ulang</small>
+              </button>
+            </section>
+
+            <div id="catalog-priority" class="catalog-priority">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-alert"/>
+              </svg>
+              <div>
+                <strong id="catalog-priority-title">Periksa ketersediaan varian sebelum menerima pesanan baru.</strong>
+                <p id="catalog-priority-copy">Stok dihitung per SKU dan lokasi setelah dikurangi reservasi aktif.</p>
+              </div>
+              <button type="button" class="queue-text-button" data-action="filter-attention">Lihat stok kritis</button>
+            </div>
+
+            <section class="catalog-sheet" aria-label="Daftar produk">
+              <div class="catalog-toolbar">
+                <div class="product-search">
+                  <label for="product-search">Cari produk atau SKU</label>
+                  <div>
+                    <svg class="icon icon--small" aria-hidden="true">
+                      <use href="#i-search"/>
+                    </svg>
+                    <input id="product-search" type="search" placeholder="Nama produk atau SKU varian" autocomplete="off">
+                  </div>
+                </div>
+                <div class="catalog-toolbar-actions">
+                  <button class="queue-button" type="button" id="product-filter-toggle" aria-expanded="false" aria-controls="catalog-filters">
+                    <svg class="icon icon--small" aria-hidden="true">
+                      <use href="#i-filter"/>
+                    </svg>
+                    Filter
+                  </button>
+                  <button class="queue-button" type="button" data-action="manage-categories">Kelola kategori</button>
+                </div>
+              </div>
+              <div id="catalog-filters" class="catalog-filters" hidden>
+                <label>
+                  Kategori
+                  <select id="category-filter">
+                    <option value="all">Semua kategori</option>
+                  </select>
+                </label>
+                <label>
+                  Status katalog
+                  <select id="status-filter">
+                    <option value="all">Semua status</option>
+                    <option value="active">Aktif</option>
+                    <option value="inactive">Nonaktif</option>
+                  </select>
+                </label>
+                <label>
+                  Ketersediaan
+                  <select id="availability-filter">
+                    <option value="all">Semua stok</option>
+                    <option value="attention">Stok kritis (≤5)</option>
+                    <option value="low">Menipis (1 sampai 5)</option>
+                    <option value="empty">Habis (0)</option>
+                    <option value="available">Tersedia (&gt;5)</option>
+                  </select>
+                </label>
+                <label>
+                  Penanganan
+                  <select id="handling-filter">
+                    <option value="all">Semua penanganan</option>
+                    <option value="perishable">Mudah layu</option>
+                    <option value="durable">Tahan lama</option>
+                  </select>
+                </label>
+              </div>
+              <div id="active-product-filters" class="active-product-filters" hidden></div>
+              <div class="catalog-list-meta">
+                <p id="catalog-result" aria-live="polite">Daftar produk contoh</p>
+                <label for="product-sort">
+                  Urutkan
+                  <select id="product-sort">
+                    <option value="attention">Perlu perhatian</option>
+                    <option value="name">Nama A sampai Z</option>
+                    <option value="priceLow">Harga terendah</option>
+                    <option value="recent">Terakhir diubah</option>
+                  </select>
+                </label>
+              </div>
+              <div id="catalog-loading" class="product-loading" role="status" hidden>
+                <p>Memuat katalog dan saldo stok…</p>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <div id="catalog-error" class="product-empty" hidden>
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-alert"/>
+                </svg>
+                <h2>Katalog belum dapat dimuat</h2>
+                <p>Data belum berubah. Coba muat kembali untuk melanjutkan.</p>
+                <button type="button" class="queue-button" data-action="retry-load">Coba lagi</button>
+              </div>
+              <div id="catalog-empty" class="product-empty" hidden>
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-box"/>
+                </svg>
+                <h2 id="catalog-empty-title">Belum ada produk</h2>
+                <p id="catalog-empty-copy">Tambahkan produk beserta varian pertamanya untuk memulai.</p>
+                <button type="button" class="queue-button" id="catalog-empty-action" data-action="new-product">Tambah produk</button>
+              </div>
+              <table id="products-table" class="products-table">
+                <caption class="sr-only">Produk, varian, harga, ketersediaan, penanganan, status, dan tindakan</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Produk</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Ketersediaan</th>
+                    <th scope="col">Penanganan</th>
+                    <th scope="col">Katalog</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="product-rows">
+                  <tr>
+                    <td data-label="Produk">Ficus elastica, pot nursery</td>
+                    <td data-label="Kategori">Tanaman hias</td>
+                    <td data-label="Harga">Rp 95.000 sampai Rp 225.000</td>
+                    <td data-label="Ketersediaan">Stok per varian</td>
+                    <td data-label="Penanganan">Mudah layu</td>
+                    <td data-label="Katalog">Aktif</td>
+                    <td data-label="Aksi">Aktifkan JavaScript untuk mengelola.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="catalog-pagination" id="catalog-pagination">
+                <p id="catalog-page-copy">Data ilustrasi katalog</p>
+                <div class="pagination-actions">
+                  <button type="button" class="icon-button" id="previous-product-page" aria-label="Halaman produk sebelumnya" disabled>
+                    <svg class="icon icon--small" aria-hidden="true">
+                      <use href="#i-chevron"/>
+                    </svg>
+                  </button>
+                  <span id="product-page-number">1 dari 1</span>
+                  <button type="button" class="icon-button" id="next-product-page" aria-label="Halaman produk berikutnya" disabled>
+                    <svg class="icon icon--small next-chevron" aria-hidden="true">
+                      <use href="#i-chevron"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <p class="stock-explanation">
+              Stok tersedia = saldo stok jual − reservasi aktif. Bahan produksi buket dikelola terpisah dari barang dagangan.
+            </p>
+          </div>
+
+          <section id="movements-view" class="catalog-sheet workspace-sheet" aria-labelledby="movements-title" hidden>
+            <div class="product-section-heading">
+              <div>
+                <h2 id="movements-title">Mutasi persediaan</h2>
+                <p>Setiap perubahan meninggalkan catatan. Saldo tidak ditimpa langsung.</p>
+              </div>
+              <button type="button" class="queue-button queue-button--primary" data-action="new-movement">Catat mutasi</button>
+            </div>
+            <div id="movement-list"></div>
+          </section>
+          <section id="approvals-view" class="catalog-sheet workspace-sheet" aria-labelledby="approvals-title" hidden>
+            <div class="product-section-heading">
+              <div>
+                <h2 id="approvals-title">Persetujuan penyesuaian stok</h2>
+                <p>Penyesuaian Admin di atas 20 unit menunggu keputusan SuperAdmin.</p>
+              </div>
+            </div>
+            <div id="approval-list"></div>
+          </section>
+        </section>
+
+        <section id="product-detail-view" aria-label="Detail produk" hidden></section>
+        <section id="product-editor-view" aria-label="Form produk dan varian" hidden></section>
+        <section id="product-task-view" aria-label="Tindakan persediaan" hidden></section>
+
+        <details class="work-preview-controls product-preview-controls">
+          <summary>Pilihan pratinjau</summary>
+          <label for="product-profile">Profil contoh</label>
+          <select id="product-profile">
+            <option value="admin">Admin RylVa</option>
+            <option value="superadmin">SuperAdmin RylVa</option>
+          </select>
+          <label class="product-check">
+            <input type="checkbox" id="product-fail-save">
+            Simulasikan kegagalan simpan berikutnya
+          </label>
+          <p>Data ilustrasi pada 4 November 2026, 10.20 WIB. Refresh mengembalikan data contoh.</p>
+        </details>
+        <footer class="queue-footer">
+          <p>RylVa Green, Gudang Pusat</p>
+          <p>
+            Data dan foto ilustrasi.
+            <button type="button" class="queue-text-button" data-action="photo-credits">Sumber foto</button>
+          </p>
+        </footer>
+        <noscript>
+          <p class="product-note">JavaScript diperlukan untuk pencarian, form, dan simulasi perubahan. Data contoh di atas tetap dapat dibaca.</p>
+        </noscript>
+      </main>
+    </div>
+  </div>
+  <dialog id="product-confirm" class="product-dialog" aria-labelledby="product-confirm-title" aria-describedby="product-confirm-copy">
+    <form method="dialog">
+      <h2 id="product-confirm-title">Konfirmasi tindakan</h2>
+      <div id="product-confirm-copy"></div>
+      <div class="product-dialog-actions">
+        <button type="submit" value="cancel" class="queue-button">Kembali</button>
+        <button type="submit" value="confirm" class="queue-button queue-button--primary" id="product-confirm-submit">Konfirmasi</button>
+      </div>
+    </form>
+  </dialog>
+  <svg class="symbol-library" aria-hidden="true">
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <path d="M12 4v16M4 12h16"/>
+    </symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24">
+      <path d="m15 4 5 5M4 20l5-1L21 7l-5-5L4 14v6ZM4 20h16"/>
+    </symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24">
+      <path d="m12 3 10 5-10 5L2 8l10-5Zm-10 9 10 5 10-5M2 16l10 5 10-5"/>
+    </symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24">
+      <path d="M4 12h16"/>
+    </symbol>
+  </svg>
+  <script src="../../assets/js/shared/admin-audit-nav.js" defer></script>
+  <script src="../../assets/js/shared/admin-settings-nav.js" defer></script>
+</body>
+</html>

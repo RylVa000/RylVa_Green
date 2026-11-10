@@ -1,0 +1,352 @@
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: RylVa Green incumbent · signature: usage-aware taxonomy · data: sample · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H5 E5 S5 R5 V4 · dependencies are visible before actions. */
+/* Hallmark · answered F7 · shared admin shell, controls, status badges and catalog-stat cards are reused. */
+/* Hallmark · finish-review: subagent · fix · 2 findings · 2 resolved on recapture and interaction checks. */
+:root
+{
+  --taxonomy-surface: var(--queue-surface);
+  --taxonomy-warning: var(--queue-warning-soft);
+  --taxonomy-warning-ink: var(--queue-warning-ink);
+}
+
+.taxonomy-main
+{
+  max-width: 1440px;
+  margin-inline: auto;
+  font-size: var(--queue-body);
+}
+
+.taxonomy-main small,
+.taxonomy-dialog small
+{
+  font-size: var(--queue-small);
+}
+
+.taxonomy-actions,
+.taxonomy-inline
+{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.taxonomy-stats
+{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.taxonomy-stats .catalog-stat
+{
+  min-height: 88px;
+}
+
+.taxonomy-hook,
+.taxonomy-notice,
+.taxonomy-feedback
+{
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  margin-block: var(--space-md);
+  border-radius: var(--radius-input);
+  color: var(--primary);
+  background: var(--queue-success-soft);
+  line-height: 1.6;
+}
+
+.taxonomy-notice
+{
+  color: var(--taxonomy-warning-ink);
+  background: var(--taxonomy-warning);
+}
+
+.taxonomy-hook p,
+.taxonomy-notice p
+{
+  margin: 0;
+}
+
+.taxonomy-subtitle
+{
+  display: block;
+  margin-top: var(--space-2xs);
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.taxonomy-detail
+{
+  padding: var(--space-lg);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: var(--taxonomy-surface);
+}
+
+.taxonomy-detail h2,
+.taxonomy-dialog h2
+{
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.taxonomy-main button:active,
+.taxonomy-dialog button:active
+{
+  transform: translateY(1px);
+}
+
+.taxonomy-definition
+{
+  display: grid;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.taxonomy-definition > div
+{
+  display: grid;
+  grid-template-columns: minmax(140px, 0.6fr) minmax(0, 1.4fr);
+  gap: var(--space-md);
+}
+
+.taxonomy-definition dt
+{
+  color: var(--color-muted);
+}
+
+.taxonomy-definition dd
+{
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.taxonomy-option-list,
+.taxonomy-history
+{
+  display: grid;
+  gap: var(--space-md);
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.taxonomy-option-list li,
+.taxonomy-history li
+{
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.taxonomy-option-row
+{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.taxonomy-dialog
+{
+  width: min(640px, calc(100% - 32px));
+}
+
+.taxonomy-dialog[open]
+{
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: calc(100dvh - 32px);
+  overflow: hidden;
+}
+
+#taxonomy-dialog-body
+{
+  min-height: 0;
+  padding: var(--space-2xs);
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.taxonomy-form
+{
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.taxonomy-form .report-field
+{
+  min-width: 0;
+}
+
+.taxonomy-form textarea
+{
+  min-height: 88px;
+  resize: vertical;
+  padding: var(--space-sm);
+  border: 1px solid var(--queue-control-border);
+  border-radius: var(--radius-input);
+  background: var(--taxonomy-surface);
+  color: var(--color-ink);
+  font: inherit;
+}
+
+.taxonomy-form textarea:focus-visible,
+.taxonomy-form summary:focus-visible
+{
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.taxonomy-form small
+{
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.taxonomy-check
+{
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 44px;
+}
+
+.taxonomy-check input
+{
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.taxonomy-category-choices
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xs);
+  margin: 0;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-input);
+}
+
+.taxonomy-category-picker summary
+{
+  padding-block: var(--space-xs);
+  cursor: pointer;
+}
+
+.taxonomy-category-picker .taxonomy-category-choices
+{
+  margin-top: var(--space-sm);
+}
+
+.taxonomy-errors
+{
+  color: var(--taxonomy-warning-ink);
+  background: var(--taxonomy-warning);
+  padding: var(--space-sm);
+  border-radius: var(--radius-input);
+  line-height: 1.6;
+}
+
+.taxonomy-errors ul
+{
+  margin: 0;
+  padding-left: var(--space-lg);
+}
+
+.taxonomy-form-actions
+{
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  border-top: 1px solid var(--color-rule);
+  padding-top: var(--space-sm);
+  background: var(--taxonomy-surface);
+}
+
+.taxonomy-back
+{
+  margin-bottom: var(--space-md);
+  padding-left: 0;
+}
+
+.taxonomy-used
+{
+  color: var(--primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.taxonomy-skeleton
+{
+  display: grid;
+  gap: var(--space-md);
+  width: 100%;
+  padding-block: var(--space-md);
+}
+
+.taxonomy-skeleton span
+{
+  height: 44px;
+  border-radius: var(--radius-input);
+  background: var(--color-paper-2);
+}
+
+@media (max-width: 767px)
+{
+  .taxonomy-stats
+  {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .taxonomy-definition > div
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xs);
+  }
+
+  .taxonomy-detail
+  {
+    padding: var(--space-md);
+  }
+
+  .taxonomy-heading > .taxonomy-actions
+  {
+    width: 100%;
+  }
+
+  .taxonomy-category-choices
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 479px)
+{
+  .taxonomy-breadcrumb a,
+  .taxonomy-breadcrumb > span[aria-hidden]
+  {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+  .taxonomy-main *,
+  .taxonomy-dialog *
+  {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

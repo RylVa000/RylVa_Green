@@ -1,0 +1,78 @@
+FAIL 10a public\admin-dashboard.html:192 transition-[width,transform] on <aside class="fixed inset-y-0 left-0 z-40 fle…"> | fix: Name the properties: transition-colors, transition-opacity or transition-transform
+FAIL 34 public\admin-dashboard.html:1 no overflow-x: clip on html and body | fix: overflow-x: clip on both html and body
+FAIL 34 public\admin-dashboard.html:1 [375px] div.relative.flex runs 256px past the 375 screen, hidden only by the page's clip | fix: Stack it under 60rem: drop the desktop column gap, widths and offsets on the phone
+FAIL 40 public\admin-dashboard.html:1 [1440px] a field's edge is under 3:1 against what surrounds it: input.min-w-0 1.16:1 | fix: Draw the field in --color-muted, or fill it a step off the surface it sits on
+FAIL 48 public\admin-dashboard.html:51 font-family literal "Poppins, sans-serif" on body | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:59 colour literal #F8F9FA outside tokens (background on .card) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:60 colour literal #DDE6DC outside tokens (border on .card) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:64 colour literal #526855 outside tokens (color on .nav-item) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:68 colour literal #E7F0E4 outside tokens (background on .nav-item:hover) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:69 colour literal #0F2A1D outside tokens (color on .nav-item:hover) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:73 colour literal #DFEBDD outside tokens (background on .nav-item[aria-current="page"]) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:74 colour literal #0F2A1D outside tokens (color on .nav-item[aria-current="page"]) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:79 colour literal #EFF1EC outside tokens (border-bottom on .order-row) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:99 colour literal #E5EFE4 outside tokens (background on .status-success) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:100 colour literal #0F2A1D outside tokens (color on .status-success) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:104 colour literal #FFF3EB outside tokens (background on .status-warning) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:105 colour literal #9A431F outside tokens (color on .status-warning) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:106 colour literal #DDAF95 outside tokens (border on .status-warning) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:110 colour literal #EAF2F3 outside tokens (background on .status-info) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:111 colour literal #28525F outside tokens (color on .status-info) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:115 colour literal #F9E8DF outside tokens (background on .status-error) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:116 colour literal #7B351F outside tokens (color on .status-error) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:117 colour literal #B66746 outside tokens (border on .status-error) | fix: Lift the value into the token block
+FAIL 48 public\admin-dashboard.html:192 colour literal border-[#E5EAE2] in a class on <aside class="fixed inset-y-0 left-0 z-40 fle…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:203 colour literal border-[#E3E9E0] in a class on <button class="absolute -right-4 top-7 z-10 hi…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:212 colour literal border-[#E4EAE0] in a class on <div class="workspace-card flex items-cente…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:263 colour literal border-[#E2E8DE] in a class on <div class="border-t border-[#E2E8DE] p-3"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:264 colour literal bg-[#E7EFE4] in a class on <div class="sidebar-extra mb-3 rounded-xl b…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:270 colour literal bg-[#DECBB4] in a class on <span class="profile-avatar grid h-9 w-9 fle…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:281 colour literal border-[#ECEFE9] in a class on <header class="sticky top-0 z-20 flex h-[72px]…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:283 colour literal border-[#E4EAE0] in a class on <button class="grid h-10 w-10 flex-none place-…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:291 colour literal border-[#E3E9E1] in a class on <label class="hidden h-10 w-56 items-center g…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:293 colour literal placeholder:text-[#879489] in a class on <input class="min-w-0 flex-1 bg-transparent t…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:298 colour literal bg-[#DECBB4] in a class on <span class="grid h-9 w-9 place-items-center…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:316 colour literal border-[#E3E9E1] in a class on <span class="inline-flex h-10 items-center g…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:351 colour literal border-[#DDE6DC] in a class on <article class="flex min-h-[164px] flex-col rou…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:362 colour literal border-[#D2E0D0] in a class on <article class="flex min-h-[164px] flex-col rou…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:373 colour literal border-[#D5E3DF] in a class on <article class="flex min-h-[164px] flex-col rou…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:376 colour literal stroke-[#28525F] in a class on <svg class="h-5 w-5 fill-none stroke-[#2852…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:380 colour literal bg-[#E3EFF0] in a class on <span class="rounded-md bg-[#E3EFF0] px-2 py…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:400 colour literal bg-[#EEF3ED] in a class on <section class="card min-w-0 rounded-2xl bg-[#E…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:425 colour literal divide-[#D5E1D3] in a class on <ul class="mt-3 divide-y divide-[#D5E1D3] …"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:460 colour literal divide-[#E3EAE1] in a class on <ul class="mt-4 divide-y divide-[#E3EAE1] …"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:484 colour literal bg-[#EDF2EC] in a class on <p class="mt-3 rounded-lg bg-[#EDF2EC] p-…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:507 colour literal border-[#EDF0EA] in a class on <div class="mt-5 flex gap-5 overflow-x-auto…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:517 colour literal bg-[#FBFCFA] in a class on <thead class="bg-[#FBFCFA] text-muted-ink"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:532 colour literal border-[#EDF0EA] in a class on <div class="flex items-center justify-betwe…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:550 colour literal bg-[#F1F6EF] in a class on <div class="mt-5 rounded-xl bg-[#F1F6EF] p-4"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:559 colour literal border-[#D8E4D5] in a class on <div class="border-l border-[#D8E4D5] pl-4"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:568 colour literal border-[#E9EEE7] in a class on <div class="mt-5 border-t border-[#E9EEE7] …"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:579 colour literal bg-[#ECF0E9] in a class on <div class="mt-1.5 h-[6px] rounded-full bg-…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:580 colour literal bg-[#78A07A] in a class on <div class="h-[6px] w-[80%] rounded-full bg…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:588 colour literal bg-[#ECF0E9] in a class on <div class="mt-1.5 h-[6px] rounded-full bg-…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:589 colour literal bg-[#8EAF8E] in a class on <div class="h-[6px] w-[80%] rounded-full bg…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:597 colour literal bg-[#ECF0E9] in a class on <div class="mt-1.5 h-[6px] rounded-full bg-…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:598 colour literal bg-[#A7C2A1] in a class on <div class="h-[6px] w-[75%] rounded-full bg…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:606 colour literal bg-[#ECF0E9] in a class on <div class="mt-1.5 h-[6px] rounded-full bg-…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:607 colour literal bg-[#B8CBB2] in a class on <div class="h-[6px] w-[74.4%] rounded-full …"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:613 colour literal border-[#E9EEE7] in a class on <div class="mt-5 border-t border-[#E9EEE7] …"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:618 colour literal bg-[#ECF0E9] in a class on <div class="mt-2 h-[6px] rounded-full bg-[#…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:626 colour literal bg-[#FFFBF8] in a class on <section class="card min-w-0 rounded-2xl border…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:636 colour literal divide-[#E3EAE1] in a class on <ul class="mt-4 divide-y divide-[#E3EAE1] …"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:655 colour literal border-[#E3EAE1] in a class on <div class="mt-4 grid grid-cols-2 gap-2 bor…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:656 colour literal bg-[#F0F5EE] in a class on <div class="rounded-lg bg-[#F0F5EE] p-3"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:660 colour literal bg-[#F0F5EE] in a class on <div class="rounded-lg bg-[#F0F5EE] p-3"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 48 public\admin-dashboard.html:665 colour literal bg-[#EDF2EC] in a class on <p class="mt-3 rounded-xl border border-p…"> | fix: Lift the value into the token block (@theme or :root) and use its utility name
+FAIL 49a public\admin-dashboard.html:1 [320px] control "Hapus filter →" wraps to 2 lines (button.font-semibold.text-primary) | fix: Shorten the label or set nowrap
+FAIL 56 public\admin-dashboard.html:1 [1280px] two sticky top:0 elements: aside.fixed.inset-y-0 + header.sticky.top-0 | fix: Offset the second sticky by banner height
+FAIL 63 public\admin-dashboard.html:332 arrow glued to the label "Lihat prioritas →" | fix: A verb as the label; the link already says it goes somewhere
+FAIL 63 public\admin-dashboard.html:522 middle-dot meta string "Pesanan · Bayar · Kirim" | fix: Line breaks, columns or hairlines; one dot in a byline at most
+FAIL 63 public\admin-dashboard.html:534 arrow glued to the label "Hapus filter →" | fix: A verb as the label; the link already says it goes somewhere
+REFLEX 26b public\admin-dashboard.html:1 no :active styling anywhere | fix: All eight states; guard: not a form control, no aria-disabled anywhere
+REFLEX 26b public\admin-dashboard.html:1 no :disabled styling anywhere | fix: All eight states; guard: not a form control, no aria-disabled anywhere
+REFLEX 39b public\admin-dashboard.html:1 [1440px] control height outside 32 to 52px: button.font-semibold 18px | fix: Marketing controls stand 44 to 52px; app UI 32 to 40px with a 44px hit target
+REFLEX 49b public\admin-dashboard.html:1 [320px] link "Lihat semua" wraps to 2 lines (a.inline-flex.min-h-8) | fix: Shorten the label or set nowrap
+REFLEX 72 public\admin-dashboard.html:1 [375px] text runs to the edge of the screen (p.mt-1.text-[11px]) | fix: Give the page a gutter: 16px or more at each side on a phone
+WARN F23 public\admin-dashboard.html:1 the document lacks a meta description | fix: Name the language, title the page in its own words, and describe it in one sentence for link previews
+WARN F25 public\admin-dashboard.html:1 [375px] 84 words shown at 1440 are hidden on a phone (first: "28 Okt 2026 Siang · 12.00–16.00") | fix: If it matters, make it work on a phone; if it does not, cut it everywhere

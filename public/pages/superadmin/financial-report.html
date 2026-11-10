@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F3F5EF">
+  <title>Laporan Keuangan | RylVa Green</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../assets/css/shared/admin-controls.css">
+  <script src="../../assets/js/shared/admin-controls.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { 
+        extend: {
+          fontFamily: { 
+            sans: ['Poppins', 'sans-serif'] 
+          },
+          colors: {
+            'primary-dark': '#0F2A1D', 
+            'primary': '#375534', 
+            'primary-light': '#6B9071',
+            'neutral-soft': '#AEC3B0', 
+            'background': '#FBF7F4', 
+            'card-background': '#F8F9FA',
+            'sidebar': '#F3F5EF', 
+            'soft-green': '#E7F0E4',
+            'warning-ink': '#9A431F', 
+            'warning-soft': '#FFF3EB', 
+            'warning-border': '#E7C3AD',
+            'text-secondary': '#718096', 
+            'muted-ink': '#5B6B5D'
+          }
+        }
+      }
+    };
+  </script>
+  
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Poppins, sans-serif; }
+    .tabular { font-variant-numeric: tabular-nums; }
+    .card { background: #FFFFFF; border: 1px solid #DDE6DC; }
+    .nav-item { color: #526855; }
+    .nav-item:hover { background: #E7F0E4; color: #0F2A1D; }
+    .nav-item[aria-current="page"] { background: #DFEBDD; color: #0F2A1D; font-weight: 600; }
+    .order-row { border-bottom: 1px solid #EFF1EC; }
+    .order-row:last-child { border-bottom: 0; }
+    
+    .status-badge { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: .25rem; 
+      border-radius: 999px; 
+      padding: .2rem .55rem; 
+      font-size: 12px; 
+      font-weight: 600; 
+      line-height: 1.35; 
+      white-space: nowrap; 
+    }
+    .status-success { background: #E5EFE4; color: #0F2A1D; }
+    .status-warning { background: #FFF3EB; color: #9A431F; border: 1px solid #DDAF95; }
+    .status-info { background: #EAF2F3; color: #28525F; }
+    .status-error { background: #F9E8DF; color: #7B351F; border: 1px solid #B66746; }
+    
+    @media (min-width: 1024px) {
+      #sidebar.sidebar-collapsed { width: 5rem; }
+      .sidebar-collapsed .sidebar-label, 
+      .sidebar-collapsed .sidebar-extra { display: none; }
+      .sidebar-collapsed .nav-item { justify-content: center; padding-left: 0; padding-right: 0; }
+      .sidebar-collapsed .brand-lockup, 
+      .sidebar-collapsed .profile-row { justify-content: center; }
+      .sidebar-collapsed .brand-mark, 
+      .sidebar-collapsed .profile-avatar { flex: none; }
+      .sidebar-collapsed #collapse-icon { transform: rotate(180deg); }
+      .sidebar-collapsed .workspace-card { justify-content: center; padding-left: 0; padding-right: 0; }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { 
+        scroll-behavior: auto !important; 
+        transition-duration: .01ms !important; 
+        animation-duration: .01ms !important; 
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-background text-primary-dark antialiased">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/><path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-7h6v7"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 5v10l9 5 9-5V7M12 12v10"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path d="M12 12c-3-2-3-5 0-7 3 2 3 5 0 7Zm0 0c1-4 4-5 7-3-1 3-4 4-7 3Zm0 0c4 1 5 4 3 7-3-1-4-4-3-7Zm0 0c-1 4-4 5-7 3 1-3 4-4 7-3Zm0 0c-4-1-5-4-3-7 3 1 4 4 3 7Z"/><path d="M12 19v3"/></symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24"><path d="M7 3h10l3 3v15H4V6l3-3Z"/><path d="M8 10h8M8 14h8M8 18h5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5v1h-4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10 3h4l.7 2.2 1.9.8 2-.9 2.8 2.8-.9 2 .8 1.9L23 12.5v4l-2.2.7-.8 1.9.9 2-2.8 2.8-2-.9-1.9.8L13.5 26h-4l-.7-2.2-1.9-.8-2 .9-2.8-2.8.9-2-.8-1.9L0 16.5v-4l2.2-.7.8-1.9-.9-2L4.9 5l2 .9 1.9-.8L9.5 3Z" transform="translate(0 -2) scale(.92)"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 9h18c0-1-3-2-3-9ZM10 21h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5m0 3v.1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4m0 16h17M7 15l4-4 3 2 6-7"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.7 1.5-1.7 2.7M12 17v.1"/></symbol>
+  </svg>
+
+  <a href="#laporan-keuangan" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-primary-dark focus:outline focus:outline-2 focus:outline-primary">Lewati navigasi</a>
+  <div id="mobile-backdrop" class="fixed inset-0 z-30 hidden bg-primary-dark/35 lg:hidden" aria-hidden="true"></div>
+  
+  <div class="min-h-screen lg:flex">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-[#E5EAE2] bg-sidebar text-primary-dark transition-[width,transform] duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:translate-x-0" aria-label="Navigasi utama">
+      <div class="relative flex h-[88px] flex-none items-center px-5">
+        <a href="../staff/admin-dashboard.html?role=superadmin" class="brand-lockup flex min-w-0 items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" aria-label="RylVa Green, Operasional">
+          <span class="brand-mark grid h-10 w-10 flex-none place-items-center rounded-xl bg-primary-dark text-white">
+            <svg class="h-6 w-6 fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-leaf"/></svg>
+          </span>
+          <span class="sidebar-label min-w-0">
+            <strong class="block whitespace-nowrap text-lg font-semibold leading-tight tracking-tight">RylVa Green<span class="text-primary-light">.</span></strong>
+            <small class="block whitespace-nowrap text-[11px] font-medium text-muted-ink">Plant &amp; Florist</small>
+          </span>
+        </a>
+        <button id="sidebar-toggle" type="button" class="absolute -right-4 top-7 z-10 hidden h-8 w-8 items-center justify-center rounded-full border border-[#E3E9E0] bg-white text-primary-dark transition-colors hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary lg:flex" aria-label="Kecilkan sidebar" aria-expanded="true" aria-controls="sidebar-nav">
+          <svg id="collapse-icon" class="h-4 w-4 fill-none stroke-current stroke-2 transition-transform duration-300" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button id="mobile-close" type="button" class="ml-auto grid h-11 w-11 place-items-center rounded-lg text-primary-dark hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Tutup menu">
+          <svg class="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-extra px-4 pt-4">
+        <div class="workspace-card flex items-center gap-3 rounded-xl border border-[#E4EAE0] bg-white p-3">
+          <span class="grid h-9 w-9 flex-none place-items-center rounded-lg bg-soft-green text-primary">
+            <svg class="h-5 w-5 fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-leaf"/></svg>
+          </span>
+          <span class="sidebar-label min-w-0">
+            <strong class="block truncate text-[13px] font-semibold">Gudang Pusat</strong>
+            <small class="block truncate text-[11px] text-muted-ink">Ruang kerja toko</small>
+          </span>
+        </div>
+      </div>
+      <p class="sidebar-extra mb-2 mt-7 px-7 text-[11px] font-semibold text-muted-ink">Ruang kerja</p>
+
+      <nav id="sidebar-nav" class="flex-1 space-y-0.5 overflow-y-auto px-3 pb-4" aria-label="Menu admin">
+        <a href="../staff/admin-dashboard.html?role=superadmin" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Operasional">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-home"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Operasional</span>
+        </a>
+        <a href="../staff/orders-queue.html?role=superadmin" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Manajemen Pesanan">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-orders"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Manajemen Pesanan</span>
+        </a>
+        <a href="../staff/products.html?role=superadmin" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Produk & Varian">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-box"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Produk &amp; Varian</span>
+        </a>
+        <a href="../staff/production-materials.html?role=superadmin" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Bahan Produksi">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-flower"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Bahan Produksi</span>
+        </a>
+        <a href="../staff/bouquet-production.html?role=superadmin" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px]" data-role-link title="Buket &amp; Produksi">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true">
+            <use href="#i-flower"/>
+          </svg>
+          <span class="sidebar-label">Buket &amp; Produksi</span>
+        </a>
+        <a
+          href="../staff/customers.html?role=superadmin"
+          class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          data-role-link
+          title="Pelanggan"
+        >
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-users"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Pelanggan</span>
+        </a>
+        <a
+          href="../staff/closure-calendar.html?role=superadmin"
+          class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+          data-role-link
+          title="Kalender Tutup"
+        >
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Kalender Tutup</span>
+        </a>
+        <a href="../superadmin/financial-report.html" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" aria-current="page" title="Laporan Keuangan">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-chart"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Laporan Keuangan</span>
+        </a>
+        <a href="../superadmin/audit-log.html" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Audit Log" data-audit-link data-role-link>
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-audit"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Audit Log</span>
+        </a>
+        <a href="../superadmin/system-parameters.html?role=superadmin" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Pengaturan Sistem">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-settings"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Pengaturan Sistem</span>
+        </a>
+      </nav>
+
+      <div class="border-t border-[#E2E8DE] p-3">
+        <div class="sidebar-extra mb-3 rounded-xl bg-[#E7EFE4] p-4">
+          <svg class="h-5 w-5 fill-none stroke-primary stroke-[1.7]" aria-hidden="true"><use href="#i-help"/></svg>
+          <p class="mt-2 text-[13px] font-semibold">Butuh Bantuan?</p>
+          <p class="mt-1 text-[11px] leading-[1.6] text-muted-ink">Panduan operasional untuk tim RylVa Green.</p>
+        </div>
+        <div class="profile-row flex min-h-12 items-center gap-3 px-2">
+          <span class="profile-avatar grid h-9 w-9 flex-none place-items-center rounded-full bg-[#DECBB4] text-xs font-semibold text-primary-dark">SA</span>
+          <span class="sidebar-label min-w-0">
+            <strong id="profile-name" class="block truncate text-[13px] font-semibold">SuperAdmin RylVa</strong>
+            <small class="block truncate text-[11px] text-muted-ink">Gudang Pusat</small>
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="min-w-0 flex-1">
+      
+      <!-- Header -->
+      <header class="sticky top-0 z-20 flex h-[72px] items-center justify-between gap-4 border-b border-[#ECEFE9] bg-background/95 px-4 sm:px-6 xl:px-8">
+        <div class="flex min-w-0 items-center gap-3">
+          <button id="mobile-open" type="button" class="grid h-10 w-10 flex-none place-items-center rounded-lg border border-[#E4EAE0] text-primary-dark hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar">
+            <svg class="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true"><use href="#i-menu"/></svg>
+          </button>
+          <p class="truncate text-[13px] text-muted-ink">
+            Ruang kerja <span class="mx-2 text-neutral-soft" aria-hidden="true">/</span> <strong class="font-semibold text-primary-dark">Laporan Keuangan</strong>
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="hidden text-[12px] font-medium text-muted-ink sm:inline">SuperAdmin · Gudang Pusat</span>
+          <span class="grid h-9 w-9 place-items-center rounded-full bg-[#DECBB4] text-xs font-semibold text-primary-dark" aria-label="SuperAdmin RylVa">SA</span>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main id="laporan-keuangan" class="mx-auto w-full max-w-[1680px] px-4 pb-8 pt-7 sm:px-6 xl:px-8 xl:pt-9">
+        <section aria-labelledby="page-title" class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div class="min-w-0">
+            <p class="text-[13px] font-semibold text-primary">Gudang Pusat · Khusus SuperAdmin</p>
+            <h1 id="page-title" class="mt-2 text-[27px] font-semibold leading-tight tracking-tight text-primary-dark sm:text-[32px]">Laporan keuangan</h1>
+            <p id="headline-finding" class="mt-2 max-w-[760px] text-[14px] leading-6 text-muted-ink" aria-live="polite">Pembayaran tercatat naik dibanding periode sebelumnya; satu selisih rekonsiliasi memerlukan pemeriksaan.</p>
+          </div>
+          <div class="flex flex-wrap items-end gap-3">
+            <div>
+              <label for="period-select" class="mb-1.5 block text-[12px] font-medium text-muted-ink">Periode laporan</label>
+              <select id="period-select" class="h-11 min-w-[200px] rounded-xl border border-[#C9D6CA] bg-white px-3 text-[13px] font-semibold text-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <option value="oct">1–28 Oktober 2026</option>
+                <option value="sep">1–28 September 2026</option>
+              </select>
+            </div>
+            <a href="../staff/admin-dashboard.html?role=superadmin" class="inline-flex h-11 items-center gap-2 rounded-xl border border-[#C9D6CA] bg-white px-4 text-[13px] font-semibold text-primary-dark transition-colors hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              Lihat operasional <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8]" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <p role="note" class="mt-5 rounded-xl border border-[#DDE6DC] bg-[#EDF2EC] px-4 py-2.5 text-[12px] leading-5 text-primary-dark">
+          <strong class="font-semibold">Pratinjau · Data ilustrasi.</strong> Angka berikut adalah contoh desain, bukan laporan atau saldo toko sebenarnya. Pembayaran COD yang masih menunggu tidak dihitung sebagai pembayaran tercatat.
+        </p>
+
+        <div class="mt-5 grid items-stretch gap-4 xl:grid-cols-12">
+          
+          <!-- Ringkasan keuangan -->
+          <div class="order-2 grid min-w-0 gap-4 sm:grid-cols-2 xl:col-span-6 xl:grid-rows-2" aria-label="Ringkasan keuangan">
+            
+            <!-- Card 1: Pembayaran Tercatat -->
+            <section aria-labelledby="gross-card-title" class="card flex min-h-[166px] min-w-0 flex-col rounded-2xl p-5">
+              <div class="flex items-center justify-between gap-2">
+                <h2 id="gross-card-title" class="text-[13px] font-medium text-muted-ink">Pembayaran tercatat</h2>
+                <svg class="h-4 w-4 flex-none fill-none stroke-muted-ink stroke-[2]" aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              
+              <p id="gross-total" class="tabular mt-3 text-[26px] sm:text-[28px] font-bold tracking-tight text-primary-dark">
+                Rp 18.000.000
+              </p>
+              
+              <div class="mt-auto pt-4 flex items-end justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span id="gross-badge" class="inline-flex items-center gap-0.5 rounded-md bg-soft-green px-1.5 py-0.5 text-[12px] font-semibold text-primary">
+                    <svg id="gross-dir-icon" class="h-3 w-3 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 19V5M5 12l7-7 7 7"/>
+                    </svg>
+                    <span id="gross-change">12,5%</span>
+                  </span>
+                  <span id="gross-label" class="text-[12px] font-medium text-muted-ink">vs bln lalu</span>
+                </div>
+                
+                <svg class="h-5 w-[72px] flex-none stroke-primary opacity-80" viewBox="0 0 72 20" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 16 L 16 12 L 26 15 L 42 7 L 54 10 L 70 3" />
+                </svg>
+              </div>
+            </section>
+
+            <!-- Card 2: Setelah Refund -->
+            <section aria-labelledby="net-card-title" class="card flex min-h-[166px] min-w-0 flex-col rounded-2xl bg-white p-5">
+              <div class="flex items-center justify-between gap-2">
+                <h2 id="net-card-title" class="text-[13px] font-medium text-muted-ink">Setelah refund</h2>
+                <svg class="h-4 w-4 flex-none fill-none stroke-muted-ink stroke-[2]" aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p id="after-refund-total" class="tabular mt-3 text-[26px] sm:text-[28px] font-bold tracking-tight text-primary-dark">
+                Rp 17.250.000
+              </p>
+              <div class="mt-auto pt-4 flex items-center gap-2">
+                <span class="inline-flex items-center rounded-md bg-[#F1F6EF] px-1.5 py-0.5 text-[12px] font-semibold text-primary">
+                  Bersih
+                </span>
+                <span class="text-[12px] font-medium text-muted-ink">Pembayaran − refund</span>
+              </div>
+            </section>
+
+            <!-- Card 3: Refund Selesai -->
+            <section aria-labelledby="refund-card-title" class="card flex min-h-[166px] min-w-0 flex-col rounded-2xl p-5">
+              <div class="flex items-center justify-between gap-2">
+                <h2 id="refund-card-title" class="text-[13px] font-medium text-muted-ink">Refund selesai</h2>
+                <svg class="h-4 w-4 flex-none fill-none stroke-muted-ink stroke-[2]" aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p id="refund-total" class="tabular mt-3 text-[26px] sm:text-[28px] font-bold tracking-tight text-primary-dark">
+                Rp 750.000
+              </p>
+              <div class="mt-auto pt-4 flex items-center gap-2">
+                <span class="inline-flex items-center rounded-md bg-[#EBF1EA] px-1.5 py-0.5 text-[12px] font-semibold text-primary">
+                  <span id="refund-share">4,2%</span>
+                </span>
+                <span class="text-[12px] font-medium text-muted-ink">dari total tercatat</span>
+              </div>
+            </section>
+
+            <!-- Card 4: Selisih Rekonsiliasi -->
+            <section id="reconciliation-detail" aria-labelledby="recon-card-title" class="card flex min-h-[166px] min-w-0 flex-col rounded-2xl border border-[#E7C3AD] bg-white p-5">
+              <div class="flex items-start justify-between gap-2">
+                <h2 id="recon-card-title" class="text-[13px] font-medium text-muted-ink">Selisih rekonsiliasi</h2>
+                <svg class="h-4 w-4 flex-none fill-none stroke-[#9A431F] stroke-[2]" aria-hidden="true"><use href="#i-alert"/></svg>
+              </div>
+              <p id="unmatched-total" class="tabular mt-3 text-[26px] sm:text-[28px] font-bold tracking-tight text-warning-ink">
+                Rp 150.000
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center rounded-md bg-[#FFF3EB] px-1.5 py-0.5 text-[12px] font-semibold text-[#9A431F]">
+                  Perlu tinjauan
+                </span>
+                <span id="recon-case" class="text-[12px] font-medium text-muted-ink">DEMO-006</span>
+                <a href="../superadmin/payment-reconciliation.html?role=superadmin" class="inline-flex min-h-11 items-center text-[12px] font-semibold text-primary underline underline-offset-4">
+                  Buka daftar
+                </a>
+              </div>
+            </section>
+            
+          </div>
+
+          <!-- Revenue Trends Chart -->
+          <section aria-labelledby="revenue-title" class="card order-1 flex min-w-0 flex-col rounded-2xl p-5 sm:p-6 xl:col-span-6">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h2 id="revenue-title" class="text-[19px] font-semibold tracking-tight">Tren pembayaran</h2>
+                <p id="revenue-subtitle" class="mt-1 text-[13px] text-muted-ink">Empat pekan dibanding periode sebelumnya.</p>
+              </div>
+              <div class="flex items-center gap-4 text-[12px] text-muted-ink">
+                <span class="inline-flex items-center gap-1.5">
+                  <i class="h-2.5 w-2.5 rounded-sm bg-primary-light" aria-hidden="true"></i>
+                  <span id="legend-current">Oktober</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5">
+                  <i class="h-2.5 w-2.5 rounded-sm bg-[#CBD5CD]" aria-hidden="true"></i>
+                  <span id="legend-previous">September</span>
+                </span>
+              </div>
+            </div>
+            
+            <figure class="mt-5">
+              <div id="revenue-chart" class="min-w-0 overflow-x-auto" aria-live="polite"></div>
+              <figcaption id="chart-note" class="mt-2 text-[12px] leading-5 text-muted-ink">Pekan terakhir mencatat pembayaran terendah dalam periode ini.</figcaption>
+            </figure>
+            
+            <dl class="mt-auto grid grid-cols-2 gap-4 border-t border-[#E5EBE4] pt-4 text-[12px]">
+              <div>
+                <dt class="text-muted-ink">Pekan tertinggi</dt>
+                <dd id="strongest-value" class="tabular mt-1 text-[16px] font-semibold">Rp 5.250.000</dd>
+                <dd id="strongest-label" class="text-muted-ink">8–14 Okt</dd>
+              </div>
+              <div>
+                <dt class="text-muted-ink">Pekan terendah</dt>
+                <dd id="weakest-value" class="tabular mt-1 text-[16px] font-semibold">Rp 3.000.000</dd>
+                <dd id="weakest-label" class="text-muted-ink">22–28 Okt</dd>
+              </div>
+            </dl>
+          </section>
+
+          <!-- Weekly Details Table -->
+          <section aria-labelledby="weekly-title" class="card order-4 flex min-w-0 flex-col overflow-hidden rounded-2xl xl:col-span-6">
+            <div class="px-5 pt-5">
+              <h2 id="weekly-title" class="text-[19px] font-semibold tracking-tight">Rincian per pekan</h2>
+              <p class="mt-1 text-[13px] text-muted-ink">Pembayaran, refund, dan hasil setelah refund.</p>
+            </div>
+            <div class="mt-4 hidden flex-1 overflow-x-auto sm:block">
+              <table class="h-full w-full min-w-[430px] text-left text-[12px] xl:text-[11px] 2xl:text-[12px]" aria-label="Rincian keuangan per pekan">
+                <thead class="text-muted-ink">
+                  <tr class="border-b border-[#E5EBE4]">
+                    <th scope="col" class="px-4 py-3 font-medium">Pekan</th>
+                    <th scope="col" class="px-2 py-3 text-right font-medium">Pembayaran</th>
+                    <th scope="col" class="px-2 py-3 text-right font-medium">Refund</th>
+                    <th scope="col" class="px-4 py-3 text-right font-medium">Setelah refund</th>
+                  </tr>
+                </thead>
+                <tbody id="weekly-rows"></tbody>
+                <tfoot id="weekly-foot" class="border-t border-[#DDE6DC] font-semibold"></tfoot>
+              </table>
+            </div>
+            <div id="weekly-mobile" class="mt-4 space-y-2 px-4 pb-4 sm:hidden"></div>
+          </section>
+
+          <!-- Payment Mix -->
+          <section aria-labelledby="mix-title" class="card order-3 min-w-0 rounded-2xl p-5 xl:col-span-6">
+            <div class="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <h2 id="mix-title" class="text-[19px] font-semibold tracking-tight">Asal pembayaran</h2>
+                <p class="mt-1 text-[13px] text-muted-ink">Online dan COD yang sudah lunas.</p>
+              </div>
+              <span id="mix-period" class="text-[12px] text-muted-ink">1–28 Okt 2026</span>
+            </div>
+            
+            <div class="mt-5 flex flex-col items-center gap-5 sm:flex-row">
+              <div id="mix-donut" class="h-[160px] w-[160px] flex-none" aria-live="polite"></div>
+              <dl class="w-full min-w-0 space-y-3 text-[13px]">
+                <div class="flex items-start justify-between gap-3">
+                  <dt class="flex items-center gap-2">
+                    <i class="mt-1 h-2.5 w-2.5 flex-none rounded-sm bg-primary" aria-hidden="true"></i>Online
+                  </dt>
+                  <dd class="text-right">
+                    <strong id="online-total" class="tabular block font-semibold">Rp 14.400.000</strong>
+                    <span id="online-share" class="text-[12px] text-muted-ink">80,0%</span>
+                  </dd>
+                </div>
+                <div class="flex items-start justify-between gap-3">
+                  <dt class="flex items-center gap-2">
+                    <i class="mt-1 h-2.5 w-2.5 flex-none rounded-sm bg-primary-light" aria-hidden="true"></i>COD lunas
+                  </dt>
+                  <dd class="text-right">
+                    <strong id="cod-total" class="tabular block font-semibold">Rp 3.600.000</strong>
+                    <span id="cod-share" class="text-[12px] text-muted-ink">20,0%</span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            
+            <p id="pending-cod" class="mt-4 rounded-xl bg-[#EAF2F3] p-3 text-[12px] leading-5 text-[#28525F]">
+              COD menunggu Rp 560.000 · tidak termasuk pembayaran tercatat.
+            </p>
+            
+            <div class="mt-4 border-t border-[#E5EBE4] pt-4">
+              <h3 class="text-[13px] font-semibold">Alasan refund</h3>
+              <div id="refund-reasons" class="mt-3 space-y-3" aria-label="Alasan refund"></div>
+              <p class="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-t border-[#E5EBE4] pt-3 text-[12px] text-muted-ink">
+                <span>Rekonsiliasi cocok <strong id="matched-total" class="tabular font-semibold text-primary-dark">Rp 17.850.000</strong></span>
+                <span id="matched-rate">99,2% sudah cocok</span>
+              </p>
+            </div>
+          </section>
+          
+        </div>
+        
+        <footer class="mt-5 flex flex-wrap justify-between gap-2 text-[12px] text-muted-ink">
+          <span>RylVa Green · Gudang Pusat</span>
+          <span>Pratinjau SuperAdmin · Data ilustrasi</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const reports = {
+      oct: {
+        month: 'Oktober', 
+        previous: 'September', 
+        shortMonth: 'Okt',
+        weeks: [4800000, 5250000, 4950000, 3000000],
+        priorWeeks: [3900000, 4200000, 4500000, 3400000],
+        refunds: [150000, 250000, 200000, 150000],
+        reasons: [
+          ['Pembatalan', 320000], 
+          ['Kualitas produk', 250000], 
+          ['Pengiriman', 180000]
+        ],
+        online: 14400000, 
+        codPaid: 3600000, 
+        codPending: 560000,
+        unmatched: 150000, 
+        caseId: 'DEMO-006'
+      },
+      sep: {
+        month: 'September', 
+        previous: 'Agustus', 
+        shortMonth: 'Sep',
+        weeks: [3900000, 4200000, 4500000, 3400000],
+        priorWeeks: [3600000, 3900000, 4100000, 3400000],
+        refunds: [100000, 150000, 100000, 100000],
+        reasons: [
+          ['Pembatalan', 200000], 
+          ['Kualitas produk', 150000], 
+          ['Pengiriman', 100000]
+        ],
+        online: 12800000, 
+        codPaid: 3200000, 
+        codPending: 350000,
+        unmatched: 50000, 
+        caseId: 'DEMO-SEP-01'
+      }
+    };
+
+    const sum = values => values.reduce((total, value) => total + value, 0);
+    const rupiah = value => 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
+    const decimal = value => new Intl.NumberFormat('id-ID', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(value);
+    
+    function setText(id, value)
+    {
+      document.getElementById(id).textContent = value;
+    }
+
+    function chart(report)
+    {
+      const gross = sum(report.weeks);
+      const labels = ['1–7', '8–14', '15–21', '22–28'];
+      
+      const grid = [0, 2000000, 4000000, 6000000].map(value => {
+        const y = 209 - value / 6000000 * 174;
+        return `
+          <line x1="54" y1="${y}" x2="710" y2="${y}" stroke="#E5EBE4" stroke-width="1"/>
+          <text x="45" y="${y + 4}" text-anchor="end" fill="#5B6B5D" font-size="11">${value / 1000000} jt</text>
+        `;
+      }).join('');
+      
+      const bars = report.weeks.map((value, index) => {
+        const x = 100 + index * 152;
+        const prior = report.priorWeeks[index];
+        const py = 209 - prior / 6000000 * 174;
+        const cy = 209 - value / 6000000 * 174;
+        
+        return `
+          <rect x="${x}" y="${py}" width="30" height="${209 - py}" rx="4" fill="#CBD5CD">
+            <title>${labels[index]} ${report.previous}: ${rupiah(prior)}</title>
+          </rect>
+          <rect x="${x + 36}" y="${cy}" width="30" height="${209 - cy}" rx="4" fill="#6B9071">
+            <title>${labels[index]} ${report.month}: ${rupiah(value)}</title>
+          </rect>
+          <text x="${x + 33}" y="238" text-anchor="middle" fill="#5B6B5D" font-size="11">${labels[index]} ${report.shortMonth}</text>
+        `;
+      }).join('');
+      
+      document.getElementById('revenue-chart').innerHTML = `
+        <svg viewBox="0 0 720 252" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="finance-chart-title finance-chart-desc" class="block h-auto w-full min-w-[560px] sm:min-w-0">
+          <title id="finance-chart-title">Pembayaran tercatat per pekan</title>
+          <desc id="finance-chart-desc">Perbandingan empat pekan ${report.month} dan ${report.previous}. Total periode aktif ${rupiah(gross)}. Rincian angka tersedia pada tabel di bawah.</desc>
+          <g font-family="Poppins, sans-serif">
+            ${grid}
+            ${bars}
+          </g>
+        </svg>
+      `;
+    }
+
+    function renderMix(report, gross)
+    {
+      const share = (report.online / gross) * 100;
+      const circumference = 2 * Math.PI * 58;
+      const arc = circumference * (share / 100);
+      
+      document.getElementById('mix-donut').innerHTML = `
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mix-chart-title mix-chart-desc" class="h-full w-full">
+          <title id="mix-chart-title">Komposisi pembayaran tercatat</title>
+          <desc id="mix-chart-desc">Online ${decimal(share)} persen, ${rupiah(report.online)}; COD lunas ${decimal(100 - share)} persen, ${rupiah(report.codPaid)}.</desc>
+          <circle cx="80" cy="80" r="58" fill="none" stroke="#AFC5B2" stroke-width="18"/>
+          <circle cx="80" cy="80" r="58" fill="none" stroke="#375534" stroke-width="18" stroke-dasharray="${arc} ${circumference}" transform="rotate(-90 80 80)"/>
+          <text x="80" y="76" text-anchor="middle" font-family="Poppins, sans-serif" font-size="23" font-weight="600" fill="#0F2A1D">${decimal(share)}%</text>
+          <text x="80" y="96" text-anchor="middle" font-family="Poppins, sans-serif" font-size="11" fill="#5B6B5D">Online</text>
+        </svg>
+      `;
+    }
+
+    function render(key)
+    {
+      const report = reports[key];
+      const gross = sum(report.weeks);
+      const prior = sum(report.priorWeeks);
+      const refunds = sum(report.refunds);
+      const afterRefund = gross - refunds;
+      const matched = gross - report.unmatched;
+      const delta = ((gross - prior) / prior) * 100;
+      const matchedRate = (matched / gross) * 100;
+      const isPositive = delta >= 0;
+
+      console.assert(gross === report.online + report.codPaid, 'Komposisi pembayaran harus cocok.');
+      console.assert(refunds === sum(report.reasons.map(item => item[1])), 'Alasan refund harus cocok.');
+      console.assert(gross === matched + report.unmatched, 'Rekonsiliasi harus cocok.');
+
+      setText('headline-finding', 'Pembayaran tercatat ' + (isPositive ? 'naik ' : 'turun ') + rupiah(Math.abs(gross - prior)) + ' dibanding 28 hari sebelumnya; ' + rupiah(report.unmatched) + ' masih perlu rekonsiliasi.');
+      setText('revenue-subtitle', '1–28 ' + report.shortMonth + ' 2026 dibanding 1–28 ' + report.previous + ' 2026.');
+      setText('legend-current', report.month);
+      setText('legend-previous', report.previous);
+
+      // Card 1
+      setText('gross-total', rupiah(gross));
+      setText('gross-change', decimal(Math.abs(delta)) + '%');
+      setText('gross-label', 'vs ' + report.previous);
+      
+      const badgeElement = document.getElementById('gross-badge');
+      const iconElement = document.getElementById('gross-dir-icon');
+
+      if (isPositive)
+      {
+        badgeElement.className = 'inline-flex items-center gap-0.5 rounded-md bg-soft-green px-1.5 py-0.5 text-[12px] font-semibold text-primary';
+        iconElement.innerHTML = '<path d="M12 19V5M5 12l7-7 7 7"/>';
+      }
+      else
+      {
+        badgeElement.className = 'inline-flex items-center gap-0.5 rounded-md bg-[#F9E8DF] px-1.5 py-0.5 text-[12px] font-semibold text-[#7B351F]';
+        iconElement.innerHTML = '<path d="M12 5v14m7-7l-7 7-7-7"/>';
+      }
+
+      // Card 2
+      setText('after-refund-total', rupiah(afterRefund));
+
+      // Card 3
+      setText('refund-total', rupiah(refunds));
+      setText('refund-share', decimal((refunds / gross) * 100) + '%');
+
+      // Card 4
+      setText('unmatched-total', rupiah(report.unmatched));
+      setText('recon-case', report.caseId);
+
+      // Bottom sections
+      setText('matched-total', rupiah(matched));
+      setText('matched-rate', decimal(matchedRate) + '% sudah cocok');
+      setText('online-total', rupiah(report.online));
+      setText('cod-total', rupiah(report.codPaid));
+      setText('online-share', decimal((report.online / gross) * 100) + '%');
+      setText('cod-share', decimal((report.codPaid / gross) * 100) + '%');
+      setText('mix-period', '1–28 ' + report.shortMonth + ' 2026');
+      setText('pending-cod', 'COD menunggu ' + rupiah(report.codPending) + ' · tidak termasuk total pembayaran tercatat.');
+      
+      renderMix(report, gross);
+      
+      setText('chart-note', 'Pekan 22–28 ' + report.shortMonth + ' mencatat ' + rupiah(report.weeks[3]) + ', terendah dalam periode ini.');
+      
+      const strongestIndex = report.weeks.indexOf(Math.max(...report.weeks));
+      const weakestIndex = report.weeks.indexOf(Math.min(...report.weeks));
+      const weekRanges = ['1–7', '8–14', '15–21', '22–28'];
+      
+      setText('strongest-value', rupiah(report.weeks[strongestIndex]));
+      setText('strongest-label', weekRanges[strongestIndex] + ' ' + report.shortMonth);
+      setText('weakest-value', rupiah(report.weeks[weakestIndex]));
+      setText('weakest-label', weekRanges[weakestIndex] + ' ' + report.shortMonth);
+      
+      document.getElementById('refund-reasons').innerHTML = report.reasons.map(([label, value]) => `
+        <div>
+          <div class="flex justify-between gap-2 text-[12px]">
+            <span class="text-muted-ink">${label}</span>
+            <strong class="tabular font-medium">${rupiah(value)}</strong>
+          </div>
+          <div class="mt-1.5 h-1.5 rounded-full bg-[#E9EEE8]">
+            <div class="h-1.5 rounded-full bg-primary-light" style="width:${(value / refunds) * 100}%"></div>
+          </div>
+        </div>
+      `).join('');
+      
+      chart(report);
+      
+      const ranges = ['1–7', '8–14', '15–21', '22–28'];
+      
+      document.getElementById('weekly-rows').innerHTML = report.weeks.map((amount, index) => `
+        <tr class="border-b border-[#EDF0EA]">
+          <th scope="row" class="px-4 py-3 font-medium">${ranges[index]} ${report.shortMonth}</th>
+          <td class="tabular px-2 py-3 text-right">${rupiah(amount)}</td>
+          <td class="tabular px-2 py-3 text-right">${rupiah(report.refunds[index])}</td>
+          <td class="tabular px-4 py-3 text-right font-semibold">${rupiah(amount - report.refunds[index])}</td>
+        </tr>
+      `).join('');
+      
+      document.getElementById('weekly-foot').innerHTML = `
+        <tr>
+          <th scope="row" class="px-4 py-3">Total</th>
+          <td class="tabular px-2 py-3 text-right">${rupiah(gross)}</td>
+          <td class="tabular px-2 py-3 text-right">${rupiah(refunds)}</td>
+          <td class="tabular px-4 py-3 text-right">${rupiah(afterRefund)}</td>
+        </tr>
+      `;
+      
+      document.getElementById('weekly-mobile').innerHTML = report.weeks.map((amount, index) => `
+        <div class="rounded-xl border border-[#E3EAE1] bg-white p-3">
+          <p class="font-semibold">${ranges[index]} ${report.shortMonth}</p>
+          <dl class="mt-2 grid grid-cols-2 gap-2 text-[12px]">
+            <div>
+              <dt class="text-muted-ink">Pembayaran</dt>
+              <dd class="tabular font-medium">${rupiah(amount)}</dd>
+            </div>
+            <div>
+              <dt class="text-muted-ink">Refund</dt>
+              <dd class="tabular font-medium">${rupiah(report.refunds[index])}</dd>
+            </div>
+            <div class="col-span-2 border-t border-[#EDF0EA] pt-2">
+              <dt class="text-muted-ink">Setelah refund</dt>
+              <dd class="tabular font-semibold">${rupiah(amount - report.refunds[index])}</dd>
+            </div>
+          </dl>
+        </div>
+      `).join('') + `<div class="rounded-xl bg-[#EDF2EC] p-3 text-[12px] font-semibold">Total setelah refund · ${rupiah(afterRefund)}</div>`;
+    }
+
+    const select = document.getElementById('period-select');
+    const params = new URLSearchParams(window.location.search);
+    
+    if (params.get('period') === 'sep')
+    {
+      select.value = 'sep';
+    }
+    
+    select.addEventListener('change', function ()
+    {
+      render(select.value);
+      const url = new URL(window.location.href);
+      
+      if (select.value === 'oct')
+      {
+        url.searchParams.delete('period');
+      }
+      else
+      {
+        url.searchParams.set('period', select.value);
+      }
+      
+      window.history.replaceState(null, '', url);
+    });
+    
+    render(select.value);
+
+    // Sidebar & Mobile Menu Logic
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('sidebar-toggle');
+    const open = document.getElementById('mobile-open');
+    const close = document.getElementById('mobile-close');
+    const backdrop = document.getElementById('mobile-backdrop');
+    
+    function setMobileMenu(isOpen)
+    {
+      sidebar.classList.toggle('-translate-x-full', !isOpen);
+      backdrop.classList.toggle('hidden', !isOpen);
+      open.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('overflow-hidden', isOpen);
+      
+      if (isOpen)
+      {
+        close.focus();
+      }
+      else
+      {
+        open.focus();
+      }
+    }
+    
+    toggle.addEventListener('click', function ()
+    {
+      const collapsed = sidebar.classList.toggle('sidebar-collapsed');
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      toggle.setAttribute('aria-label', collapsed ? 'Besarkan sidebar' : 'Kecilkan sidebar');
+    });
+    
+    open.addEventListener('click', function ()
+    {
+      setMobileMenu(true);
+    });
+    
+    close.addEventListener('click', function ()
+    {
+      setMobileMenu(false);
+    });
+    
+    backdrop.addEventListener('click', function ()
+    {
+      setMobileMenu(false);
+    });
+    
+    sidebar.querySelectorAll('nav a').forEach(function (link)
+    {
+      link.addEventListener('click', function ()
+      {
+        if (window.innerWidth < 1024)
+        {
+          setMobileMenu(false);
+        }
+      });
+    });
+    
+    document.addEventListener('keydown', function (event)
+    {
+      if (event.key === 'Escape' && open.getAttribute('aria-expanded') === 'true')
+      {
+        setMobileMenu(false);
+      }
+    });
+    
+    window.addEventListener('resize', function ()
+    {
+      if (window.innerWidth >= 1024 && open.getAttribute('aria-expanded') === 'true')
+      {
+        setMobileMenu(false);
+      }
+    });
+  </script>
+  <script src="../../assets/js/shared/admin-audit-nav.js" defer></script>
+  <script src="../../assets/js/shared/admin-settings-nav.js" defer></script>
+</body>
+</html>

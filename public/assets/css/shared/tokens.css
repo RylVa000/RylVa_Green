@@ -1,0 +1,105 @@
+:root {
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 144px;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.44rem;
+  --text-2xl: 1.728rem;
+  --text-3xl: 2.074rem;
+  --text-display-s: 1.44rem;
+  --text-display: 1.728rem;
+  --text-section: 1.2rem;
+  --text-title: 1rem;
+  --text-lead: 1rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+  --color-error: var(--primary-dark);
+  --color-success: var(--primary);
+  --container: 1440px;
+  --gutter: 64px;
+  --gap-columns: 32px;
+  --section-gap-s: 120px;
+  --section-gap: 144px;
+  --section-gap-l: 176px;
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-sticky-nav: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+  --primary-dark: #0f2a1d;
+  --primary: #375534;
+  --primary-light: #6b9071;
+  --neutral-soft: #aec3b0;
+  --background: #fbf7f4;
+  --card-background: #f8f9fa;
+  --text-secondary: #718096;
+  --product-card-background: #cdcfcc;
+  --color-paper: var(--background);
+  --color-paper-2: #f0f3ed;
+  --color-paper-3: #e6ebe2;
+  --color-ink: var(--primary-dark);
+  --color-ink-2: var(--primary);
+  --color-muted: #526452;
+  --color-rule: #dce3d7;
+  --color-selection: #dfe9da;
+  --color-accent: var(--primary);
+  --color-accent-ink: #ffffff;
+  --color-focus: var(--primary);
+  --color-transparent: transparent;
+  --color-tap: transparent;
+  --color-overlay: #0f2a1d66;
+  --font-display: "Poppins", Arial, sans-serif;
+  --font-body: "Poppins", Arial, sans-serif;
+  --font-outlier: var(--font-body);
+  --radius-card: 12px;
+  --radius-input: 8px;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+  --shadow-card: none;
+  --tracking-display: -0.02em;
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../fonts/poppins/poppins-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../fonts/poppins/poppins-500.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../fonts/poppins/poppins-600.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../fonts/poppins/poppins-700.ttf") format("truetype");
+}

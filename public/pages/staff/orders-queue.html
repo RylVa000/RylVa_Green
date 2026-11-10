@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Antrean pemenuhan pesanan RylVa Green berdasarkan jadwal kirim dan kasus yang perlu ditindaklanjuti.">
+  <title>Antrean Pesanan | RylVa Green</title>
+  <link rel="stylesheet" href="../../assets/css/staff/orders/orders-queue.css">
+  <link rel="stylesheet" href="../../assets/css/staff/orders/order-workflows.css">
+  <link rel="stylesheet" href="../../assets/css/shared/admin-controls.css">
+  <script src="../../assets/js/shared/admin-controls.js" defer></script>
+  <script src="../../assets/js/staff/superadmin/superadmin-review-data.js" defer>
+  </script>
+  <script src="../../assets/js/staff/superadmin/superadmin-review-store.js" defer>
+  </script>
+  <script src="../../assets/js/staff/orders/orders-queue.js" defer>
+  </script>
+  <script src="../../assets/js/staff/orders/order-corrections.js" defer>
+  </script>
+  <script src="../../assets/js/staff/orders/order-workflows.js" defer>
+  </script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbol-library" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24">
+      <path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/>
+      <path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="m3 10 9-7 9 7v10H3V10ZM9 21v-7h6v7"/>
+    </symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24">
+      <path d="M7 3h10l3 3v15H4V6l3-3ZM8 10h8M8 14h8M8 18h5"/>
+    </symbol>
+    <symbol id="i-box" viewBox="0 0 24 24">
+      <path d="m12 2 9 5-9 5-9-5 9-5ZM3 7v10l9 5 9-5V7M12 12v10"/>
+    </symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24">
+      <path d="M12 12c-3-2-3-5 0-7 3 2 3 5 0 7Zm0 0c1-4 4-5 7-3-1 3-4 4-7 3Zm0 0c4 1 5 4 3 7-3-1-4-4-3-7Zm0 0c-1 4-4 5-7 3 1-3 4-4 7-3Zm0 0c-4-1-5-4-3-7 3 1 4 4 3 7ZM12 19v3"/>
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3"/>
+      <path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5v1h-4"/>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2"/>
+      <path d="M7 3v4m10-4v4M3 10h18"/>
+    </symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24">
+      <path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/>
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <path d="m9 3-.7 2.1-2 .9-2.1-.8L2 9l1.8 1.4v2.2L2 14l2.2 3.8 2.1-.8 2 .9L9 20h4l.7-2.1 2-.9 2.1.8L20 14l-1.8-1.4v-2.2L20 9l-2.2-3.8-2.1.8-2-.9L13 3H9Z"/>
+      <circle cx="11" cy="11.5" r="3"/>
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m14 6-6 6 6 6"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M5 5 19 19M19 5 5 19"/>
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="10.5" cy="10.5" r="6.5"/>
+      <path d="m16 16 5 5"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M12 3 2 21h20L12 3ZM12 9v5m0 3v.1"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24">
+      <path d="M3 6h18M6 12h12M9 18h6"/>
+    </symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24">
+      <path d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 14 6M4 12a8 8 0 0 0 14 6"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 12 4 4L19 6"/>
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 11v6m0-10v.1"/>
+    </symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24">
+      <path d="M3 5h11v12H3V5Zm11 5h4l3 4v3h-7"/>
+      <circle cx="6.5" cy="18" r="2"/>
+      <circle cx="17.5" cy="18" r="2"/>
+    </symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24">
+      <path d="M8 5 9.5 3h5L16 5h5v15H3V5h5Z"/>
+      <circle cx="12" cy="12.5" r="4"/>
+    </symbol>
+    <symbol id="i-help" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.7 1.5-1.7 2.7M12 17v.1"/>
+    </symbol>
+  </svg>
+
+  <a href="#queue-main" class="skip-link">Lewati navigasi</a>
+  <div id="mobile-backdrop" class="mobile-backdrop hidden" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar -translate-x-full" aria-label="Navigasi utama">
+      <div class="brand-row">
+        <a href="../staff/admin-dashboard.html" class="brand-lockup" data-role-link aria-label="RylVa Green, Operasional">
+          <span class="brand-mark">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-leaf"/>
+            </svg>
+          </span>
+          <span class="sidebar-label">
+            <strong class="brand-name">RylVa Green.</strong>
+            <small class="brand-caption">Plant &amp; Florist</small>
+          </span>
+        </a>
+        <button id="sidebar-toggle" class="icon-button collapse-button" type="button" aria-label="Kecilkan sidebar" aria-expanded="true" aria-controls="sidebar-nav">
+          <svg id="collapse-icon" class="icon icon--small" aria-hidden="true">
+            <use href="#i-chevron"/>
+          </svg>
+        </button>
+        <button id="mobile-close" class="icon-button mobile-control" type="button" aria-label="Tutup menu">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-close"/>
+          </svg>
+        </button>
+      </div>
+      <div class="workspace sidebar-extra">
+        <div class="workspace-card">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-box"/>
+          </svg>
+          <span class="sidebar-label">
+            <strong>Gudang Pusat</strong>
+            <small>Ruang kerja toko</small>
+          </span>
+        </div>
+      </div>
+      <nav id="sidebar-nav" class="sidebar-nav" aria-label="Menu admin">
+        <a href="../staff/admin-dashboard.html" class="nav-item" data-role-link title="Operasional">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-home"/>
+          </svg>
+          <span class="sidebar-label">Operasional</span>
+        </a>
+        <a href="../staff/orders-queue.html" class="nav-item" data-role-link title="Manajemen Pesanan" aria-current="page">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-orders"/>
+          </svg>
+          <span class="sidebar-label">Manajemen Pesanan</span>
+        </a>
+        <a href="../staff/products.html" class="nav-item" data-role-link title="Produk &amp; Varian">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-box"/>
+          </svg>
+          <span class="sidebar-label">Produk &amp; Varian</span>
+        </a>
+        <a href="../staff/production-materials.html" class="nav-item" data-role-link title="Bahan Produksi">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-flower"/>
+          </svg>
+          <span class="sidebar-label">Bahan Produksi</span>
+        </a>
+        <a href="../staff/bouquet-production.html" class="nav-item" data-role-link title="Buket &amp; Produksi">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-flower"/>
+          </svg>
+          <span class="sidebar-label">Buket &amp; Produksi</span>
+        </a>
+        <a href="../staff/customers.html" class="nav-item" data-role-link title="Pelanggan">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-users"/>
+          </svg>
+          <span class="sidebar-label">Pelanggan</span>
+        </a>
+        <a href="../staff/closure-calendar.html" class="nav-item" data-role-link title="Kalender Tutup">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-calendar"/>
+          </svg>
+          <span class="sidebar-label">Kalender Tutup</span>
+        </a>
+        <a href="../superadmin/financial-report.html" class="nav-item" title="Laporan Keuangan" data-superadmin-only hidden>
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-audit"/>
+          </svg>
+          <span class="sidebar-label">Laporan Keuangan</span>
+        </a>
+        <a href="../superadmin/audit-log.html" class="nav-item" title="Audit Log" data-audit-link data-role-link>
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-audit"/>
+          </svg>
+          <span class="sidebar-label">Audit Log</span>
+        </a>
+        <a href="../superadmin/system-parameters.html?role=superadmin" class="nav-item" title="Pengaturan Sistem" data-superadmin-only hidden>
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-settings"/>
+          </svg>
+          <span class="sidebar-label">Pengaturan Sistem</span>
+        </a>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="help-block sidebar-extra">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-help"/>
+          </svg>
+          <strong>Butuh Bantuan?</strong>
+          <p>Panduan operasional untuk tim RylVa Green.</p>
+        </div>
+        <div class="profile-row">
+          <span class="profile-avatar" aria-hidden="true">AR</span>
+          <span class="sidebar-label">
+            <strong id="profile-name">Admin RylVa</strong>
+            <small>Gudang Pusat</small>
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="workspace-main">
+      <header class="topbar queue-topbar">
+        <div class="topbar-leading">
+          <button id="mobile-open" class="icon-button mobile-control" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-menu"/>
+            </svg>
+          </button>
+          <p class="breadcrumb">
+            <span class="breadcrumb-context">Ruang kerja</span>
+            <span class="breadcrumb-context" aria-hidden="true">/</span>
+            <strong>Pesanan</strong>
+          </p>
+        </div>
+        <div class="topbar-account">
+          <span id="preview-role" class="role-caption">Pratinjau Admin</span>
+          <span class="profile-avatar" aria-label="Admin RylVa">AR</span>
+        </div>
+      </header>
+
+      <main id="queue-main" class="queue-main">
+        <div class="queue-heading">
+          <div>
+            <h1 id="page-title" tabindex="-1">Antrean pesanan</h1>
+            <p id="view-intro">Dahulukan jadwal kirim terdekat dan kasus yang tertunda.</p>
+          </div>
+          <div class="queue-date">
+            <span>Selasa, 3 November 2026</span>
+            <small>Waktu contoh 11.25 WIB</small>
+          </div>
+        </div>
+
+        <nav id="order-workspaces" class="order-workspaces" aria-label="Ruang kerja pesanan">
+          <button type="button" data-workspace="queue" aria-pressed="true">Antrean pemenuhan</button>
+          <button type="button" data-workspace="aftercare" aria-pressed="false">
+            Purnajual
+            <span id="aftercare-count" class="work-count">0</span>
+          </button>
+        </nav>
+
+        <div id="queue-view">
+          <section class="priority-section" aria-label="Prioritas seluruh pesanan Gudang Pusat">
+            <article class="priority-hook priority-hook--critical">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-alert"/>
+              </svg>
+              <span class="hook-copy">
+                <strong id="case-hook-title">1 kasus terlambat 20 menit</strong>
+                <span id="case-hook-copy">PH-06: stok fisik tidak sesuai.</span>
+              </span>
+              <button id="overdue-hook" class="hook-action" type="button" aria-describedby="case-hook-title case-hook-copy">
+                <span class="hook-action-full">Tinjau kasus</span>
+                <span class="hook-action-short">Tinjau</span>
+              </button>
+            </article>
+            <article class="priority-hook priority-hook--warning">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-clock"/>
+              </svg>
+              <span class="hook-copy">
+                <strong id="delivery-hook-title">Slot pagi berakhir 35 menit lagi</strong>
+                <span id="delivery-hook-copy">2 pesanan belum diserahkan ke kurir.</span>
+              </span>
+              <button id="delivery-hook" class="hook-action" type="button" aria-describedby="delivery-hook-title delivery-hook-copy">
+                <span class="hook-action-full">Buka antrean</span>
+                <span class="hook-action-short">Buka</span>
+              </button>
+            </article>
+          </section>
+
+          <section class="queue-sheet" aria-label="Daftar pesanan">
+            <div class="queue-tabs" role="group" aria-label="Filter tahap pesanan">
+              <button class="queue-tab" type="button" data-tab="ready" aria-pressed="true">
+                <span>Siap diproses</span>
+                <strong data-count="ready">5</strong>
+              </button>
+              <button class="queue-tab" type="button" data-tab="preparing" aria-pressed="false">
+                <span>Disiapkan</span>
+                <strong data-count="preparing">3</strong>
+              </button>
+              <button class="queue-tab" type="button" data-tab="attention" aria-pressed="false">
+                <span>Perlu penanganan</span>
+                <strong data-count="attention">2</strong>
+              </button>
+              <button class="queue-tab" type="button" data-tab="all" aria-pressed="false">
+                <span>Semua pesanan</span>
+                <strong data-count="all">12</strong>
+              </button>
+            </div>
+
+            <form id="search-form" class="queue-toolbar" role="search">
+              <div class="queue-search">
+                <label for="order-search">Cari pesanan</label>
+                <div class="search-control">
+                  <svg class="icon icon--small" aria-hidden="true">
+                    <use href="#i-search"/>
+                  </svg>
+                  <input id="order-search" name="q" type="search" placeholder="Nomor pesanan atau pelanggan" autocomplete="off">
+                </div>
+              </div>
+              <button id="filters-toggle" class="queue-button" type="button" aria-expanded="false" aria-controls="advanced-filters">
+                <svg class="icon icon--small" aria-hidden="true">
+                  <use href="#i-filter"/>
+                </svg>
+                Filter
+                <span id="filter-count" class="filter-count" hidden>0</span>
+              </button>
+              <button id="refresh-button" class="icon-button refresh-button" type="button" aria-label="Muat ulang data contoh">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-refresh"/>
+                </svg>
+              </button>
+            </form>
+
+            <form id="advanced-filters" class="advanced-filters" hidden>
+              <div class="filter-field">
+                <label for="stage-filter">Status pesanan</label>
+                <select id="stage-filter" name="stage">
+                  <option value="all">Semua status</option>
+                  <option value="ready">Siap diproses</option>
+                  <option value="preparing">Sedang disiapkan</option>
+                  <option value="attention">Perlu penanganan</option>
+                  <option value="shipping">Dikirim</option>
+                  <option value="delivered">Terkirim</option>
+                  <option value="complete">Selesai</option>
+                  <option value="cancelled">Dibatalkan</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="day-filter">Tanggal kirim</label>
+                <select id="day-filter" name="day">
+                  <option value="all">Semua tanggal</option>
+                  <option value="today">Hari ini</option>
+                  <option value="tomorrow">Besok</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="slot-filter">Slot kirim</label>
+                <select id="slot-filter" name="slot">
+                  <option value="all">Semua slot</option>
+                  <option value="morning">Pagi</option>
+                  <option value="afternoon">Siang</option>
+                  <option value="evening">Sore</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="payment-filter">Pembayaran</label>
+                <select id="payment-filter" name="payment">
+                  <option value="all">Semua pembayaran</option>
+                  <option value="paid">Berhasil</option>
+                  <option value="cod">COD menunggu</option>
+                  <option value="review">Perlu ditinjau</option>
+                  <option value="refundProcessing">Refund diproses</option>
+                  <option value="refundedPartial">Refund sebagian</option>
+                  <option value="refundedFull">Refund penuh</option>
+                </select>
+              </div>
+              <div class="filter-field">
+                <label for="shipping-filter">Pengiriman</label>
+                <select id="shipping-filter" name="shipping">
+                  <option value="all">Semua pengiriman</option>
+                  <option value="pending">Belum diserahkan</option>
+                  <option value="shipping">Dalam pengiriman</option>
+                  <option value="delivered">Terkirim</option>
+                  <option value="issue">Terkendala</option>
+                  <option value="returned">Dikembalikan</option>
+                </select>
+              </div>
+              <div class="filter-actions">
+                <button class="queue-button queue-button--primary" type="submit">Terapkan</button>
+                <button id="reset-filters" class="queue-text-button" type="button">Hapus filter</button>
+              </div>
+            </form>
+
+            <div class="queue-list-meta">
+              <p id="result-summary" role="status" aria-live="polite">5 pesanan siap diproses</p>
+              <p class="sort-explanation">
+                <svg class="icon icon--small" aria-hidden="true">
+                  <use href="#i-calendar"/>
+                </svg>
+                Jadwal kirim terdekat
+              </p>
+            </div>
+            <div id="active-filters" class="active-filters" hidden></div>
+
+            <div id="list-loading" class="list-state" role="status" hidden>
+              <p>Memuat pesanan contoh…</p>
+              <div class="skeleton-row" aria-hidden="true"></div>
+              <div class="skeleton-row" aria-hidden="true"></div>
+              <div class="skeleton-row" aria-hidden="true"></div>
+            </div>
+            <div id="list-error" class="list-state" role="alert" hidden>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-alert"/>
+              </svg>
+              <h2>Pesanan belum dapat dimuat</h2>
+              <p>Contoh keadaan gagal. Coba muat kembali untuk melihat antrean.</p>
+              <button id="retry-button" class="queue-button" type="button">Coba lagi</button>
+            </div>
+            <div id="list-empty" class="list-state" hidden>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-check"/>
+              </svg>
+              <h2 id="empty-title">Tidak ada pesanan yang sesuai</h2>
+              <p id="empty-copy">Coba kata pencarian lain atau hapus filter yang aktif.</p>
+              <button id="empty-reset" class="queue-button" type="button">Hapus pencarian dan filter</button>
+            </div>
+
+            <table id="orders-table" class="queue-table">
+              <caption class="sr-only">Antrean pemenuhan dengan status pesanan, pembayaran, dan pengiriman terpisah</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Pesanan</th>
+                  <th scope="col">Pelanggan</th>
+                  <th scope="col">Jadwal kirim</th>
+                  <th scope="col">Pesanan</th>
+                  <th scope="col">Pembayaran</th>
+                  <th scope="col">Pengiriman</th>
+                  <th scope="col" class="numeric-cell">Total</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="order-rows">
+                <tr>
+                  <th scope="row" class="order-identity">
+                    <code class="order-number">RV-261103-A7K9M2</code>
+                    <span>Buket mawar pastel</span>
+                  </th>
+                  <td data-label="Pelanggan">Nadia Putri</td>
+                  <td data-label="Jadwal kirim">
+                    <strong>Hari ini</strong>
+                    <span>Pagi, 08.00 sampai 12.00</span>
+                  </td>
+                  <td data-label="Pesanan">
+                    <span class="queue-badge">Siap Diproses</span>
+                  </td>
+                  <td data-label="Pembayaran">
+                    <span class="queue-badge queue-badge--success">Berhasil</span>
+                    <span>Online</span>
+                  </td>
+                  <td data-label="Pengiriman">Belum Diserahkan</td>
+                  <td data-label="Total" class="numeric-cell">Rp 250.000</td>
+                  <td class="order-row-action">
+                    <button class="queue-open-button" type="button" data-open-order="RV-261103-A7K9M2">
+                      Buka
+                      <svg class="icon icon--small next-chevron" aria-hidden="true">
+                        <use href="#i-chevron"/>
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div id="queue-pagination" class="queue-pagination">
+              <p id="pagination-summary">Data ilustrasi untuk pratinjau interaksi</p>
+              <div class="pagination-actions">
+                <button id="previous-page" class="icon-button" type="button" aria-label="Halaman sebelumnya" disabled>
+                  <svg class="icon icon--small" aria-hidden="true">
+                    <use href="#i-chevron"/>
+                  </svg>
+                </button>
+                <span id="page-label">Halaman 1</span>
+                <button id="next-page" class="icon-button" type="button" aria-label="Halaman berikutnya" disabled>
+                  <svg class="icon icon--small next-chevron" aria-hidden="true">
+                    <use href="#i-chevron"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+          <p class="queue-rule-note">COD yang tervalidasi tetap dapat disiapkan saat pembayaran berstatus Menunggu.</p>
+        </div>
+
+        <section id="aftercare-view" aria-labelledby="aftercare-title" hidden>
+          <div class="work-section-heading">
+            <div>
+              <h2 id="aftercare-title">Permintaan yang perlu ditangani</h2>
+              <p>Pembatalan, refund, dan komplain memiliki keputusan serta tenggat masing-masing.</p>
+            </div>
+          </div>
+          <div id="aftercare-filters" class="work-filter-bar" role="group" aria-label="Jenis permintaan">
+            <button type="button" data-aftercare-filter="all" aria-pressed="true">Semua</button>
+            <button type="button" data-aftercare-filter="cancellation" aria-pressed="false">Pembatalan</button>
+            <button type="button" data-aftercare-filter="refund" aria-pressed="false">Refund</button>
+            <button type="button" data-aftercare-filter="complaint" aria-pressed="false">Komplain</button>
+          </div>
+          <div id="aftercare-list" class="work-request-list"></div>
+        </section>
+
+        <section id="detail-view" aria-label="Detail pesanan terpilih" hidden>
+          <button id="back-to-queue" class="queue-text-button back-button" type="button">
+            <svg class="icon icon--small" aria-hidden="true">
+              <use href="#i-chevron"/>
+            </svg>
+            Kembali ke antrean
+          </button>
+          <div class="detail-heading">
+            <div>
+              <h2 id="detail-order-id"></h2>
+              <p id="detail-created" class="secondary-text"></p>
+            </div>
+            <span id="detail-urgency" class="queue-badge"></span>
+          </div>
+          <div class="detail-status-strip">
+            <div>
+              <span>Pesanan</span>
+              <strong id="detail-order-status"></strong>
+            </div>
+            <div>
+              <span>Pembayaran</span>
+              <strong id="detail-payment-status"></strong>
+            </div>
+            <div>
+              <span>Pengiriman</span>
+              <strong id="detail-shipping-status"></strong>
+            </div>
+          </div>
+          <section class="work-next-action" aria-labelledby="detail-action-title">
+            <div>
+              <h3 id="detail-action-title">Langkah berikutnya</h3>
+              <p id="detail-action-copy"></p>
+            </div>
+            <div id="detail-action-buttons" class="work-actions">
+              <button id="prepare-button" class="queue-button queue-button--primary" type="button">Mulai siapkan</button>
+            </div>
+          </section>
+          <p id="detail-action-result" class="work-feedback" role="status" tabindex="-1" hidden></p>
+          <nav id="detail-tabs" class="work-tabs" aria-label="Bagian detail pesanan">
+            <button type="button" data-detail-tab="overview" aria-current="page">Ringkasan</button>
+            <button type="button" data-detail-tab="fulfillment">Pemenuhan</button>
+            <button type="button" data-detail-tab="case">Penanganan</button>
+            <button type="button" data-detail-tab="aftercare">Purnajual</button>
+            <button type="button" data-detail-tab="activity">Aktivitas</button>
+          </nav>
+          <div id="detail-case" class="detail-case" hidden>
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-alert"/>
+            </svg>
+            <div>
+              <h3 id="detail-case-title"></h3>
+              <p id="detail-case-description"></p>
+              <p id="detail-case-owner"></p>
+              <p id="detail-case-next"></p>
+            </div>
+          </div>
+          <div class="detail-grid">
+            <div class="detail-primary">
+              <section class="detail-section" aria-labelledby="detail-items-title">
+                <h3 id="detail-items-title">Item yang disiapkan</h3>
+                <ul id="detail-items" class="detail-items"></ul>
+                <div id="detail-greeting" class="detail-greeting" hidden>
+                  <strong>Kartu ucapan</strong>
+                  <p id="greeting-text"></p>
+                </div>
+              </section>
+              <section class="detail-section" aria-labelledby="detail-recipient-title">
+                <h3 id="detail-recipient-title">Pelanggan dan penerima</h3>
+                <dl class="detail-fields">
+                  <div>
+                    <dt>Pemesan</dt>
+                    <dd id="detail-customer"></dd>
+                  </div>
+                  <div>
+                    <dt>Penerima</dt>
+                    <dd id="detail-recipient"></dd>
+                  </div>
+                  <div class="field-full">
+                    <dt>Alamat contoh</dt>
+                    <dd id="detail-address"></dd>
+                  </div>
+                </dl>
+              </section>
+              <section id="detail-history-section" class="detail-section" aria-labelledby="detail-history-title">
+                <h3 id="detail-history-title">Riwayat pesanan</h3>
+                <ol id="detail-history" class="detail-history"></ol>
+              </section>
+            </div>
+            <div class="detail-secondary">
+              <section class="detail-section" aria-labelledby="detail-delivery-title">
+                <h3 id="detail-delivery-title">Jadwal pengiriman</h3>
+                <dl class="detail-summary">
+                  <div>
+                    <dt>Jadwal</dt>
+                    <dd id="detail-delivery-date"></dd>
+                  </div>
+                  <div>
+                    <dt>Slot</dt>
+                    <dd id="detail-delivery-slot"></dd>
+                  </div>
+                  <div>
+                    <dt>Layanan</dt>
+                    <dd id="detail-courier"></dd>
+                  </div>
+                  <div>
+                    <dt>Resi</dt>
+                    <dd id="detail-tracking"></dd>
+                  </div>
+                </dl>
+              </section>
+              <section class="detail-section" aria-labelledby="detail-total-title">
+                <h3 id="detail-total-title">Ringkasan biaya</h3>
+                <dl class="detail-summary">
+                  <div>
+                    <dt>Produk</dt>
+                    <dd id="detail-subtotal" class="tabular"></dd>
+                  </div>
+                  <div>
+                    <dt>Ongkir</dt>
+                    <dd id="detail-shipping-cost" class="tabular"></dd>
+                  </div>
+                  <div id="cod-adjustment-row" class="summary-total" hidden>
+                    <dt id="cod-adjustment-label" hidden>Penyesuaian tagihan COD</dt>
+                    <dd id="cod-adjustment-value" class="tabular" hidden></dd>
+                  </div>
+                  <div class="summary-total">
+                    <dt>Total pesanan</dt>
+                    <dd id="detail-total" class="tabular"></dd>
+                  </div>
+                </dl>
+                <p id="detail-payment-note" class="secondary-text"></p>
+              </section>
+            </div>
+          </div>
+          <section id="workflow-panel" class="workflow-panel" aria-label="Tindakan pesanan" hidden></section>
+        </section>
+
+        <noscript>
+          <p class="queue-rule-note">Aktifkan JavaScript untuk mencoba pencarian, filter, dan rincian pesanan. Baris yang tampil adalah data ilustrasi.</p>
+        </noscript>
+        <footer class="queue-footer">
+          <span>RylVa Green, Gudang Pusat</span>
+          <span>Data ilustrasi. Perubahan hanya pada pratinjau ini.</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="prepare-dialog" class="prepare-dialog" aria-labelledby="prepare-dialog-title" aria-describedby="prepare-dialog-copy">
+    <form method="dialog">
+      <div class="dialog-title-row">
+        <h2 id="prepare-dialog-title">Mulai persiapan pesanan?</h2>
+        <button class="icon-button" type="submit" value="cancel" aria-label="Tutup konfirmasi">
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-close"/>
+          </svg>
+        </button>
+      </div>
+      <p id="prepare-dialog-copy"></p>
+      <p class="dialog-demo-note">Simulasi desain. Pesanan sebenarnya tidak berubah.</p>
+      <div class="dialog-actions">
+        <button class="queue-button" type="submit" value="cancel" autofocus>Kembali</button>
+        <button id="confirm-prepare" class="queue-button queue-button--primary" type="submit" value="prepare">Terapkan pada contoh</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="workflow-confirm" class="prepare-dialog" aria-labelledby="workflow-confirm-title" aria-describedby="workflow-confirm-copy">
+    <form method="dialog">
+      <h2 id="workflow-confirm-title">Terapkan perubahan?</h2>
+      <p id="workflow-confirm-copy"></p>
+      <div class="dialog-actions">
+        <button class="queue-button" type="submit" value="cancel" autofocus>Kembali</button>
+        <button class="queue-button queue-button--primary" type="submit" value="confirm">Terapkan pada contoh</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="order-row-template">
+    <tr>
+      <th scope="row" class="order-identity">
+        <code data-field="id" class="order-number"></code>
+        <span data-field="itemSummary"></span>
+        <span data-field="caseSummary" class="case-row-copy" hidden></span>
+      </th>
+      <td data-label="Pelanggan">
+        <span data-field="customer" class="customer-name"></span>
+        <span data-field="createdTime" class="secondary-text"></span>
+      </td>
+      <td data-label="Jadwal kirim">
+        <strong data-field="deliveryDay"></strong>
+        <span data-field="slotLabel"></span>
+        <span data-field="urgency" class="urgency-label" hidden></span>
+      </td>
+      <td data-label="Pesanan">
+        <span data-field="orderStatus" class="queue-badge"></span>
+      </td>
+      <td data-label="Pembayaran">
+        <span data-field="paymentStatus" class="queue-badge"></span>
+        <span data-field="method" class="secondary-text"></span>
+      </td>
+      <td data-label="Pengiriman">
+        <span data-field="shippingStatus" class="shipping-status"></span>
+        <span data-field="courierShort" class="secondary-text"></span>
+      </td>
+      <td data-label="Total" class="numeric-cell">
+        <strong data-field="total" class="tabular"></strong>
+      </td>
+      <td class="order-row-action">
+        <button class="queue-open-button" type="button" data-open-order>
+          Buka
+          <svg class="icon icon--small next-chevron" aria-hidden="true">
+            <use href="#i-chevron"/>
+          </svg>
+        </button>
+      </td>
+    </tr>
+  </template>
+  <template id="detail-item-template">
+    <li>
+      <div>
+        <strong data-field="name"></strong>
+        <span data-field="variant" class="secondary-text"></span>
+        <span data-field="sku" class="secondary-text"></span>
+      </div>
+      <div class="detail-item-price">
+        <strong data-field="lineTotal" class="tabular"></strong>
+        <span data-field="quantity" class="secondary-text"></span>
+      </div>
+    </li>
+  </template>
+  <template id="history-template">
+    <li>
+      <svg class="icon icon--small" aria-hidden="true">
+        <use href="#i-check"/>
+      </svg>
+      <div>
+        <strong data-field="label"></strong>
+        <span data-field="actor" class="secondary-text"></span>
+      </div>
+      <time data-field="time" class="tabular"></time>
+    </li>
+  </template>
+  <script src="../../assets/js/shared/admin-audit-nav.js" defer></script>
+  <script src="../../assets/js/shared/admin-settings-nav.js" defer></script>
+</body>
+</html>

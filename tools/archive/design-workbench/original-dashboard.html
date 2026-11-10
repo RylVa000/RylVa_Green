@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F3F5EF">
+  <title>Dashboard Admin | RylVa Green</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif']
+          },
+          colors: {
+            'primary-dark': '#0F2A1D',
+            'primary': '#375534',
+            'primary-light': '#6B9071',
+            'neutral-soft': '#AEC3B0',
+            'background': '#FBF7F4',
+            'card-background': '#F8F9FA',
+            'sidebar': '#F3F5EF',
+            'soft-green': '#E7F0E4',
+            'warning-ink': '#9A431F',
+            'warning-soft': '#FFF3EB',
+            'warning-border': '#E7C3AD',
+            'text-secondary': '#718096',
+            'muted-ink': '#5B6B5D'
+          }
+        }
+      }
+    };
+  </script>
+  
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: Poppins, sans-serif;
+    }
+    
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+    
+    .card {
+      background: #F8F9FA;
+      border: 1px solid #DDE6DC;
+    }
+    
+    .nav-item {
+      color: #526855;
+    }
+    
+    .nav-item:hover {
+      background: #E7F0E4;
+      color: #0F2A1D;
+    }
+    
+    .nav-item[aria-current="page"] {
+      background: #DFEBDD;
+      color: #0F2A1D;
+      font-weight: 600;
+    }
+    
+    .order-row {
+      border-bottom: 1px solid #EFF1EC;
+    }
+    
+    .order-row:last-child {
+      border-bottom: 0;
+    }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      border-radius: 999px;
+      padding: .2rem .55rem;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+    
+    .status-success {
+      background: #E5EFE4;
+      color: #0F2A1D;
+    }
+    
+    .status-warning {
+      background: #FFF3EB;
+      color: #9A431F;
+      border: 1px solid #DDAF95;
+    }
+    
+    .status-info {
+      background: #EAF2F3;
+      color: #28525F;
+    }
+    
+    .status-error {
+      background: #F9E8DF;
+      color: #7B351F;
+      border: 1px solid #B66746;
+    }
+    
+    @media (min-width: 1024px) {
+      #sidebar.sidebar-collapsed {
+        width: 5rem;
+      }
+      .sidebar-collapsed .sidebar-label,
+      .sidebar-collapsed .sidebar-extra {
+        display: none;
+      }
+      .sidebar-collapsed .nav-item {
+        justify-content: center;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .sidebar-collapsed .brand-lockup,
+      .sidebar-collapsed .profile-row {
+        justify-content: center;
+      }
+      .sidebar-collapsed .brand-mark,
+      .sidebar-collapsed .profile-avatar {
+        flex: none;
+      }
+      .sidebar-collapsed #collapse-icon {
+        transform: rotate(180deg);
+      }
+      .sidebar-collapsed .workspace-card {
+        justify-content: center;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-background text-primary-dark antialiased">
+  
+  <!-- SVG Symbols -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/><path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-7h6v7"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 5v10l9 5 9-5V7M12 12v10"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path d="M12 12c-3-2-3-5 0-7 3 2 3 5 0 7Zm0 0c1-4 4-5 7-3-1 3-4 4-7 3Zm0 0c4 1 5 4 3 7-3-1-4-4-3-7Zm0 0c-1 4-4 5-7 3 1-3 4-4 7-3Zm0 0c-4-1-5-4-3-7 3 1 4 4 3 7Z"/><path d="M12 19v3"/></symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24"><path d="M7 3h10l3 3v15H4V6l3-3Z"/><path d="M8 10h8M8 14h8M8 18h5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5v1h-4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10 3h4l.7 2.2 1.9.8 2-.9 2.8 2.8-.9 2 .8 1.9L23 12.5v4l-2.2.7-.8 1.9.9 2-2.8 2.8-2-.9-1.9.8L13.5 26h-4l-.7-2.2-1.9-.8-2 .9-2.8-2.8.9-2-.8-1.9L0 16.5v-4l2.2-.7.8-1.9-.9-2L4.9 5l2 .9 1.9-.8L9.5 3Z" transform="translate(0 -2) scale(.92)"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 9h18c0-1-3-2-3-9ZM10 21h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5m0 3v.1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.7 1.5-1.7 2.7M12 17v.1"/></symbol>
+  </svg>
+
+  <a href="#Operasional" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-primary-dark focus:outline focus:outline-2 focus:outline-primary">Lewati navigasi</a>
+  
+  <div id="mobile-backdrop" class="fixed inset-0 z-30 hidden bg-primary-dark/35 lg:hidden" aria-hidden="true"></div>
+  
+  <div class="min-h-screen lg:flex">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-[#E5EAE2] bg-sidebar text-primary-dark transition-[width,transform] duration-300 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:translate-x-0" aria-label="Navigasi utama">
+      <div class="relative flex h-[88px] flex-none items-center px-5">
+        <a href="#Operasional" class="brand-lockup flex min-w-0 items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" aria-label="RylVa Green, Operasional">
+          <span class="brand-mark grid h-10 w-10 flex-none place-items-center rounded-xl bg-primary-dark text-white">
+            <svg class="h-6 w-6 fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-leaf"/></svg>
+          </span>
+          <span class="sidebar-label min-w-0">
+            <strong class="block whitespace-nowrap text-lg font-semibold leading-tight tracking-tight">RylVa Green<span class="text-primary-light">.</span></strong>
+            <small class="block whitespace-nowrap text-[11px] font-medium text-muted-ink">Plant &amp; Florist</small>
+          </span>
+        </a>
+        <button id="sidebar-toggle" type="button" class="absolute -right-4 top-7 z-10 hidden h-8 w-8 items-center justify-center rounded-full border border-[#E3E9E0] bg-white text-primary-dark transition-colors hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary lg:flex" aria-label="Kecilkan sidebar" aria-expanded="true" aria-controls="sidebar-nav">
+          <svg id="collapse-icon" class="h-4 w-4 fill-none stroke-current stroke-2 transition-transform duration-300" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button id="mobile-close" type="button" class="ml-auto grid h-11 w-11 place-items-center rounded-lg text-primary-dark hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Tutup menu">
+          <svg class="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-extra px-4 pt-4">
+        <div class="workspace-card flex items-center gap-3 rounded-xl border border-[#E4EAE0] bg-white p-3">
+          <span class="grid h-9 w-9 flex-none place-items-center rounded-lg bg-soft-green text-primary">
+            <svg class="h-5 w-5 fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-leaf"/></svg>
+          </span>
+          <span class="sidebar-label min-w-0">
+            <strong class="block truncate text-[13px] font-semibold">Gudang Pusat</strong>
+            <small class="block truncate text-[11px] text-muted-ink">Ruang kerja toko</small>
+          </span>
+        </div>
+      </div>
+      <p class="sidebar-extra mb-2 mt-7 px-7 text-[11px] font-semibold text-muted-ink">Ruang kerja</p>
+
+      <nav id="sidebar-nav" class="flex-1 space-y-0.5 overflow-y-auto px-3 pb-4" aria-label="Menu admin">
+        <a href="#Operasional" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" aria-current="page" title="Operasional">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-home"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Operasional</span>
+        </a>
+        <a href="#pesanan" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Manajemen Pesanan">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-orders"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Manajemen Pesanan</span>
+        </a>
+        <a href="#inventory" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Produk & Varian">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-box"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Produk &amp; Varian</span>
+        </a>
+        <a href="#inventory" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Bahan Produksi">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-flower"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Bahan Produksi</span>
+        </a>
+        <a href="#pesanan" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Pelanggan">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-users"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Pelanggan</span>
+        </a>
+        <a href="#ringkasan" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Kalender Tutup">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Kalender Tutup</span>
+        </a>
+        <a data-superadmin-only href="financial-report.html" style="display:none" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Laporan Keuangan">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-audit"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Laporan Keuangan</span>
+        </a>
+        <a data-superadmin-only href="#ringkasan" style="display:none" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Audit Log">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-audit"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Audit Log</span>
+        </a>
+        <a data-superadmin-only href="#ringkasan" style="display:none" class="nav-item flex min-h-11 items-center gap-3 rounded-xl px-4 text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" title="Pengaturan Sistem">
+          <svg class="h-[18px] w-[18px] flex-none fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-settings"/></svg>
+          <span class="sidebar-label whitespace-nowrap">Pengaturan Sistem</span>
+        </a>
+      </nav>
+
+      <div class="border-t border-[#E2E8DE] p-3">
+        <div class="sidebar-extra mb-3 rounded-xl bg-[#E7EFE4] p-4">
+          <svg class="h-5 w-5 fill-none stroke-primary stroke-[1.7]" aria-hidden="true"><use href="#i-help"/></svg>
+          <p class="mt-2 text-[13px] font-semibold">Butuh Bantuan?</p>
+          <p class="mt-1 text-[11px] leading-[1.6] text-muted-ink">Panduan operasional untuk tim RylVa Green.</p>
+        </div>
+        <div class="profile-row flex min-h-12 items-center gap-3 px-2">
+          <span class="profile-avatar grid h-9 w-9 flex-none place-items-center rounded-full bg-[#DECBB4] text-xs font-semibold text-primary-dark">AR</span>
+          <span class="sidebar-label min-w-0">
+            <strong id="profile-name" class="block truncate text-[13px] font-semibold">Admin RylVa</strong>
+            <small class="block truncate text-[11px] text-muted-ink">Gudang Pusat</small>
+          </span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="min-w-0 flex-1">
+      <!-- Header -->
+      <header class="sticky top-0 z-20 flex h-[72px] items-center justify-between gap-4 border-b border-[#ECEFE9] bg-background/95 px-4 sm:px-6 xl:px-8">
+        <div class="flex min-w-0 items-center gap-3">
+          <button id="mobile-open" type="button" class="grid h-10 w-10 flex-none place-items-center rounded-lg border border-[#E4EAE0] text-primary-dark hover:bg-soft-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Buka menu" aria-expanded="false" aria-controls="sidebar">
+            <svg class="h-5 w-5 fill-none stroke-current stroke-2" aria-hidden="true"><use href="#i-menu"/></svg>
+          </button>
+          <p class="truncate text-[13px] text-muted-ink">
+            Ruang kerja <span class="mx-2 text-neutral-soft" aria-hidden="true">/</span> <strong class="font-semibold text-primary-dark">Operasional</strong>
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <label class="hidden h-10 w-56 items-center gap-2 rounded-xl border border-[#E3E9E1] bg-white px-3 text-muted-ink xl:flex">
+            <svg class="h-4 w-4 flex-none fill-none stroke-current stroke-[1.8]" aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="search-orders" class="min-w-0 flex-1 bg-transparent text-[12px] text-primary-dark outline-none placeholder:text-[#879489]" type="search" placeholder="Cari pesanan..." aria-label="Cari pesanan">
+          </label>
+          <span class="grid h-9 w-9 place-items-center text-primary-dark" aria-label="Contoh notifikasi">
+            <svg class="h-5 w-5 fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-bell"/></svg>
+          </span>
+          <span class="grid h-9 w-9 place-items-center rounded-full bg-[#DECBB4] text-xs font-semibold text-primary-dark" aria-label="Admin RylVa">AR</span>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main id="Operasional" class="mx-auto w-full max-w-[1680px] px-4 pb-7 pt-7 sm:px-6 xl:px-8 xl:pt-9">
+        
+        <!-- Header Ringkasan -->
+        <section id="ringkasan" aria-labelledby="page-title" class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="flex items-center gap-2 text-[12px] font-semibold text-muted-ink">
+              <span class="h-2 w-2 rounded-full bg-primary-light" aria-hidden="true"></span>
+              RylVa Green dalam sekilas
+            </p>
+            <h1 id="page-title" class="mt-3 text-[26px] font-semibold leading-tight tracking-tight text-primary-dark sm:text-[32px]">Prioritas operasional</h1>
+            <p class="mt-1.5 text-[13px] text-muted-ink sm:text-sm">Selesaikan pengiriman hari ini dan tugas yang melewati tenggat.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="inline-flex h-10 items-center gap-2 rounded-xl border border-[#E3E9E1] bg-white px-3 text-[13px] font-medium text-primary-dark">
+              <svg class="h-4 w-4 fill-none stroke-current stroke-[1.7]" aria-hidden="true"><use href="#i-calendar"/></svg>
+              28 Oktober 2026 · WIB
+            </span>
+            <a href="#pesanan" class="inline-flex h-10 items-center gap-2 rounded-xl bg-primary px-4 text-[13px] font-semibold text-white transition-colors hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              Lihat pesanan <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8]" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- Alert Bar -->
+        <div role="alert" class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-warning-border bg-warning-soft px-4 py-3 text-[13px] text-warning-ink">
+          <svg class="h-5 w-5 flex-none fill-none stroke-current stroke-[1.8]" aria-hidden="true"><use href="#i-alert"/></svg>
+          <p class="min-w-0 flex-1">
+            <strong class="font-semibold">Perlu perhatian sekarang:</strong> 1 refund melewati tenggat dan 4 produk berada di ambang stok rendah.
+          </p>
+          <a href="#tasks-title" class="w-full pl-8 font-semibold underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-warning-ink sm:ml-auto sm:w-auto sm:pl-0">
+            Lihat prioritas <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <p role="note" class="mt-2 text-[12px] text-muted-ink">Mockup · Semua angka, produk, pesanan, dan tenggat pada halaman ini adalah data ilustrasi.</p>
+
+        <!-- Overview Cards -->
+        <section class="mt-7" aria-labelledby="overview-title">
+          <div class="mb-3 flex flex-wrap items-end justify-between gap-2">
+            <div>
+              <h2 id="overview-title" class="text-[18px] font-semibold tracking-tight">Situasi hari ini</h2>
+              <p class="mt-0.5 text-[13px] text-muted-ink">Satu pandangan cepat sebelum menindaklanjuti antrean.</p>
+            </div>
+            <p class="text-[13px] text-muted-ink">
+              <span id="preview-role">Pratinjau Admin</span> <span class="mx-1" aria-hidden="true">·</span> Data ilustrasi
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <article class="flex min-h-[164px] flex-col rounded-2xl border border-[#DDE6DC] bg-white p-5">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-[13px] font-medium text-muted-ink">Siap diproses</h3>
+                <svg class="h-5 w-5 fill-none stroke-primary-light stroke-[1.8]" aria-hidden="true"><use href="#i-orders"/></svg>
+              </div>
+              <p class="tabular mt-5 text-[31px] font-semibold leading-none text-primary-dark">12</p>
+              <p class="mt-auto pt-3 text-[13px] text-muted-ink">
+                <span class="rounded-md bg-soft-green px-2 py-1 font-semibold text-primary">Antrean</span> <span class="ml-1">menunggu tindakan</span>
+              </p>
+            </article>
+            
+            <article class="flex min-h-[164px] flex-col rounded-2xl border border-[#D2E0D0] bg-[#F1F6EF] p-5">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-[13px] font-medium text-muted-ink">Kirim hari ini</h3>
+                <svg class="h-5 w-5 fill-none stroke-primary-light stroke-[1.8]" aria-hidden="true"><use href="#i-calendar"/></svg>
+              </div>
+              <p class="tabular mt-5 text-[31px] font-semibold leading-none text-primary-dark">8</p>
+              <p class="mt-auto pt-3 text-[13px] text-muted-ink">
+                <span class="rounded-md bg-white px-2 py-1 font-semibold text-primary">Hari ini</span> <span class="ml-1">jatuh tempo · WIB</span>
+              </p>
+            </article>
+            
+            <article class="flex min-h-[164px] flex-col rounded-2xl border border-[#D5E3DF] bg-[#F1F6F5] p-5">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-[13px] font-medium text-muted-ink">Pembayaran ditinjau</h3>
+                <svg class="h-5 w-5 fill-none stroke-[#28525F] stroke-[1.8]" aria-hidden="true"><use href="#i-info"/></svg>
+              </div>
+              <p class="tabular mt-5 text-[31px] font-semibold leading-none text-primary-dark">3</p>
+              <p id="payment-metric-caption" class="mt-auto pt-3 text-[13px] text-muted-ink">
+                <span class="rounded-md bg-[#E3EFF0] px-2 py-1 font-semibold text-[#28525F]">Periksa</span> <span class="ml-1">dan eskalasi kasus</span>
+              </p>
+            </article>
+            
+            <article class="flex min-h-[164px] flex-col rounded-2xl border border-warning-border bg-warning-soft p-5">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="text-[13px] font-medium text-warning-ink">Peringatan stok rendah</h3>
+                <svg class="h-5 w-5 fill-none stroke-warning-ink stroke-[1.8]" aria-hidden="true"><use href="#i-alert"/></svg>
+              </div>
+              <p class="tabular mt-5 text-[31px] font-semibold leading-none text-warning-ink">4</p>
+              <p class="mt-auto pt-3 text-[13px] text-warning-ink">
+                <span class="rounded-md bg-white px-2 py-1 font-semibold">Perlu perhatian</span> <span class="ml-1">≤ 5 unit · P-22</span>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <div class="mt-4 grid auto-rows-auto gap-4 md:grid-cols-2 xl:grid-cols-12 xl:items-stretch">
+          
+          <!-- Tasks Section -->
+          <section aria-labelledby="tasks-title" class="card min-w-0 rounded-2xl bg-[#EEF3ED] p-5 md:col-span-2 xl:col-span-4 xl:col-start-9 xl:row-start-1">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="mb-1 text-[13px] font-semibold text-primary">Fokus tindakan</p>
+                <h2 id="tasks-title" class="text-[19px] font-semibold tracking-tight">Perlu ditindaklanjuti</h2>
+                <p class="mt-1 text-[13px] text-muted-ink">Urut menurut tenggat.</p>
+              </div>
+              <span class="rounded-full border border-primary-light bg-white px-2.5 py-1 text-[13px] font-semibold text-primary-dark">
+                4 tugas
+              </span>
+            </div>
+            
+            <div class="mt-4 rounded-xl border border-warning-border bg-warning-soft p-4">
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <div>
+                  <p class="text-[13px] font-semibold text-warning-ink">Paling mendesak</p>
+                  <h3 class="mt-1 text-[15px] font-semibold">Pembatalan / refund</h3>
+                </div>
+                <span class="rounded-full border border-warning-ink bg-white px-2.5 py-1 text-[12px] font-semibold text-warning-ink">
+                  Lewat 15 menit
+                </span>
+              </div>
+              <p class="mt-2 text-[13px] text-muted-ink">Admin RylVa · Tinjau keputusan dan bukti pesanan.</p>
+            </div>
+            
+            <ul class="mt-3 divide-y divide-[#D5E1D3] text-[13px]">
+              <li class="flex items-center justify-between gap-3 py-2.5">
+                <span>
+                  <strong class="block font-semibold">PH-06 · Selisih stok</strong>
+                  <small class="text-[13px] text-muted-ink">Sisa 45 menit</small>
+                </span>
+                <span class="font-semibold text-primary">Tangani</span>
+              </li>
+              <li class="flex items-center justify-between gap-3 py-2.5">
+                <span>
+                  <strong class="block font-semibold">Pengiriman terkendala</strong>
+                  <small class="text-[13px] text-muted-ink">Sisa 1 jam</small>
+                </span>
+                <span class="font-semibold text-primary">Periksa</span>
+              </li>
+              <li class="flex items-center justify-between gap-3 py-2.5">
+                <span>
+                  <strong class="block font-semibold">Komplain terbuka</strong>
+                  <small class="text-[13px] text-muted-ink">Sisa 2 jam</small>
+                </span>
+                <span class="font-semibold text-primary">Tinjau</span>
+              </li>
+            </ul>
+          </section>
+          
+          <!-- Payment Review Section -->
+          <section aria-labelledby="payment-review-title" class="card min-w-0 rounded-2xl p-5 md:col-span-2 xl:col-span-4 xl:col-start-9 xl:row-start-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h2 id="payment-review-title" class="text-[19px] font-semibold tracking-tight">Pembayaran ditinjau</h2>
+                <p class="mt-1 text-[13px] text-muted-ink">Tiga kasus menunggu pemeriksaan.</p>
+              </div>
+              <svg class="h-5 w-5 flex-none fill-none stroke-primary stroke-[1.8]" aria-hidden="true"><use href="#i-info"/></svg>
+            </div>
+            
+            <ul class="mt-4 divide-y divide-[#E3EAE1] text-[13px]">
+              <li class="flex justify-between gap-2 py-2.5">
+                <span>
+                  <strong class="font-semibold">DEMO-004</strong>
+                  <span class="block text-muted-ink">PH-03 · Nominal tidak cocok</span>
+                </span>
+                <span class="text-primary">Periksa</span>
+              </li>
+              <li class="flex justify-between gap-2 py-2.5">
+                <span>
+                  <strong class="font-semibold">DEMO-005</strong>
+                  <span class="block text-muted-ink">PH-02 · Pembayaran terlambat</span>
+                </span>
+                <span class="text-primary">Periksa</span>
+              </li>
+              <li class="flex justify-between gap-2 py-2.5">
+                <span>
+                  <strong class="font-semibold">DEMO-006</strong>
+                  <span class="block text-muted-ink">Selisih rekonsiliasi</span>
+                </span>
+                <span class="text-primary">Eskalasi</span>
+              </li>
+            </ul>
+            
+            <p id="payment-review-note" class="mt-3 rounded-lg bg-[#EDF2EC] p-3 text-[13px] leading-5 text-primary-dark">
+              Rekonsiliasi manual diteruskan ke SuperAdmin.
+            </p>
+          </section>
+
+          <!-- Orders Section -->
+          <section id="pesanan" aria-labelledby="orders-title" class="card min-w-0 overflow-hidden rounded-2xl md:col-span-2 xl:col-span-8 xl:col-start-1 xl:row-start-1 xl:row-span-2">
+            <div class="px-5 pt-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h2 id="orders-title" class="text-[19px] font-semibold tracking-tight">Antrean pesanan</h2>
+                    <span id="order-count" class="rounded-full bg-soft-green px-2 py-1 text-[12px] font-semibold text-primary">
+                      6 pesanan
+                    </span>
+                  </div>
+                  <p class="mt-1 text-[13px] text-muted-ink">Jadwal kirim dan status yang perlu ditindaklanjuti.</p>
+                </div>
+                <a href="#pesanan" class="inline-flex min-h-8 items-center gap-1 text-[12px] font-semibold text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+                  Lihat semua <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8]" aria-hidden="true"><use href="#i-arrow"/></svg>
+                </a>
+              </div>
+              
+              <div class="mt-5 flex gap-5 overflow-x-auto border-b border-[#EDF0EA] text-[12px] font-medium" role="tablist" aria-label="Filter pesanan">
+                <button type="button" data-filter="all" role="tab" aria-selected="true" class="filter-tab min-h-10 flex-none border-b-2 border-primary pb-1 font-semibold text-primary">Semua</button>
+                <button type="button" data-filter="Siap Diproses" role="tab" aria-selected="false" class="filter-tab min-h-10 flex-none border-b-2 border-transparent pb-1 text-muted-ink">Siap diproses</button>
+                <button type="button" data-filter="Sedang Disiapkan" role="tab" aria-selected="false" class="filter-tab min-h-10 flex-none border-b-2 border-transparent pb-1 text-muted-ink">Disiapkan</button>
+                <button type="button" data-filter="Dikirim" role="tab" aria-selected="false" class="filter-tab min-h-10 flex-none border-b-2 border-transparent pb-1 text-muted-ink">Dikirim</button>
+              </div>
+            </div>
+            
+            <div class="hidden overflow-x-auto lg:block">
+              <table class="w-full min-w-[670px] text-left text-[12px]" aria-label="Pesanan terbaru">
+                <thead class="bg-[#FBFCFA] text-muted-ink">
+                  <tr>
+                    <th scope="col" class="w-[22%] px-5 py-3 font-medium">No. pesanan</th>
+                    <th scope="col" class="w-[16%] px-2 py-3 font-medium">Pelanggan</th>
+                    <th scope="col" class="w-[18%] px-2 py-3 font-medium">Jadwal kirim</th>
+                    <th scope="col" class="w-[30%] px-2 py-3 font-medium">Pesanan · Bayar · Kirim</th>
+                    <th scope="col" class="w-[14%] px-5 py-3 text-right font-medium">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table"></tbody>
+              </table>
+            </div>
+            
+            <div id="orders-cards" class="space-y-2 p-4 lg:hidden"></div>
+            
+            <div class="flex items-center justify-between gap-3 border-t border-[#EDF0EA] px-5 py-3 text-[12px] text-muted-ink">
+              <span id="order-summary">Menampilkan 6 dari 6 pesanan contoh</span>
+              <button id="clear-filter" type="button" class="font-semibold text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary">
+                Hapus filter <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Inventory Section -->
+          <section id="inventory" aria-labelledby="inventory-title" class="card min-w-0 rounded-2xl p-5 md:col-span-2 xl:col-span-7 xl:col-start-1 xl:row-start-3">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <h2 id="inventory-title" class="text-[19px] font-semibold tracking-tight">Peta stok</h2>
+                <p class="mt-1 text-[13px] text-muted-ink">Merchandise dan bahan produksi dipantau terpisah.</p>
+              </div>
+              <svg class="h-5 w-5 fill-none stroke-primary stroke-[1.8]" aria-hidden="true"><use href="#i-box"/></svg>
+            </div>
+            
+            <div class="mt-5 rounded-xl bg-[#F1F6EF] p-4">
+              <p class="text-[13px] font-medium text-muted-ink">Dua domain stok aktif</p>
+              <div class="mt-2 grid grid-cols-2 gap-4">
+                <div>
+                  <p class="tabular text-[24px] font-semibold leading-none">
+                    368 <span class="text-[13px] font-normal text-muted-ink">unit</span>
+                  </p>
+                  <p class="mt-1 text-[13px] text-muted-ink">Merchandise</p>
+                </div>
+                <div class="border-l border-[#D8E4D5] pl-4">
+                  <p class="tabular text-[24px] font-semibold leading-none">
+                    186 <span class="text-[13px] font-normal text-muted-ink">unit</span>
+                  </p>
+                  <p class="mt-1 text-[13px] text-muted-ink">Bahan buket</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-5 border-t border-[#E9EEE7] pt-4">
+              <div class="mb-4 flex items-center justify-between">
+                <h3 class="text-[13px] font-semibold">Stok merchandise</h3>
+                <span class="text-[13px] font-medium text-muted-ink">Tersedia / kapasitas</span>
+              </div>
+              <div class="space-y-3.5 text-[13px]">
+                <div>
+                  <div class="flex justify-between">
+                    <span class="text-muted-ink">Tanaman hias varian</span>
+                    <strong class="tabular font-medium">144 / 180</strong>
+                  </div>
+                  <div class="mt-1.5 h-[6px] rounded-full bg-[#ECF0E9]">
+                    <div class="h-[6px] w-[80%] rounded-full bg-[#78A07A]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between">
+                    <span class="text-muted-ink">Pot</span>
+                    <strong class="tabular font-medium">88 / 110</strong>
+                  </div>
+                  <div class="mt-1.5 h-[6px] rounded-full bg-[#ECF0E9]">
+                    <div class="h-[6px] w-[80%] rounded-full bg-[#8EAF8E]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between">
+                    <span class="text-muted-ink">Media tanam</span>
+                    <strong class="tabular font-medium">75 / 100</strong>
+                  </div>
+                  <div class="mt-1.5 h-[6px] rounded-full bg-[#ECF0E9]">
+                    <div class="h-[6px] w-[75%] rounded-full bg-[#A7C2A1]"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between">
+                    <span class="text-muted-ink">Alat berkebun</span>
+                    <strong class="tabular font-medium">61 / 82</strong>
+                  </div>
+                  <div class="mt-1.5 h-[6px] rounded-full bg-[#ECF0E9]">
+                    <div class="h-[6px] w-[74.4%] rounded-full bg-[#B8CBB2]"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-5 border-t border-[#E9EEE7] pt-4">
+              <div class="flex justify-between text-[13px]">
+                <h3 class="font-semibold">Bahan produksi buket</h3>
+                <strong class="tabular font-medium">186 / 300</strong>
+              </div>
+              <div class="mt-2 h-[6px] rounded-full bg-[#ECF0E9]">
+                <div class="h-[6px] w-[62%] rounded-full bg-primary-light"></div>
+              </div>
+              <p class="mt-2 text-[13px] leading-4 text-muted-ink">Bunga potong, kertas wrapping, pita, dan pelengkap.</p>
+            </div>
+          </section>
+          
+          <!-- Restock Priority Section -->
+          <section aria-labelledby="restock-title" class="card min-w-0 rounded-2xl border-warning-border bg-[#FFFBF8] p-5 md:col-span-2 xl:col-span-5 xl:col-start-8 xl:row-start-3 xl:self-start">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <p class="mb-1 text-[13px] font-semibold text-warning-ink">P-22 · ambang 5 unit</p>
+                <h2 id="restock-title" class="text-[19px] font-semibold tracking-tight">Prioritas restok</h2>
+                <p class="mt-1 text-[13px] text-muted-ink">Empat varian perlu diperiksa sebelum stok habis.</p>
+              </div>
+              <svg class="h-5 w-5 fill-none stroke-warning-ink stroke-[1.8]" aria-hidden="true"><use href="#i-alert"/></svg>
+            </div>
+            
+            <ul class="mt-4 divide-y divide-[#E3EAE1] text-[13px]">
+              <li class="flex items-center justify-between gap-2 py-3">
+                <span>Monstera <small class="block text-[13px] text-muted-ink">DEMO-M01</small></span>
+                <strong class="tabular font-semibold">2 pot</strong>
+              </li>
+              <li class="flex items-center justify-between gap-2 py-3">
+                <span>Sirih gading <small class="block text-[13px] text-muted-ink">DEMO-S01</small></span>
+                <strong class="tabular font-semibold">3 pot</strong>
+              </li>
+              <li class="flex items-center justify-between gap-2 py-3">
+                <span>Pot terakota <small class="block text-[13px] text-muted-ink">DEMO-P01</small></span>
+                <strong class="tabular font-semibold">4 unit</strong>
+              </li>
+              <li class="flex items-center justify-between gap-2 py-3">
+                <span>Media tanam <small class="block text-[13px] text-muted-ink">DEMO-T01</small></span>
+                <strong class="tabular font-semibold text-warning-ink">1 sak</strong>
+              </li>
+            </ul>
+            
+            <div class="mt-4 grid grid-cols-2 gap-2 border-t border-[#E3EAE1] pt-4">
+              <div class="rounded-lg bg-[#F0F5EE] p-3">
+                <strong class="tabular block text-[20px] font-semibold leading-none">2</strong>
+                <span class="mt-1 block text-[13px] text-muted-ink">Varian tanaman</span>
+              </div>
+              <div class="rounded-lg bg-[#F0F5EE] p-3">
+                <strong class="tabular block text-[20px] font-semibold leading-none">2</strong>
+                <span class="mt-1 block text-[13px] text-muted-ink">Barang pendukung</span>
+              </div>
+            </div>
+            <p class="mt-3 rounded-xl border border-primary-light bg-[#EDF2EC] p-3 text-[13px] font-medium text-primary-dark">
+              Stok tersedia ≤ 5 unit per produk.
+            </p>
+          </section>
+          
+        </div>
+        
+        <footer class="mt-5 flex flex-wrap justify-between gap-2 text-[12px] text-muted-ink">
+          <span>RylVa Green · Tumbuh bersama setiap hari.</span>
+          <span>Pratinjau desain · Data ilustrasi</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Pratinjau peran saja; hak akses produksi harus ditegakkan di server.
+    const urlParams = new URLSearchParams(window.location.search);
+    const role = urlParams.get('role') === 'superadmin' ? 'superadmin' : 'admin';
+    
+    if (role === 'superadmin')
+    {
+      document.querySelectorAll('[data-superadmin-only]').forEach(function (element)
+      {
+        element.style.display = '';
+      });
+      document.getElementById('profile-name').textContent = 'SuperAdmin RylVa';
+      document.getElementById('preview-role').textContent = 'Pratinjau SuperAdmin';
+      document.querySelector('#payment-metric-caption span:last-child').textContent = 'dan rekonsiliasi';
+      document.getElementById('payment-review-note').textContent = 'Rekonsiliasi manual hanya oleh SuperAdmin dengan bukti dan audit.';
+    }
+    
+    const orders = [
+      {
+        no: 'RV-261028-7K4M9P',
+        customer: 'Siti Rahmawati',
+        date: '28 Okt 2026',
+        slot: 'Siang · 12.00–16.00',
+        order: 'Siap Diproses',
+        payment: 'Berhasil',
+        method: 'QRIS',
+        shipping: 'Belum diserahkan',
+        total: 425000
+      },
+      {
+        no: 'RV-261028-X5A8T2',
+        customer: 'Budi Santoso',
+        date: '28 Okt 2026',
+        slot: 'Sore · 16.00–20.00',
+        order: 'Siap Diproses',
+        payment: 'Menunggu',
+        method: 'COD',
+        shipping: 'Belum diserahkan',
+        total: 315000
+      },
+      {
+        no: 'RV-261028-B6C3N7',
+        customer: 'Nadia Putri',
+        date: '29 Okt 2026',
+        slot: 'Pagi · 08.00–12.00',
+        order: 'Sedang Disiapkan',
+        payment: 'Berhasil',
+        method: 'Transfer',
+        shipping: 'Belum diserahkan',
+        total: 780000
+      },
+      {
+        no: 'RV-261028-R8V5D2',
+        customer: 'Dimas Pratama',
+        date: '29 Okt 2026',
+        slot: 'Siang · 12.00–16.00',
+        order: 'Siap Diproses',
+        payment: 'Menunggu',
+        method: 'COD',
+        shipping: 'Belum diserahkan',
+        total: 245000
+      },
+      {
+        no: 'RV-261028-M3Q7S4',
+        customer: 'Maya Lestari',
+        date: '30 Okt 2026',
+        slot: 'Siang · 12.00–16.00',
+        order: 'Sedang Disiapkan',
+        payment: 'Berhasil',
+        method: 'VA',
+        shipping: 'Belum diserahkan',
+        total: 560000
+      },
+      {
+        no: 'RV-261028-T9Y2F6',
+        customer: 'Rizky Firmansyah',
+        date: '30 Okt 2026',
+        slot: 'Sore · 16.00–20.00',
+        order: 'Dikirim',
+        payment: 'Berhasil',
+        method: 'QRIS',
+        shipping: 'Terkendala',
+        shippingReason: 'Penerima tidak ada',
+        total: 390000
+      }
+    ];
+    
+    function formatRupiah(value)
+    {
+      return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
+    }
+    
+    function getPaymentLabel(order)
+    {
+      if (order.method === 'COD')
+      {
+        return 'COD · Menunggu / UNPAID';
+      }
+      return order.method + ' · ' + order.payment;
+    }
+    
+    function renderStatusBadge(label, kind)
+    {
+      const alertIcon = kind === 'error' ? '<svg class="h-3 w-3 flex-none fill-none stroke-current stroke-2" aria-hidden="true"><use href="#i-alert"/></svg>' : '';
+      return `<span class="status-badge status-${kind}">${alertIcon}${label}</span>`;
+    }
+    
+    const productNames = ['Buket custom', 'Monstera deliciosa', 'Paket berkebun', 'Pot terakota', 'Buket mawar', 'Media tanam'];
+    const searchInput = document.getElementById('search-orders');
+    const filterTabs = Array.from(document.querySelectorAll('.filter-tab'));
+    let activeFilter = 'all';
+
+    function renderBadgeGroup(order)
+    {
+      const orderStatusKind = order.order === 'Siap Diproses' ? 'success' : 'info';
+      const paymentStatusKind = order.payment === 'Berhasil' ? 'success' : (order.method === 'COD' ? 'info' : 'warning');
+      const shippingStatusKind = order.shipping === 'Terkendala' ? 'error' : 'info';
+      
+      let badgeHtml = `
+        <div class="flex flex-wrap gap-1">
+          ${renderStatusBadge(order.order, orderStatusKind)}
+          ${renderStatusBadge(getPaymentLabel(order), paymentStatusKind)}
+          ${renderStatusBadge(order.shipping, shippingStatusKind)}
+      `;
+      
+      if (order.shippingReason)
+      {
+        badgeHtml += `<small class="w-full text-[12px] text-primary-dark">Alasan: ${order.shippingReason}</small>`;
+      }
+      
+      badgeHtml += `</div>`;
+      return badgeHtml;
+    }
+
+    function renderOrders()
+    {
+      const searchQuery = (searchInput.value || '').trim().toLocaleLowerCase('id-ID');
+      
+      const visibleOrders = orders.map(function (order, index)
+      {
+        return { ...order, product: productNames[index] };
+      }).filter(function (order)
+      {
+        const isFilterMatch = activeFilter === 'all' || order.order === activeFilter;
+        const isQueryMatch = !searchQuery || `${order.no} ${order.customer} ${order.product}`.toLocaleLowerCase('id-ID').includes(searchQuery);
+        return isFilterMatch && isQueryMatch;
+      });
+
+      const tableBody = document.getElementById('orders-table');
+      const mobileCards = document.getElementById('orders-cards');
+      
+      if (visibleOrders.length > 0)
+      {
+        tableBody.innerHTML = visibleOrders.map(function (order)
+        {
+          return `
+            <tr class="order-row align-middle">
+              <td class="px-5 py-3">
+                <strong class="tabular block whitespace-nowrap text-[12px] font-semibold">${order.no}</strong>
+                <span class="mt-1 block text-[12px] text-muted-ink">${order.product}</span>
+              </td>
+              <td class="px-2 py-3 text-[12px] font-medium">${order.customer}</td>
+              <td class="px-2 py-3">
+                <span class="block whitespace-nowrap">${order.date}</span>
+                <span class="mt-1 block whitespace-nowrap text-[12px] text-muted-ink">${order.slot}</span>
+              </td>
+              <td class="px-2 py-3">${renderBadgeGroup(order)}</td>
+              <td class="tabular whitespace-nowrap px-5 py-3 text-right text-[12px] font-semibold">
+                ${formatRupiah(order.total)}
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        mobileCards.innerHTML = visibleOrders.map(function (order)
+        {
+          const orderStatusKind = order.order === 'Siap Diproses' ? 'success' : 'info';
+          const paymentStatusKind = order.payment === 'Berhasil' ? 'success' : (order.method === 'COD' ? 'info' : 'warning');
+          const shippingStatusKind = order.shipping === 'Terkendala' ? 'error' : 'info';
+          
+          let cardHtml = `
+            <article class="rounded-xl border border-[#E8ECE5] p-3.5">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <strong class="tabular text-[12px]">${order.no}</strong>
+                  <p class="mt-0.5 text-[12px] text-muted-ink">${order.product} · ${order.customer}</p>
+                </div>
+                <strong class="tabular whitespace-nowrap text-[12px]">${formatRupiah(order.total)}</strong>
+              </div>
+              <p class="mt-2.5 text-[12px] text-muted-ink">${order.date} · ${order.slot}</p>
+              <dl class="mt-2.5 flex flex-wrap gap-1.5">
+                <div>
+                  <dt class="sr-only">Status pesanan</dt>
+                  <dd>${renderStatusBadge(order.order, orderStatusKind)}</dd>
+                </div>
+                <div>
+                  <dt class="sr-only">Status pembayaran</dt>
+                  <dd>${renderStatusBadge(getPaymentLabel(order), paymentStatusKind)}</dd>
+                </div>
+                <div>
+                  <dt class="sr-only">Status pengiriman</dt>
+                  <dd>${renderStatusBadge(order.shipping, shippingStatusKind)}</dd>
+                </div>
+              </dl>
+          `;
+          
+          if (order.shippingReason)
+          {
+            cardHtml += `<p class="mt-2 text-[12px] text-primary-dark">Alasan pengiriman: ${order.shippingReason}</p>`;
+          }
+          
+          cardHtml += `</article>`;
+          return cardHtml;
+        }).join('');
+      }
+      else
+      {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="px-5 py-10 text-center text-[13px] text-muted-ink">
+              Tidak ada pesanan yang cocok.
+            </td>
+          </tr>
+        `;
+        mobileCards.innerHTML = `
+          <p class="py-8 text-center text-[13px] text-muted-ink">
+            Tidak ada pesanan yang cocok.
+          </p>
+        `;
+      }
+
+      document.getElementById('order-count').textContent = `${visibleOrders.length} pesanan`;
+      document.getElementById('order-summary').textContent = `Menampilkan ${visibleOrders.length} dari ${orders.length} pesanan contoh`;
+    }
+    
+    filterTabs.forEach(function (tab)
+    {
+      tab.addEventListener('click', function ()
+      {
+        activeFilter = tab.dataset.filter;
+        
+        filterTabs.forEach(function (item)
+        {
+          const isSelected = item === tab;
+          item.setAttribute('aria-selected', String(isSelected));
+          item.classList.toggle('border-primary', isSelected);
+          item.classList.toggle('border-transparent', !isSelected);
+          item.classList.toggle('font-semibold', isSelected);
+          item.classList.toggle('text-primary', isSelected);
+          item.classList.toggle('text-muted-ink', !isSelected);
+        });
+        
+        renderOrders();
+      });
+    });
+    
+    searchInput.addEventListener('input', renderOrders);
+    
+    document.getElementById('clear-filter').addEventListener('click', function ()
+    {
+      searchInput.value = '';
+      filterTabs[0].click();
+    });
+    
+    renderOrders();
+
+    // Sidebar & Mobile Menu Logic
+    const sidebarElement = document.getElementById('sidebar');
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+    const mobileOpenBtn = document.getElementById('mobile-open');
+    const mobileCloseBtn = document.getElementById('mobile-close');
+    const backdropElement = document.getElementById('mobile-backdrop');
+    
+    function toggleMobileMenu(isOpen)
+    {
+      sidebarElement.classList.toggle('-translate-x-full', !isOpen);
+      backdropElement.classList.toggle('hidden', !isOpen);
+      mobileOpenBtn.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('overflow-hidden', isOpen);
+      
+      if (isOpen)
+      {
+        mobileCloseBtn.focus();
+      }
+      else
+      {
+        mobileOpenBtn.focus();
+      }
+    }
+    
+    sidebarToggleBtn.addEventListener('click', function ()
+    {
+      const isCollapsed = sidebarElement.classList.toggle('sidebar-collapsed');
+      sidebarToggleBtn.setAttribute('aria-expanded', String(!isCollapsed));
+      sidebarToggleBtn.setAttribute('aria-label', isCollapsed ? 'Besarkan sidebar' : 'Kecilkan sidebar');
+    });
+    
+    mobileOpenBtn.addEventListener('click', function ()
+    {
+      toggleMobileMenu(true);
+    });
+    
+    mobileCloseBtn.addEventListener('click', function ()
+    {
+      toggleMobileMenu(false);
+    });
+    
+    backdropElement.addEventListener('click', function ()
+    {
+      toggleMobileMenu(false);
+    });
+    
+    sidebarElement.querySelectorAll('nav a').forEach(function (link)
+    {
+      link.addEventListener('click', function ()
+      {
+        if (window.innerWidth < 1024)
+        {
+          toggleMobileMenu(false);
+        }
+      });
+    });
+    
+    document.addEventListener('keydown', function (event)
+    {
+      if (event.key === 'Escape' && mobileOpenBtn.getAttribute('aria-expanded') === 'true')
+      {
+        toggleMobileMenu(false);
+      }
+    });
+    
+    window.addEventListener('resize', function ()
+    {
+      if (window.innerWidth >= 1024 && mobileOpenBtn.getAttribute('aria-expanded') === 'true')
+      {
+        toggleMobileMenu(false);
+      }
+    });
+  </script>
+</body>
+</html>

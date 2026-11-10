@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAFAFA">
+  <meta name="description" content="Dashboard operasional RylVa Green untuk memantau antrean pesanan, pengiriman, pembayaran, dan stok toko.">
+  <title>Dashboard Admin | RylVa Green</title>
+
+  <!-- Tailwind CDN (Tetap dipertahankan untuk utilitas jika dibutuhkan ke depan) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* =========================================
+       1. TOKENS & VARIABLES (Minimalist Theme)
+       ========================================= */
+    :root {
+      /* Colors - Muted & Premium */
+      --primary-dark: #0f2a1d;
+      --primary: #375534;
+      --primary-light: #6b9071;
+      --neutral-soft: #aec3b0;
+      
+      /* Backgrounds */
+      --background: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --sidebar-bg: #FFFFFF;
+      
+      /* Text & UI Elements */
+      --color-ink: #111827;
+      --color-muted: #6B7280;
+      --color-rule: #F3F4F6;
+      --color-rule-strong: #E5E7EB;
+      
+      /* Shadows & Borders */
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.02);
+      --border-soft: 1px solid rgba(0, 0, 0, 0.04);
+      
+      /* Radii */
+      --radius-card: 16px;
+      --radius-input: 8px;
+      
+      /* Fonts */
+      --font-body: "Poppins", Arial, sans-serif;
+    }
+
+    /* =========================================
+       2. BASE STYLES
+       ========================================= */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+    h1, h2, h3, p { margin: 0; }
+    .tabular { font-variant-numeric: tabular-nums; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+    /* Icons */
+    svg.icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; flex: none; }
+    svg.icon--small { width: 16px; height: 16px; }
+    .symbol-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    /* =========================================
+       3. LAYOUT & SHELL
+       ========================================= */
+    .app-shell { display: flex; max-width: 1600px; min-height: 100dvh; margin-inline: auto; }
+    .workspace-main { min-width: 0; flex: 1; }
+    .dashboard { padding: 32px 40px; max-width: 1280px; margin-inline: auto; }
+
+    /* =========================================
+       4. SIDEBAR
+       ========================================= */
+    .sidebar {
+      width: 240px;
+      flex: none;
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: var(--sidebar-bg);
+      border-right: var(--border-soft);
+      z-index: 50;
+    }
+    .brand-row { display: flex; align-items: center; min-height: 80px; padding: 24px; }
+    .brand-lockup { display: flex; align-items: center; gap: 12px; }
+    .brand-mark { color: var(--primary); }
+    .brand-name { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; }
+    .brand-caption { display: block; font-size: 11px; color: var(--color-muted); }
+    
+    .workspace-card { padding: 0 24px 24px; display: flex; gap: 12px; align-items: center; }
+    .workspace-card strong { font-size: 13px; font-weight: 600; }
+    .workspace-card small { display: block; font-size: 11px; color: var(--color-muted); }
+
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 0 16px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 16px; border-radius: 8px;
+      color: var(--color-muted); font-size: 13px; font-weight: 500;
+      margin-bottom: 4px; transition: all 0.2s ease;
+    }
+    .nav-item:hover { background: var(--background); color: var(--color-ink); }
+    .nav-item[aria-current="page"] { background: #EEF3ED; color: var(--primary); font-weight: 600; }
+
+    .sidebar-foot { padding: 24px; border-top: var(--border-soft); }
+    .profile-row { display: flex; align-items: center; gap: 12px; }
+    .profile-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #F0F0F0; color: var(--primary-dark);
+      display: grid; place-items: center; font-weight: 600; font-size: 12px;
+    }
+
+    /* =========================================
+       5. TOPBAR & HEADER
+       ========================================= */
+    .topbar {
+      min-height: 72px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; border-bottom: var(--border-soft);
+      background: rgba(250, 250, 250, 0.8); backdrop-filter: blur(8px);
+      position: sticky; top: 0; z-index: 40;
+    }
+    .breadcrumb { color: var(--color-muted); font-size: 13px; }
+    .breadcrumb strong { color: var(--color-ink); font-weight: 500; }
+    .topbar-account { display: flex; align-items: center; gap: 24px; color: var(--color-muted); }
+
+    .page-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+    .page-heading h1 { font-size: 28px; font-weight: 600; color: var(--primary-dark); margin-bottom: 4px; }
+    .page-heading p { color: var(--color-muted); font-size: 14px; }
+    
+    .button-primary {
+      background: var(--primary); color: #FFF; padding: 10px 20px;
+      border-radius: var(--radius-input); font-weight: 600; font-size: 13px;
+      transition: background 0.2s;
+    }
+    .button-primary:hover { background: var(--primary-dark); }
+
+    .attention-strip {
+      background: #FFF5F0; border-radius: 12px; padding: 16px 20px;
+      display: flex; gap: 12px; align-items: center; color: #9A431F;
+    }
+    .attention-strip strong { font-weight: 600; }
+    .text-link { color: var(--primary); font-weight: 600; }
+    .text-link:hover { text-decoration: underline; }
+
+    /* =========================================
+       6. "INVISIBLE" CARDS & LAYOUT
+       ========================================= */
+    /* Modifikasi kotak agar terlihat menyatu namun jelas terpisah (Minimalist Scannable) */
+    .dashboard-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-card);
+      border: var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      padding: 24px;
+    }
+
+    .stat-section { margin: 32px 0; }
+    .stat-section h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--primary-dark); }
+    
+    .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .stat { display: flex; flex-direction: column; }
+    .stat h3 { font-size: 13px; color: var(--color-muted); font-weight: 500; }
+    .stat-value { font-size: 32px; font-weight: 600; color: var(--primary-dark); margin: 8px 0; }
+
+    .work-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
+    
+    /* =========================================
+       7. TABLE & ORDERS
+       ========================================= */
+    .section-heading { display: flex; justify-content: space-between; margin-bottom: 24px; }
+    .section-heading h2 { font-size: 18px; font-weight: 600; }
+    .section-heading p { color: var(--color-muted); font-size: 12px; margin-top: 4px; }
+    
+    .orders-toolbar { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+    .filter-tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--color-rule-strong); overflow-x: auto; }
+    .filter-tab {
+      padding: 12px 0; background: transparent; color: var(--color-muted);
+      font-weight: 500; border-bottom: 2px solid transparent;
+    }
+    .filter-tab[aria-selected="true"] { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+
+    .orders-table { width: 100%; border-collapse: collapse; }
+    .orders-table th { padding: 12px 0; border-bottom: 1px solid var(--color-rule-strong); color: var(--color-muted); font-weight: 500; font-size: 12px; text-align: left; }
+    .orders-table td { padding: 16px 0; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
+    
+    .order-number { font-size: 13px; font-weight: 600; color: var(--color-ink); }
+    .order-secondary { display: block; font-size: 12px; color: var(--color-muted); margin-top: 4px; }
+
+    /* =========================================
+       8. SOFT BADGES (Borderless Pastel)
+       ========================================= */
+    .status-stack { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+    .status-badge {
+      padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+    }
+    .status-success { background: #E7F0E4; color: #1F4529; }
+    .status-info { background: #F3F4F6; color: #374151; }
+    .status-warning { background: #FFF3EB; color: #9A431F; }
+    .status-error { background: #FDE8E8; color: #9B1C1C; }
+
+    /* =========================================
+       9. RIGHT COLUMN (Tasks & Reviews)
+       ========================================= */
+    .right-column { display: flex; flex-direction: column; gap: 24px; }
+    
+    .task-list { list-style: none; padding: 0; margin: 16px 0 0; }
+    .task-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--color-rule); }
+    .task-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .task-list strong { font-size: 13px; display: block; }
+    .task-list small { color: var(--color-muted); font-size: 11px; display: block; margin-top: 4px; }
+    .task-action { color: var(--primary); font-weight: 600; font-size: 12px; }
+
+    /* Utilities */
+    .hidden { display: none; }
+    .mobile-control, .orders-cards { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- SVG Symbols -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="symbol-library" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20.5 3.5c-7.8.4-13.4 3-15.6 7.6-1.5 3.2-.8 6.4 1.4 8.6 2.3 2.3 5.5 2.9 8.7 1.3 4.5-2.3 7-7.8 5.5-16.5Z"/><path d="M4 21c3-5.8 7.2-9.9 13.5-13.1M6.8 15.8l-1-5.2m6.1.2 5.3.5"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-7h6v7"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 5v10l9 5 9-5V7M12 12v10"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 24 24"><path d="M12 12c-3-2-3-5 0-7 3 2 3 5 0 7Zm0 0c1-4 4-5 7-3-1 3-4 4-7 3Zm0 0c4 1 5 4 3 7-3-1-4-4-3-7Zm0 0c-1 4-4 5-7 3 1-3 4-4 7-3Zm0 0c-4-1-5-4-3-7 3 1 4 4 3 7Z"/><path d="M12 19v3"/></symbol>
+    <symbol id="i-orders" viewBox="0 0 24 24"><path d="M7 3h10l3 3v15H4V6l3-3Z"/><path d="M8 10h8M8 14h8M8 18h5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2H3Zm13-15a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5v1h-4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5m0 3v.1"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <div class="brand-row">
+        <a href="#Operasional" class="brand-lockup">
+          <span class="brand-mark">
+            <svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg>
+          </span>
+          <div>
+            <strong class="brand-name">RylVa Green.</strong>
+            <small class="brand-caption">Plant &amp; Florist</small>
+          </div>
+        </a>
+      </div>
+      
+      <div class="workspace-card">
+        <svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>
+        <div>
+          <strong>Gudang Pusat</strong>
+          <small>Ruang kerja toko</small>
+        </div>
+      </div>
+      
+      <nav id="sidebar-nav" class="sidebar-nav">
+        <a href="#Operasional" class="nav-item" aria-current="page">
+          <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+          <span>Operasional</span>
+        </a>
+        <a href="#pesanan" class="nav-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-orders"/></svg>
+          <span>Manajemen Pesanan</span>
+        </a>
+        <a href="#inventory" class="nav-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>
+          <span>Produk &amp; Varian</span>
+        </a>
+        <a href="#inventory" class="nav-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-flower"/></svg>
+          <span>Bahan Produksi</span>
+        </a>
+        <a href="#pesanan" class="nav-item">
+          <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+          <span>Pelanggan</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-foot">
+        <div class="profile-row">
+          <span class="profile-avatar">AR</span>
+          <div>
+            <strong id="profile-name">Admin RylVa</strong>
+            <small style="color:var(--color-muted); font-size:11px;">Gudang Pusat</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="workspace-main">
+      <header class="topbar">
+        <div class="breadcrumb">
+          Ruang kerja <span style="margin: 0 8px;">/</span> <strong>Operasional</strong>
+        </div>
+        <div class="topbar-account">
+          <span id="preview-role" style="font-size:12px;">Pratinjau Admin</span>
+          <span class="profile-avatar" style="width:32px; height:32px;">AR</span>
+        </div>
+      </header>
+
+      <main id="Operasional" class="dashboard">
+        
+        <!-- Header -->
+        <section class="page-heading">
+          <div>
+            <h1>Prioritas operasional</h1>
+            <p>Selesaikan pengiriman hari ini dan tugas yang melewati tenggat.</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <span style="color:var(--color-muted); font-size:12px;">28 Oktober 2026</span>
+            <a href="#pesanan" class="button-primary">Lihat pesanan</a>
+          </div>
+        </section>
+        
+        <!-- Alert -->
+        <div role="alert" class="attention-strip">
+          <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+          <div style="flex:1;">
+            <strong>Perlu perhatian sekarang:</strong> 1 refund melewati tenggat dan 4 produk berada di ambang stok rendah.
+          </div>
+          <a href="#tasks" class="text-link">Lihat prioritas</a>
+        </div>
+        
+        <!-- Stats (Invisible Cards) -->
+        <section class="stat-section">
+          <h2>Situasi hari ini</h2>
+          <div class="stat-strip">
+            <article class="stat dashboard-card">
+              <h3>Siap diproses</h3>
+              <strong class="stat-value tabular">12</strong>
+              <span class="status-badge status-success" style="width:fit-content; margin-top:auto;">Antrean menunggu</span>
+            </article>
+            <article class="stat dashboard-card">
+              <h3>Kirim hari ini</h3>
+              <strong class="stat-value tabular">8</strong>
+              <span class="status-badge status-info" style="width:fit-content; margin-top:auto;">Jatuh tempo WIB</span>
+            </article>
+            <article class="stat dashboard-card">
+              <h3>Pembayaran ditinjau</h3>
+              <strong class="stat-value tabular">3</strong>
+              <span class="status-badge status-warning" style="width:fit-content; margin-top:auto;">Periksa kasus</span>
+            </article>
+            <article class="stat dashboard-card">
+              <h3>Peringatan stok</h3>
+              <strong class="stat-value tabular" style="color:#9B1C1C;">4</strong>
+              <span class="status-badge status-error" style="width:fit-content; margin-top:auto;">≤ 5 unit sisa</span>
+            </article>
+          </div>
+        </section>
+
+        <!-- Data Grid -->
+        <div class="work-grid">
+          
+          <!-- Orders Table (Invisible Card) -->
+          <section id="pesanan" class="orders-section dashboard-card">
+            <div class="section-heading">
+              <div>
+                <h2 style="display:flex; gap:12px; align-items:center;">
+                  Antrean pesanan
+                  <span class="status-badge status-success" style="font-size:11px;">6 Pesanan</span>
+                </h2>
+                <p>Jadwal kirim dan status yang perlu ditindaklanjuti.</p>
+              </div>
+            </div>
+            
+            <div class="orders-toolbar">
+              <div class="filter-tabs">
+                <button type="button" class="filter-tab" data-filter="all" aria-selected="true">Semua</button>
+                <button type="button" class="filter-tab" data-filter="Siap Diproses">Siap diproses</button>
+                <button type="button" class="filter-tab" data-filter="Dikirim">Dikirim</button>
+              </div>
+            </div>
+            
+            <div style="overflow-x: auto;">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th style="width:25%;">Pesanan & Produk</th>
+                    <th style="width:20%;">Pelanggan</th>
+                    <th style="width:35%;">Status (Order / Bayar / Kirim)</th>
+                    <th style="width:20%; text-align:right;">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table">
+                  <!-- Row 1 -->
+                  <tr>
+                    <td>
+                      <strong class="order-number tabular">RV-261028-7K4M9P</strong>
+                      <span class="order-secondary">Buket custom</span>
+                    </td>
+                    <td>
+                      <strong style="font-weight:500;">Siti Rahmawati</strong>
+                      <span class="order-secondary">28 Okt, 12:00-16:00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-success">Siap Diproses</span>
+                        <span class="status-badge status-success">QRIS, Lunas</span>
+                      </div>
+                    </td>
+                    <td style="text-align:right;">
+                      <strong class="tabular">Rp 425.000</strong>
+                    </td>
+                  </tr>
+                  <!-- Row 2 -->
+                  <tr>
+                    <td>
+                      <strong class="order-number tabular">RV-261028-X5A8T2</strong>
+                      <span class="order-secondary">Monstera deliciosa</span>
+                    </td>
+                    <td>
+                      <strong style="font-weight:500;">Budi Santoso</strong>
+                      <span class="order-secondary">28 Okt, 16:00-20:00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-success">Siap Diproses</span>
+                        <span class="status-badge status-warning">COD, Menunggu</span>
+                      </div>
+                    </td>
+                    <td style="text-align:right;">
+                      <strong class="tabular">Rp 315.000</strong>
+                    </td>
+                  </tr>
+                  <!-- Row 3 (Error) -->
+                  <tr>
+                    <td>
+                      <strong class="order-number tabular">RV-261028-T9Y2F6</strong>
+                      <span class="order-secondary">Media tanam</span>
+                    </td>
+                    <td>
+                      <strong style="font-weight:500;">Rizky Firmansyah</strong>
+                      <span class="order-secondary">30 Okt, 16:00-20:00</span>
+                    </td>
+                    <td>
+                      <div class="status-stack">
+                        <span class="status-badge status-info">Dikirim</span>
+                        <span class="status-badge status-error">
+                          <svg class="icon icon--small"><use href="#i-alert"/></svg> Terkendala: Penerima tidak ada
+                        </span>
+                      </div>
+                    </td>
+                    <td style="text-align:right;">
+                      <strong class="tabular">Rp 390.000</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          
+          <!-- Right Sidebar (Tasks) -->
+          <div class="right-column">
+            
+            <section id="tasks" class="dashboard-card">
+              <div class="section-heading" style="margin-bottom:16px;">
+                <div>
+                  <h2>Perlu ditindaklanjuti</h2>
+                  <p>Urut menurut tenggat.</p>
+                </div>
+              </div>
+              
+              <div style="background:#FFF5F0; padding:16px; border-radius:12px; margin-bottom:16px;">
+                <div style="display:flex; justify-content:space-between;">
+                  <strong style="color:#9A431F;">Pembatalan / refund</strong>
+                  <span style="color:#9A431F; font-size:11px; font-weight:600;">Lewat 15 menit</span>
+                </div>
+                <p style="font-size:12px; color:#9A431F; margin-top:8px;">Tinjau keputusan dan bukti.</p>
+              </div>
+              
+              <ul class="task-list">
+                <li>
+                  <div>
+                    <strong>PH-06, Selisih stok</strong>
+                    <small>Sisa 45 menit</small>
+                  </div>
+                  <span class="task-action">Tangani</span>
+                </li>
+                <li>
+                  <div>
+                    <strong>Pengiriman terkendala</strong>
+                    <small>Sisa 1 jam</small>
+                  </div>
+                  <span class="task-action">Periksa</span>
+                </li>
+              </ul>
+            </section>
+            
+            <section class="dashboard-card">
+              <div class="section-heading">
+                <div>
+                  <h2>Pembayaran ditinjau</h2>
+                  <p>Kasus menunggu pemeriksaan.</p>
+                </div>
+              </div>
+              <ul class="task-list" style="margin-top:0;">
+                <li>
+                  <div>
+                    <strong>DEMO-004</strong>
+                    <small>Nominal tidak cocok</small>
+                  </div>
+                  <span class="task-action">Periksa</span>
+                </li>
+                <li>
+                  <div>
+                    <strong>DEMO-006</strong>
+                    <small>Selisih rekonsiliasi</small>
+                  </div>
+                  <span class="task-action">Eskalasi</span>
+                </li>
+              </ul>
+            </section>
+            
+          </div>
+        </div>
+        
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Logic Sederhana Filter (Allman Style & camelCase)
+    const filterTabs = Array.from(document.querySelectorAll('.filter-tab'));
+    
+    filterTabs.forEach(function (tab)
+    {
+      tab.addEventListener('click', function ()
+      {
+        filterTabs.forEach(function (item)
+        {
+          const isSelected = item === tab;
+          item.setAttribute('aria-selected', String(isSelected));
+        });
+        
+        // Logika penyortiran dapat ditambahkan di sini
+      });
+    });
+  </script>
+</body>
+</html>

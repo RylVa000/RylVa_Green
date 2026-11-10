@@ -1,0 +1,23 @@
+/config/.env
+/vendor/
+/storage/uploads/*
+!/storage/uploads/**/.gitkeep
+/storage/logs/*.log
+/storage/cache/*
+/storage/backups/*
+/storage/reports/*
+!/storage/reports/.gitkeep
+/storage/logs/development/*
+!/storage/logs/development/.gitkeep
+.DS_Store
+Thumbs.db
+
+# Cache dan bukti pengerjaan alat desain: tetap lokal
+/.hallmark/
+/.taste-skill/
+/.impeccable/*
+!/.impeccable/config.json
+!/.impeccable/design.json
+
+# Dependensi JavaScript lokal di direktori alat
+**/node_modules/

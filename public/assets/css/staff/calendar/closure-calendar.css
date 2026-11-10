@@ -1,0 +1,522 @@
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: established RylVa Green · signature: closure conflicts in a delivery calendar · states: full, selected, empty, loading, error, confirmation, saving · v2.0.0 */
+/* Hallmark · pre-emit critique: a date and its affected orders share one work area; the established admin shell and status cues are reused. */
+
+.closure-main
+{
+  min-width: 0;
+}
+
+.closure-heading
+{
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+}
+
+.closure-heading h1,
+.closure-main h2,
+.closure-main h3
+{
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.closure-summary
+{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.closure-summary .queue-tab
+{
+  white-space: normal;
+}
+
+.closure-summary-warning strong
+{
+  color: var(--queue-warning-ink);
+}
+
+.closure-alert
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--queue-warning-border);
+  border-radius: var(--radius-card);
+  color: var(--queue-warning-ink);
+  background: var(--queue-warning-soft);
+}
+
+.closure-alert-message,
+.closure-actions,
+.closure-legend,
+.closure-month-controls
+{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.closure-alert-message .icon
+{
+  flex: none;
+}
+
+.closure-alert-message
+{
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.closure-alert .queue-text-button
+{
+  color: var(--queue-warning-ink);
+  font-weight: 600;
+}
+
+.closure-tabs
+{
+  margin-bottom: var(--space-lg);
+}
+
+.closure-layout
+{
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-lg);
+}
+
+.closure-panel
+{
+  min-width: 0;
+  margin-top: 0;
+}
+
+.closure-panel > h2
+{
+  margin-bottom: var(--space-sm);
+}
+
+.closure-panel h3
+{
+  font-size: var(--queue-body);
+  font-weight: 600;
+}
+
+.closure-calendar-header,
+.closure-detail-header,
+.closure-section-heading,
+.closure-order-heading,
+.closure-secondary-month,
+.closure-record
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.closure-calendar-header
+{
+  flex-wrap: wrap;
+  margin-block: var(--space-md);
+}
+
+.closure-next .icon
+{
+  transform: rotate(180deg);
+}
+
+.closure-legend
+{
+  margin-bottom: var(--space-md);
+}
+
+.closure-badge
+{
+  gap: var(--space-2xs);
+  max-width: 100%;
+  white-space: normal;
+}
+
+.closure-badge .icon
+{
+  flex: none;
+}
+
+.closure-calendar-scroll
+{
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.closure-scroll-hint
+{
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--color-muted);
+  font-size: var(--queue-small);
+}
+
+.closure-scroll-hint[hidden]
+{
+  display: none;
+}
+
+.closure-month-grid
+{
+  width: 100%;
+  min-width: 308px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: var(--space-2xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.closure-month-grid th
+{
+  padding: var(--space-xs) 0;
+  color: var(--color-muted);
+  font-weight: 500;
+  text-align: left;
+}
+
+.closure-month-grid td
+{
+  height: 1px;
+  padding: 0;
+  vertical-align: top;
+}
+
+.closure-day
+{
+  display: grid;
+  align-content: start;
+  gap: var(--space-2xs);
+  width: 100%;
+  height: 100%;
+  min-width: 44px;
+  min-height: 86px;
+  padding: var(--space-xs);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-input);
+  background: var(--queue-surface);
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+}
+
+.closure-day[aria-pressed="true"]
+{
+  border-color: var(--primary);
+  background: var(--queue-success-soft);
+}
+
+.closure-day.is-past:not(.is-closed):not([aria-pressed="true"])
+{
+  color: var(--color-muted);
+  background: var(--color-paper-2);
+}
+
+.closure-day.is-closed
+{
+  border-color: var(--queue-warning-border);
+  background: var(--queue-warning-soft);
+}
+
+.closure-day.is-closed[aria-pressed="true"]
+{
+  border-color: var(--queue-warning-ink);
+  outline: 1px solid var(--queue-warning-ink);
+}
+
+.closure-day[aria-current="date"] strong
+{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.closure-day-top
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xs);
+}
+
+.closure-day-label
+{
+  color: var(--queue-warning-ink);
+  font-size: var(--queue-small);
+}
+
+.closure-day-orders
+{
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--queue-info-ink);
+  font-size: var(--queue-small);
+  font-variant-numeric: tabular-nums;
+}
+
+.closure-day-orders .icon
+{
+  width: 14px;
+  height: 14px;
+}
+
+.closure-day.has-conflict .closure-day-orders
+{
+  color: var(--queue-warning-ink);
+}
+
+.closure-detail-header
+{
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-block: var(--space-md);
+}
+
+.closure-reason,
+.closure-stack
+{
+  display: grid;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.closure-reason,
+.closure-actions,
+.closure-notice,
+.closure-sync-note
+{
+  margin-top: var(--space-md);
+}
+
+.closure-sync-note
+{
+  color: var(--color-muted);
+  font-size: var(--queue-small);
+}
+
+.closure-section-heading
+{
+  margin-top: var(--space-xl);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.closure-order,
+.closure-record
+{
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.closure-order:last-child,
+.closure-record:last-child
+{
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.closure-order-heading
+{
+  align-items: flex-start;
+  margin-bottom: var(--space-sm);
+}
+
+.closure-order-details
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm) var(--space-md);
+  margin: var(--space-sm) 0 0;
+}
+
+.closure-order-details > div
+{
+  min-width: 0;
+}
+
+.closure-order-details dt
+{
+  color: var(--color-muted);
+}
+
+.closure-order-details dd
+{
+  margin: var(--space-2xs) 0 0;
+  overflow-wrap: anywhere;
+}
+
+.closure-empty
+{
+  display: grid;
+  justify-items: start;
+  gap: var(--space-xs);
+  padding-block: var(--space-lg);
+}
+
+.closure-secondary-month
+{
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.closure-record
+{
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.closure-history
+{
+  display: grid;
+  gap: var(--space-md);
+  padding: 0;
+  margin-top: var(--space-lg);
+  list-style: none;
+}
+
+.closure-history li
+{
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: var(--space-xs) var(--space-sm);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.closure-history p,
+.closure-history span
+{
+  grid-column: 2;
+}
+
+.closure-dialog
+{
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+.closure-dialog .product-dialog-actions
+{
+  position: sticky;
+  bottom: calc(-1 * var(--space-lg));
+  padding-block: var(--space-md);
+  background: var(--queue-surface);
+}
+
+#closure-dialog-body
+{
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.closure-dialog p
+{
+  margin-top: 0;
+  line-height: 1.5;
+}
+
+.closure-help,
+.closure-error
+{
+  font-size: var(--queue-small);
+}
+
+.closure-help
+{
+  color: var(--color-muted);
+}
+
+.closure-error
+{
+  color: var(--queue-critical-ink);
+}
+
+.closure-impact .closure-notice
+{
+  margin-top: 0;
+}
+
+.closure-impact-list
+{
+  display: grid;
+  gap: var(--space-xs);
+  padding-left: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.closure-dialog textarea:focus-visible,
+.closure-main summary:focus-visible
+{
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1199px)
+{
+  .closure-layout
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 639px)
+{
+  .closure-heading
+  {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .closure-summary
+  {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .closure-summary > :last-child
+  {
+    grid-column: 1 / -1;
+  }
+
+  .closure-month-grid
+  {
+    min-width: 420px;
+  }
+
+  .closure-day
+  {
+    min-width: 56px;
+    min-height: 72px;
+    padding: var(--space-2xs);
+  }
+
+  .closure-day-top .icon
+  {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 420px)
+{
+  #closure-breadcrumb
+  {
+    gap: var(--space-xs);
+  }
+
+  #closure-breadcrumb a,
+  #closure-breadcrumb [aria-current="page"]
+  {
+    white-space: nowrap;
+  }
+
+}

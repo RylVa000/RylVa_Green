@@ -1,0 +1,162 @@
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: RylVa Green incumbent · signature: compare before a second decision · data: sample · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 · payment, approval and execution remain independent. */
+/* Hallmark · answered F7 · staff support, queue and report components are reused across both review pages. */
+/* Hallmark · waive 72 · only scrolled menu text is clipped by .sidebar-nav; page controls retain measured padding · SuperAdmin review keeps the active menu visible inside its own scroll region. */
+/* Hallmark · finish-review: subagent · fix · one mobile comparison label finding resolved and recaptured. */
+/* Hallmark · completion-review: subagent · ship · correction and recovery increment has no material findings. */
+:root
+{
+  --review-positive: var(--primary);
+  --review-warning: var(--queue-warning-ink);
+}
+
+.review-stats.support-stats
+{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.review-identity
+{
+  margin-top: var(--space-sm);
+}
+
+.review-table strong + small
+{
+  margin-top: var(--space-xs);
+}
+
+.review-money
+{
+  display: block;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 1200px)
+{
+  .review-table:not(.review-detail-table) th:nth-child(2),
+  .review-table:not(.review-detail-table) td:nth-child(2) small
+  {
+    text-align: right;
+  }
+}
+
+.review-note
+{
+  margin-block: var(--space-md);
+}
+
+.review-detail-table
+{
+  margin-top: var(--space-md);
+}
+
+.review-detail-table th:first-child,
+.review-detail-table td:first-child
+{
+  padding-left: 0;
+}
+
+.review-detail-table th:last-child,
+.review-detail-table td:last-child
+{
+  padding-right: 0;
+}
+
+.review-check
+{
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  min-height: 44px;
+  line-height: 1.6;
+}
+
+.review-check input
+{
+  width: 18px;
+  height: 18px;
+  margin-top: var(--space-2xs);
+  accent-color: var(--primary);
+  flex: none;
+}
+
+.review-file-note
+{
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+.review-attachment
+{
+  overflow-wrap: anywhere;
+}
+
+.review-form-reference
+{
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1199px)
+{
+  .review-money
+  {
+    text-align: left;
+  }
+
+  .review-detail-table tr
+  {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-inline: 0;
+  }
+
+  .review-detail-table td:last-child
+  {
+    grid-column: auto;
+    justify-self: stretch;
+    text-align: left;
+  }
+
+  .review-detail-table td:last-child::before
+  {
+    display: block;
+  }
+}
+
+@media (max-width: 767px)
+{
+  .review-stats.support-stats
+  {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .review-stats .catalog-stat strong
+  {
+    font-size: var(--text-lg);
+  }
+}
+
+.review-correction-note
+{
+  display: grid;
+  gap: var(--space-xs);
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.review-correction-note:last-child
+{
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.review-correction-note .queue-button
+{
+  justify-self: end;
+}
+
+.review-source-selector .report-field
+{
+  margin-top: var(--space-md);
+}

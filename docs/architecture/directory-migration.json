@@ -1,0 +1,1983 @@
+{
+  "moved": [
+    {
+      "from": "public/assets/css/admin-controls.css",
+      "to": "public/assets/css/shared/admin-controls.css",
+      "sha256Before": "891945596fda4d178389bffad73e7bc94d3297f226cd4c9bc6965ded49077695",
+      "sha256After": "891945596fda4d178389bffad73e7bc94d3297f226cd4c9bc6965ded49077695"
+    },
+    {
+      "from": "public/assets/css/audit-log.css",
+      "to": "public/assets/css/staff/superadmin/audit-log.css",
+      "sha256Before": "a52d003816a1f7dfa4bd8a9c6c1341097eaeae69baa44a0f1c050c619de97962",
+      "sha256After": "a52d003816a1f7dfa4bd8a9c6c1341097eaeae69baa44a0f1c050c619de97962"
+    },
+    {
+      "from": "public/assets/css/bouquet-customizer.css",
+      "to": "public/assets/css/storefront/bouquet-customizer.css",
+      "sha256Before": "e0e2a41d81ae9e95a38788c28ffdf7e1a9748222911cc6fb9639e2ef427be455",
+      "sha256After": "cd45bd599a04e25150fd0717a0f5488fe767afbaea8aa6577187db28bc55053d"
+    },
+    {
+      "from": "public/assets/css/bouquet-production.css",
+      "to": "public/assets/css/staff/production/bouquet-production.css",
+      "sha256Before": "3bd4111d12e1ebf070134644492e96d0d3cf58f85100be136c9ff13f1c094ac4",
+      "sha256After": "3bd4111d12e1ebf070134644492e96d0d3cf58f85100be136c9ff13f1c094ac4"
+    },
+    {
+      "from": "public/assets/css/closure-calendar.css",
+      "to": "public/assets/css/staff/calendar/closure-calendar.css",
+      "sha256Before": "859be431344f8c4369a9be0d94fa5916800f38d95c4a40870cf72214e27c6b74",
+      "sha256After": "859be431344f8c4369a9be0d94fa5916800f38d95c4a40870cf72214e27c6b74"
+    },
+    {
+      "from": "public/assets/css/components.css",
+      "to": "public/assets/css/shared/components.css",
+      "sha256Before": "14c3152393ad50088165dfcec9bc572000de4ea2bb625dc121ba1917fad55dc9",
+      "sha256After": "51a8f29f8480316d91608a2808a97e06983dd45b1d803ddefe5207d26acc84d1"
+    },
+    {
+      "from": "public/assets/css/customers.css",
+      "to": "public/assets/css/staff/customers/customers.css",
+      "sha256Before": "231e5e25eb6cb809f4e98d60d330aebaab9248be859932687aaafe00288e2530",
+      "sha256After": "231e5e25eb6cb809f4e98d60d330aebaab9248be859932687aaafe00288e2530"
+    },
+    {
+      "from": "public/assets/css/design-system.css",
+      "to": "public/assets/css/shared/design-system.css",
+      "sha256Before": "d538e3740c8fd40319c74c0e1d7942859dd26ccc7b41aee91f74006220d262d7",
+      "sha256After": "55a0011b4bd48e0ee525fdfee7693ddace58ec9e5bd8fd80bffe722d06a53184"
+    },
+    {
+      "from": "public/assets/css/materials.css",
+      "to": "public/assets/css/staff/inventory/materials.css",
+      "sha256Before": "25c3b79c45b97ee1c481c4dea71feb8ae034d5856eee6a7738335e7cf94004f8",
+      "sha256After": "25c3b79c45b97ee1c481c4dea71feb8ae034d5856eee6a7738335e7cf94004f8"
+    },
+    {
+      "from": "public/assets/css/operational-report.css",
+      "to": "public/assets/css/staff/reports/operational-report.css",
+      "sha256Before": "8d342c49fa0f42a623cd4a12c4d90e1ff16c9659efe2115511abd0c80eb6d043",
+      "sha256After": "8d342c49fa0f42a623cd4a12c4d90e1ff16c9659efe2115511abd0c80eb6d043"
+    },
+    {
+      "from": "public/assets/css/order-workflows.css",
+      "to": "public/assets/css/staff/orders/order-workflows.css",
+      "sha256Before": "c41249921fd603d0d900cb1df2ef513453afaebb200c97e37ccc7dc98e69412e",
+      "sha256After": "c41249921fd603d0d900cb1df2ef513453afaebb200c97e37ccc7dc98e69412e"
+    },
+    {
+      "from": "public/assets/css/orders-queue.css",
+      "to": "public/assets/css/staff/orders/orders-queue.css",
+      "sha256Before": "58dcd642de94ee3797556322ef8f5449cf6f85aa4cd15787b5fbcd47fbcca9c4",
+      "sha256After": "876da166fb197769b6c138de915f41ddf89e1b4682b8414a9c177b8116b56bcf"
+    },
+    {
+      "from": "public/assets/css/products.css",
+      "to": "public/assets/css/staff/catalog/products.css",
+      "sha256Before": "6202b2d2e6557b93a12eed08677aef8543cc8b68d6f71d9d78027bc2fb020aae",
+      "sha256After": "6202b2d2e6557b93a12eed08677aef8543cc8b68d6f71d9d78027bc2fb020aae"
+    },
+    {
+      "from": "public/assets/css/public-storefront.css",
+      "to": "public/assets/css/storefront/public-storefront.css",
+      "sha256Before": "57589aa08d8a3646febed9d5d5a7a755ebdb003dd39f7658cb168c28012acad1",
+      "sha256After": "34176f124b60f5939f5c4caea06dd69a22112823b1c2f88b2e93eed32e46ea56"
+    },
+    {
+      "from": "public/assets/css/staff-accounts.css",
+      "to": "public/assets/css/staff/accounts/staff-accounts.css",
+      "sha256Before": "776cc043f02634a083c6f882d7a9990d6d24a1a64a49742a2a173247776c17f8",
+      "sha256After": "776cc043f02634a083c6f882d7a9990d6d24a1a64a49742a2a173247776c17f8"
+    },
+    {
+      "from": "public/assets/css/staff-auth.css",
+      "to": "public/assets/css/staff/auth/staff-auth.css",
+      "sha256Before": "e0b974e8fb37bcc57028dca373da0c57e2151f5ca4198165903a453e5cabbb81",
+      "sha256After": "e0b974e8fb37bcc57028dca373da0c57e2151f5ca4198165903a453e5cabbb81"
+    },
+    {
+      "from": "public/assets/css/staff-panel.css",
+      "to": "public/assets/css/shared/staff-panel.css",
+      "sha256Before": "0922b8510cd6305b615433a6c4ecb4b7c172f3071bc26b2bc273480431be3590",
+      "sha256After": "40c81afae6cc632aa40a3e4138a9d530113156a526314d90f1beec8ef3c7211a"
+    },
+    {
+      "from": "public/assets/css/staff-support.css",
+      "to": "public/assets/css/staff/support/staff-support.css",
+      "sha256Before": "aaa1d4ad080fc5b71d19c94cc657b0c7199a2793c0882a93d063c21d9ffdd56a",
+      "sha256After": "aaa1d4ad080fc5b71d19c94cc657b0c7199a2793c0882a93d063c21d9ffdd56a"
+    },
+    {
+      "from": "public/assets/css/superadmin-review.css",
+      "to": "public/assets/css/staff/superadmin/superadmin-review.css",
+      "sha256Before": "c0ee2cbe2397663d6872a6821e0072f13d00c85e39b04182e3bfd26f3c538df9",
+      "sha256After": "c0ee2cbe2397663d6872a6821e0072f13d00c85e39b04182e3bfd26f3c538df9"
+    },
+    {
+      "from": "public/assets/css/system-parameters.css",
+      "to": "public/assets/css/staff/superadmin/system-parameters.css",
+      "sha256Before": "a508a82d1119486b878d44dbc62a0553be1b981e25c25cb97c70607b34ee50bf",
+      "sha256After": "a508a82d1119486b878d44dbc62a0553be1b981e25c25cb97c70607b34ee50bf"
+    },
+    {
+      "from": "public/assets/css/taxonomy.css",
+      "to": "public/assets/css/staff/catalog/taxonomy.css",
+      "sha256Before": "5143abec96d80a1a3cb548e7ad8017ff6493deb5b5228fd273b13b0a23aa3da4",
+      "sha256After": "5143abec96d80a1a3cb548e7ad8017ff6493deb5b5228fd273b13b0a23aa3da4"
+    },
+    {
+      "from": "public/assets/js/admin-audit-nav.js",
+      "to": "public/assets/js/shared/admin-audit-nav.js",
+      "sha256Before": "cb97b49b6b55f9ca80f25138994a0ea76f9e88c4234423e976412e39f925a6ca",
+      "sha256After": "cb97b49b6b55f9ca80f25138994a0ea76f9e88c4234423e976412e39f925a6ca"
+    },
+    {
+      "from": "public/assets/js/admin-controls.js",
+      "to": "public/assets/js/shared/admin-controls.js",
+      "sha256Before": "e9e33fa6264a5eca656b70c17bd6d8bd80d4ef9126e625c76411fcf2cdf900e3",
+      "sha256After": "e9e33fa6264a5eca656b70c17bd6d8bd80d4ef9126e625c76411fcf2cdf900e3"
+    },
+    {
+      "from": "public/assets/js/admin-settings-nav.js",
+      "to": "public/assets/js/shared/admin-settings-nav.js",
+      "sha256Before": "6844c207cf6f19309a87ec4218a4b31fa3b1bcdb718c392a338c61764565f0fe",
+      "sha256After": "6844c207cf6f19309a87ec4218a4b31fa3b1bcdb718c392a338c61764565f0fe"
+    },
+    {
+      "from": "public/assets/js/admin-shell.js",
+      "to": "public/assets/js/shared/admin-shell.js",
+      "sha256Before": "6fb06a84be3f964af99066175b37d6755346b52e17c4911eeb410c2a5d5f2ebb",
+      "sha256After": "6fb06a84be3f964af99066175b37d6755346b52e17c4911eeb410c2a5d5f2ebb"
+    },
+    {
+      "from": "public/assets/js/app.js",
+      "to": "public/assets/js/shared/app.js",
+      "sha256Before": "8913d042039d91ef3fa0a776083fec75bf73219cfa2ca35345473db42802dffb",
+      "sha256After": "4e39d54006b12a47c3c0e56b3e9fd02827a26132829b3a1a8f77e1c48b6ddeba"
+    },
+    {
+      "from": "public/assets/js/audit-data.js",
+      "to": "public/assets/js/staff/superadmin/audit-data.js",
+      "sha256Before": "2e5238032294ec070ebff3af2469074b4ba5f45364bdffa7c708cd6be9109b5f",
+      "sha256After": "2e5238032294ec070ebff3af2469074b4ba5f45364bdffa7c708cd6be9109b5f"
+    },
+    {
+      "from": "public/assets/js/audit-log.js",
+      "to": "public/assets/js/staff/superadmin/audit-log.js",
+      "sha256Before": "b95f4ab0fc6b39099318b63d77b95909b9256f1cf62273936b468590ff0b2686",
+      "sha256After": "b95f4ab0fc6b39099318b63d77b95909b9256f1cf62273936b468590ff0b2686"
+    },
+    {
+      "from": "public/assets/js/bouquet-customizer.js",
+      "to": "public/assets/js/storefront/bouquet-customizer.js",
+      "sha256Before": "b0cf0043b557f2a332a84851e7bb09429b184345c697bd5ea0b5ee0bba124e2b",
+      "sha256After": "043b566f855d39416742a31067d460b45c5358058d846bd4b4fea25c0d6c5144"
+    },
+    {
+      "from": "public/assets/js/bouquet-data.js",
+      "to": "public/assets/js/staff/production/bouquet-data.js",
+      "sha256Before": "0c95287a85db6e2d19205f42753679fcff06a30371eb5ce2bb5f1cfb205385fe",
+      "sha256After": "0c95287a85db6e2d19205f42753679fcff06a30371eb5ce2bb5f1cfb205385fe"
+    },
+    {
+      "from": "public/assets/js/bouquet-editor.js",
+      "to": "public/assets/js/staff/production/bouquet-editor.js",
+      "sha256Before": "62388ffd1a1a3ea5e63befc48a0030f4cf50abb4ccab13b56bc1afc292755a40",
+      "sha256After": "62388ffd1a1a3ea5e63befc48a0030f4cf50abb4ccab13b56bc1afc292755a40"
+    },
+    {
+      "from": "public/assets/js/bouquet-production.js",
+      "to": "public/assets/js/staff/production/bouquet-production.js",
+      "sha256Before": "d87d48049c3d97839ebe70d7048e1e6fa1bd0022ffb3d583e2ab70dc23372863",
+      "sha256After": "d87d48049c3d97839ebe70d7048e1e6fa1bd0022ffb3d583e2ab70dc23372863"
+    },
+    {
+      "from": "public/assets/js/catalog-filter.js",
+      "to": "public/assets/js/storefront/catalog-filter.js",
+      "sha256Before": "a95e9327b278910f2482f43d74939ad059478865ee4c7270413c2c18399487a6",
+      "sha256After": "17fb2a691c49ce525836da5a65454f15440810004f88866342bb278088f581d8"
+    },
+    {
+      "from": "public/assets/js/checkout-map-slot.js",
+      "to": "public/assets/js/storefront/checkout-map-slot.js",
+      "sha256Before": "8caf1aaddb7efd842109cbaceefe41ffb777678667b5bc7e12774ca7c8a3ce86",
+      "sha256After": "44cd716921eb8aa050c68e6c26cf9f97dd48c3f2bd968b336f70a85350bdc0f6"
+    },
+    {
+      "from": "public/assets/js/closure-calendar-data.js",
+      "to": "public/assets/js/staff/calendar/closure-calendar-data.js",
+      "sha256Before": "ad23a90bfaaf3118894949252977df3805a120eac6cb340440de4ec2253fa630",
+      "sha256After": "ad23a90bfaaf3118894949252977df3805a120eac6cb340440de4ec2253fa630"
+    },
+    {
+      "from": "public/assets/js/closure-calendar.js",
+      "to": "public/assets/js/staff/calendar/closure-calendar.js",
+      "sha256Before": "7164f62afc0b7a19a97f27097b9ee123cfb08a72d1e12b93c9e01888c7652311",
+      "sha256After": "7164f62afc0b7a19a97f27097b9ee123cfb08a72d1e12b93c9e01888c7652311"
+    },
+    {
+      "from": "public/assets/js/customers-data.js",
+      "to": "public/assets/js/staff/customers/customers-data.js",
+      "sha256Before": "700bee77568ff0bb449b2af67525bfd4786c0f0d64e964c58701958a4f344f77",
+      "sha256After": "700bee77568ff0bb449b2af67525bfd4786c0f0d64e964c58701958a4f344f77"
+    },
+    {
+      "from": "public/assets/js/customers.js",
+      "to": "public/assets/js/staff/customers/customers.js",
+      "sha256Before": "0b51c09c8dd0b41f328361c9d82bcec5bb5f705ff28f5e37ab0f45a0a00e8d0d",
+      "sha256After": "0b51c09c8dd0b41f328361c9d82bcec5bb5f705ff28f5e37ab0f45a0a00e8d0d"
+    },
+    {
+      "from": "public/assets/js/guest-cart.js",
+      "to": "public/assets/js/storefront/guest-cart.js",
+      "sha256Before": "e30c2e96f6c252cbd9a2f7ed9c153688deeb0271c0763a273c0ddb81f2f75219",
+      "sha256After": "3fa11a74ff6a1a340cb30139db11a26d7661f139d8b599be87763b2643a30fa9"
+    },
+    {
+      "from": "public/assets/js/materials-data.js",
+      "to": "public/assets/js/staff/inventory/materials-data.js",
+      "sha256Before": "c48ae5a1d55536b0b2a23baabfc2eaaef0ec4fc4edfb4fe90f1af980131121cb",
+      "sha256After": "c48ae5a1d55536b0b2a23baabfc2eaaef0ec4fc4edfb4fe90f1af980131121cb"
+    },
+    {
+      "from": "public/assets/js/materials-forms.js",
+      "to": "public/assets/js/staff/inventory/materials-forms.js",
+      "sha256Before": "4149b0ef828ddf3b5964cd3d11c756b4edf91b20ab1d5e7a9484f4ec0429957b",
+      "sha256After": "4149b0ef828ddf3b5964cd3d11c756b4edf91b20ab1d5e7a9484f4ec0429957b"
+    },
+    {
+      "from": "public/assets/js/materials.js",
+      "to": "public/assets/js/staff/inventory/materials.js",
+      "sha256Before": "ced5e04e3fddce8d7d8e03f86c5b96d8495a330cf2b4ac7eba44c9bf4145c3ed",
+      "sha256After": "ced5e04e3fddce8d7d8e03f86c5b96d8495a330cf2b4ac7eba44c9bf4145c3ed"
+    },
+    {
+      "from": "public/assets/js/operational-report-data.js",
+      "to": "public/assets/js/staff/reports/operational-report-data.js",
+      "sha256Before": "fdd8050e6b8b65504c92fdcba7983599629ab9bddb1c4b645e49a1bf5b746060",
+      "sha256After": "fdd8050e6b8b65504c92fdcba7983599629ab9bddb1c4b645e49a1bf5b746060"
+    },
+    {
+      "from": "public/assets/js/operational-report.js",
+      "to": "public/assets/js/staff/reports/operational-report.js",
+      "sha256Before": "ab2e6da2e57cf9268231976924635bc62b23c5efcf7013e72bac8ffb31e1d73a",
+      "sha256After": "ab2e6da2e57cf9268231976924635bc62b23c5efcf7013e72bac8ffb31e1d73a"
+    },
+    {
+      "from": "public/assets/js/order-corrections.js",
+      "to": "public/assets/js/staff/orders/order-corrections.js",
+      "sha256Before": "fe8f038f8aa06d7658c2121d4c4e680f85ef930399a05ddeb8137e0ec6cb4896",
+      "sha256After": "fe8f038f8aa06d7658c2121d4c4e680f85ef930399a05ddeb8137e0ec6cb4896"
+    },
+    {
+      "from": "public/assets/js/order-workflows.js",
+      "to": "public/assets/js/staff/orders/order-workflows.js",
+      "sha256Before": "160412bbdcbde07776fd9a46a5feaeeb4bac74c42d241f395f1f466513a1b2f9",
+      "sha256After": "160412bbdcbde07776fd9a46a5feaeeb4bac74c42d241f395f1f466513a1b2f9"
+    },
+    {
+      "from": "public/assets/js/orders-queue.js",
+      "to": "public/assets/js/staff/orders/orders-queue.js",
+      "sha256Before": "6d850527485bccc82f801c87750ec8e6512c835fe0012a2c0cbe94c9ec1a0f52",
+      "sha256After": "6d850527485bccc82f801c87750ec8e6512c835fe0012a2c0cbe94c9ec1a0f52"
+    },
+    {
+      "from": "public/assets/js/payment-countdown.js",
+      "to": "public/assets/js/storefront/payment-countdown.js",
+      "sha256Before": "f75d964bf8cbd39d53394a025f56f71a33681b41878226a86a43c8be427e2672",
+      "sha256After": "6d2d064b5c33391fc4031eaf64ad2e5686891b82a32513abc0d41d530a0eb057"
+    },
+    {
+      "from": "public/assets/js/product-variant.js",
+      "to": "public/assets/js/storefront/product-variant.js",
+      "sha256Before": "c0665dea1670533cd30b65c16c9cb7c236b06231ef688a4874abf3e73ade508f",
+      "sha256After": "56079dbc2f30dade899c60e405e205cfa18734b5be8723dda434655352b44358"
+    },
+    {
+      "from": "public/assets/js/products-data.js",
+      "to": "public/assets/js/staff/catalog/products-data.js",
+      "sha256Before": "847c364d243ebb2b4d72f64e52ae3bb961fd5b51fb494312a60655861547e8a0",
+      "sha256After": "847c364d243ebb2b4d72f64e52ae3bb961fd5b51fb494312a60655861547e8a0"
+    },
+    {
+      "from": "public/assets/js/products-editor.js",
+      "to": "public/assets/js/staff/catalog/products-editor.js",
+      "sha256Before": "c514abdb3587258daf4cd337d2b60e07097b355c97f6ed5cc3fe2cd628031634",
+      "sha256After": "c514abdb3587258daf4cd337d2b60e07097b355c97f6ed5cc3fe2cd628031634"
+    },
+    {
+      "from": "public/assets/js/products.js",
+      "to": "public/assets/js/staff/catalog/products.js",
+      "sha256Before": "f7c7aabbdcceba06b4dcfd8d5be33875de19466c28e9e80a27c50f973a357ffd",
+      "sha256After": "f7c7aabbdcceba06b4dcfd8d5be33875de19466c28e9e80a27c50f973a357ffd"
+    },
+    {
+      "from": "public/assets/js/staff-accounts-data.js",
+      "to": "public/assets/js/staff/accounts/staff-accounts-data.js",
+      "sha256Before": "b5a4abc0bbfae3a5a9b723edee7ab369aaf79d0a503c6b0de520f65518a16153",
+      "sha256After": "b5a4abc0bbfae3a5a9b723edee7ab369aaf79d0a503c6b0de520f65518a16153"
+    },
+    {
+      "from": "public/assets/js/staff-accounts.js",
+      "to": "public/assets/js/staff/accounts/staff-accounts.js",
+      "sha256Before": "e89b78ab8ab1e6f8750ab1560fc91ae42884d8183ebe20f83a1f9eede5f9bb78",
+      "sha256After": "e89b78ab8ab1e6f8750ab1560fc91ae42884d8183ebe20f83a1f9eede5f9bb78"
+    },
+    {
+      "from": "public/assets/js/staff-auth.js",
+      "to": "public/assets/js/staff/auth/staff-auth.js",
+      "sha256Before": "21c362d7123c82e603a77976072d4766a7e047ae33b66ca325140ca52eb1219e",
+      "sha256After": "21c362d7123c82e603a77976072d4766a7e047ae33b66ca325140ca52eb1219e"
+    },
+    {
+      "from": "public/assets/js/staff-dashboard.js",
+      "to": "public/assets/js/staff/dashboard/staff-dashboard.js",
+      "sha256Before": "4d6ae01f3d5da963eeea406c0537c6a9118b2c7c700fc1a9c705bd8b0cc4f731",
+      "sha256After": "28b491db0251520e7d667000451dfc05fdfa49354a42ac9d7b9e6b7d42549a00"
+    },
+    {
+      "from": "public/assets/js/staff-help.js",
+      "to": "public/assets/js/staff/support/staff-help.js",
+      "sha256Before": "61907fc5697589fda79e972fcb19fad1e72c5634903b7c4ad8b1e8bfc9330408",
+      "sha256After": "61907fc5697589fda79e972fcb19fad1e72c5634903b7c4ad8b1e8bfc9330408"
+    },
+    {
+      "from": "public/assets/js/staff-notifications.js",
+      "to": "public/assets/js/staff/support/staff-notifications.js",
+      "sha256Before": "512279a8e37e87c3e3e751a6e19f3c251a3a1dc40343e0390edc6403d61815cf",
+      "sha256After": "512279a8e37e87c3e3e751a6e19f3c251a3a1dc40343e0390edc6403d61815cf"
+    },
+    {
+      "from": "public/assets/js/staff-profile.js",
+      "to": "public/assets/js/staff/support/staff-profile.js",
+      "sha256Before": "bbf3e3dac81a4a4ed3154cbeac80ad8a8b48c1d906f34b4498e5ca02f0463686",
+      "sha256After": "bbf3e3dac81a4a4ed3154cbeac80ad8a8b48c1d906f34b4498e5ca02f0463686"
+    },
+    {
+      "from": "public/assets/js/staff-status.js",
+      "to": "public/assets/js/staff/support/staff-status.js",
+      "sha256Before": "bd62605a796a49a90071a165ebf6e5e46071667dd9a5d09cca6caea081632e5c",
+      "sha256After": "bd62605a796a49a90071a165ebf6e5e46071667dd9a5d09cca6caea081632e5c"
+    },
+    {
+      "from": "public/assets/js/staff-support-data.js",
+      "to": "public/assets/js/staff/support/staff-support-data.js",
+      "sha256Before": "73d11677097aab8845cc3bd7abde0afcb36908dd2058421271eb658ee549a8e0",
+      "sha256After": "73d11677097aab8845cc3bd7abde0afcb36908dd2058421271eb658ee549a8e0"
+    },
+    {
+      "from": "public/assets/js/staff-support.js",
+      "to": "public/assets/js/staff/support/staff-support.js",
+      "sha256Before": "472ed898abaf35c6f696d04bad3c9e328c01b2a0b2d74ad67d7d4ac83dd5aa2e",
+      "sha256After": "472ed898abaf35c6f696d04bad3c9e328c01b2a0b2d74ad67d7d4ac83dd5aa2e"
+    },
+    {
+      "from": "public/assets/js/superadmin-review-data.js",
+      "to": "public/assets/js/staff/superadmin/superadmin-review-data.js",
+      "sha256Before": "d73855e0a78d8c9d3d2dce949fc4361a7bb11d81915b24460ad9f97250724b6e",
+      "sha256After": "d73855e0a78d8c9d3d2dce949fc4361a7bb11d81915b24460ad9f97250724b6e"
+    },
+    {
+      "from": "public/assets/js/superadmin-review-store.js",
+      "to": "public/assets/js/staff/superadmin/superadmin-review-store.js",
+      "sha256Before": "b02642d1e0e06f21ba9eb043d37c982372b93136f8b3a006abb32d5f69bbca46",
+      "sha256After": "b02642d1e0e06f21ba9eb043d37c982372b93136f8b3a006abb32d5f69bbca46"
+    },
+    {
+      "from": "public/assets/js/superadmin-review.js",
+      "to": "public/assets/js/staff/superadmin/superadmin-review.js",
+      "sha256Before": "6df5c9f9a78f536c3711d9630215812c54a384d62f08a864c45cdf40cd976de8",
+      "sha256After": "6df5c9f9a78f536c3711d9630215812c54a384d62f08a864c45cdf40cd976de8"
+    },
+    {
+      "from": "public/assets/js/system-parameters-data.js",
+      "to": "public/assets/js/staff/superadmin/system-parameters-data.js",
+      "sha256Before": "f733e814b34f1d39f0efda41e282ca0edd987b5404b0d3ddb8191d2d78f70421",
+      "sha256After": "f733e814b34f1d39f0efda41e282ca0edd987b5404b0d3ddb8191d2d78f70421"
+    },
+    {
+      "from": "public/assets/js/system-parameters.js",
+      "to": "public/assets/js/staff/superadmin/system-parameters.js",
+      "sha256Before": "79a1de4c3d852d572c885774a683df920adaa929a08741b4bce76626367ae757",
+      "sha256After": "79a1de4c3d852d572c885774a683df920adaa929a08741b4bce76626367ae757"
+    },
+    {
+      "from": "public/assets/js/taxonomy-data.js",
+      "to": "public/assets/js/staff/catalog/taxonomy-data.js",
+      "sha256Before": "bb4dfefb64593cbd884e2e5f3f3127031c2e4a370e972bb5d2f8ba957e8e2c50",
+      "sha256After": "bb4dfefb64593cbd884e2e5f3f3127031c2e4a370e972bb5d2f8ba957e8e2c50"
+    },
+    {
+      "from": "public/assets/js/taxonomy.js",
+      "to": "public/assets/js/staff/catalog/taxonomy.js",
+      "sha256Before": "da26142a854d660dd16163dad5d0e325e9aa4e3712f479b66bbd663b7bdd6c9c",
+      "sha256After": "da26142a854d660dd16163dad5d0e325e9aa4e3712f479b66bbd663b7bdd6c9c"
+    },
+    {
+      "from": "public/assets/css/admin-dashboard/tokens.css",
+      "to": "public/assets/css/shared/tokens.css",
+      "sha256Before": "ab3cad12a36a62a0d4feb60f2b2d069ff0f5d0087a1cdd819fdbb9eb909bdf69",
+      "sha256After": "ab3cad12a36a62a0d4feb60f2b2d069ff0f5d0087a1cdd819fdbb9eb909bdf69"
+    },
+    {
+      "from": "public/assets/css/admin-dashboard/base.css",
+      "to": "public/assets/css/shared/base.css",
+      "sha256Before": "c516e0fbf75f0ffd3750fd02df3ad6a3ebfd918d5fc398d0bb0d3c0acd584fea",
+      "sha256After": "c516e0fbf75f0ffd3750fd02df3ad6a3ebfd918d5fc398d0bb0d3c0acd584fea"
+    },
+    {
+      "from": "public/assets/css/admin-dashboard/dashboard.css",
+      "to": "public/assets/css/staff/dashboard/dashboard.css",
+      "sha256Before": "1cd0da2c3e02b8dccd94a77c36db5dc593844e91c043f8f27259d99e20f44d5e",
+      "sha256After": "9a76b1e9e24b5ae9b62259285358521860a5bef22d1e7efbab1908cb1cc0a23d"
+    },
+    {
+      "from": "spesifikasi-proyek.md.md",
+      "to": "docs/specifications/spesifikasi-proyek-v2.6.md",
+      "sha256Before": "c97774144ed1487cc5962e3d7eae80cf9fac616f3f65953fc9b3ca5c7e2d0790",
+      "sha256After": "c97774144ed1487cc5962e3d7eae80cf9fac616f3f65953fc9b3ca5c7e2d0790"
+    },
+    {
+      "from": "DESIGN.txt",
+      "to": "docs/design/archive/DESIGN.txt",
+      "sha256Before": "b2a59668fcb2aef7853ad0a27e21faa047bfd4526cf021468f1778f9ab624716",
+      "sha256After": "b2a59668fcb2aef7853ad0a27e21faa047bfd4526cf021468f1778f9ab624716"
+    },
+    {
+      "from": "public/g1.html",
+      "to": "tools/archive/prototypes/g1.html",
+      "sha256Before": "418349d2e6fa198025eb6bf29063db1d93a30cf2d60172d29e9ad0c4a6e99146",
+      "sha256After": "418349d2e6fa198025eb6bf29063db1d93a30cf2d60172d29e9ad0c4a6e99146"
+    },
+    {
+      "from": "public/tes.html",
+      "to": "tools/archive/prototypes/tes.html",
+      "sha256Before": "38badeb56eb9bdf82d51ac7df73284a35f5a12777ff15b78d6ed51101b32c7e1",
+      "sha256After": "38badeb56eb9bdf82d51ac7df73284a35f5a12777ff15b78d6ed51101b32c7e1"
+    },
+    {
+      "from": "docs/admin-dashboard-role-changes.md",
+      "to": "docs/design/decisions/admin-dashboard-role-changes.md",
+      "sha256Before": "0860da8ac234c953fd1a9161df79751e4bfcf607eb6da563af7f98f9526088c0",
+      "sha256After": "4f12d39054ade2454a4fff4fd1d6b5d5165bbc3e9f44d266b943071e0fa524fa"
+    },
+    {
+      "from": "docs/audit-log-coverage.md",
+      "to": "docs/coverage/audit-log-coverage.md",
+      "sha256Before": "98381547133f109f631c13b63fe11079ede560f2004c337e8d340a61d8da4f9a",
+      "sha256After": "319cfad5ae06c05c077ca1499074d6c61ed62b8973e20d720245fd48cfda1192"
+    },
+    {
+      "from": "docs/audit-log-surface.md",
+      "to": "docs/design/surfaces/audit-log-surface.md",
+      "sha256Before": "2545f19b3da2d649186a449404a4c247852aad9ef63ad8db552f0598e8c36d85",
+      "sha256After": "1c0940e0749509ca9d3a7832d43730e229b54871fb11a3c1a00a7aee3d93c0a9"
+    },
+    {
+      "from": "docs/bouquet-production-coverage.md",
+      "to": "docs/coverage/bouquet-production-coverage.md",
+      "sha256Before": "d4f2db0c15d196965ed845a92810f7ae23fc1cb046b62c7bd4752ad6f4fbd6df",
+      "sha256After": "1ecad2b077f561dd18dc9df42186610c36e5d755bf69cae5ebbbf99d6f4b200d"
+    },
+    {
+      "from": "docs/bouquet-production-surface.md",
+      "to": "docs/design/surfaces/bouquet-production-surface.md",
+      "sha256Before": "f7c9025b7682ed21bd268f9928657d0d71bdf38f839b791b9c5df2190560e9f8",
+      "sha256After": "8235ae87b623ea2fa6cddabc947a5212bbbd6086e521e9836aa8931fe794faf7"
+    },
+    {
+      "from": "docs/categories-attributes-coverage.md",
+      "to": "docs/coverage/categories-attributes-coverage.md",
+      "sha256Before": "3403c46312e4e1aa938973aeacf7d6590e50659d69dbde7f7895566d8c620059",
+      "sha256After": "a0e158fb16a40542f699652738285a026ea1ab08eca108dad49b6a823b038529"
+    },
+    {
+      "from": "docs/categories-attributes-surface.md",
+      "to": "docs/design/surfaces/categories-attributes-surface.md",
+      "sha256Before": "f89c4b687db78a6b6a9c91954ff8ab13c061723f59c5ff05dcbfbdff8042c4f1",
+      "sha256After": "f89c4b687db78a6b6a9c91954ff8ab13c061723f59c5ff05dcbfbdff8042c4f1"
+    },
+    {
+      "from": "docs/closure-calendar-coverage.md",
+      "to": "docs/coverage/closure-calendar-coverage.md",
+      "sha256Before": "b28fa987775b654a31c6bc44f4d26a6b01938eab2c6662fe8522188fd0d6ef39",
+      "sha256After": "a0c8ace58ff2a6e7891cda4f83891e1fa2575902ee064c68b36f6894db4e94e9"
+    },
+    {
+      "from": "docs/closure-calendar-surface.md",
+      "to": "docs/design/surfaces/closure-calendar-surface.md",
+      "sha256Before": "839bc688d58d90379f5b50ae3ffb443338070d4330abab8cacb49fbc9e623334",
+      "sha256After": "3f3dab071fd43da58d67a47b9795e2aed5cd6ee295741406a0d870342d97d236"
+    },
+    {
+      "from": "docs/customers-coverage.md",
+      "to": "docs/coverage/customers-coverage.md",
+      "sha256Before": "9da825b653ca7cb7a1f8b0fe5d511a014c2501f3b5c348b635b7548f07f6108b",
+      "sha256After": "9804af8e15d14b7a56d342fdf3a12937f46674fa046e0b6ff7b30b6862838037"
+    },
+    {
+      "from": "docs/customers-surface.md",
+      "to": "docs/design/surfaces/customers-surface.md",
+      "sha256Before": "90cd6b671573f347f00122b3bc0649adcdd268911146b4092820f2c864309de5",
+      "sha256After": "ff985895e544d6ce5c2649309dc3d0de8a84f5ac2dfdbb0009bbc78b37e0c051"
+    },
+    {
+      "from": "docs/materials-coverage.md",
+      "to": "docs/coverage/materials-coverage.md",
+      "sha256Before": "7664dd3e9d67970fe398b0fa8e205bde8ad4f87557bc6a8656c58c16e32ee802",
+      "sha256After": "5c81909fc7e7d5f0516a0ff676bc1969d33a25883efb9f09ea60b5198956f7a6"
+    },
+    {
+      "from": "docs/materials-surface.md",
+      "to": "docs/design/surfaces/materials-surface.md",
+      "sha256Before": "8e0e0b804148131dda9b1a8ce599d463b5b0722c4d2280bf90c487e0db0d4601",
+      "sha256After": "6888428a16ddac1524cc14669d1e18a174d8ad52c86d9aa4611b020eb0b14b11"
+    },
+    {
+      "from": "docs/operational-report-coverage.md",
+      "to": "docs/coverage/operational-report-coverage.md",
+      "sha256Before": "19978d640cb764f00ba2e12767ac15c975642e269fb3558681ae7aa7d35a3ad8",
+      "sha256After": "19978d640cb764f00ba2e12767ac15c975642e269fb3558681ae7aa7d35a3ad8"
+    },
+    {
+      "from": "docs/orders-queue-surface.md",
+      "to": "docs/design/surfaces/orders-queue-surface.md",
+      "sha256Before": "d8614feb1bf02bb44c5c83e8c05fc8fa181be2b240dff38d2fedeabaef7f90e4",
+      "sha256After": "556081e385902936811fb7a92b05a2ea65892415057870e53725b29fd32610fd"
+    },
+    {
+      "from": "docs/orders-workflows-coverage.md",
+      "to": "docs/coverage/orders-workflows-coverage.md",
+      "sha256Before": "e79e67a96131fa05fcce590bf7de2abb414174ad5c27a08bddb11a3df490d7d3",
+      "sha256After": "4f7fb7862289633b33ad6f7f15f369a50fe40c2da90f2d2b07d92a25b86f2a91"
+    },
+    {
+      "from": "docs/products-coverage.md",
+      "to": "docs/coverage/products-coverage.md",
+      "sha256Before": "48f395507b62ad0ffa6db26b1260ae9ccbeb49f50ea62f9364dcb467cf402e7d",
+      "sha256After": "a795511fe3ff35663f75e0fc1e87af3019481e67d3132607544f3f8fb53aae48"
+    },
+    {
+      "from": "docs/products-surface.md",
+      "to": "docs/design/surfaces/products-surface.md",
+      "sha256Before": "884fc298e77a389c55da40e5195a6551d29f2c4d13b0bff8beeb8ef75e43d702",
+      "sha256After": "a94f0deb3810f067a14280472f57a7dfd6c0762eeca0cdc9cfd712dae771fec0"
+    },
+    {
+      "from": "docs/staff-accounts-coverage.md",
+      "to": "docs/coverage/staff-accounts-coverage.md",
+      "sha256Before": "fac8e05999207f886081c8888a22d3a75b396641ad1efdf9832529548914bdbf",
+      "sha256After": "7068085247c522618ee0c21a4de130c6cae902e0ac429fe3d71f8c4b667ee06f"
+    },
+    {
+      "from": "docs/staff-accounts-surface.md",
+      "to": "docs/design/surfaces/staff-accounts-surface.md",
+      "sha256Before": "49bcac22bc46271a1e00e2df15cae343cae16b4a1381785c4bceca6c84df29fa",
+      "sha256After": "3fa3a7d8ed2fee8d52fb501694c277569a7bc445b6acabf9a48546e3731b1380"
+    },
+    {
+      "from": "docs/staff-auth-coverage.md",
+      "to": "docs/coverage/staff-auth-coverage.md",
+      "sha256Before": "a4750f9776a847df7f8747e0a9e79505ad73ecf95e27e683ebc0489c320d116f",
+      "sha256After": "a4750f9776a847df7f8747e0a9e79505ad73ecf95e27e683ebc0489c320d116f"
+    },
+    {
+      "from": "docs/staff-completion-surface.md",
+      "to": "docs/design/surfaces/staff-completion-surface.md",
+      "sha256Before": "d05b008336ac324e25ecf13f46c0ec92e9ba00ef8f06b1514fa9ba52fbd62deb",
+      "sha256After": "d05b008336ac324e25ecf13f46c0ec92e9ba00ef8f06b1514fa9ba52fbd62deb"
+    },
+    {
+      "from": "docs/staff-support-coverage.md",
+      "to": "docs/coverage/staff-support-coverage.md",
+      "sha256Before": "80edbc3d561a062487797f20955f998f1fa1c23108c712ed59bd0a52c84e4315",
+      "sha256After": "1db66acf9390e33d567c63a890be97931121904e85edc95054921cee72ee460b"
+    },
+    {
+      "from": "docs/staff-support-surface.md",
+      "to": "docs/design/surfaces/staff-support-surface.md",
+      "sha256Before": "7f676fd8a07913a893557c8cd2560f9562f51c8e62b01f82391609233d77776f",
+      "sha256After": "7f676fd8a07913a893557c8cd2560f9562f51c8e62b01f82391609233d77776f"
+    },
+    {
+      "from": "docs/staff-ui-completion.md",
+      "to": "docs/coverage/staff-ui-completion.md",
+      "sha256Before": "f2f8e4bc5676dd4e049c4449382024a827a768990e59e8b5ba4dc359c3c26994",
+      "sha256After": "6ac01cdd3bdf815ac93ef369bee7c961713c777c89ad4eb895d8ee0440f1d45c"
+    },
+    {
+      "from": "docs/superadmin-review-coverage.md",
+      "to": "docs/coverage/superadmin-review-coverage.md",
+      "sha256Before": "a9bcf0c439256a608cc84a128275547f114c3fff4869a887e84278f3e028ef0d",
+      "sha256After": "ee08f18fcd4216ca8464a1be9c1407ff09cb2109b661489f11c01c9a1bdbcc5e"
+    },
+    {
+      "from": "docs/superadmin-review-surface.md",
+      "to": "docs/design/surfaces/superadmin-review-surface.md",
+      "sha256Before": "20e1fd53268e74cd2c7fb5964e50855f96a4b940ab21adcd24d90f1772e31bdc",
+      "sha256After": "20e1fd53268e74cd2c7fb5964e50855f96a4b940ab21adcd24d90f1772e31bdc"
+    },
+    {
+      "from": "docs/system-parameters-coverage.md",
+      "to": "docs/coverage/system-parameters-coverage.md",
+      "sha256Before": "d6b9c5a064d979a71feddb3fca64a3681dd1fad6e53ce4bb770e4beb50cc70a8",
+      "sha256After": "8150ea31694ff0933678b24fcb297ddff24101b31161c3acc8d46b965c2b6853"
+    },
+    {
+      "from": "docs/system-parameters-surface.md",
+      "to": "docs/design/surfaces/system-parameters-surface.md",
+      "sha256Before": "7e265a1cd4af7200a9cc1eee54c3c00633c57463f7c1126ca5897ea24cc47987",
+      "sha256After": "81920c851e4bae86ca3ab9ed64dbe9bfaf22c283b35b95379d525b002563b3f9"
+    },
+    {
+      "from": ".hallmark/append-system-log.cjs",
+      "to": "tools/archive/generators/append-system-log.cjs",
+      "sha256Before": "4d1c1f6a43f5418b2b48869a85512badad81c06f09a585877ada6f1775a9b17f",
+      "sha256After": "2659bac5a0ac4709f937e53368f7ebf92dd12a07488ac5be0d5217ea801d451e"
+    },
+    {
+      "from": ".hallmark/audit-log-entry.json",
+      "to": ".hallmark/entries/audit-log-entry.json",
+      "sha256Before": "bd13f50f15fd846a344df6748295768d11556371f9b950a77f8b56da3c12abf6",
+      "sha256After": "bd13f50f15fd846a344df6748295768d11556371f9b950a77f8b56da3c12abf6"
+    },
+    {
+      "from": ".hallmark/before.json",
+      "to": "tools/archive/design-workbench/before.json",
+      "sha256Before": "e5ee0b514c0e47cdbb602ef33c98287432353fa7d55f486da28f054a48e1cc2c",
+      "sha256After": "e5ee0b514c0e47cdbb602ef33c98287432353fa7d55f486da28f054a48e1cc2c"
+    },
+    {
+      "from": ".hallmark/before.txt",
+      "to": "tools/archive/design-workbench/before.txt",
+      "sha256Before": "632b7812851def16cfbfdcd5ea89e3622f9cd0a28196f211c9171f0cf916d367",
+      "sha256After": "632b7812851def16cfbfdcd5ea89e3622f9cd0a28196f211c9171f0cf916d367"
+    },
+    {
+      "from": ".hallmark/bouquet-production-log-entry.json",
+      "to": ".hallmark/entries/bouquet-production-log-entry.json",
+      "sha256Before": "33df8d1d1200bf729bece1dd6fa8d3b857c3c6ef5e16d668a12204e0e92ae4a0",
+      "sha256After": "33df8d1d1200bf729bece1dd6fa8d3b857c3c6ef5e16d668a12204e0e92ae4a0"
+    },
+    {
+      "from": ".hallmark/build-audit-log.cjs",
+      "to": "tools/archive/generators/build-audit-log.cjs",
+      "sha256Before": "c9dc704573f4fd2a367028b262b9ffa54b56ecff0acdeb58dad8915af1f0809c",
+      "sha256After": "46f54b36cb52c760cd90dff6e9288eef5253b294737a5b787836873f21bfb608"
+    },
+    {
+      "from": ".hallmark/build-bouquet-production.cjs",
+      "to": "tools/archive/generators/build-bouquet-production.cjs",
+      "sha256Before": "afe1bc1adcd460ba01c03857f7245b174aa90eb2c6b9ef4a75b3000a98dea030",
+      "sha256After": "45104655318cf36932369e552395c803f865202b95f105629142da039b0bdab8"
+    },
+    {
+      "from": ".hallmark/build-closure-calendar.cjs",
+      "to": "tools/archive/generators/build-closure-calendar.cjs",
+      "sha256Before": "4c4140c226ac8c895a60878566732c7919705e66b2d53990dd6dce176324c6f5",
+      "sha256After": "3cb2f8339e9f3a944b2a4b5e9dee609f4de521d709db61c216664cea7096a6dc"
+    },
+    {
+      "from": ".hallmark/build-customers.cjs",
+      "to": "tools/archive/generators/build-customers.cjs",
+      "sha256Before": "9d9214ae78bdf9b6550db2f88dee2e60348b8cfbd6803ee46ce504298071abe3",
+      "sha256After": "a06a535e99bac9cce85b5372e7c8e1296bbba69d96a3afbcdd58e28167663e43"
+    },
+    {
+      "from": ".hallmark/build-materials-shell.cjs",
+      "to": "tools/archive/generators/build-materials-shell.cjs",
+      "sha256Before": "9a25af959be6acb4a1175b0a2cdceb7cdd6327d2701f9f0fee06ba45025f9967",
+      "sha256After": "325bca9c9b325b03b5d0870ecebd353d11ed009992f09a0d9d7ad1cd4443632e"
+    },
+    {
+      "from": ".hallmark/build-system-page.cjs",
+      "to": "tools/archive/generators/build-system-page.cjs",
+      "sha256Before": "f4b1c2c59f03393779756d3cb34fda7026357aa96a786d832ab4c1e05e87302c",
+      "sha256After": "c8e904f983a7693c2477e70b77536b265ff9fb436dde030ed5eb56a9e09b34e9"
+    },
+    {
+      "from": ".hallmark/capture-customers.cjs",
+      "to": "tools/preview/capture-customers.cjs",
+      "sha256Before": "fcd65554ff0edb955382f928df34d96a7509c6222a4b07df8f3a909837673404",
+      "sha256After": "53c6210be9784d1f378230ed60f1109be1bd3eef56592f1ff7877b30c55d8101"
+    },
+    {
+      "from": ".hallmark/capture-materials.cjs",
+      "to": "tools/preview/capture-materials.cjs",
+      "sha256Before": "1b2c4890c2d4027dba822a2a24ac012d107aa88e1f45ee158d4f2446bec55864",
+      "sha256After": "19c93e4eb58a9d99b6078020d8922638337e680b67d992d66407743455eb6704"
+    },
+    {
+      "from": ".hallmark/capture-products.cjs",
+      "to": "tools/preview/capture-products.cjs",
+      "sha256Before": "ee051f1cdc49fa9df9f3c446acc99ef83fab256ffafb0065ac10a73ed5f71809",
+      "sha256After": "268197d42e1a0dfc0c50af135c44af3328f8a26f78b986fa8798be134612162b"
+    },
+    {
+      "from": ".hallmark/capture-staff-accounts.cjs",
+      "to": "tools/preview/capture-staff-accounts.cjs",
+      "sha256Before": "5088d83ef501af459d131b261aebbbb0a4b279a1fd792bc7c12a59959fea8685",
+      "sha256After": "62ab61ced9a5379c939ad6a1e1c7580891c6b2c0e6cb9f9d0e1b5097114684df"
+    },
+    {
+      "from": ".hallmark/capture-system-fixes.cjs",
+      "to": "tools/preview/capture-system-fixes.cjs",
+      "sha256Before": "70d390825479882533eba544be713cc0fe8d37b7adc102e9fa920bea2b340780",
+      "sha256After": "058c4c1ae859bef5606c79bd7cbc07700af71592c5e71de3a1c10923c70b04c9"
+    },
+    {
+      "from": ".hallmark/closure-calendar-log-entry.json",
+      "to": ".hallmark/entries/closure-calendar-log-entry.json",
+      "sha256Before": "504ca8b0e81af4e4d11f4cf39bdbc10941902cd0f14ee2e821ca199682489360",
+      "sha256After": "504ca8b0e81af4e4d11f4cf39bdbc10941902cd0f14ee2e821ca199682489360"
+    },
+    {
+      "from": ".hallmark/closure-calendar-preflight.json",
+      "to": ".hallmark/preflights/closure-calendar-preflight.json",
+      "sha256Before": "028b1ba18bed427b18139783784eb44569bb4c2baed8650c59077aeeeb5501c7",
+      "sha256After": "6495b683c95ba654bec9fb3b2b0ae9652b189a93c32df84388537cb6d25f3bfd"
+    },
+    {
+      "from": ".hallmark/customers-log-entry.json",
+      "to": ".hallmark/entries/customers-log-entry.json",
+      "sha256Before": "ef1fc58c3e34e2f07f06a8ee47043d89e9b81966beba10297cabeaa8fec93400",
+      "sha256After": "ef1fc58c3e34e2f07f06a8ee47043d89e9b81966beba10297cabeaa8fec93400"
+    },
+    {
+      "from": ".hallmark/customers-preflight.json",
+      "to": ".hallmark/preflights/customers-preflight.json",
+      "sha256Before": "e1060206e7391e887085f41e49ef7ac1b995d266c0533683b19ad8527f505e49",
+      "sha256After": "489a8f3120c24fc004b0bd361b003ffbaf9012ae09f9bebb1d3ede80886717b8"
+    },
+    {
+      "from": ".hallmark/dashboard-verification.json",
+      "to": "storage/reports/hallmark/reports/dashboard-verification.json",
+      "sha256Before": "2488d27d34ee5bf1c2d062bf6f84a43920e4607a300d15f6954d73189f83c4ec",
+      "sha256After": "2488d27d34ee5bf1c2d062bf6f84a43920e4607a300d15f6954d73189f83c4ec"
+    },
+    {
+      "from": ".hallmark/finalize-dashboard.cjs",
+      "to": "tools/archive/generators/finalize-dashboard.cjs",
+      "sha256Before": "95ffc5e15422f1f4e4e3c59775c992795e3225e97abfffa1bfb4d92342e316b8",
+      "sha256After": "0850a30b6de776b629778899efecdc1909b06fab2e6943b55e0f327ede0b9963"
+    },
+    {
+      "from": ".hallmark/format-audit.cjs",
+      "to": "tools/archive/generators/format-audit.cjs",
+      "sha256Before": "5c22b5e78d52919aff145058f0f5387dbe894fd67d94e3402b12d562424f3391",
+      "sha256After": "a49747c99f895764aa631b2622967d976622793a28fba842d4aee5a5f190102b"
+    },
+    {
+      "from": ".hallmark/format-bouquet.cjs",
+      "to": "tools/archive/generators/format-bouquet.cjs",
+      "sha256Before": "54963574795ffc41e07618751fcba4445ed1ad1aa010ba85e0d93562608b5683",
+      "sha256After": "9ad866029fd9b46757b4d382c28dca5de44b24cedd2a4d64d1d97438636843be"
+    },
+    {
+      "from": ".hallmark/format-customers.cjs",
+      "to": "tools/archive/generators/format-customers.cjs",
+      "sha256Before": "d0dee253a0df56b762a383a70a1cbe888dfb5a5ce72f27d6a400389657bbd00c",
+      "sha256After": "a65efdb042a37e79c144f9bd8f059cc5a881d8b01281d1b5c1310f7c7d0df955"
+    },
+    {
+      "from": ".hallmark/format-system-data.cjs",
+      "to": "tools/archive/generators/format-system-data.cjs",
+      "sha256Before": "41ea173eac520059623091a3e21eaa90fe8179f113142951781cbcb551c8dfcc",
+      "sha256After": "4e322c9391a09c3e73236c87926b62a7c7d5ea78c6e5394427b5b71e69913332"
+    },
+    {
+      "from": ".hallmark/format-system-parameters.cjs",
+      "to": "tools/archive/generators/format-system-parameters.cjs",
+      "sha256Before": "bd456f26aa9ff392e2666b70cae68fb3e412f12bb306408dc7278a30ec50e58f",
+      "sha256After": "3800f7d77166b9df36f1e5ce67606b5613ec601d8db0a452ad9d974a229d6760"
+    },
+    {
+      "from": ".hallmark/materials-log-entry.json",
+      "to": ".hallmark/entries/materials-log-entry.json",
+      "sha256Before": "c1322c5aad483cba7849d41751ff1206d36e5aa03bbac6d1258401b4de2142bc",
+      "sha256After": "c1322c5aad483cba7849d41751ff1206d36e5aa03bbac6d1258401b4de2142bc"
+    },
+    {
+      "from": ".hallmark/materials-preflight.json",
+      "to": ".hallmark/preflights/materials-preflight.json",
+      "sha256Before": "f7a40e999bc274a46783117ca740238169483e2281145d25b22b217f9ef2df13",
+      "sha256After": "0022acff7484d0e8e2ec7421b7dfdfc0f72cd205006aac3e19b47b0808058fac"
+    },
+    {
+      "from": ".hallmark/orders-full-preflight.json",
+      "to": ".hallmark/preflights/orders-full-preflight.json",
+      "sha256Before": "4283f6002282de72b3379b5de85b02bd96acaae801edb25ee92cff1ccc3e2ef3",
+      "sha256After": "8f42c05788bbb795e2d7a8f5ad44b0245889c877ba3e28cf2894c41f9d000de2"
+    },
+    {
+      "from": ".hallmark/orders-preflight.json",
+      "to": ".hallmark/preflights/orders-preflight.json",
+      "sha256Before": "0d273e6e6a0e13d865b799e53a87f97eebc0bcbba8b22e003325e5d40e068969",
+      "sha256After": "0d273e6e6a0e13d865b799e53a87f97eebc0bcbba8b22e003325e5d40e068969"
+    },
+    {
+      "from": ".hallmark/original-dashboard.html",
+      "to": "tools/archive/design-workbench/original-dashboard.html",
+      "sha256Before": "f0fd09385eff56f5945906593f4f02555826725cb7d02f6e0ec7a95aaaca4f48",
+      "sha256After": "f0fd09385eff56f5945906593f4f02555826725cb7d02f6e0ec7a95aaaca4f48"
+    },
+    {
+      "from": ".hallmark/poppins-google.css",
+      "to": "tools/archive/design-workbench/poppins-google.css",
+      "sha256Before": "7a9c3ac236a13c5a22c94da81c75e0b806f8e1a704370cf3a39b5b5b4b95403f",
+      "sha256After": "7a9c3ac236a13c5a22c94da81c75e0b806f8e1a704370cf3a39b5b5b4b95403f"
+    },
+    {
+      "from": ".hallmark/preflight-audit-log.json",
+      "to": ".hallmark/preflights/preflight-audit-log.json",
+      "sha256Before": "1acefb88f7233882609482ff02a8cf0ea73476421a50b9836f40e28bf1642fe2",
+      "sha256After": "1acefb88f7233882609482ff02a8cf0ea73476421a50b9836f40e28bf1642fe2"
+    },
+    {
+      "from": ".hallmark/preflight-bouquet-production.json",
+      "to": ".hallmark/preflights/preflight-bouquet-production.json",
+      "sha256Before": "f526e278e0fc7c42400dc88904719d0d5737056654f4de5106979f96a4c6f307",
+      "sha256After": "f526e278e0fc7c42400dc88904719d0d5737056654f4de5106979f96a4c6f307"
+    },
+    {
+      "from": ".hallmark/products-preflight.json",
+      "to": ".hallmark/preflights/products-preflight.json",
+      "sha256Before": "bcf2fc3f7f249e4b1ae9f44c39f23c682e8ca3543684e160f58f2bcc3345033c",
+      "sha256After": "612b0e997e487f153662abccad1c998db539a90e02c2f8892967924d22e49d26"
+    },
+    {
+      "from": ".hallmark/redesign-dashboard.cjs",
+      "to": "tools/archive/generators/redesign-dashboard.cjs",
+      "sha256Before": "777435e298af0207f2f54d964ed7181e747dbefe9ea87c051859ff2c240d5f5d",
+      "sha256After": "d898317d3e509e9040811920ec872235255ec105632cb7012e82c1131c5916d7"
+    },
+    {
+      "from": ".hallmark/report-orders-1440.png",
+      "to": "storage/reports/hallmark/screenshots/report-orders-1440.png",
+      "sha256Before": "8965d938f0b32fb812486fea1a10da1fe5204f125e7c82ea8bf7928efd4c504e",
+      "sha256After": "8965d938f0b32fb812486fea1a10da1fe5204f125e7c82ea8bf7928efd4c504e"
+    },
+    {
+      "from": ".hallmark/report-orders-390.png",
+      "to": "storage/reports/hallmark/screenshots/report-orders-390.png",
+      "sha256Before": "4db37ba0bf424dc2ebd3e9bb8223df03077fcc0db59880427e53597626a61232",
+      "sha256After": "4db37ba0bf424dc2ebd3e9bb8223df03077fcc0db59880427e53597626a61232"
+    },
+    {
+      "from": ".hallmark/report-orders-768.png",
+      "to": "storage/reports/hallmark/screenshots/report-orders-768.png",
+      "sha256Before": "85dddc3b60047f0edba0c501b0f78fd82878868e0f07bfa9ec815879123e448c",
+      "sha256After": "85dddc3b60047f0edba0c501b0f78fd82878868e0f07bfa9ec815879123e448c"
+    },
+    {
+      "from": ".hallmark/report-overview-1440.png",
+      "to": "storage/reports/hallmark/screenshots/report-overview-1440.png",
+      "sha256Before": "b4a13f4610c5aa1b559a6b5fdebea8dbb941c1d70f8c4a5c51bb9ce666e6fde9",
+      "sha256After": "b4a13f4610c5aa1b559a6b5fdebea8dbb941c1d70f8c4a5c51bb9ce666e6fde9"
+    },
+    {
+      "from": ".hallmark/report-overview-390.png",
+      "to": "storage/reports/hallmark/screenshots/report-overview-390.png",
+      "sha256Before": "171519ff2a79291b99457f4d7fa615a9c9237f24c41890c97d5a053cc6d86bd8",
+      "sha256After": "171519ff2a79291b99457f4d7fa615a9c9237f24c41890c97d5a053cc6d86bd8"
+    },
+    {
+      "from": ".hallmark/report-overview-768.png",
+      "to": "storage/reports/hallmark/screenshots/report-overview-768.png",
+      "sha256Before": "6a6804bdad6e86e294a7e393fe13c16855a4f07af4ff6306d0132fbc1e8770b0",
+      "sha256After": "6a6804bdad6e86e294a7e393fe13c16855a4f07af4ff6306d0132fbc1e8770b0"
+    },
+    {
+      "from": ".hallmark/report-products-1440.png",
+      "to": "storage/reports/hallmark/screenshots/report-products-1440.png",
+      "sha256Before": "beb7f9d223f414815bd4a5974b0cd167e0e2cd1b5bbdc4538c32bffd6dd1dd74",
+      "sha256After": "beb7f9d223f414815bd4a5974b0cd167e0e2cd1b5bbdc4538c32bffd6dd1dd74"
+    },
+    {
+      "from": ".hallmark/report-products-390.png",
+      "to": "storage/reports/hallmark/screenshots/report-products-390.png",
+      "sha256Before": "25ec637c9018fb11539fac60b80a5165bb0fa3d4dd7f6cdce6e49e9ccccf33d1",
+      "sha256After": "25ec637c9018fb11539fac60b80a5165bb0fa3d4dd7f6cdce6e49e9ccccf33d1"
+    },
+    {
+      "from": ".hallmark/report-products-768.png",
+      "to": "storage/reports/hallmark/screenshots/report-products-768.png",
+      "sha256Before": "e9e3c8f56e6ecc9b69298b678da456a76c7a49b187283abe97402cc672b72f5b",
+      "sha256After": "e9e3c8f56e6ecc9b69298b678da456a76c7a49b187283abe97402cc672b72f5b"
+    },
+    {
+      "from": ".hallmark/report-shipping-1440.png",
+      "to": "storage/reports/hallmark/screenshots/report-shipping-1440.png",
+      "sha256Before": "97e46442da2abf53fe2906f7ec97d74e1c98d45d05ee9812bc0ca067d6f8ba3f",
+      "sha256After": "97e46442da2abf53fe2906f7ec97d74e1c98d45d05ee9812bc0ca067d6f8ba3f"
+    },
+    {
+      "from": ".hallmark/report-shipping-390.png",
+      "to": "storage/reports/hallmark/screenshots/report-shipping-390.png",
+      "sha256Before": "d252dd76954bbfba46de4e76cf96f322aef3ead2d2c4269e46b77beb1ed5bd45",
+      "sha256After": "d252dd76954bbfba46de4e76cf96f322aef3ead2d2c4269e46b77beb1ed5bd45"
+    },
+    {
+      "from": ".hallmark/report-shipping-768.png",
+      "to": "storage/reports/hallmark/screenshots/report-shipping-768.png",
+      "sha256Before": "87d917f7d0251c8f4128bab9531a99ae74451fa0843cc612d03b47b176db0450",
+      "sha256After": "87d917f7d0251c8f4128bab9531a99ae74451fa0843cc612d03b47b176db0450"
+    },
+    {
+      "from": ".hallmark/report-stock-1440.png",
+      "to": "storage/reports/hallmark/screenshots/report-stock-1440.png",
+      "sha256Before": "e5f996fd2ea7ca34436d544f57af6d063a49d12b20ada576682f94e3a567b09c",
+      "sha256After": "e5f996fd2ea7ca34436d544f57af6d063a49d12b20ada576682f94e3a567b09c"
+    },
+    {
+      "from": ".hallmark/report-stock-390.png",
+      "to": "storage/reports/hallmark/screenshots/report-stock-390.png",
+      "sha256Before": "ba51c69457e489568f972cf40e9cdc1579d2f3a260f6c32083545501e4b75162",
+      "sha256After": "ba51c69457e489568f972cf40e9cdc1579d2f3a260f6c32083545501e4b75162"
+    },
+    {
+      "from": ".hallmark/report-stock-768.png",
+      "to": "storage/reports/hallmark/screenshots/report-stock-768.png",
+      "sha256Before": "1e457fce33e157199e7e5fab1a5e6612170042128999bf1e0e977e296e17ce9a",
+      "sha256After": "1e457fce33e157199e7e5fab1a5e6612170042128999bf1e0e977e296e17ce9a"
+    },
+    {
+      "from": ".hallmark/review-approval-impact-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-approval-impact-1440.png",
+      "sha256Before": "b0075d8fe5d7e22ece32bc19085278061927ecae698b8da3039c9515c54c188e",
+      "sha256After": "b0075d8fe5d7e22ece32bc19085278061927ecae698b8da3039c9515c54c188e"
+    },
+    {
+      "from": ".hallmark/review-approval-impact-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-approval-impact-390.png",
+      "sha256Before": "0a6dab715e22095578f01cbc5a2e182ecf70450c5f07cc012980dd13fe9a4ce4",
+      "sha256After": "0a6dab715e22095578f01cbc5a2e182ecf70450c5f07cc012980dd13fe9a4ce4"
+    },
+    {
+      "from": ".hallmark/review-approvals-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-approvals-1440.png",
+      "sha256Before": "c086b58640a8ba48c98b4d4d3f5dd534cd9f07c028746d52a6aeb28ced781695",
+      "sha256After": "c086b58640a8ba48c98b4d4d3f5dd534cd9f07c028746d52a6aeb28ced781695"
+    },
+    {
+      "from": ".hallmark/review-approvals-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-approvals-390.png",
+      "sha256Before": "1fab475e925a0ba0960b54df5d5c39558a44fffef54a2aec21c97b6e8cfd25f5",
+      "sha256After": "1fab475e925a0ba0960b54df5d5c39558a44fffef54a2aec21c97b6e8cfd25f5"
+    },
+    {
+      "from": ".hallmark/review-awaiting-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-awaiting-1440.png",
+      "sha256Before": "2860916242925370ec400ba27557ed9dc1e09733c1565556bd26a414e9902880",
+      "sha256After": "2860916242925370ec400ba27557ed9dc1e09733c1565556bd26a414e9902880"
+    },
+    {
+      "from": ".hallmark/review-awaiting-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-awaiting-390.png",
+      "sha256Before": "faeb85f87b7215136fd32a7a6c625e5be762e74f9d33a2d00dd8e4b565effdb0",
+      "sha256After": "faeb85f87b7215136fd32a7a6c625e5be762e74f9d33a2d00dd8e4b565effdb0"
+    },
+    {
+      "from": ".hallmark/review-decision-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-decision-1440.png",
+      "sha256Before": "75d5b54cb0c6fc450502b1443ad85e296472f2c0d2d78d767fcc74690d5bd0ef",
+      "sha256After": "75d5b54cb0c6fc450502b1443ad85e296472f2c0d2d78d767fcc74690d5bd0ef"
+    },
+    {
+      "from": ".hallmark/review-decision-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-decision-390.png",
+      "sha256Before": "470ffd5eae896e35e797b951add4be3d49b198228d5b2a036e43f3009cb6cbae",
+      "sha256After": "470ffd5eae896e35e797b951add4be3d49b198228d5b2a036e43f3009cb6cbae"
+    },
+    {
+      "from": ".hallmark/review-reconciliation-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-reconciliation-1440.png",
+      "sha256Before": "dd5ac970e7e5abfc5d5ef2092831962f63344201a4570cf4e108bd054a4ff18d",
+      "sha256After": "dd5ac970e7e5abfc5d5ef2092831962f63344201a4570cf4e108bd054a4ff18d"
+    },
+    {
+      "from": ".hallmark/review-reconciliation-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-reconciliation-390.png",
+      "sha256Before": "f446dcd7b990c7b6c62b804b5c41ad2fdeca1da35ccf57442a1901e43a37f21b",
+      "sha256After": "f446dcd7b990c7b6c62b804b5c41ad2fdeca1da35ccf57442a1901e43a37f21b"
+    },
+    {
+      "from": ".hallmark/review-reconciliation-comparison-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-reconciliation-comparison-1440.png",
+      "sha256Before": "7110f165647b8cb63f243004da71a07edaba7671d7fedd5d3deca95c3bcced0f",
+      "sha256After": "7110f165647b8cb63f243004da71a07edaba7671d7fedd5d3deca95c3bcced0f"
+    },
+    {
+      "from": ".hallmark/review-reconciliation-comparison-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-reconciliation-comparison-390.png",
+      "sha256Before": "fdd7e0187819e2ef8237d29fb829b91f9d3dc8924afe6000fd817f710662f9f9",
+      "sha256After": "fdd7e0187819e2ef8237d29fb829b91f9d3dc8924afe6000fd817f710662f9f9"
+    },
+    {
+      "from": ".hallmark/review-stock-blocked-1440.png",
+      "to": "storage/reports/hallmark/screenshots/review-stock-blocked-1440.png",
+      "sha256Before": "7044822753ff1af1e6a64b64aac560ff2310e6ffb9b352b12683f0e4b7d3dcd9",
+      "sha256After": "7044822753ff1af1e6a64b64aac560ff2310e6ffb9b352b12683f0e4b7d3dcd9"
+    },
+    {
+      "from": ".hallmark/review-stock-blocked-390.png",
+      "to": "storage/reports/hallmark/screenshots/review-stock-blocked-390.png",
+      "sha256Before": "5ec2af980a196a12a131d6b9468e942968c77af4b543e40a6cfcecc388a5db4b",
+      "sha256After": "5ec2af980a196a12a131d6b9468e942968c77af4b543e40a6cfcecc388a5db4b"
+    },
+    {
+      "from": ".hallmark/serve-dashboard.cjs",
+      "to": "tools/preview/serve-dashboard.cjs",
+      "sha256Before": "0a24f5bdd4c37d6e2b11c19f033ee766e8eb2c2dcbe552a79aaf3a6ebb2cc539",
+      "sha256After": "0a24f5bdd4c37d6e2b11c19f033ee766e8eb2c2dcbe552a79aaf3a6ebb2cc539"
+    },
+    {
+      "from": ".hallmark/staff-auth-activation-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-activation-1440.png",
+      "sha256Before": "430823bc0c34df9d6c7b63d8cd7daf04884e8a44444de470e86ce1316c0f95f6",
+      "sha256After": "430823bc0c34df9d6c7b63d8cd7daf04884e8a44444de470e86ce1316c0f95f6"
+    },
+    {
+      "from": ".hallmark/staff-auth-activation-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-activation-390.png",
+      "sha256Before": "49ba3c1d9df76b8a7cdd8739aac58043f86bb3a54e9ef44cfcd89cda6bbbea08",
+      "sha256After": "49ba3c1d9df76b8a7cdd8739aac58043f86bb3a54e9ef44cfcd89cda6bbbea08"
+    },
+    {
+      "from": ".hallmark/staff-auth-activation-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-activation-768.png",
+      "sha256Before": "812acaf1aae54e3bb8c2b6f64a188f7c901b1e38bc40f0af33fe9267f99322ee",
+      "sha256After": "812acaf1aae54e3bb8c2b6f64a188f7c901b1e38bc40f0af33fe9267f99322ee"
+    },
+    {
+      "from": ".hallmark/staff-auth-activation-mfa-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-activation-mfa-1440.png",
+      "sha256Before": "cff43886a8668783e4664c20b495dc4c68290c043192d583dc078b1269cfd9b1",
+      "sha256After": "cff43886a8668783e4664c20b495dc4c68290c043192d583dc078b1269cfd9b1"
+    },
+    {
+      "from": ".hallmark/staff-auth-activation-mfa-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-activation-mfa-390.png",
+      "sha256Before": "c0a1304e39a8a1c73fd76d438e75c9426a4645da2d5feae65a2fd415d93f0c1e",
+      "sha256After": "c0a1304e39a8a1c73fd76d438e75c9426a4645da2d5feae65a2fd415d93f0c1e"
+    },
+    {
+      "from": ".hallmark/staff-auth-activation-mfa-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-activation-mfa-768.png",
+      "sha256Before": "b7884db2f571ab03978a270067b073b57d0c4a74b51c6928dba9491ef7f564fc",
+      "sha256After": "b7884db2f571ab03978a270067b073b57d0c4a74b51c6928dba9491ef7f564fc"
+    },
+    {
+      "from": ".hallmark/staff-auth-backup-code-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-backup-code-1440.png",
+      "sha256Before": "9a0abf6dd20845eb4648079c6ca5d8ab2f1cfb7d4d2329d0832b8a5d14d618e3",
+      "sha256After": "9a0abf6dd20845eb4648079c6ca5d8ab2f1cfb7d4d2329d0832b8a5d14d618e3"
+    },
+    {
+      "from": ".hallmark/staff-auth-backup-code-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-backup-code-390.png",
+      "sha256Before": "a5861eb0cede6bb4bfdb331e3c100c7cf27b92aadfec302751a4391834adf9f0",
+      "sha256After": "a5861eb0cede6bb4bfdb331e3c100c7cf27b92aadfec302751a4391834adf9f0"
+    },
+    {
+      "from": ".hallmark/staff-auth-backup-code-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-backup-code-768.png",
+      "sha256Before": "c0ea4398a73254e07c319466b5dd4df6e3a50cf3d584c8ce51b5222eed0af88c",
+      "sha256After": "c0ea4398a73254e07c319466b5dd4df6e3a50cf3d584c8ce51b5222eed0af88c"
+    },
+    {
+      "from": ".hallmark/staff-auth-blocked-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-blocked-1440.png",
+      "sha256Before": "d095d72596c199b419b8a7f2fe2a961000398bc46c7da5ba40431e8ed5b8b793",
+      "sha256After": "d095d72596c199b419b8a7f2fe2a961000398bc46c7da5ba40431e8ed5b8b793"
+    },
+    {
+      "from": ".hallmark/staff-auth-blocked-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-blocked-390.png",
+      "sha256Before": "d50fe93c388f37f4bfa5ab6f5cb8f0d80be150a2e4e78d3ea7d717106fea0450",
+      "sha256After": "d50fe93c388f37f4bfa5ab6f5cb8f0d80be150a2e4e78d3ea7d717106fea0450"
+    },
+    {
+      "from": ".hallmark/staff-auth-blocked-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-blocked-768.png",
+      "sha256Before": "076dea94b70b8d3391be418894f2c7c7f1d9208c5341e014722461b51a2d8c0c",
+      "sha256After": "076dea94b70b8d3391be418894f2c7c7f1d9208c5341e014722461b51a2d8c0c"
+    },
+    {
+      "from": ".hallmark/staff-auth-credentials-error-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-credentials-error-1440.png",
+      "sha256Before": "c0be01a8ce66b9821e85f892af1a039c4315620875c2efa1d1a75c4cb22850e7",
+      "sha256After": "c0be01a8ce66b9821e85f892af1a039c4315620875c2efa1d1a75c4cb22850e7"
+    },
+    {
+      "from": ".hallmark/staff-auth-credentials-error-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-credentials-error-390.png",
+      "sha256Before": "810f4cd8d89292115f312e76a4cf19bee1b8fff01bfbd99acc622c2a707133ca",
+      "sha256After": "810f4cd8d89292115f312e76a4cf19bee1b8fff01bfbd99acc622c2a707133ca"
+    },
+    {
+      "from": ".hallmark/staff-auth-credentials-error-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-credentials-error-768.png",
+      "sha256Before": "ec05dd7d843307f4199c357e3b5ce98e1748889f46f2c3dfe656bb210454e108",
+      "sha256After": "ec05dd7d843307f4199c357e3b5ce98e1748889f46f2c3dfe656bb210454e108"
+    },
+    {
+      "from": ".hallmark/staff-auth-expired-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-expired-1440.png",
+      "sha256Before": "1eb51bd5e3d5e0b2bf1f22eab1f44856a68cc203be3df89ef70a536578fed908",
+      "sha256After": "1eb51bd5e3d5e0b2bf1f22eab1f44856a68cc203be3df89ef70a536578fed908"
+    },
+    {
+      "from": ".hallmark/staff-auth-expired-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-expired-390.png",
+      "sha256Before": "eb041dcdad27606e6ae26ed7d39af914a92977596eb9d020790893a3a4a9a41c",
+      "sha256After": "eb041dcdad27606e6ae26ed7d39af914a92977596eb9d020790893a3a4a9a41c"
+    },
+    {
+      "from": ".hallmark/staff-auth-expired-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-expired-768.png",
+      "sha256Before": "cc7a1302cb169436d0bb79e1ed7ceb4b6e79445c4c8d7aa80b04ece34fcfd4dc",
+      "sha256After": "cc7a1302cb169436d0bb79e1ed7ceb4b6e79445c4c8d7aa80b04ece34fcfd4dc"
+    },
+    {
+      "from": ".hallmark/staff-auth-help-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-help-1440.png",
+      "sha256Before": "8e5e933941f9203f989445663c6cdb525d06955a135d1709e7af17c3e98620dc",
+      "sha256After": "8e5e933941f9203f989445663c6cdb525d06955a135d1709e7af17c3e98620dc"
+    },
+    {
+      "from": ".hallmark/staff-auth-help-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-help-390.png",
+      "sha256Before": "7651143e62c0adf629f95b3b271697082e6b5d91baff1b1740c5fced89b72e6c",
+      "sha256After": "7651143e62c0adf629f95b3b271697082e6b5d91baff1b1740c5fced89b72e6c"
+    },
+    {
+      "from": ".hallmark/staff-auth-help-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-help-768.png",
+      "sha256Before": "fbba8fd1b61b14308b9c36ebca28437841fd96c3ee50614caa498738db0a900d",
+      "sha256After": "fbba8fd1b61b14308b9c36ebca28437841fd96c3ee50614caa498738db0a900d"
+    },
+    {
+      "from": ".hallmark/staff-auth-help-open-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-help-open-1440.png",
+      "sha256Before": "85a468d70bda52d012c05871e4d809bcb8cf77bcaf380dd1261b694f2a601e0d",
+      "sha256After": "85a468d70bda52d012c05871e4d809bcb8cf77bcaf380dd1261b694f2a601e0d"
+    },
+    {
+      "from": ".hallmark/staff-auth-help-open-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-help-open-390.png",
+      "sha256Before": "763570cd90333ae7e2418e22d1224d44985cc695d1d955cc3bcc04466d52ec78",
+      "sha256After": "763570cd90333ae7e2418e22d1224d44985cc695d1d955cc3bcc04466d52ec78"
+    },
+    {
+      "from": ".hallmark/staff-auth-help-open-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-help-open-768.png",
+      "sha256Before": "216829a208fe1ff9b6849c97d9a5d355904bac46668ffe91eaafa603dc9a93c3",
+      "sha256After": "216829a208fe1ff9b6849c97d9a5d355904bac46668ffe91eaafa603dc9a93c3"
+    },
+    {
+      "from": ".hallmark/staff-auth-login-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-login-1440.png",
+      "sha256Before": "f503a3c01c3356309b3d1c54ead72085f3582628295f0c4bd2fd9859a7f1ed14",
+      "sha256After": "f503a3c01c3356309b3d1c54ead72085f3582628295f0c4bd2fd9859a7f1ed14"
+    },
+    {
+      "from": ".hallmark/staff-auth-login-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-login-390.png",
+      "sha256Before": "2582d54e09aaf84903019b47de76fc8187d96c348f6fe23d8be94e209506fc04",
+      "sha256After": "2582d54e09aaf84903019b47de76fc8187d96c348f6fe23d8be94e209506fc04"
+    },
+    {
+      "from": ".hallmark/staff-auth-login-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-login-768.png",
+      "sha256Before": "5dc34da18f8f50bc1cf29d7d3f4ea472ddfb22e0b5a582e36caac901d6cfdea4",
+      "sha256After": "5dc34da18f8f50bc1cf29d7d3f4ea472ddfb22e0b5a582e36caac901d6cfdea4"
+    },
+    {
+      "from": ".hallmark/staff-auth-mfa-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-mfa-1440.png",
+      "sha256Before": "9dbb954cd3a69e42401526279bb321737dee21e71af998098c11752555bb92c2",
+      "sha256After": "9dbb954cd3a69e42401526279bb321737dee21e71af998098c11752555bb92c2"
+    },
+    {
+      "from": ".hallmark/staff-auth-mfa-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-mfa-390.png",
+      "sha256Before": "ada78e6855657974f018580fabac0770686dedfd05924101657950aca757a508",
+      "sha256After": "ada78e6855657974f018580fabac0770686dedfd05924101657950aca757a508"
+    },
+    {
+      "from": ".hallmark/staff-auth-mfa-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-mfa-768.png",
+      "sha256Before": "aa33f04ad626deda85b09bec711a1f534996c140105abc328dbb7f88f34a7369",
+      "sha256After": "aa33f04ad626deda85b09bec711a1f534996c140105abc328dbb7f88f34a7369"
+    },
+    {
+      "from": ".hallmark/staff-auth-mfa-error-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-mfa-error-1440.png",
+      "sha256Before": "d9d1e535221477c2cdf8108ab6fa63981c9fc1f7418109fe9bae24f803282d57",
+      "sha256After": "d9d1e535221477c2cdf8108ab6fa63981c9fc1f7418109fe9bae24f803282d57"
+    },
+    {
+      "from": ".hallmark/staff-auth-mfa-error-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-mfa-error-390.png",
+      "sha256Before": "31b42ae3cc248f1a3e183ba8686b946540d2a9a8314b0359b755e0e31b460444",
+      "sha256After": "31b42ae3cc248f1a3e183ba8686b946540d2a9a8314b0359b755e0e31b460444"
+    },
+    {
+      "from": ".hallmark/staff-auth-mfa-error-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-mfa-error-768.png",
+      "sha256Before": "68e427242179cfd9a64fe37153793de935fd3f68a4d33141834541a2e7fb74f1",
+      "sha256After": "68e427242179cfd9a64fe37153793de935fd3f68a4d33141834541a2e7fb74f1"
+    },
+    {
+      "from": ".hallmark/staff-auth-network-error-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-network-error-1440.png",
+      "sha256Before": "709fd49e58a881be17ecfc671cefcb52b8a2aca8189cc477a83d28f332377051",
+      "sha256After": "709fd49e58a881be17ecfc671cefcb52b8a2aca8189cc477a83d28f332377051"
+    },
+    {
+      "from": ".hallmark/staff-auth-network-error-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-network-error-390.png",
+      "sha256Before": "a61aab45886fa897b052d64322a14d73731dafa7c2fd6f626ec07475a9a0c49d",
+      "sha256After": "a61aab45886fa897b052d64322a14d73731dafa7c2fd6f626ec07475a9a0c49d"
+    },
+    {
+      "from": ".hallmark/staff-auth-network-error-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-network-error-768.png",
+      "sha256Before": "2db05bc09a23b83dbf4479016ffc286e1460820fcc5a1e39dd5546bafc46cd8a",
+      "sha256After": "2db05bc09a23b83dbf4479016ffc286e1460820fcc5a1e39dd5546bafc46cd8a"
+    },
+    {
+      "from": ".hallmark/staff-auth-recovery-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-recovery-1440.png",
+      "sha256Before": "4ce4d24e3d35723554cfa5868fd2d782c46e88f27c57fa6bd87450f168a477ac",
+      "sha256After": "4ce4d24e3d35723554cfa5868fd2d782c46e88f27c57fa6bd87450f168a477ac"
+    },
+    {
+      "from": ".hallmark/staff-auth-recovery-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-recovery-390.png",
+      "sha256Before": "2a144b003667badfb4e2a22d897481038f3398a024df07016f47018b7b9a628e",
+      "sha256After": "2a144b003667badfb4e2a22d897481038f3398a024df07016f47018b7b9a628e"
+    },
+    {
+      "from": ".hallmark/staff-auth-recovery-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-recovery-768.png",
+      "sha256Before": "7d9906614d08db0f1bc9d41f28480f5885a2db03611232db3caea96e68e40bdd",
+      "sha256After": "7d9906614d08db0f1bc9d41f28480f5885a2db03611232db3caea96e68e40bdd"
+    },
+    {
+      "from": ".hallmark/staff-auth-session-expired-1440.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-session-expired-1440.png",
+      "sha256Before": "edc91b60f4e4da565954cc422a51630da3e06a51f1204db3adf11162611b5551",
+      "sha256After": "edc91b60f4e4da565954cc422a51630da3e06a51f1204db3adf11162611b5551"
+    },
+    {
+      "from": ".hallmark/staff-auth-session-expired-390.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-session-expired-390.png",
+      "sha256Before": "13657316e1b90ce55a01e4293e061fcc63c7b7414b1e28a11717cc62435a255b",
+      "sha256After": "13657316e1b90ce55a01e4293e061fcc63c7b7414b1e28a11717cc62435a255b"
+    },
+    {
+      "from": ".hallmark/staff-auth-session-expired-768.png",
+      "to": "storage/reports/hallmark/screenshots/staff-auth-session-expired-768.png",
+      "sha256Before": "e29c14eb55c8a0c2e6441ba85081b88686fd39462eaeddd0f58487fbc3b352c2",
+      "sha256After": "e29c14eb55c8a0c2e6441ba85081b88686fd39462eaeddd0f58487fbc3b352c2"
+    },
+    {
+      "from": ".hallmark/staff-completion-log-entry.json",
+      "to": ".hallmark/entries/staff-completion-log-entry.json",
+      "sha256Before": "391ae3923496d1afe6e8249c6fb054ca4258acdc438feec34a73d7d66f2fa296",
+      "sha256After": "391ae3923496d1afe6e8249c6fb054ca4258acdc438feec34a73d7d66f2fa296"
+    },
+    {
+      "from": ".hallmark/staff-completion-verification.md",
+      "to": "storage/reports/hallmark/reports/staff-completion-verification.md",
+      "sha256Before": "7e8b4a49206fd256527cd3ca3a250733f9293c7fe19366f6bb797f6ccca5ac6d",
+      "sha256After": "4d55dfe3639da647eee6688de7d051e65f79349831d877b977e86b685bce43a8"
+    },
+    {
+      "from": ".hallmark/staff-preview-error.log",
+      "to": "storage/logs/development/staff-preview-error.log",
+      "sha256Before": "f859ab7b909b53111d0acdb02ef17875607b8848720ae0432272490c46239e39",
+      "sha256After": "f859ab7b909b53111d0acdb02ef17875607b8848720ae0432272490c46239e39"
+    },
+    {
+      "from": ".hallmark/staff-preview.log",
+      "to": "storage/logs/development/staff-preview.log",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "from": ".hallmark/staff-support-log-entry.json",
+      "to": ".hallmark/entries/staff-support-log-entry.json",
+      "sha256Before": "b41183169ffc7fdba7480f6fb63f8686b86f87f6e3a5773d39e8e1ca014d8381",
+      "sha256After": "b41183169ffc7fdba7480f6fb63f8686b86f87f6e3a5773d39e8e1ca014d8381"
+    },
+    {
+      "from": ".hallmark/staff-support-preflight.json",
+      "to": ".hallmark/preflights/staff-support-preflight.json",
+      "sha256Before": "68b7784665a8903a7643d88930cff238d935293cac68d602f54c20d0061e1de4",
+      "sha256After": "6611af9194519d9828ed031e896dcb983498246e0927001daa4a6490c85c70e0"
+    },
+    {
+      "from": ".hallmark/staff-support-verification.md",
+      "to": "storage/reports/hallmark/reports/staff-support-verification.md",
+      "sha256Before": "8c7cb1d620ec47865bb70fc119ef9fce198d0857b0c58129be3e286d0a1416ae",
+      "sha256After": "ca7d89586f75efcf45c0248935f0490f27a8ae277d7ada0cb2b55fecb2dda072"
+    },
+    {
+      "from": ".hallmark/superadmin-review-log-entry.json",
+      "to": ".hallmark/entries/superadmin-review-log-entry.json",
+      "sha256Before": "7313df5ecd6e53ad2dc41c113e8924fe3978c6283ba53973526c1bd3f528f44e",
+      "sha256After": "7313df5ecd6e53ad2dc41c113e8924fe3978c6283ba53973526c1bd3f528f44e"
+    },
+    {
+      "from": ".hallmark/superadmin-review-verification.md",
+      "to": "storage/reports/hallmark/reports/superadmin-review-verification.md",
+      "sha256Before": "59038511c8af5f81436e152a5d762e0e2a666b6c122f9e561e3a5be28fc562e9",
+      "sha256After": "b3263f308a7fd252cefe20c0db7effc239facf948c207989793aeddec82b977e"
+    },
+    {
+      "from": ".hallmark/support-help-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-help-1440.png",
+      "sha256Before": "6f663bb1e0a53174bb89bc032b717e3564585ccfade9df2ba3009ccfe2b4b500",
+      "sha256After": "6f663bb1e0a53174bb89bc032b717e3564585ccfade9df2ba3009ccfe2b4b500"
+    },
+    {
+      "from": ".hallmark/support-help-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-help-390.png",
+      "sha256Before": "d26fd62821b6942731ce94258961fdd9c782473ca1f62132f66fcaccdf5280b0",
+      "sha256After": "d26fd62821b6942731ce94258961fdd9c782473ca1f62132f66fcaccdf5280b0"
+    },
+    {
+      "from": ".hallmark/support-help-article-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-help-article-1440.png",
+      "sha256Before": "9695cdc8073c27f8235f522ebb884e908127a9b2e7d6f98fd53be935bb53283b",
+      "sha256After": "9695cdc8073c27f8235f522ebb884e908127a9b2e7d6f98fd53be935bb53283b"
+    },
+    {
+      "from": ".hallmark/support-help-article-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-help-article-390.png",
+      "sha256Before": "9174edfd5f8885d3ae7b20bd6746a6c286c2d934b9ae2ec94dd3374745129c05",
+      "sha256After": "9174edfd5f8885d3ae7b20bd6746a6c286c2d934b9ae2ec94dd3374745129c05"
+    },
+    {
+      "from": ".hallmark/support-notifications-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-notifications-1440.png",
+      "sha256Before": "968f192df258ff96a4db08dd8be9cb2c2575ce8623a147d091a06ff0c60c589e",
+      "sha256After": "968f192df258ff96a4db08dd8be9cb2c2575ce8623a147d091a06ff0c60c589e"
+    },
+    {
+      "from": ".hallmark/support-notifications-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-notifications-390.png",
+      "sha256Before": "9859fde85c0a04f3f3b6d411119e94406a30cec168891c5b742e6d6012c6c67e",
+      "sha256After": "9859fde85c0a04f3f3b6d411119e94406a30cec168891c5b742e6d6012c6c67e"
+    },
+    {
+      "from": ".hallmark/support-password-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-password-1440.png",
+      "sha256Before": "5f92fd13d021ea7f35553aebb5235fafa41ce13ced893c7a6d70297bafbe14c0",
+      "sha256After": "5f92fd13d021ea7f35553aebb5235fafa41ce13ced893c7a6d70297bafbe14c0"
+    },
+    {
+      "from": ".hallmark/support-password-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-password-390.png",
+      "sha256Before": "3c64910c6d75b6120f5c378c6f62ba24e2e46febe7b21285da41c6acce2948aa",
+      "sha256After": "3c64910c6d75b6120f5c378c6f62ba24e2e46febe7b21285da41c6acce2948aa"
+    },
+    {
+      "from": ".hallmark/support-profile-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-profile-1440.png",
+      "sha256Before": "0c22ec94a7df6fb92c02149c969c4dc90aac1d926193b89597f98756416c4fd8",
+      "sha256After": "0c22ec94a7df6fb92c02149c969c4dc90aac1d926193b89597f98756416c4fd8"
+    },
+    {
+      "from": ".hallmark/support-profile-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-profile-390.png",
+      "sha256Before": "9fc978a603de38556a0709fc2519a38ca68c1c0d2b5850b28d90f109447b0c44",
+      "sha256After": "9fc978a603de38556a0709fc2519a38ca68c1c0d2b5850b28d90f109447b0c44"
+    },
+    {
+      "from": ".hallmark/support-security-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-security-1440.png",
+      "sha256Before": "a05f17054b5af43b654188e27bfb7cc42dfb4133d5b5888a208e86efd073cf9c",
+      "sha256After": "a05f17054b5af43b654188e27bfb7cc42dfb4133d5b5888a208e86efd073cf9c"
+    },
+    {
+      "from": ".hallmark/support-security-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-security-390.png",
+      "sha256Before": "431c895ccdbd450d5a510bbdbec3f229baa87dce6ba3a47ee380efc6202f2f12",
+      "sha256After": "431c895ccdbd450d5a510bbdbec3f229baa87dce6ba3a47ee380efc6202f2f12"
+    },
+    {
+      "from": ".hallmark/support-sessions-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-sessions-1440.png",
+      "sha256Before": "748816208e14e57eaddd417d953bf58e6285d534dfc5a9f6a0a20d5277648371",
+      "sha256After": "748816208e14e57eaddd417d953bf58e6285d534dfc5a9f6a0a20d5277648371"
+    },
+    {
+      "from": ".hallmark/support-sessions-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-sessions-390.png",
+      "sha256Before": "3ba959d5a177c279e8039ddd176b7185e21025eaef379f3e44091b086fa11d19",
+      "sha256After": "3ba959d5a177c279e8039ddd176b7185e21025eaef379f3e44091b086fa11d19"
+    },
+    {
+      "from": ".hallmark/support-unavailable-1440.png",
+      "to": "storage/reports/hallmark/screenshots/support-unavailable-1440.png",
+      "sha256Before": "fb5e97566ba7e638da1f21c346a5e1c53812a0b16761afe9393ddc58574f152f",
+      "sha256After": "fb5e97566ba7e638da1f21c346a5e1c53812a0b16761afe9393ddc58574f152f"
+    },
+    {
+      "from": ".hallmark/support-unavailable-390.png",
+      "to": "storage/reports/hallmark/screenshots/support-unavailable-390.png",
+      "sha256Before": "ccc4cbb151e9d5aeb8ae088c9e70609d60ed5ebfd64a890a12e210bb1103ab00",
+      "sha256After": "ccc4cbb151e9d5aeb8ae088c9e70609d60ed5ebfd64a890a12e210bb1103ab00"
+    },
+    {
+      "from": ".hallmark/system-parameter-effects.json",
+      "to": "storage/reports/hallmark/reports/system-parameter-effects.json",
+      "sha256Before": "067eed5b8d1c6b108346922c110dbeb5f8bfe1ae1d77072ce5cf02f1cf397d98",
+      "sha256After": "067eed5b8d1c6b108346922c110dbeb5f8bfe1ae1d77072ce5cf02f1cf397d98"
+    },
+    {
+      "from": ".hallmark/system-parameters-log-entry.json",
+      "to": ".hallmark/entries/system-parameters-log-entry.json",
+      "sha256Before": "faff328a64f3be83de3101b504507fb7303f7d489c3a370545736072de654db2",
+      "sha256After": "faff328a64f3be83de3101b504507fb7303f7d489c3a370545736072de654db2"
+    },
+    {
+      "from": ".hallmark/system-parameters-preflight.json",
+      "to": ".hallmark/preflights/system-parameters-preflight.json",
+      "sha256Before": "7de61620f230ff5dfe1f7482cf844fa864b84353fb53428ae398ce3944c90aaf",
+      "sha256After": "23559ceac5071721dec6875a5c71365bbc15026f87c3140b4906d15d6bf25882"
+    },
+    {
+      "from": ".hallmark/system-preview-error.log",
+      "to": "storage/logs/development/system-preview-error.log",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "from": ".hallmark/system-preview.log",
+      "to": "storage/logs/development/system-preview.log",
+      "sha256Before": "bda3e8d4a416f4dad12ef6cedfa5edc274c7837868e114c6c2a4e8bd6130a757",
+      "sha256After": "bda3e8d4a416f4dad12ef6cedfa5edc274c7837868e114c6c2a4e8bd6130a757"
+    },
+    {
+      "from": ".hallmark/taxonomy-attribute-detail-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-attribute-detail-1440.png",
+      "sha256Before": "92ae1f9a87cb1dd7be5bbdc544f6a2c1eca4b77cea50f79819eed0b1db03eed4",
+      "sha256After": "92ae1f9a87cb1dd7be5bbdc544f6a2c1eca4b77cea50f79819eed0b1db03eed4"
+    },
+    {
+      "from": ".hallmark/taxonomy-attribute-detail-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-attribute-detail-390.png",
+      "sha256Before": "f866861c7cef676a6c4527e5e0fcf0501d17314781b808bbe9420efdfd10fe49",
+      "sha256After": "f866861c7cef676a6c4527e5e0fcf0501d17314781b808bbe9420efdfd10fe49"
+    },
+    {
+      "from": ".hallmark/taxonomy-attributes-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-attributes-1440.png",
+      "sha256Before": "b5ef736d1c4b36565b6e74aeada21311d79d9166e12896b83ef556958eafd26e",
+      "sha256After": "b5ef736d1c4b36565b6e74aeada21311d79d9166e12896b83ef556958eafd26e"
+    },
+    {
+      "from": ".hallmark/taxonomy-attributes-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-attributes-390.png",
+      "sha256Before": "c65ea7974d998cbaaee980746118eb16c353846431d2062ee7e67a8171bedae5",
+      "sha256After": "c65ea7974d998cbaaee980746118eb16c353846431d2062ee7e67a8171bedae5"
+    },
+    {
+      "from": ".hallmark/taxonomy-categories-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-categories-1440.png",
+      "sha256Before": "876fbcb994036d7530f503af2bd29b5445cf3bd91eff6a142084ce45474bc283",
+      "sha256After": "876fbcb994036d7530f503af2bd29b5445cf3bd91eff6a142084ce45474bc283"
+    },
+    {
+      "from": ".hallmark/taxonomy-categories-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-categories-390.png",
+      "sha256Before": "a38670a1f9ff0b6c20f67f1a99c3262ee405d16e5d5fce97a04c3775a5f036d8",
+      "sha256After": "a38670a1f9ff0b6c20f67f1a99c3262ee405d16e5d5fce97a04c3775a5f036d8"
+    },
+    {
+      "from": ".hallmark/taxonomy-category-detail-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-category-detail-1440.png",
+      "sha256Before": "01b2c787f9482abc70b713f19dc6492302c1e4b56874f6b688027d86346a9d2e",
+      "sha256After": "01b2c787f9482abc70b713f19dc6492302c1e4b56874f6b688027d86346a9d2e"
+    },
+    {
+      "from": ".hallmark/taxonomy-category-detail-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-category-detail-390.png",
+      "sha256Before": "7a2ef355d0b7c087eea318cb3ec2e8c0902c63e04e922df234e9a5c59159a37a",
+      "sha256After": "7a2ef355d0b7c087eea318cb3ec2e8c0902c63e04e922df234e9a5c59159a37a"
+    },
+    {
+      "from": ".hallmark/taxonomy-edit-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-edit-1440.png",
+      "sha256Before": "da2c4f2590e2ab52970fbc7bb571fcde08059772cf3944a86b67405fa3198eba",
+      "sha256After": "da2c4f2590e2ab52970fbc7bb571fcde08059772cf3944a86b67405fa3198eba"
+    },
+    {
+      "from": ".hallmark/taxonomy-edit-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-edit-390.png",
+      "sha256Before": "351ff382ec959747779fc797dded45f20354f28229c11f974a3d4d56c6fc00ba",
+      "sha256After": "351ff382ec959747779fc797dded45f20354f28229c11f974a3d4d56c6fc00ba"
+    },
+    {
+      "from": ".hallmark/taxonomy-history-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-history-1440.png",
+      "sha256Before": "53b0989009cdc38f8a741e3d6e912ec03c85ebca70bd925e1cbd3e1bb7338cb9",
+      "sha256After": "53b0989009cdc38f8a741e3d6e912ec03c85ebca70bd925e1cbd3e1bb7338cb9"
+    },
+    {
+      "from": ".hallmark/taxonomy-history-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-history-390.png",
+      "sha256Before": "1bed3c9c566b49b574f8f6c498c901f3f679f15f893bae614f0b4b475c5f5581",
+      "sha256After": "1bed3c9c566b49b574f8f6c498c901f3f679f15f893bae614f0b4b475c5f5581"
+    },
+    {
+      "from": ".hallmark/taxonomy-log-entry.json",
+      "to": ".hallmark/entries/taxonomy-log-entry.json",
+      "sha256Before": "34ced51d2738b187d1087b246b842c8183bdbc96a0d39b4b40c8d4e12f9ba6de",
+      "sha256After": "34ced51d2738b187d1087b246b842c8183bdbc96a0d39b4b40c8d4e12f9ba6de"
+    },
+    {
+      "from": ".hallmark/taxonomy-usage-1440.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-usage-1440.png",
+      "sha256Before": "06de64bfdcc84a375c5c2e2e0718434caa5045696092ec41a5977e1ea2f2fe9c",
+      "sha256After": "06de64bfdcc84a375c5c2e2e0718434caa5045696092ec41a5977e1ea2f2fe9c"
+    },
+    {
+      "from": ".hallmark/taxonomy-usage-390.png",
+      "to": "storage/reports/hallmark/screenshots/taxonomy-usage-390.png",
+      "sha256Before": "fbb04316e66071dd9f3701bccf73da83423fa92a443f2ed6da2a8faa6e5f9958",
+      "sha256After": "fbb04316e66071dd9f3701bccf73da83423fa92a443f2ed6da2a8faa6e5f9958"
+    },
+    {
+      "from": ".hallmark/taxonomy-verification.md",
+      "to": "storage/reports/hallmark/reports/taxonomy-verification.md",
+      "sha256Before": "33280e3f1688a1100f4ddb3a2331ce48bf97e018d03ebaaeb80ce5f4fa82b253",
+      "sha256After": "5d7a2e7844bdd09119e3dbb52758be2dd2717be022d0aad402c52f6087f29af0"
+    },
+    {
+      "from": ".hallmark/verify-audit-log.cjs",
+      "to": "tests/e2e/browser/verify-audit-log.cjs",
+      "sha256Before": "47117b7a0d7fedffb856d495423a9caac015ee186fdd9b03523634fbd32dddc9",
+      "sha256After": "a33f820089a4745809787d507df612268f435f927a35f1d2fff3940c003340cc"
+    },
+    {
+      "from": ".hallmark/verify-audit-states.cjs",
+      "to": "tests/e2e/browser/verify-audit-states.cjs",
+      "sha256Before": "b535b2d08fbee6dfefc04a61f8ecce646626ab56ccdefbc409c3fec9016c6270",
+      "sha256After": "83fe06d9d1540ae8317fca113db53f874f6adce2decdb71eaf720d150b504dc7"
+    },
+    {
+      "from": ".hallmark/verify-bouquet-decimal.cjs",
+      "to": "tests/e2e/browser/verify-bouquet-decimal.cjs",
+      "sha256Before": "5aa57ea77b7a8261beff99a4b59ecc1f38e0a91ee56e121d59f6dfe3d5f1b459",
+      "sha256After": "284ba43696b5a88e494e438e1eda66b0cc9087887e22a2b91c40f213179460c2"
+    },
+    {
+      "from": ".hallmark/verify-bouquet-edges.cjs",
+      "to": "tests/e2e/browser/verify-bouquet-edges.cjs",
+      "sha256Before": "8a85b1a499e36c8bc2649955cd422bc316a2cdead70742cf41d58545d6f60c58",
+      "sha256After": "e597383ab062b541af7d0698c07d9a4d19ea8b3e9bf617730f3fbd4fe85b9560"
+    },
+    {
+      "from": ".hallmark/verify-bouquet-production.cjs",
+      "to": "tests/e2e/browser/verify-bouquet-production.cjs",
+      "sha256Before": "c6ecf7aa4338c2bd00436ba8f017d8a1866f7f7b761fc7b62e4bc339156808df",
+      "sha256After": "0176cf98fdee3208e2012ba98ac74be1debeb05dd1aefac3ac321a2c24a0a748"
+    },
+    {
+      "from": ".hallmark/verify-closure-calendar.cjs",
+      "to": "tests/e2e/browser/verify-closure-calendar.cjs",
+      "sha256Before": "1875fceb45e2cce21efd6ac7c32fd098b24e6f177015ece41874097451781605",
+      "sha256After": "fdc19279a24d73dc7abd7ba18980c49d624d0f9263aea20acc31147046e4a29f"
+    },
+    {
+      "from": ".hallmark/verify-closure-links.cjs",
+      "to": "tests/e2e/browser/verify-closure-links.cjs",
+      "sha256Before": "3b39ed51e54d589675f05b35106f2d27305bdb10d74123483c4b49a664f1419e",
+      "sha256After": "a5d31b1dee67926df315148a393e16786bad3965382fe9fe4c98f032ef50a08c"
+    },
+    {
+      "from": ".hallmark/verify-closure-readonly.cjs",
+      "to": "tests/e2e/browser/verify-closure-readonly.cjs",
+      "sha256Before": "e2052ec2e374d78db60491588e4d89bed76c81c64e5e08713872ee655dfed5c1",
+      "sha256After": "a10fcd1f3b9b1442b708bb96ef25bf71116371d294aeaac093c646c19977ea24"
+    },
+    {
+      "from": ".hallmark/verify-customers-fixes.cjs",
+      "to": "tests/e2e/browser/verify-customers-fixes.cjs",
+      "sha256Before": "5bcc07c1e793b1628447b5be80ab0d27142ccfb20ad80ec426dee223a9d3508d",
+      "sha256After": "68768286c252a8ad78335bed456204df4499f103faa97e94033f7dd8b5e33f0d"
+    },
+    {
+      "from": ".hallmark/verify-customers.cjs",
+      "to": "tests/e2e/browser/verify-customers.cjs",
+      "sha256Before": "348b9ab58622c1681193296991a24cd79300f5ae53b9c2a52f4f3c99dc9ec27e",
+      "sha256After": "d17dbc84b612e66e51014cb5013891abd3b4dea61cb63131f34ffcf9fa33f8ff"
+    },
+    {
+      "from": ".hallmark/verify-dashboard.cjs",
+      "to": "tests/e2e/browser/verify-dashboard.cjs",
+      "sha256Before": "5d110d27977f9fabf40b88f9552d4baa267d80016b4b6bed1b7d41824ea5a130",
+      "sha256After": "7a0fc267c29a6a959269ef0d6e4a15e0ca5894c5af485545ef5975d7bd3d04c8"
+    },
+    {
+      "from": ".hallmark/verify-material-edges.cjs",
+      "to": "tests/e2e/browser/verify-material-edges.cjs",
+      "sha256Before": "04ca5f1854fd20da18731565027156772d06ecc5826967345b2c87645df03346",
+      "sha256After": "10d473ca52af9b088f3be3436540583ac187f066ccdcabb04c93a64209bb3188"
+    },
+    {
+      "from": ".hallmark/verify-material-fixes.cjs",
+      "to": "tests/e2e/browser/verify-material-fixes.cjs",
+      "sha256Before": "0d51a299c9b11d4a958d9fd205a3359f578d7e0c92e65c280f7b16df39e3f8d1",
+      "sha256After": "3fa08193ee99ea25d11d1d7e694dec22aa0d047479f8d94de24d27ac02b4317a"
+    },
+    {
+      "from": ".hallmark/verify-materials.cjs",
+      "to": "tests/e2e/browser/verify-materials.cjs",
+      "sha256Before": "56b785da2307ab0cfc970cda1550dd63a4d946b413752b40a52f98db1af38fe8",
+      "sha256After": "066023945b4ae90b093a22ef3611ae71f51b5da558490f8175005de514f537d8"
+    },
+    {
+      "from": ".hallmark/verify-operational-report.cjs",
+      "to": "tests/e2e/browser/verify-operational-report.cjs",
+      "sha256Before": "45d19c0884fdd199f1e5dadadb120aac3f80f4bae9f1b548b3738ebba7f7d8b8",
+      "sha256After": "3e0970ee430b139f3725d81813728aa024029cb139708e9b1f84ff907028bc6a"
+    },
+    {
+      "from": ".hallmark/verify-order-signals.cjs",
+      "to": "tests/e2e/browser/verify-order-signals.cjs",
+      "sha256Before": "a0a94dd0dcb98428c36b0bf88825f77d055e5ce0252ed3751c14c7d076a50ee6",
+      "sha256After": "d86fd8f8f780a39d0f642c86c05e151e9bf8e80cf43f42817f4280ec8319428c"
+    },
+    {
+      "from": ".hallmark/verify-orders.cjs",
+      "to": "tests/e2e/browser/verify-orders.cjs",
+      "sha256Before": "e5749423977fdfe1308bf7e453922af14a9233b9a08f35bc88e00b0dbef5df6c",
+      "sha256After": "984a423dbf5c065fa72b3ef898ea78245f20aa3522d6e8a65eee381fd4a4476d"
+    },
+    {
+      "from": ".hallmark/verify-product-controls.cjs",
+      "to": "tests/e2e/browser/verify-product-controls.cjs",
+      "sha256Before": "f94d70fdfd8942d1d67c69d489b9846fe9f23babb60474db88450bdd4445af2f",
+      "sha256After": "234905b89e9d0471e479721a1d5a3c510df8dd201072ec06fea406a344fc9068"
+    },
+    {
+      "from": ".hallmark/verify-products-empty.cjs",
+      "to": "tests/e2e/browser/verify-products-empty.cjs",
+      "sha256Before": "95b8198cfc9f667f43f00b9e6934a6e4d13c35fbfe826af17e363a5f2cc1956d",
+      "sha256After": "06ebee9033d3658ef8d2f9161d7a722f6a0cced4723c7a0dfce265b56bcef232"
+    },
+    {
+      "from": ".hallmark/verify-products.cjs",
+      "to": "tests/e2e/browser/verify-products.cjs",
+      "sha256Before": "4e1015f513f4721c684ded908c818c4f74219ab644697de14bdf930bda9a9bc2",
+      "sha256After": "495cf6f95487b16049c4d3cf255d6b58882a8c34598e0db87a811f2ce7b9acf2"
+    },
+    {
+      "from": ".hallmark/verify-staff-accounts.cjs",
+      "to": "tests/e2e/browser/verify-staff-accounts.cjs",
+      "sha256Before": "45bbbe9179ce281fac2e496f3c57817477aa738cfd88ff82a1aee7aea36d2200",
+      "sha256After": "416605022726db917826d3818d4310d77f9ecbdc31f131080d818c47ecb1b2f3"
+    },
+    {
+      "from": ".hallmark/verify-staff-auth.cjs",
+      "to": "tests/e2e/browser/verify-staff-auth.cjs",
+      "sha256Before": "4225358035a74df0e529d7786cb01fd459cda934784ffc078c6a60bef5908033",
+      "sha256After": "ad0ff574153a1cf01ad457bb9e5c173c1a21e15907c94b80ddf6ebedebe45e07"
+    },
+    {
+      "from": ".hallmark/verify-staff-completion.cjs",
+      "to": "tests/e2e/browser/verify-staff-completion.cjs",
+      "sha256Before": "10eb353534eeb7bb3de640d48fbbcbe26283695ab1f212add0aaec0c238bcd32",
+      "sha256After": "f16ea1e300da9e3ff8c037542739abdd715e9a287acfad9eaae18090f304778b"
+    },
+    {
+      "from": ".hallmark/verify-staff-support.cjs",
+      "to": "tests/e2e/browser/verify-staff-support.cjs",
+      "sha256Before": "0c0bb66db0dc137662b183feff135978974aa76f2c0aa0297a7c5d769cadf8b6",
+      "sha256After": "cd76f447311ca0b22dce8326e3229bfd3a92d0b3ea74b10a32ee6212607903fc"
+    },
+    {
+      "from": ".hallmark/verify-superadmin-review.cjs",
+      "to": "tests/e2e/browser/verify-superadmin-review.cjs",
+      "sha256Before": "0c16850a0ce8ab573d8974c682b50770f1dc982fc256e2876bf4021477fe6fa8",
+      "sha256After": "5e4ccd31d9f7159c0ffb454351b101466b080c1981683100ea441c0da1816f00"
+    },
+    {
+      "from": ".hallmark/verify-system-edges.cjs",
+      "to": "tests/e2e/browser/verify-system-edges.cjs",
+      "sha256Before": "3d8865e422680ec559d7a3329fa4eead568be35260638ee852ea37c9764bc70a",
+      "sha256After": "b7a6887d720a531a0fa5980f4b8d857758aefe197a5324ab08996f0717b24920"
+    },
+    {
+      "from": ".hallmark/verify-system-parameters.cjs",
+      "to": "tests/e2e/browser/verify-system-parameters.cjs",
+      "sha256Before": "6cd6ffd682e765cb256a07d605655dbdf884d0e5429a6e82bce8e876f57a6f13",
+      "sha256After": "7c3c3ec34bfc1bfb9f0f2369228c40d41093d2855110765e67f1c2d4d302abbe"
+    },
+    {
+      "from": ".hallmark/verify-taxonomy.cjs",
+      "to": "tests/e2e/browser/verify-taxonomy.cjs",
+      "sha256Before": "a1a00eaf12a9cabe64ec4d62833656763982a97dbf4c1ce4b9128afd8db4aeb8",
+      "sha256After": "5ad607d6e5589667a79ea4b8ca55ff95b00b58b73e333aad0833228cb0c0d267"
+    },
+    {
+      "from": ".hallmark/verify-workflows.cjs",
+      "to": "tests/e2e/browser/verify-workflows.cjs",
+      "sha256Before": "765c1c352c97c484a1e5cf4ec94d2e695be78afbe830e0cd15ea498dc81b45f8",
+      "sha256After": "a9ebda15f7029d6dea0775e12edc7e7ad6520f13e6af09ddaca59fafcf3ff882"
+    },
+    {
+      "from": "public/.hallmark/.gitignore",
+      "to": "storage/reports/legacy-public-preview/.gitignore",
+      "sha256Before": "5a324f18e7f30bc84b6a6a182aab706755509102fa89af4345efa210bb97143d",
+      "sha256After": "5a324f18e7f30bc84b6a6a182aab706755509102fa89af4345efa210bb97143d"
+    },
+    {
+      "from": "public/.hallmark/before/admin-dashboard-1280x800.png",
+      "to": "storage/reports/legacy-public-preview/before/admin-dashboard-1280x800.png",
+      "sha256Before": "8ba2fcaacff836d4d8daa1f779b9671361f6096c83a740af389e600861ff61af",
+      "sha256After": "8ba2fcaacff836d4d8daa1f779b9671361f6096c83a740af389e600861ff61af"
+    },
+    {
+      "from": "public/.hallmark/before/admin-dashboard-1440-full.png",
+      "to": "storage/reports/legacy-public-preview/before/admin-dashboard-1440-full.png",
+      "sha256Before": "e749617d71ab5749519a2abd1cdc565ec2ab3083cf085a0ac3dd5cfcdb5c25ef",
+      "sha256After": "e749617d71ab5749519a2abd1cdc565ec2ab3083cf085a0ac3dd5cfcdb5c25ef"
+    },
+    {
+      "from": "public/.hallmark/before/admin-dashboard-1440x900.png",
+      "to": "storage/reports/legacy-public-preview/before/admin-dashboard-1440x900.png",
+      "sha256Before": "1243af7c51072d19c7039025c2653298707a25fef33ca82756c72154ebe2d121",
+      "sha256After": "1243af7c51072d19c7039025c2653298707a25fef33ca82756c72154ebe2d121"
+    },
+    {
+      "from": "public/.hallmark/before/admin-dashboard-1920x1080.png",
+      "to": "storage/reports/legacy-public-preview/before/admin-dashboard-1920x1080.png",
+      "sha256Before": "537374ea983fb9efa7f53bf337457bd042e151bda7edca56337a349fe8f3b5cb",
+      "sha256After": "537374ea983fb9efa7f53bf337457bd042e151bda7edca56337a349fe8f3b5cb"
+    },
+    {
+      "from": "public/.hallmark/before/admin-dashboard-375.png",
+      "to": "storage/reports/legacy-public-preview/before/admin-dashboard-375.png",
+      "sha256Before": "0b551651aad65d04155f2d44149308a0c1a921f4e751f657dcd11d7950d00652",
+      "sha256After": "0b551651aad65d04155f2d44149308a0c1a921f4e751f657dcd11d7950d00652"
+    },
+    {
+      "from": "public/.hallmark/compare.html",
+      "to": "storage/reports/legacy-public-preview/compare.html",
+      "sha256Before": "7a2ba44bc905d6f57347bd48aac3de9a6bdbf382c09a6c8079f7417a20fa058f",
+      "sha256After": "7a2ba44bc905d6f57347bd48aac3de9a6bdbf382c09a6c8079f7417a20fa058f"
+    },
+    {
+      "from": "public/.hallmark/shots/admin-dashboard-1280x800.png",
+      "to": "storage/reports/legacy-public-preview/shots/admin-dashboard-1280x800.png",
+      "sha256Before": "f97c25ee328cf23d9090f5a3e4c30ca41bdc4980573610930599bccdc6dbafec",
+      "sha256After": "f97c25ee328cf23d9090f5a3e4c30ca41bdc4980573610930599bccdc6dbafec"
+    },
+    {
+      "from": "public/.hallmark/shots/admin-dashboard-1440-full.png",
+      "to": "storage/reports/legacy-public-preview/shots/admin-dashboard-1440-full.png",
+      "sha256Before": "6d370fa21e47f5bc145c58005cd2bff7e6176b5fb96db157680b86e78a372ec5",
+      "sha256After": "6d370fa21e47f5bc145c58005cd2bff7e6176b5fb96db157680b86e78a372ec5"
+    },
+    {
+      "from": "public/.hallmark/shots/admin-dashboard-1440x900.png",
+      "to": "storage/reports/legacy-public-preview/shots/admin-dashboard-1440x900.png",
+      "sha256Before": "18b549e9ab5e8e2d36bb8880f438ac3ccdbecd4dd06f38f6bdb8f14d12fd61a5",
+      "sha256After": "18b549e9ab5e8e2d36bb8880f438ac3ccdbecd4dd06f38f6bdb8f14d12fd61a5"
+    },
+    {
+      "from": "public/.hallmark/shots/admin-dashboard-1920x1080.png",
+      "to": "storage/reports/legacy-public-preview/shots/admin-dashboard-1920x1080.png",
+      "sha256Before": "43186e0f66524b9f7daafb007f58faa8229a99e0e5afe53550ffd4573b88eb6f",
+      "sha256After": "43186e0f66524b9f7daafb007f58faa8229a99e0e5afe53550ffd4573b88eb6f"
+    },
+    {
+      "from": "public/.hallmark/shots/admin-dashboard-375.png",
+      "to": "storage/reports/legacy-public-preview/shots/admin-dashboard-375.png",
+      "sha256Before": "d28fc8535b2698f0b4b702e240f6ed2391f80b217d1ff2654a4f369a810af9b3",
+      "sha256After": "d28fc8535b2698f0b4b702e240f6ed2391f80b217d1ff2654a4f369a810af9b3"
+    },
+    {
+      "from": "public/.hallmark/shots/system-parameters-1280x800.png",
+      "to": "storage/reports/legacy-public-preview/shots/system-parameters-1280x800.png",
+      "sha256Before": "51ca4f4d6fed32cecc8d7ba5003a97243aa42f66ead98bb493be71102bbdb965",
+      "sha256After": "51ca4f4d6fed32cecc8d7ba5003a97243aa42f66ead98bb493be71102bbdb965"
+    },
+    {
+      "from": "public/.hallmark/shots/system-parameters-1440-full.png",
+      "to": "storage/reports/legacy-public-preview/shots/system-parameters-1440-full.png",
+      "sha256Before": "ca2449261bc0ca772d07e0e771036d8ef7599d11862296c05aa44bdb7292cb08",
+      "sha256After": "ca2449261bc0ca772d07e0e771036d8ef7599d11862296c05aa44bdb7292cb08"
+    },
+    {
+      "from": "public/.hallmark/shots/system-parameters-1440x900.png",
+      "to": "storage/reports/legacy-public-preview/shots/system-parameters-1440x900.png",
+      "sha256Before": "92dbf454d8ebdb1e8f53b554516e31d6207cdfe1175e612ab404096e25b77077",
+      "sha256After": "92dbf454d8ebdb1e8f53b554516e31d6207cdfe1175e612ab404096e25b77077"
+    },
+    {
+      "from": "public/.hallmark/shots/system-parameters-1920x1080.png",
+      "to": "storage/reports/legacy-public-preview/shots/system-parameters-1920x1080.png",
+      "sha256Before": "be38ff40c77452cf30e4edb95770c4ecb9f4dd4472a3e30f7f9c16e403224190",
+      "sha256After": "be38ff40c77452cf30e4edb95770c4ecb9f4dd4472a3e30f7f9c16e403224190"
+    },
+    {
+      "from": "public/.hallmark/shots/system-parameters-375.png",
+      "to": "storage/reports/legacy-public-preview/shots/system-parameters-375.png",
+      "sha256Before": "78b491a2614a6b7647dcc1ef2da31feb75971fd97eb5e191512d87d74f2236aa",
+      "sha256After": "78b491a2614a6b7647dcc1ef2da31feb75971fd97eb5e191512d87d74f2236aa"
+    }
+  ],
+  "rewrittenFiles": [
+    ".hallmark/log.json",
+    ".hallmark/preflight.json",
+    ".hallmark/preflights/closure-calendar-preflight.json",
+    ".hallmark/preflights/customers-preflight.json",
+    ".hallmark/preflights/materials-preflight.json",
+    ".hallmark/preflights/orders-full-preflight.json",
+    ".hallmark/preflights/products-preflight.json",
+    ".hallmark/preflights/staff-support-preflight.json",
+    ".hallmark/preflights/system-parameters-preflight.json",
+    ".impeccable/review/audit-log/hallmark.txt",
+    ".impeccable/review/bouquet-production/finish-review.md",
+    ".impeccable/review/bouquet-production/hallmark.txt",
+    ".impeccable/review/customers/finish-review.md",
+    ".impeccable/review/order-signals/finish-review.md",
+    ".impeccable/review/product-controls/finish-review.md",
+    ".impeccable/review/staff-completion/documentation.md",
+    ".impeccable/review/system-parameters/finish-review.md",
+    ".impeccable/review/system-parameters/hallmark.json",
+    ".impeccable/surfaces/public-audit-log-html.md",
+    ".impeccable/surfaces/public-bouquet-production-html.md",
+    ".impeccable/surfaces/public-closure-calendar-html.md",
+    ".impeccable/surfaces/public-customers-html.md",
+    ".impeccable/surfaces/public-orders-queue-html.md",
+    ".impeccable/surfaces/public-production-materials-html.md",
+    ".impeccable/surfaces/public-products-html.md",
+    ".impeccable/surfaces/public-staff-accounts-html.md",
+    ".impeccable/surfaces/public-system-parameters-html.md",
+    "DESIGN.md",
+    "docs/coverage/audit-log-coverage.md",
+    "docs/coverage/bouquet-production-coverage.md",
+    "docs/coverage/categories-attributes-coverage.md",
+    "docs/coverage/closure-calendar-coverage.md",
+    "docs/coverage/customers-coverage.md",
+    "docs/coverage/materials-coverage.md",
+    "docs/coverage/orders-workflows-coverage.md",
+    "docs/coverage/products-coverage.md",
+    "docs/coverage/staff-accounts-coverage.md",
+    "docs/coverage/staff-support-coverage.md",
+    "docs/coverage/staff-ui-completion.md",
+    "docs/coverage/superadmin-review-coverage.md",
+    "docs/coverage/system-parameters-coverage.md",
+    "docs/design/decisions/admin-dashboard-role-changes.md",
+    "docs/design/surfaces/audit-log-surface.md",
+    "docs/design/surfaces/bouquet-production-surface.md",
+    "docs/design/surfaces/closure-calendar-surface.md",
+    "docs/design/surfaces/customers-surface.md",
+    "docs/design/surfaces/materials-surface.md",
+    "docs/design/surfaces/orders-queue-surface.md",
+    "docs/design/surfaces/products-surface.md",
+    "docs/design/surfaces/staff-accounts-surface.md",
+    "docs/design/surfaces/system-parameters-surface.md",
+    "docs/mockups/admin-dashboard-polished.prompt.md",
+    "docs/mockups/admin-dashboard.prompt.md",
+    "PRODUCT.md",
+    "public/admin-dashboard.html",
+    "public/assets/css/shared/components.css",
+    "public/assets/css/shared/design-system.css",
+    "public/assets/css/shared/staff-panel.css",
+    "public/assets/css/staff/dashboard/dashboard.css",
+    "public/assets/css/staff/orders/orders-queue.css",
+    "public/assets/css/storefront/bouquet-customizer.css",
+    "public/assets/css/storefront/public-storefront.css",
+    "public/assets/js/shared/app.js",
+    "public/assets/js/staff/dashboard/staff-dashboard.js",
+    "public/assets/js/storefront/bouquet-customizer.js",
+    "public/assets/js/storefront/catalog-filter.js",
+    "public/assets/js/storefront/checkout-map-slot.js",
+    "public/assets/js/storefront/guest-cart.js",
+    "public/assets/js/storefront/payment-countdown.js",
+    "public/assets/js/storefront/product-variant.js",
+    "public/audit-log.html",
+    "public/bouquet-production.html",
+    "public/categories-attributes.html",
+    "public/closure-calendar.html",
+    "public/customers.html",
+    "public/financial-report.html",
+    "public/operational-report.html",
+    "public/orders-queue.html",
+    "public/payment-reconciliation.html",
+    "public/production-materials.html",
+    "public/products.html",
+    "public/sensitive-approvals.html",
+    "public/staff-accounts.html",
+    "public/staff-help.html",
+    "public/staff-login.html",
+    "public/staff-notifications.html",
+    "public/staff-profile.html",
+    "public/staff-status.html",
+    "public/system-parameters.html",
+    "storage/reports/hallmark/reports/staff-completion-verification.md",
+    "storage/reports/hallmark/reports/staff-support-verification.md",
+    "storage/reports/hallmark/reports/superadmin-review-verification.md",
+    "storage/reports/hallmark/reports/taxonomy-verification.md",
+    "tests/e2e/browser/verify-audit-log.cjs",
+    "tests/e2e/browser/verify-audit-states.cjs",
+    "tests/e2e/browser/verify-bouquet-decimal.cjs",
+    "tests/e2e/browser/verify-bouquet-edges.cjs",
+    "tests/e2e/browser/verify-bouquet-production.cjs",
+    "tests/e2e/browser/verify-closure-calendar.cjs",
+    "tests/e2e/browser/verify-closure-links.cjs",
+    "tests/e2e/browser/verify-closure-readonly.cjs",
+    "tests/e2e/browser/verify-customers-fixes.cjs",
+    "tests/e2e/browser/verify-customers.cjs",
+    "tests/e2e/browser/verify-dashboard.cjs",
+    "tests/e2e/browser/verify-material-edges.cjs",
+    "tests/e2e/browser/verify-material-fixes.cjs",
+    "tests/e2e/browser/verify-materials.cjs",
+    "tests/e2e/browser/verify-operational-report.cjs",
+    "tests/e2e/browser/verify-order-signals.cjs",
+    "tests/e2e/browser/verify-orders.cjs",
+    "tests/e2e/browser/verify-product-controls.cjs",
+    "tests/e2e/browser/verify-products-empty.cjs",
+    "tests/e2e/browser/verify-products.cjs",
+    "tests/e2e/browser/verify-staff-accounts.cjs",
+    "tests/e2e/browser/verify-staff-auth.cjs",
+    "tests/e2e/browser/verify-staff-completion.cjs",
+    "tests/e2e/browser/verify-staff-support.cjs",
+    "tests/e2e/browser/verify-superadmin-review.cjs",
+    "tests/e2e/browser/verify-system-edges.cjs",
+    "tests/e2e/browser/verify-system-parameters.cjs",
+    "tests/e2e/browser/verify-taxonomy.cjs",
+    "tests/e2e/browser/verify-workflows.cjs",
+    "tools/archive/generators/append-system-log.cjs",
+    "tools/archive/generators/build-audit-log.cjs",
+    "tools/archive/generators/build-bouquet-production.cjs",
+    "tools/archive/generators/build-closure-calendar.cjs",
+    "tools/archive/generators/build-customers.cjs",
+    "tools/archive/generators/build-materials-shell.cjs",
+    "tools/archive/generators/build-system-page.cjs",
+    "tools/archive/generators/finalize-dashboard.cjs",
+    "tools/archive/generators/format-audit.cjs",
+    "tools/archive/generators/format-bouquet.cjs",
+    "tools/archive/generators/format-customers.cjs",
+    "tools/archive/generators/format-system-data.cjs",
+    "tools/archive/generators/format-system-parameters.cjs",
+    "tools/archive/generators/redesign-dashboard.cjs",
+    "tools/preview/capture-customers.cjs",
+    "tools/preview/capture-materials.cjs",
+    "tools/preview/capture-products.cjs",
+    "tools/preview/capture-staff-accounts.cjs",
+    "tools/preview/capture-system-fixes.cjs"
+  ]
+}

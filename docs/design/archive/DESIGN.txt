@@ -1,0 +1,127 @@
+---
+version: alpha
+name: RylVa Green
+description: RylVa Green menyajikan sistem retail botani yang segar, bersih, dan organik. Canvas menggunakan warna putih gading lembut (#FBF7F4) yang natural, dipadukan dengan tinta hijau botani sangat gelap (#0F2A1D) untuk keterbacaan teks maksimal. Warna Hijau Tua (#375534) bertindak sebagai signature accent penanda aksi utama dan tombol CTA. Seluruh elemen antarmuka dikunci menggunakan satu rumpun font tunggal yaitu Poppins. Sudut komponen dibuat melengkung lembut secara konsisten dengan radius 12px untuk memberikan kesan ramah dan modern.
+colors:
+  primary: "#375534"
+  primary-dark: "#000000"
+  primary-light: "#6B9071"
+  ink: "#000000"
+  ink-dark: "#000000"
+  ink-soft: "#718096"
+  muted: "#CDCFCC"
+  hairline: "#000000"
+  surface: "#FBF7F4"
+  surface-card: "#F8F9FA"
+  success: "#375534"
+  accent-discount: "#FF0000"
+typography:
+  display-lg:
+    fontFamily: Poppins
+    fontSize: 48px
+    fontWeight: 700
+    lineHeight: 1.1
+    letterSpacing: normal
+  display-md:
+    fontFamily: Poppins
+    fontSize: 36px
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: normal
+  body:
+    fontFamily: Poppins
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: normal
+  body-strong:
+    fontFamily: Poppins
+    fontSize: 16px
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: normal
+  caption:
+    fontFamily: Poppins
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: normal
+rounded:
+  md: 12px
+  lg: 20px
+---
+
+# RylVa Green Global Design Guidelines
+
+## Overview
+RylVa Green dibangun di atas kanvas bernuansa alam yang bersih, menggunakan latar belakang putih gading hangat, **Warm Nature Canvas** (`surface`, #FBF7F4). Sistem ini meminimalkan penggunaan warna dekoratif yang tidak perlu dan memfokuskan perhatian pengguna pada keindahan fotografi produk tanaman asli. Blok warna **Hijau Tua Botani** (`primary`, #375534) digunakan secara eksklusif untuk elemen interaktif penting dan tombol konversi (*Call-to-Action*), memastikan alur belanja terasa intuitif.
+
+Hierarki visual dikendalikan secara presisi melalui kontras teks yang tegas, penggunaan kartu kontainer kontras rendah, dan penanda diskon berwarna merah cerah yang langsung menarik perhatian mata pembeli.
+
+**Karakteristik Kunci:**
+- Latar belakang halaman menggunakan `surface` (#FBF7F4), bukan putih murni, dipadukan dengan kontainer produk berwarna `surface-card` (#F8F9FA).
+- Seluruh elemen tipografi antarmuka tanpa pengecualian wajib menggunakan satu rumpun font tunggal yaitu **Poppins**.
+- Warna aksen utama tunggal, `primary` Hijau Tua (#375534), wajib digunakan untuk tombol kuantitas, tombol tambah keranjang, dan badge status ketersediaan tanaman.
+- Elemen diskon menggunakan warna kontras tinggi `accent-discount` (#FF0000) berbentuk kotak tegas di ujung kiri atas gambar produk.
+- Struktur sudut lengkung menerapkan aturan konsisten: `rounded.md` (12px) untuk sudut luar kartu produk utama, dan bentuk lingkaran sempurna (`50%`) khusus untuk tombol ikon sirkular (*Wishlist* dan *Add to Cart* sirkular).
+- Layout terpisah secara horizontal menggunakan garis batas tipis `hairline` (#000000) berukuran 1px untuk memisahkan area detail harga dengan tombol aksi di bawahnya.
+
+## Colors
+
+### Brand & Aksen Utama
+- **Hijau Tua Botani** (`primary`, #375534): Identitas utama brand. Digunakan untuk badge status ketersediaan ("Tersedia"), tombol ikon tambah keranjang, dan teks hover penting.
+- **Hijau Terang** (`primary-light`, #6B9071): Digunakan untuk batas hover atau elemen penunjuk sekunder.
+- **Merah Diskon** (`accent-discount`, #FF0000): Warna peringatan/promosi khusus. Digunakan eksklusif untuk badge potongan harga (misal: "-6%") agar langsung terlihat kontras di atas produk.
+
+### Surface & Latar Belakang
+- **Warm Nature Canvas** (`surface`, #FBF7F4): Warna dasar seluruh halaman web e-commerce untuk menciptakan impresi toko tanaman yang organik.
+- **Putih Card** (`surface-card`, #F8F9FA): Container utama pembungkus detail produk yang memberikan batas tegas namun lembut terhadap latar belakang halaman.
+- **Latar Produk Gray** (`muted`, #CDCFCC): Latar belakang boks foto tanaman agar objek pot dan daun hijau tanaman terlihat menonjol dan serasi.
+
+### Komponen Teks
+- **Tinta Hitam Botani** (`ink-dark`, #000000): Digunakan untuk teks nama produk ukuran besar (seperti "Peace Lily"), teks harga utama, dan ikon fungsional.
+- **Abu-abu Teks** (`ink-soft`, #718096): Untuk teks deskripsi panjang, informasi satuan produk (seperti "/ Pot"), dan coretan harga coret sebelum diskon (Rp 130.000).
+
+## Typography
+
+Sistem menggunakan satu rumpun tipografi **Poppins** di seluruh hierarki untuk menciptakan impresi antarmuka aplikasi dagang modern yang konsisten dan rapi.
+
+| Token | Size | Weight | Line Height | Penggunaan |
+|---|---|---|---|---|
+| `display-lg` | 48px | 700 | 1.1 | Judul utama halaman / Nama produk besar ("Peace Lily") |
+| `display-md` | 36px | 700 | 1.2 | Teks harga utama produk ("Rp 128.999") |
+| `body` | 16px | 400 | 1.5 | Teks deskripsi tanaman dan paragraf informasi |
+| `body-strong` | 16px | 700 | 1.2 | Tombol navigasi teks ("Detail Produk"), harga coret |
+| `caption` | 14px | 400 | 1.4 | Informasi teks kecil pelengkap / teks satuan ukuran ("/ Pot") |
+
+## Elevation & Depth
+
+Sistem antarmuka ini sepenuhnya menolak penggunaan efek drop shadow atau blur yang berat. Kedalaman ruang diatur murni menggunakan blok warna datar (*flat color blocks*) dan garis pembatas mekanis.
+
+| Level | Perlakuan Visual | Penggunaan |
+|---|---|---|
+| Flat Canvas | Tanpa bayangan; bertumpu langsung pada latar `#FBF7F4` | Komponen halaman dasar |
+| Layer Kartu | Blok warna solid `#F8F9FA` dengan sudut melengkung 12px | Area container pembungkus produk (*Product Grid Card*) |
+| Pembatas Garis | Garis solid 1px berwarna hitam tipis | Batas horizontal pemisah info harga dengan tombol navigasi bawah |
+
+## Shapes
+
+### Skala Border Radius
+
+| Token | Value | Penggunaan |
+|---|---|---|
+| `rounded.md` | 12px | Sudut lengkung luar untuk boks kartu produk dan sudut boks gambar tanaman |
+| `rounded.lg` | 20px | Digunakan pada boks badge promosi diskon di pojok kiri |
+| `rounded.full` | 50% / Circle | Digunakan pada tombol aksi lingkaran: tombol hati (wishlist) dan tombol hijau tambah keranjang |
+
+## Do's and Don'ts
+
+### Do
+- Gunakan font **Poppins** untuk seluruh elemen teks tanpa pengecualian sebagai *default* utama sistem.
+- Gunakan warna latar belakang halaman `#FBF7F4` secara konsisten untuk menjaga estetika toko botani organik.
+- Pastikan tombol kuantitas atau tambah keranjang sirkular menggunakan warna hijau `#375534` dengan ikon berwarna putih murni.
+
+### Don't
+- Jangan pernah membuat atau mengganti file `DESIGN.md` baru per halaman; modifikasi global cukup dilakukan di file ini saja.
+- Jangan menambahkan bayangan (*drop shadow*) pada kartu produk; pemisahan komponen harus menggunakan kontras warna `#F8F9FA`.
+- Jangan menyisipkan font sekunder di luar rumpun **Poppins** untuk menjaga integritas kebersihan desain.
