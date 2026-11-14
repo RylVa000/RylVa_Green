@@ -52,8 +52,17 @@ const server = http.createServer((request, response) =>
     response.end();
     return;
   }
-  const target = path.resolve(root, `.${pathname}`);
-  if (!target.startsWith(`${root}${path.sep}`) || pathname.split("/").some((part) => part.startsWith(".")))
+  const isPaymentWorkbench = pathname === "/__preview/payment";
+  const isOrderWorkbench = pathname === "/__preview/order-detail";
+  const isMyOrdersWorkbench = pathname === "/__preview/my-orders";
+  const isAccountWorkbench = pathname === "/__preview/account";
+  const isWorkbench = isPaymentWorkbench || isOrderWorkbench || isMyOrdersWorkbench || isAccountWorkbench;
+  const target = isWorkbench
+    ? path.resolve(__dirname, isPaymentWorkbench ? "payment-states.html"
+      : (isOrderWorkbench ? "order-detail-states.html" : (isMyOrdersWorkbench ? "my-orders-states.html" : "account-states.html")))
+    : path.resolve(root, `.${pathname}`);
+  if ((!isWorkbench && !target.startsWith(`${root}${path.sep}`))
+    || pathname.split("/").some((part) => part.startsWith(".")))
   {
     response.writeHead(403);
     response.end("Access denied");

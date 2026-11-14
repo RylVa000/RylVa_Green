@@ -12,6 +12,7 @@ RewriteRule (^|/)\.(?!well-known) - [F,L]
 
 # Arahkan seluruh permintaan ke front controller index.php
 # Kompatibilitas alamat pratinjau HTML sebelum pemisahan folder halaman
+RewriteRule ^(payment|order-detail|my-orders|account)\.html$ pages/customer/$1.html [R=302,L,NE]
 RewriteRule ^(staff-login)\.html$ pages/auth/$1.html [R=302,L,NE]
 RewriteRule ^(admin-dashboard|orders-queue|products|categories-attributes|production-materials|bouquet-production|customers|closure-calendar|operational-report|staff-profile|staff-notifications|staff-help|staff-status)\.html$ pages/staff/$1.html [R=302,L,NE]
 RewriteRule ^(audit-log|financial-report|payment-reconciliation|sensitive-approvals|staff-accounts|system-parameters)\.html$ pages/superadmin/$1.html [R=302,L,NE]

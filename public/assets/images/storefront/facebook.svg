@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 4">
+<g id="Ellipse 8">
+<path d="M44 22C44 34.1503 34.1503 44 22 44C9.84974 44 0 34.1503 0 22C0 9.84974 9.84974 0 22 0C34.1503 0 44 9.84974 44 22Z" fill="#FBF7F4"/>
+<mask id="stroke0_0_55" fill="white">
+<path d="M44 22C44 34.1503 34.1503 44 22 44C9.84974 44 0 34.1503 0 22C0 9.84974 9.84974 0 22 0C34.1503 0 44 9.84974 44 22Z"/>
+</mask>
+<path d="M44 22C44 34.1503 34.1503 44 22 44C9.84974 44 0 34.1503 0 22C0 9.84974 9.84974 0 22 0C34.1503 0 44 9.84974 44 22Z" stroke-width="4" stroke="#375534" mask="url(#stroke0_0_55)"/>
+</g>
+<path id="facebook-[#176]" d="M23.8213 29.5161V22.5339H26.5537L27 19.4306H23.8213V17.9192C23.8213 17.1201 23.8476 16.3274 25.2869 16.3274H26.7447V14.1087C26.7447 14.0754 25.4925 14 24.2257 14C21.58 14 19.9234 15.2857 19.9234 17.6464V19.4306H17V22.5339H19.9234V29.5161H23.8213Z" fill-rule="evenodd" clip-rule="evenodd" fill="#375534"/>
+</g>
+</svg>

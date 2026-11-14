@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Detail Pesanan | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/payment.css">
+  <style>
+    .workbench
+    {
+      padding: 16px;
+      background: var(--card-background);
+      border-bottom: 1px solid var(--primary-light);
+    }
+
+    .workbench-controls
+    {
+      display: flex;
+      gap: 16px;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+
+    .workbench label
+    {
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .workbench select,
+    .workbench a
+    {
+      min-height: 44px;
+      padding: 8px;
+    }
+
+    .workbench-frame
+    {
+      display: block;
+      width: 100%;
+      height: calc(100dvh - 175px);
+      min-height: 600px;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="payment-page">
+  <header class="workbench">
+    <h1>Workbench Detail Pesanan</h1>
+    <p>Kontrol pengembangan. Semua data dan perubahan hanya contoh lokal.</p>
+    <div class="workbench-controls">
+      <label for="scenario">
+        State halaman
+        <select id="scenario"></select>
+      </label>
+      <label for="action-error">
+        Gangguan tindakan berikutnya
+        <select id="action-error">
+          <option value="">Tidak ada</option>
+          <option value="timeout">Timeout, hasil belum pasti</option>
+          <option value="service">Gangguan layanan</option>
+          <option value="conflict">409, pesanan berubah</option>
+          <option value="rate-limit">429, pembatasan sementara</option>
+          <option value="csrf">CSRF tidak valid</option>
+          <option value="validation">Validasi formulir</option>
+        </select>
+      </label>
+      <button type="button" id="reset-fixture" class="button button-secondary">Reset Data Contoh</button>
+      <a id="open-preview" class="text-button" target="_blank" rel="noopener">Buka Halaman</a>
+    </div>
+  </header>
+  <iframe class="workbench-frame" id="preview" title="Pratinjau halaman pembayaran"></iframe>
+  <script src="/assets/js/storefront/order-detail-preview-data.js"></script>
+  <script>
+    "use strict";
+
+    const scenarioSelect = document.getElementById("scenario");
+    const actionErrorSelect = document.getElementById("action-error");
+    const query = new URLSearchParams(window.location.search);
+
+    for (const [scenarioId, scenarioLabel] of Object.entries(window.RylvaOrderDetailPreview.scenarioLabels))
+    {
+      const option = document.createElement("option");
+      option.value = scenarioId;
+      option.textContent = scenarioLabel;
+      scenarioSelect.append(option);
+    }
+
+    scenarioSelect.value = Object.hasOwn(window.RylvaOrderDetailPreview.scenarioLabels, query.get("state"))
+      ? query.get("state") : "shipping";
+    actionErrorSelect.value = query.get("actionError") || "";
+
+    function updatePreview()
+    {
+      const parameters = new URLSearchParams({ state: scenarioSelect.value });
+      if (actionErrorSelect.value)
+      {
+        parameters.set("actionError", actionErrorSelect.value);
+      }
+      const previewUrl = "/pages/customer/order-detail.html?" + parameters;
+      document.getElementById("preview").src = previewUrl;
+      document.getElementById("open-preview").href = previewUrl;
+      window.history.replaceState(null, "", window.location.pathname + "?" + parameters);
+    }
+
+    scenarioSelect.addEventListener("change", updatePreview);
+    actionErrorSelect.addEventListener("change", updatePreview);
+    document.getElementById("reset-fixture").addEventListener("click", () =>
+    {
+      window.sessionStorage.removeItem("rylva-order-detail-preview-v1:" + scenarioSelect.value);
+      updatePreview();
+    });
+    updatePreview();
+  </script>
+</body>
+</html>
+

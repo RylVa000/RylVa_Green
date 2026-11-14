@@ -1,4 +1,8 @@
 {
+  "payment.html": "pages/customer/payment.html",
+  "order-detail.html": "pages/customer/order-detail.html",
+  "my-orders.html": "pages/customer/my-orders.html",
+  "account.html": "pages/customer/account.html",
   "staff-login.html": "pages/auth/staff-login.html",
   "admin-dashboard.html": "pages/staff/admin-dashboard.html",
   "orders-queue.html": "pages/staff/orders-queue.html",

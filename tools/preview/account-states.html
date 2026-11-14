@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Akun Pelanggan | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/payment.css">
+  <style>
+    .account-workbench
+    {
+      padding: 16px;
+      border-bottom: 1px solid var(--primary-light);
+    }
+    .account-workbench label
+    {
+      display: inline-grid;
+      gap: 8px;
+      margin-right: 16px;
+    }
+    .account-workbench select
+    {
+      min-height: 44px;
+    }
+    .account-workbench-frame
+    {
+      display: block;
+      width: 100%;
+      height: calc(100dvh - 240px);
+      min-height: 600px;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="payment-page">
+  <header class="account-workbench">
+    <h1>Workbench Akun Pelanggan</h1>
+    <p>Data sintetis. Reautentikasi contoh menerima isian minimal 8 karakter; kode email contoh 123456. Tidak ada layanan autentikasi, email atau peta yang dipanggil.</p>
+    <label for="scenario">State halaman
+      <select id="scenario"></select>
+    </label>
+    <label for="fault">Gangguan tindakan
+      <select id="fault"></select>
+    </label>
+    <button type="button" class="button button-secondary" id="reset">Reset Data Contoh</button>
+    <a id="open" class="text-button" target="_blank" rel="noopener">Buka Halaman</a>
+  </header>
+  <iframe id="preview" class="account-workbench-frame" title="Pratinjau Akun Pelanggan"></iframe>
+  <script src="/assets/js/storefront/account-preview-data.js"></script>
+  <script>
+    "use strict";
+    const frame = document.getElementById("preview");
+    const scenario = document.getElementById("scenario");
+    const fault = document.getElementById("fault");
+    for (const [element, values] of [[scenario, window.RylvaAccountPreview.scenarioLabels], [fault, window.RylvaAccountPreview.faultLabels]])
+    {
+      for (const [value, label] of Object.entries(values))
+      {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        element.append(option);
+      }
+    }
+    function update()
+    {
+      frame.contentWindow.RylvaAccountPreviewControl?.reset();
+      const url = "/pages/customer/account.html?" + new URLSearchParams({ state: scenario.value, fault: fault.value });
+      const destination = scenario.value.startsWith("sessions") ? url + "&section=security" : url;
+      frame.src = destination;
+      document.getElementById("open").href = destination;
+    }
+    scenario.addEventListener("change", update);
+    fault.addEventListener("change", update);
+    document.getElementById("reset").addEventListener("click", update);
+    update();
+  </script>
+</body>
+</html>

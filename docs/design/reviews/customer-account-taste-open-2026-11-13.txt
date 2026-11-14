@@ -1,0 +1,155 @@
+gate: checking public/pages/customer/account.html (product); this takes a few minutes on a CPU Chrome
+gate: rounds used up; 50 FAIL open
+  FAIL hero-fill        div#account-root "Profil Saya"  [1440, 390]
+       the next section shows on the first screen: it starts at 351px on a 900px screen (the hero ends at 327px)
+       fix: let the hero fill the first screen alone (min-height: 100svh, less above it): nothing of the next section on load
+  FAIL flush            div#account-root > div.account-layout > aside.account-sidebar "NP Nadia Pratama Pelanggan   [1440]
+       its first line sits 0px under the top edge of div#account-root, where the ground changes
+       fix: give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)
+  FAIL flush            div#account-root > div.account-layout > section.account-workspace "Profil Daftar Alamat Ke  [1440, 390]
+       its last line sits 0px above the lower edge of div#account-root, where the ground changes to the footer
+       fix: give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)
+  FAIL placeholder      div.account-data > dl:nth-of-type(2) > div.account-data-row:nth-of-type(1) > dd "nadia@pel  [1440]
+       a stand-in contact printed on the page ("nadia@pelanggan.example"): no visitor can use it (and 1 more like it: "+6281200000001")
+       fix: print the real address and number, or a form or a button that names the action: never an example.com address or a number of zeros
+  FAIL nav              div.storefront-utility > div.storefront-shell-container.storefront-utility-inner > nav.sto  [1440, 390]
+       "Lacak Pesanan" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              div.storefront-utility > div.storefront-shell-container.storefront-utility-inner > nav.sto  [1440, 390]
+       "Pusat Bantuan" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              div.storefront-utility > div.storefront-shell-container.storefront-utility-inner > nav.sto  [1440, 390]
+       "Mitra Florist" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              header.storefront-shell.storefront-header > div.storefront-main > div.storefront-shell-con  [1440]
+       "" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              form#storefront-search > button.storefront-search-action  [1440]
+       "" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              div.storefront-main > div.storefront-shell-container.storefront-main-inner > nav.storefron  [1440]
+       "Akun" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              div.storefront-main > div.storefront-shell-container.storefront-main-inner > nav.storefron  [1440]
+       "Wishlist" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              div.storefront-main > div.storefront-shell-container.storefront-main-inner > nav.storefron  [1440, 390]
+       "2 Keranjang" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories (0-1440px)
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL text-only        div#account-root "Profil Saya"  [1440]
+       the closing section is only text: no picture, icon, mock or effect in it
+       fix: give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground
+  FAIL cta              main#account-main > div.page-heading.account-heading  [1440, 390]
+       the hero has no button (the nav's does not count)
+       fix: add the action: a button in the hero, one on every priced item, one in the closing section
+  FAIL cta              div#account-root "Profil Saya"  [1440, 390]
+       the last section before the footer ends with no button
+       fix: add the action: a button in the hero, one on every priced item, one in the closing section
+  FAIL text-contrast    div.storefront-utility > div.storefront-shell-container.storefront-utility-inner > div.sto  [1440, 390]
+       a caption, label or muted line in #77838d on #f8f9fa reads 3.68:1 (needs 4.5:1); 5 like it, like "↶ Pengembalian mudah 7", "Lacak Pesanan", "Pusat Bantuan"
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    div.storefront-shell-container.storefront-main-inner > nav.storefront-account-links > butt  [1440, 390]
+       a caption, label or muted line in #f8f9fa on #6b9071 reads 3.4:1 (needs 4.5:1); 3 like it, like "Wishlist", "Keranjang"
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    nav.storefront-categories > div.storefront-shell-container.storefront-category-links > but  [1440, 390]
+       a caption, label or muted line in #f44949 on #375534 reads 2.35:1 (needs 4.5:1)
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    nav.storefront-categories > div.storefront-shell-container.storefront-category-links > but  [1440, 390]
+       a caption, label or muted line in #ffffff on #f44949 reads 3.56:1 (needs 4.5:1)
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    footer.storefront-shell.storefront-footer > div.storefront-footer-container.storefront-foo  [1440, 390]
+       a caption, label or muted line in #ffffff on #6b9071 reads 3.59:1 (needs 4.5:1); 16 like it, like "Beranda", "Semua Produk", "Buket Costum"
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL product-shown    main#account-main > div.page-heading.account-heading "Profil & Pengaturan Akun"  [1440]
+       the hero of this product page shows no photograph and no render of the product: the page has no picture of it at all
+       fix: lead with the product itself: the client's photograph of it, else stand-in photographs of its kind (photos.mjs search), a render (assets/objects/product-render, [data-product], data-product-place=hero) only when the brie
+  FAIL field-label      input#storefront-search-input  [1440]
+       a input[type=search] without a label you can see: its <label> is hidden
+       fix: put a <label for> with the field's name above it (references/system.md, Forms); a placeholder is no label
+  FAIL focus-visible    form#storefront-search > button.storefront-search-action "Cari produk"  [1440]
+       Tab stop 7, button "Cari produk": its focus change is faint: 1.03:1 against the ground, 3:1 needed
+       fix: keep the kit's ring (system.css :focus-visible, 2px in --action, there at once); a control that hides itself shows on focus
+  FAIL moment-none      (the page)  [1440]
+       a product page (--type) deals no moment: every kind carries one, two on a long page (moments.md)
+       fix: deal one (moments.mjs pick --page product --photo) and mount it in its own section
+  FAIL hero-screen      main#account-main > div.page-heading.account-heading "Profil & Pengaturan Akun Kelola info  [1440]
+       the hero ends at 327px on a 900px screen, 573px above the fold: it ends at the fold, 1px either way (SR-1)
+       fix: make the hero exactly one screen (height: 100svh, its content fitted inside), never taller or shorter
+  FAIL hero-screen      div#account-root "NP Nadia Pratama Pelanggan RylVa Pesanan"  [1440]
+       549px of the next section shows on the first screen (from 351px on a 900px screen): nothing below the hero shows at load (SR-1)
+       fix: end the hero at the fold so nothing of the next section shows at load (hero height: 100svh)
+  FAIL section-height   footer.storefront-shell.storefront-footer "Menghadirkan kesegaran alam dan keindaha"  [1440]
+       the section is 252px tall (0.3 screens), 648px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)
+       fix: set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit
+  FAIL section-height   div#account-root "NP Nadia Pratama Pelanggan RylVa Pesanan"  [1440]
+       the section is 611px tall (0.7 screens), 289px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)
+       fix: set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit
+  FAIL section-height   main#account-main > div.page-heading.account-heading "Profil & Pengaturan Akun Kelola info  [1440]
+       the section starts at 259px, 259px below the screen grid (0 x 900px): sections start on whole screens (SR-2)
+       fix: make every section above it exactly one or two screens tall, so this one starts on a whole screen
+  FAIL one-section      h2#footer-explore "Jelajahi RylVa"  [1440]
+       the screen at scroll 351px (the top of section 2) shows 225px of section 3 and the heading of section 3 whole and the content of 2 sections, over 24px each beside section 2: a screen shows one section (another may peek 8
+       fix: make each section exactly one screen or two, so a screen shows one section and no neighbour peeks
+  FAIL one-section      main#account-main > div.page-heading.account-heading > div > h1 "Profil & Pengaturan Akun"  [1440]
+       the screen at scroll 259px (the top of section 1) shows 133px of section 3 and the heading of section 1 whole and the content of 3 sections, over 24px each beside section 2: a screen shows one section (another may peek 8
+       fix: make each section exactly one screen or two, so a screen shows one section and no neighbour peeks
+  FAIL one-section      div#account-root "NP Nadia Pratama Pelanggan RylVa Pesanan"  [1440]
+       a <div> sits directly in <main>: every part of <main> is a <section> (SR-4)
+       fix: put every block of <main> in a <section>, and give a band its own section instead of a ground inside one
+  FAIL one-heading      h2#footer-help "Bantuan RylVa"  [1440]
+       the section holds 4 h2 headings: one per section, first in its .wrap (SR-5)
+       fix: give each section one h2, first in its .wrap, and the hero only its h1
+  FAIL one-heading      h2#footer-explore "Jelajahi RylVa"  [1440]
+       headings of two sections show whole on one screen at 4 of 8 scroll positions (50%; at scroll 200, 250, 300, 350px), here with "Profil Saya": at most 3% on a desktop (SR-5)
+       fix: make the sections one screen tall so their headings sit a screen apart and two never share one
+  FAIL container-edges  footer.storefront-shell.storefront-footer "Menghadirkan kesegaran alam dan keindaha"  [1440]
+       the content of section 3 runs 48px from the left and 48px from the right (read from its outermost blocks: no .wrap): the page's container starts at 100px; the margin is 64-120px at 1440px (one container, equal margins, 2
+       fix: use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone
+  FAIL container-edges  header.storefront-shell.storefront-header "▱ Gratis ongkir min. Rp 200.000 ↶ Pengem"  [1440]
+       the nav's content runs 72px from the left and 72px from the right (read from its outermost blocks: no .wrap): the page's container starts at 100px (one container, equal margins, 2px either way) (SR-6)
+       fix: use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone
+  FAIL container-edges  a.skip-link "Lewati ke pengaturan akun"  [1440]
+       a <a> at the top of the page, outside header.nav, main, footer.closing and nav.actionbar (SR-6)
+       fix: build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing
+  FAIL container-edges  header.storefront-shell.storefront-header > div.storefront-utility "▱ Gratis ongkir min. R  [1440]
+       a box runs 0-1440px, outside the container lines of the nav at 100-1340px: full width is for background layers and grounds only (SR-6)
+       fix: keep it inside the container lines (.wrap): full width is for background layers and grounds only
+  FAIL container-edges  header.storefront-shell.storefront-header > div.storefront-main "Cari produk, kategori, at  [1440]
+       a box runs 0-1440px, outside the container lines of the nav at 100-1340px: full width is for background layers and grounds only (and 6 more like it: "Koleksi Baru Promo Spesi", "© 2026 RylVa Green. All ", "▱") (SR-6)
+       fix: keep it inside the container lines (.wrap): full width is for background layers and grounds only
+  FAIL container-edges  footer.storefront-shell.storefront-footer > div.storefront-footer-container.storefront-foo  [1440]
+       the h2 starts 993px right of the container's left: every h1 and h2 starts on it, 2px either way (and 4 more like it: "Informasi RylVa", "Bantuan RylVa", "Jelajahi RylVa") (SR-6)
+       fix: start the text on the container's left, or on the one split line every split shares
+  FAIL container-edges  footer.storefront-shell.storefront-footer > div.storefront-copyright "© 2026 RylVa Green.   [1440]
+       a box over half the container wide runs 0-1440px, not on the container's lines at 48-1392px (SR-6)
+       fix: run the picture or box from the container's left line to its right line, or put it in a row or a split
+  FAIL row-lines        div#account-root > div.account-layout "NP Nadia Pratama Pelanggan RylVa Pesanan"  [1440]
+       a row of 2 items: its items are 288/611px tall, not one height (2px either way) (SR-7)
+       fix: start the row's first item on the container's left line and end its last on the right line, every item one height
+  FAIL row-lines        header.storefront-shell.storefront-header > nav.storefront-categories > div.storefront-she  [1440]
+       a sideways scroller: 5px of it hidden behind overflow-x: auto (SR-7)
+       fix: show every item inside the container, or stack them: no sideways scroller, no half-cut carousel
+  FAIL flush            div#account-root > div.account-layout > aside.account-sidebar "NP Nadia Pratama Pelanggan   [390]
+       its first line sits 0px under the top edge of div#account-root, where the ground changes
+       fix: give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)
+  FAIL cut-text         div.account-layout > section.account-workspace > nav.account-tabs > a:nth-of-type(4) "Priv  [390]
+       runs past the edge of its box div#account-root > div.account-layout > section.account-workspace
+       fix: give the text room: no overflow clipping a line, no line past its box
+  FAIL no-visual        div#account-root "Profil Saya"  [390]
+       no picture, effect or mock in this section; a feature section needs a visual
+       fix: give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits
+  FAIL off-grid         div.storefront-footer-column.storefront-contact > div.storefront-social-links > button:nth  [390]
+       left edge at 194.5px, 8.5px off a common edge of its section at 203px (5 elements, like button:nth-of-type(4))
+       fix: move it onto the page margin, or the column edge its section uses
+  FAIL nav              header.storefront-shell.storefront-header > nav.storefront-categories > div.storefront-she  [1280]
+       "Pupuk & Nutrisi" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL nav              header.storefront-shell.storefront-header > nav.storefront-categories > div.storefront-she  [1152]
+       "Alat Berkebun" sits outside the nav bar header.storefront-shell.storefront-header > nav.storefront-categories
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL container        page  [1440, 390]
+       no .wrap
+       fix: put the content in one .wrap
+  13 WARN (not blocking), first: flush div.storefront-footer-container.storefro; copy-actions (the page); off-grid div.storefront-main > div.storefront-she; section-gaps main#account-main > div.page-heading.acc; section-gaps div#account-root / footer.storefront-she
+Stop fixing: put these open FAILs and the waivers in your report, then finish.
+GATE: OPEN 50 (rounds used up)

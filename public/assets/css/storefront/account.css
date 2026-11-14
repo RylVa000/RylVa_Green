@@ -1,0 +1,974 @@
+/* Hallmark · shape: app screen · theme: RylVa Green incumbent · genre: modern-minimal
+ * Screen: customer identity rows, account navigation and address book · states: full, loading, empty, error
+ */
+.account-page .payment-main
+{
+  width: min(calc(100% - var(--payment-gutter) * 2), 1240px);
+}
+
+.account-heading
+{
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.account-page h1
+{
+  font-size: var(--text-2xl);
+  text-wrap: balance;
+}
+
+.account-page .button
+{
+  min-height: 44px;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-input);
+  text-decoration: none;
+  text-align: center;
+}
+
+.account-data-row .button
+{
+  align-self: start;
+  margin-top: var(--space-xs);
+}
+
+.account-page .button-primary
+{
+  border-radius: var(--radius-pill);
+}
+
+.account-page main button:active:not(:disabled),
+.account-page main a:active,
+.account-dialog button:active:not(:disabled)
+{
+  transform: translateY(1px);
+}
+
+.account-heading p,
+.account-muted
+{
+  color: var(--payment-muted);
+  font-size: var(--text-sm);
+}
+
+.account-heading p
+{
+  margin-top: var(--space-xs);
+}
+
+.account-layout
+{
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.account-sidebar,
+.account-workspace
+{
+  min-width: 0;
+  border: 1px solid var(--neutral-soft);
+  border-radius: var(--radius-card);
+  background: var(--card-background);
+}
+
+.account-sidebar
+{
+  padding: var(--space-lg);
+}
+
+.account-person
+{
+  display: grid;
+  align-items: start;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.account-person > div
+{
+  min-width: 0;
+}
+
+.account-person strong,
+.account-person small
+{
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.account-person small
+{
+  color: var(--payment-muted);
+  font-size: var(--text-xs);
+}
+
+.account-initials
+{
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: var(--color-accent-ink);
+  font-weight: 600;
+}
+
+.account-sidebar nav
+{
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.account-side-link
+{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 44px;
+  padding: var(--space-xs);
+  color: var(--primary);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border-radius: var(--radius-input);
+}
+
+.account-side-link[aria-current],
+.account-side-link:hover
+{
+  background: var(--color-selection);
+}
+
+.account-tabs
+{
+  display: flex;
+  gap: var(--space-xs);
+  padding-inline: var(--space-lg);
+  border-bottom: 1px solid var(--neutral-soft);
+  overflow-x: auto;
+  scrollbar-color: var(--primary) var(--card-background);
+}
+
+.account-tabs a
+{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 3px solid var(--color-transparent);
+  color: var(--payment-muted);
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.account-tabs a[aria-current="page"]
+{
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.account-tabs a:hover
+{
+  background: var(--color-paper-2);
+}
+
+.account-panel
+{
+  padding: var(--payment-space-32);
+  min-height: 420px;
+}
+
+.account-panel > h2,
+.account-panel-heading
+{
+  margin-bottom: var(--space-lg);
+}
+
+.account-panel-heading
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.account-panel-heading p,
+.account-panel p + p
+{
+  margin-top: var(--space-xs);
+}
+
+.account-profile-grid
+{
+  display: grid;
+  grid-template-columns: 156px minmax(0, 1fr);
+  gap: var(--payment-space-32);
+}
+
+.account-identity
+{
+  padding-block: var(--space-xs);
+}
+
+.account-identity .account-initials
+{
+  width: 88px;
+  height: 88px;
+  margin-bottom: var(--space-md);
+  font-size: var(--text-xl);
+  background: var(--neutral-soft);
+  color: var(--primary-dark);
+}
+
+.account-identity strong
+{
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-size: var(--text-sm);
+}
+
+.account-data h3
+{
+  color: var(--payment-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.account-data h3:not(:first-child)
+{
+  margin-top: var(--space-xl);
+}
+
+.account-data dl
+{
+  margin: 0;
+}
+
+.account-data-row
+{
+  display: grid;
+  grid-template-columns: 105px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--space-sm);
+  padding-block: var(--space-sm);
+}
+
+.account-data-row dt
+{
+  color: var(--payment-muted);
+  font-size: var(--text-sm);
+  padding-block: var(--space-xs);
+}
+
+.account-data-row dd
+{
+  margin: 0;
+  padding-block: var(--space-xs);
+  overflow-wrap: anywhere;
+  min-width: 0;
+  font-size: var(--text-sm);
+}
+
+.account-data-row .badge
+{
+  margin-top: var(--space-xs);
+}
+
+.account-feedback:not(:empty),
+.account-notice
+{
+  padding: var(--space-md);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-input);
+  margin-bottom: var(--space-lg);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.account-notice p,
+.account-notice strong
+{
+  display: block;
+}
+
+.account-notice .text-button
+{
+  margin-right: var(--space-md);
+}
+
+.account-section-actions
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.account-section-block + .account-section-block
+{
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-rule);
+}
+
+.account-search,
+.account-field
+{
+  display: grid;
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
+}
+
+.account-search
+{
+  margin-bottom: var(--space-lg);
+}
+
+.account-page main input,
+.account-dialog input,
+.account-dialog textarea
+{
+  min-width: 0;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-sm);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-input);
+  background: var(--card-background);
+  color: var(--primary-dark);
+  font: inherit;
+  caret-color: var(--primary);
+}
+
+.account-dialog textarea
+{
+  resize: vertical;
+}
+
+.account-dialog input[type="checkbox"]
+{
+  min-height: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  accent-color: var(--primary);
+}
+
+.account-field small
+{
+  font-size: var(--text-xs);
+  color: var(--payment-muted);
+}
+
+.account-field small:empty
+{
+  display: none;
+}
+
+.account-panel.account-empty
+{
+  min-height: 0;
+}
+
+.account-section-block .account-notice
+{
+  margin-top: var(--space-md);
+}
+
+.account-check
+{
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 44px;
+}
+
+.account-password
+{
+  display: flex;
+  gap: var(--space-xs);
+  align-items: start;
+}
+
+.account-password .text-button
+{
+  flex-shrink: 0;
+}
+
+.account-address-list
+{
+  display: grid;
+  gap: var(--space-md);
+}
+
+.account-address
+{
+  padding: var(--space-lg) var(--space-lg) 0;
+  border: 2px solid var(--neutral-soft);
+  border-radius: 20px;
+  background: var(--background);
+  overflow-wrap: anywhere;
+}
+
+.account-address[data-primary="true"]
+{
+  border-color: var(--primary);
+  border-width: 3px;
+}
+
+.account-address-heading
+{
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.account-address p
+{
+  font-size: var(--text-sm);
+}
+
+.account-address-actions
+{
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin: var(--space-md) calc(-1 * var(--space-lg)) 0;
+  padding: var(--space-sm) var(--space-lg);
+  border-top: 1px solid var(--color-rule);
+}
+
+.account-address-heading .badge
+{
+  padding: var(--space-2xs) var(--space-sm);
+  border: 0;
+  border-radius: var(--space-2xs);
+  background: var(--primary);
+  color: var(--color-accent-ink);
+}
+
+.account-address-contact
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.account-address-contact span
+{
+  padding-left: var(--space-xs);
+  border-left: 1px solid var(--neutral-soft);
+  color: var(--payment-muted);
+}
+
+.account-address-region
+{
+  color: var(--payment-muted);
+}
+
+.account-address-point
+{
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.account-address-toolbar
+{
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.account-address-toolbar .account-search
+{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  padding-left: var(--space-md);
+  border-radius: var(--radius-input);
+  background: var(--product-card-background);
+}
+
+.account-page .account-address-toolbar input
+{
+  border: 0;
+  background: var(--color-transparent);
+}
+
+.account-security-layout
+{
+  display: grid;
+  grid-template-columns: minmax(180px, 0.65fr) minmax(0, 1.6fr);
+  gap: var(--space-lg);
+}
+
+.account-security-layout .account-login-activity
+{
+  margin: 0;
+  padding: 0 0 0 var(--space-lg);
+  border-top: 0;
+  border-left: 1px solid var(--color-rule);
+}
+
+.account-login-activity .account-panel-heading
+{
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.account-security-layout .account-session
+{
+  grid-template-columns: 32px minmax(0, 1fr);
+}
+
+.account-security-layout .account-session > .button
+{
+  grid-column: 2;
+  justify-self: start;
+}
+
+.account-sessions
+{
+  list-style: none;
+  padding: 0;
+  margin: var(--space-lg) 0 0;
+}
+
+.account-session
+{
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  gap: var(--space-md);
+  align-items: center;
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.account-session > .icon
+{
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+}
+
+.account-session p
+{
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.account-session-current
+{
+  display: inline-flex;
+  margin-top: var(--space-xs);
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--color-selection);
+  color: var(--primary-dark);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.account-location-summary
+{
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-input);
+  background: var(--color-paper-3);
+}
+
+.account-location-summary small,
+.account-map-credit
+{
+  font-size: var(--text-xs);
+  color: var(--payment-muted);
+}
+
+.account-location-summary p
+{
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.account-address-form .dialog-actions
+{
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-sm);
+}
+
+.account-dialog .account-address-form
+{
+  gap: var(--space-sm);
+}
+
+.account-address-form .account-field
+{
+  gap: var(--space-2xs);
+}
+
+.account-address-form textarea
+{
+  height: 72px;
+  min-height: 72px;
+}
+
+.account-address-form .dialog-actions .button-primary
+{
+  width: 100%;
+}
+
+.account-address-details summary
+{
+  min-height: 44px;
+  padding-block: var(--space-xs);
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+.account-address-details[open] .account-fields-grid
+{
+  margin-bottom: var(--space-md);
+}
+
+.account-map
+{
+  height: 260px;
+  min-height: 260px;
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-input);
+  background: var(--color-paper-2);
+}
+
+.account-map-search
+{
+  display: flex;
+  gap: var(--space-sm);
+  align-items: end;
+}
+
+.account-map-search .account-field
+{
+  flex: 1;
+  min-width: 0;
+}
+
+.account-map-marker
+{
+  border: 3px solid var(--color-accent-ink);
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+@media (max-width: 600px)
+{
+  .account-address-toolbar
+  {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .account-session
+  {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .account-session > .button
+  {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .account-location-summary
+  {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .account-location-summary > .icon
+  {
+    display: none;
+  }
+
+  .account-location-summary > div
+  {
+    min-width: 0;
+  }
+
+  .account-location-summary small
+  {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .account-location-summary p
+  {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1100px)
+{
+  .account-security-layout
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .account-security-layout .account-login-activity
+  {
+    order: -1;
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+.account-dialog .dialog-heading
+{
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.account-dialog form,
+.account-dialog .account-dialog-body
+{
+  display: grid;
+  gap: var(--space-md);
+}
+
+.account-fields-grid
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.account-error
+{
+  font-size: var(--text-sm);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.account-error:empty
+{
+  display: none;
+}
+
+.account-error:not(:empty)
+{
+  padding: var(--space-sm);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-input);
+}
+
+.account-location-result
+{
+  text-align: left;
+  padding: var(--space-md);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-input);
+  background: var(--card-background);
+}
+
+.account-empty
+{
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: var(--space-md);
+  padding-block: var(--space-lg);
+}
+
+.account-skeleton
+{
+  min-height: 340px;
+  padding: var(--space-lg);
+  border: 1px solid var(--neutral-soft);
+  border-radius: var(--radius-card);
+}
+
+.account-skeleton div
+{
+  height: 24px;
+  margin-bottom: var(--space-lg);
+  width: 70%;
+  background: var(--neutral-soft);
+  border-radius: var(--radius-input);
+}
+
+.account-skeleton div:nth-child(2)
+{
+  width: 45%;
+}
+
+.account-page main :focus-visible,
+.account-dialog :focus-visible
+{
+  outline: 3px solid var(--primary);
+  outline-offset: var(--space-2xs);
+}
+
+.account-page main input::placeholder,
+.account-dialog input::placeholder,
+.account-dialog textarea::placeholder
+{
+  color: var(--payment-muted);
+  opacity: 1;
+}
+
+@media (max-width: 1100px)
+{
+  .account-layout
+  {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+
+  .account-sidebar
+  {
+    padding: var(--space-md);
+  }
+
+  .account-profile-grid
+  {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .account-identity
+  {
+    display: none;
+  }
+}
+
+@media (max-width: 960px)
+{
+  .account-layout
+  {
+    grid-template-columns: 1fr;
+  }
+
+  .account-heading
+  {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .account-heading h1
+  {
+    font-size: var(--text-xl);
+  }
+
+  .account-sidebar
+  {
+    padding: var(--space-md);
+  }
+
+  .account-person
+  {
+    display: flex;
+    border: 0;
+    padding: 0;
+  }
+
+  .account-sidebar nav
+  {
+    display: none;
+  }
+
+  .account-tabs
+  {
+    padding-inline: var(--space-xs);
+  }
+
+  .account-tabs a
+  {
+    min-height: 52px;
+    padding-inline: var(--space-sm);
+  }
+
+  .account-panel
+  {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .account-data-row
+  {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 var(--space-sm);
+    padding-block: var(--space-xs);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .account-data-row dt
+  {
+    grid-column: 1;
+  }
+
+  .account-data-row dd
+  {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
+  }
+
+  .account-data-row button
+  {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  .account-fields-grid
+  {
+    grid-template-columns: 1fr;
+  }
+
+  .account-address
+  {
+    padding: var(--space-md) var(--space-lg) 0;
+  }
+
+  .account-address-actions
+  {
+    gap: var(--space-sm);
+  }
+
+  .account-dialog .dialog-actions .button,
+  .account-panel-heading > .button
+  {
+    width: 100%;
+  }
+}
