@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id" data-type="product">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tinjau produk, jumlah, dan ringkasan belanja Anda di RylVa Green.">
+  <meta name="page-type" content="product">
+  <meta name="site-kind" content="other">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Keranjang | RylVa Green</title>
+  <link rel="stylesheet" href="../../assets/css/storefront/payment.css">
+  <link rel="stylesheet" href="../../assets/css/storefront/storefront-shell.css">
+  <link rel="stylesheet" href="../../assets/css/storefront/customer-status.css">
+  <link rel="stylesheet" href="../../assets/css/storefront/cart.css">
+  <script src="../../assets/js/storefront/storefront-shell.js" defer></script>
+  <script src="../../assets/js/storefront/storefront-product-preview-data.js" defer></script>
+  <script src="../../assets/js/storefront/cart-preview-data.js" defer></script>
+  <script src="../../assets/js/storefront/cart-preview-repository.js" defer></script>
+  <script src="../../assets/js/storefront/cart.js" defer></script>
+</head>
+<body class="payment-page cart-page">
+  <a class="skip-link" href="#cart-main">Lewati ke keranjang</a>
+  <header class="storefront-shell storefront-header" data-figma-node="473:1741">
+    <div class="storefront-utility">
+      <div class="storefront-shell-container storefront-utility-inner">
+        <div class="storefront-assurances">
+          <p><span aria-hidden="true">▱</span> Gratis ongkir min. Rp 200.000</p>
+          <p><span aria-hidden="true">↶</span> Pengembalian mudah 7 hari</p>
+        </div>
+        <nav class="storefront-utility-links" aria-label="Layanan RylVa">
+          <button type="button" data-storefront-page="Lacak Pesanan">Lacak Pesanan</button>
+          <button type="button" data-storefront-page="Pusat Bantuan">Pusat Bantuan</button>
+          <button type="button" data-storefront-page="Mitra Florist">Mitra Florist</button>
+        </nav>
+      </div>
+    </div>
+    <div class="storefront-main" data-figma-node="473:1749">
+      <div class="storefront-shell-container storefront-main-inner">
+        <button class="storefront-logo" type="button" data-storefront-page="Beranda" aria-label="Beranda RylVa Green">
+          <img src="../../assets/images/storefront/logo-navbar.svg" alt="RylVa Green">
+        </button>
+        <form class="storefront-search" id="storefront-search" role="search">
+          <label class="visually-hidden" for="storefront-search-input">Cari produk, kategori, atau nama tanaman</label>
+          <input
+            id="storefront-search-input"
+            name="q"
+            type="search"
+            maxlength="100"
+            placeholder="Cari produk, kategori, atau nama tanaman..."
+          >
+          <button class="storefront-search-action" type="submit" aria-label="Cari produk">
+            <img src="../../assets/images/storefront/search.svg" width="20" height="20" alt="">
+          </button>
+        </form>
+        <nav class="storefront-account-links" aria-label="Akun dan belanja">
+          <button class="storefront-account-action" type="button" data-storefront-page="Akun">
+            <img src="../../assets/images/storefront/account.svg" width="24" height="24" alt="">
+            <span>Akun</span>
+          </button>
+          <button class="storefront-account-action" type="button" data-storefront-page="Wishlist">
+            <img src="../../assets/images/storefront/wishlist.svg" width="24" height="24" alt="">
+            <span>Wishlist</span>
+          </button>
+          <button class="storefront-account-action" type="button" data-storefront-page="Keranjang" aria-label="Keranjang, 2 produk contoh">
+            <img src="../../assets/images/storefront/cart.svg" width="24" height="24" alt="">
+            <span class="storefront-cart-count" aria-hidden="true">2</span>
+            <span>Keranjang</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+    <nav class="storefront-categories" aria-label="Kategori produk" data-figma-node="473:1772">
+      <div class="storefront-shell-container storefront-category-links">
+        <button type="button" data-storefront-page="Koleksi Baru">Koleksi Baru</button>
+        <button class="storefront-promo" type="button" data-storefront-page="Promo Spesial">
+          <span>Promo Spesial</span>
+          <span class="storefront-hot">HOT</span>
+        </button>
+        <button type="button" data-storefront-page="Buket Kustom">Buket Kustom</button>
+        <button type="button" data-storefront-page="Tanaman Hias">Tanaman Hias</button>
+        <button type="button" data-storefront-page="Terrarium &amp; Moss">Terrarium &amp; Moss</button>
+        <button type="button" data-storefront-page="Media Tanam">Media Tanam</button>
+        <button type="button" data-storefront-page="Pot &amp; Vas">Pot &amp; Vas</button>
+        <button type="button" data-storefront-page="Alat Berkebun">Alat Berkebun</button>
+        <button type="button" data-storefront-page="Pupuk &amp; Nutrisi">Pupuk &amp; Nutrisi</button>
+      </div>
+    </nav>
+  </header>
+  <p class="preview-note" id="storefront-preview-note" role="status">
+    Pratinjau Keranjang dengan data contoh. Belum terhubung ke layanan transaksi.
+  </p>
+  <main id="cart-main" class="cart-main" tabindex="-1">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <button type="button" data-cart-action="home">Beranda</button>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Keranjang</span>
+    </nav>
+    <div class="cart-heading">
+      <h1 id="cart-title" tabindex="-1">Keranjang</h1>
+      <p class="cart-context" id="cart-context">Memuat isi keranjang…</p>
+    </div>
+    <div id="cart-notice" class="cart-notice" role="status" hidden></div>
+    <div id="cart-root" aria-busy="true">
+      <div class="cart-products" aria-label="Memuat keranjang">
+        <div class="cart-item cart-skeleton">
+          <div class="skeleton skeleton-title"></div>
+          <p>Memuat keranjang…</p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <section class="cart-page-state">
+        <h2>Keranjang belum dapat ditampilkan</h2>
+        <p>Aktifkan JavaScript, lalu muat ulang halaman. Isi belanja tidak diubah.</p>
+      </section>
+    </noscript>
+  </main>
+  <footer class="storefront-shell storefront-footer" data-figma-node="375:185">
+    <div class="storefront-footer-container storefront-footer-grid">
+      <div class="storefront-about">
+        <button class="storefront-footer-logo" type="button" data-storefront-page="Beranda" aria-label="Beranda RylVa Green">
+          <img src="../../assets/images/storefront/logo-footer.svg" width="203" height="61" alt="RylVa Green">
+        </button>
+        <p class="storefront-description">
+          Menghadirkan kesegaran alam dan keindahan bunga untuk menciptakan
+          ruang yang asri, sehat, dan penuh warna.
+        </p>
+      </div>
+      <nav class="storefront-footer-column" aria-labelledby="footer-explore">
+        <h2 id="footer-explore">Jelajahi RylVa</h2>
+        <div class="storefront-footer-links">
+          <button type="button" data-storefront-page="Beranda">Beranda</button>
+          <button type="button" data-storefront-page="Semua Produk">Semua Produk</button>
+          <button type="button" data-storefront-page="Buket Costum">Buket Costum</button>
+          <button type="button" data-storefront-page="Perlengkapan Berkebun">Perlengkapan Berkebun</button>
+        </div>
+      </nav>
+      <nav class="storefront-footer-column" aria-labelledby="footer-help">
+        <h2 id="footer-help">Bantuan RylVa</h2>
+        <div class="storefront-footer-links">
+          <button type="button" data-storefront-page="Cara Memesan">Cara Memesan</button>
+          <button type="button" data-storefront-page="Informasi Pengiriman">Informasi Pengiriman</button>
+          <button type="button" data-storefront-page="Pembatalan &amp; Refund">Pembatalan &amp; Refund</button>
+          <button type="button" data-storefront-page="Hubungi Kami">Hubungi Kami</button>
+        </div>
+      </nav>
+      <nav class="storefront-footer-column" aria-labelledby="footer-information">
+        <h2 id="footer-information">Informasi RylVa</h2>
+        <div class="storefront-footer-links">
+          <button type="button" data-storefront-page="Tentang Kami">Tentang Kami</button>
+          <button type="button" data-storefront-page="Kebijakan Privasi">Kebijakan Privasi</button>
+          <button type="button" data-storefront-page="Syarat &amp; Ketentuan">Syarat &amp; Ketentuan</button>
+        </div>
+      </nav>
+      <div class="storefront-footer-column storefront-contact">
+        <h2>Kontak RylVa</h2>
+        <div class="storefront-social-links">
+          <button type="button" data-storefront-page="Facebook RylVa_Green" aria-label="Facebook RylVa_Green">
+            <img src="../../assets/images/storefront/facebook.svg" width="44" height="44" alt="">
+            <span>RylVa_Green</span>
+          </button>
+          <button type="button" data-storefront-page="Instagram @Va_RylVa" aria-label="Instagram @Va_RylVa">
+            <img src="../../assets/images/storefront/instagram.svg" width="44" height="44" alt="">
+            <span>@Va_RylVa</span>
+          </button>
+          <button type="button" data-storefront-page="TikTok RylVa_Green10" aria-label="TikTok RylVa_Green10">
+            <img src="../../assets/images/storefront/tiktok.svg" width="44" height="44" alt="">
+            <span>RylVa_Green10</span>
+          </button>
+          <button type="button" data-storefront-page="YouTube YT_RylVa_Green" aria-label="YouTube YT_RylVa_Green">
+            <span class="storefront-youtube-icon" aria-hidden="true">
+              <img src="../../assets/images/storefront/social-circle.svg" width="44" height="44" alt="">
+              <img class="storefront-youtube-mark" src="../../assets/images/storefront/youtube.svg" width="20" height="14" alt="">
+            </span>
+            <span>YT_RylVa_Green</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="storefront-footer-notice" id="storefront-footer-notice" hidden></p>
+    <div class="storefront-copyright">© 2026 RylVa Green. All Rights Reserved</div>
+  </footer>
+  <dialog id="cart-dialog" class="payment-dialog" aria-labelledby="cart-dialog-title">
+    <div class="dialog-heading">
+      <h2 id="cart-dialog-title" tabindex="-1">Keranjang</h2>
+      <button class="icon-button" type="button" data-cart-action="close-dialog" aria-label="Tutup dialog">
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M18 6 6 18"/>
+        </svg>
+      </button>
+    </div>
+    <div id="cart-dialog-content"></div>
+  </dialog>
+  <div id="cart-announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

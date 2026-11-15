@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Pesanan Saya | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/payment.css">
+  <style>
+    .workbench
+    {
+      padding: 16px;
+      border-bottom: 1px solid var(--primary-light);
+    }
+
+    .workbench label
+    {
+      display: inline-grid;
+      margin-right: 16px;
+      gap: 8px;
+    }
+
+    .workbench select
+    {
+      min-height: 44px;
+    }
+
+    .workbench-frame
+    {
+      display: block;
+      width: 100%;
+      height: calc(100dvh - 180px);
+      min-height: 600px;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="payment-page">
+  <header class="workbench">
+    <h1>Workbench Pesanan Saya</h1>
+    <p>Kontrol pengembangan. Semua pesanan dan perubahan hanya contoh lokal.</p>
+    <label for="scenario">
+      State halaman
+      <select id="scenario"></select>
+    </label>
+    <button id="reset-fixtures" class="button button-secondary" type="button">Reset Data Contoh</button>
+    <a id="open-preview" class="text-button" target="_blank" rel="noopener">Buka Halaman</a>
+  </header>
+  <iframe id="preview" class="workbench-frame" title="Pratinjau Pesanan Saya"></iframe>
+  <script src="/assets/js/storefront/my-orders-preview-data.js"></script>
+  <script>
+    "use strict";
+
+    const scenario = document.getElementById("scenario");
+    const frame = document.getElementById("preview");
+    for (const [value, label] of Object.entries(window.RylvaMyOrdersPreview.scenarioLabels))
+    {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      scenario.append(option);
+    }
+    scenario.value = new URLSearchParams(window.location.search).get("state") || "normal";
+
+    function updatePreview()
+    {
+      frame.contentWindow.RylvaOrdersPreviewRepository?.reset();
+      const parameters = new URLSearchParams({ state: scenario.value || "normal" });
+      const destination = "/pages/customer/my-orders.html?" + parameters;
+      frame.src = destination;
+      document.getElementById("open-preview").href = destination;
+      window.history.replaceState(null, "", window.location.pathname + "?" + parameters);
+    }
+
+    scenario.addEventListener("change", updatePreview);
+    document.getElementById("reset-fixtures").addEventListener("click", updatePreview);
+    updatePreview();
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+[
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2026/10/974d6ee61cf857dce43e02e2a8d6ea1c_f2dd85027fd595a5da7d5ce1ac24d10b_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "gopay.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/10/f7fb2e0ab8572355142dba33ddc7b8d6_0747205be87147c03d04217ad4eb06c3_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "shopeepay.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/f6f57e9126c57179cf729cc9586e47c0_e26ce4cce944fe379072ae509fe72ec1_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "bni.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/7591290494be00b0470598db60efa1ad_d60ae495ef3a7e26168752e1a9fb4104_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "bri.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2020/09/11f8970a182ad8cf6aaf0a0cd22dd9ad_3948cb3bf5c4887c7cca7ca7ee421708_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "mandiri.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2024/10/0cc71e14e4de9ea873b0c97a7a4b2055_40a9bde2ab3051ee67944f979a91b65c_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "permata.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2025/04/75442c94f01cfd6f8e9ffd9b260317b4_d1d0586e3ee1810212634dace4ce50ed_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "danamon.png"
+  },
+  {
+    "source": "https://midtrans-website.al-mp-id-p.cdn.gtflabs.io/uploads/2026/01/e532a2a311c008bd57860e0d2421a1b1_9cef30936521d99ed6cfc577a02a98bd_compressed.png",
+    "use": "Provider identification in illustrative frontend; no gateway or merchant activation claim",
+    "page": "https://midtrans.com/features/payment-methods",
+    "accessed": "2026-11-14",
+    "file": "bsi.png"
+  },
+  {
+    "use": "Provider identification in illustrative frontend",
+    "source": "https://www.ovo.id/ovo_front_res/img/ovo-logo-white.png",
+    "file": "ovo.png",
+    "page": "https://www.ovo.id/",
+    "accessed": "2026-11-14"
+  },
+  {
+    "use": "Provider identification in illustrative frontend",
+    "source": "https://cdn.prod.website-files.com/6a709905c2ac83222ebb8c27/6adb40c0b89681d5456c3cab_linkaja%20logotype%20white.svg",
+    "file": "linkaja.svg",
+    "page": "https://www.linkaja.id/",
+    "accessed": "2026-11-14"
+  }
+]

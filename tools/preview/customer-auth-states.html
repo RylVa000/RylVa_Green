@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Autentikasi Pelanggan | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/customer-auth.css">
+  <script src="/assets/js/storefront/customer-auth-preview.js" defer></script>
+  <style>
+    main
+    {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 24px;
+      background: var(--background);
+    }
+
+    ul
+    {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    a
+    {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--primary-light);
+      border-radius: 8px;
+      color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body class="customer-auth-page">
+  <main>
+    <h1>Workbench Autentikasi Pelanggan</h1>
+    <p>Kontrol pengembangan untuk data contoh. Tidak membuat akun, mengirim email, atau membuat sesi produksi.</p>
+    <p>State khusus hanya aktif pada localhost dengan preview=auth. Gunakan tab baru untuk tiap skenario.
+      Kode contoh pertama: 123456; setiap kirim ulang menaikkan kode satu angka dan membatalkan kode sebelumnya.</p>
+    <p>Reset normal hanya terbuka setelah permintaan pemulihan contoh atau dari skenario pengembangan.
+      Kredensial tidak disimpan. Untuk menguji koneksi nyata, gunakan mode offline alat pengembangan browser.</p>
+    <ul id="auth-state-links"></ul>
+  </main>
+  <script>
+    window.addEventListener("DOMContentLoaded", () =>
+    {
+      const routes = { login: "customer-login", register: "customer-register", verify: "verify-email", forgot: "forgot-password", reset: "reset-password" };
+      const list = document.getElementById("auth-state-links");
+      for (const [state, [view, label]] of Object.entries(window.RylvaCustomerAuthPreview.scenarios))
+      {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "/pages/auth/" + routes[view] + ".html?preview=auth&state=" + encodeURIComponent(state);
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = label;
+        item.append(link);
+        list.append(item);
+      }
+    });
+  </script>
+</body>
+</html>

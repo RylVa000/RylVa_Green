@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Checkout | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/payment.css">
+  <script src="/assets/js/storefront/cart-preview-data.js" defer></script>
+  <script src="/assets/js/storefront/payment-provider-catalog.js" defer></script>
+  <script src="/assets/js/storefront/checkout-preview-data.js" defer></script>
+  <style>
+    main
+    {
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+
+    ul
+    {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    a
+    {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--primary-light);
+      border-radius: 8px;
+      color: var(--primary-dark);
+    }
+
+    a:focus-visible
+    {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body class="payment-page">
+  <main>
+    <h1>Workbench Checkout</h1>
+    <p>Kontrol pengembangan. Seluruh data adalah contoh; tidak ada pesanan atau reservasi stok yang dibuat.</p>
+    <p>State khusus hanya aktif pada localhost dengan parameter preview=checkout. Halaman normal tidak menampilkan kontrol ini.</p>
+    <ul id="checkout-state-links"></ul>
+    <h2>Interaksi yang diperiksa langsung</h2>
+    <p>Alamat/peta/manual, tanggal dan slot, jumlah, catatan/kartu, pilihan kurir, COD, persetujuan,
+      submit pending, perubahan total, timeout, replay dan kembali ke Keranjang diperiksa melalui interaksi.</p>
+    <p>Gangguan pembuatan dipicu setelah persetujuan dan tombol Buat Pesanan.
+      State peta gagal dipicu melalui Ganti → Ubah → lokasi. Tidak ada endpoint produksi yang dipanggil.</p>
+  </main>
+  <script>
+    window.addEventListener("DOMContentLoaded", () =>
+    {
+      const list = document.getElementById("checkout-state-links");
+      for (const [state, label] of Object.entries(window.RylvaCheckoutPreviewData.scenarios))
+      {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "/pages/customer/checkout.html?preview=checkout&state=" + encodeURIComponent(state);
+        link.textContent = label;
+        item.append(link);
+        list.append(item);
+      }
+    });
+  </script>
+</body>
+</html>

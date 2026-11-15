@@ -122,6 +122,12 @@ Sebagai usulan, gunakan kelipatan 4px: `4`, `8`, `12`, `16`, `24`, `32`, `48`, d
 - **Tablet:** kurangi jumlah kolom dan pindahkan filter ke panel yang bisa dibuka bila ruang tidak cukup.
 - **Mobile:** margin samping 16px, susunan satu kolom untuk konten yang kompleks, serta kontrol yang mudah dijangkau. Jangan memaksa kartu horizontal bila teks atau tombol menjadi terlalu sempit.
 - Hero dan banner memadukan foto tanaman dengan judul dan CTA. Bagian kategori, keunggulan, dan produk populer mengikuti urutan visual mockup.
+- Revisi Homepage 15 November 2026 menambahkan Marigold berdasarkan foto pengguna:
+  permukaan jingga muda `#FFF2DF`, bidang `#F3BC70`, teks `#6C3718` dan CTA
+  `#8C441B`. Warna ini hanya varian slide, bukan pengganti token brand.
+  Pemilihan slide manual memulai ulang interval 6,5 detik meski tombol tetap
+  fokus; tombol Pause, reduced motion, dialog, tab tersembunyi dan posisi
+  di luar layar tetap menghentikan autoplay sesuai interaksi existing.
 - Detail produk menempatkan galeri dan informasi pembelian berdampingan di desktop; pada mobile ditumpuk. Keranjang dan checkout menempatkan ringkasan di samping pada desktop dan dalam alur baca pada mobile.
 
 ### Whitespace Philosophy
@@ -213,6 +219,18 @@ Resep ini menggambarkan susunan, bukan ukuran terverifikasi atau implementasi le
 ### Navigation & Header
 
 Header menampilkan logo RylVa Green, tautan utama, dan akses ke akun atau belanja. Storefront pada mockup memakai navbar hijau dengan pencarian, menu kategori, serta ikon belanja. Gunakan `primary-dark` untuk area navigasi solid dengan teks dan ikon putih; tampilkan indikator halaman aktif selain perubahan warna. Pada mobile, ringkas navigasi menjadi menu yang berlabel, sambil mempertahankan akses pencarian dan keranjang. Logo harus memiliki teks alternatif yang sesuai dan menuju halaman utama.
+
+Revisi pengguna 15 November 2026: logo navigasi/footer mengikuti logo lengkap
+Figma `649:197`, dengan simbol botani `649:199` yang sesuai referensi gambar 6.
+Seluruh bentuk dan proporsi SVG asli dipertahankan, termasuk huruf wordmark.
+Warna simbol mengikuti sumber; hanya tulisan RylVa/GREEN memakai krem existing
+(`#F7F2DF`) agar terbaca pada permukaan hijau. Logo ditampilkan dengan tinggi
+otomatis sesuai rasio sumber, tanpa memipihkan simbol. Ekspor asli disimpan
+sebagai `logo-figma-source.svg`; dua varian storefront menyimpan metadata
+asalnya. Logo pada hero terang tetap memakai aset hero existing.
+
+Badge keranjang ponsel berada di dalam area tombol 44px, menempel pada sudut
+kanan atas ikon. Jangan membawa offset negatif desktop ke tampilan ponsel.
 
 ### Footer
 

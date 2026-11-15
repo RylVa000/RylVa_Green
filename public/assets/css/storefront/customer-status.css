@@ -1,0 +1,59 @@
+/* Semantic transaction colors, scoped to customer status indicators. */
+:root
+{
+  --customer-status-warning-ink: #73501d;
+  --customer-status-warning-surface: #fff2cf;
+  --customer-status-info-ink: #225b8f;
+  --customer-status-info-surface: #e8f2ff;
+  --customer-status-success-ink: #24623a;
+  --customer-status-success-surface: #e5f5e8;
+  --customer-status-danger-ink: #943737;
+  --customer-status-danger-surface: #fceaea;
+  --customer-status-neutral-ink: #526452;
+  --customer-status-neutral-surface: #edf0eb;
+}
+
+.payment-page .badge[data-status]
+{
+  border: 0;
+  border-radius: var(--radius-input);
+  background: var(--customer-status-neutral-surface);
+  color: var(--customer-status-neutral-ink);
+  padding: var(--space-2xs) var(--space-sm);
+  font-weight: 600;
+}
+
+.payment-page .badge[data-status="Menunggu Pembayaran"],
+.payment-page .badge[data-status="Menunggu"],
+.payment-page .badge[data-status="Terkirim"],
+.payment-page .badge[data-status="Perlu Penanganan"]
+{
+  background: var(--customer-status-warning-surface);
+  color: var(--customer-status-warning-ink);
+}
+
+.payment-page .badge[data-status="Dikirim"],
+.payment-page .badge[data-status="Dalam Pengiriman"],
+.payment-page .badge[data-status="Siap Diproses"],
+.payment-page .badge[data-status="Sedang Disiapkan"]
+{
+  background: var(--customer-status-info-surface);
+  color: var(--customer-status-info-ink);
+}
+
+.payment-page .badge[data-status="Selesai"],
+.payment-page .badge[data-status="Berhasil"],
+.payment-page .badge[data-status="Tiba di Tujuan"]
+{
+  background: var(--customer-status-success-surface);
+  color: var(--customer-status-success-ink);
+}
+
+.payment-page .badge[data-status="Dibatalkan"],
+.payment-page .badge[data-status="Gagal"],
+.payment-page .badge[data-status="Sengketa"],
+.payment-page .badge[data-status="Bermasalah"]
+{
+  background: var(--customer-status-danger-surface);
+  color: var(--customer-status-danger-ink);
+}

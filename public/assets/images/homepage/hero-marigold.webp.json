@@ -1,0 +1,10 @@
+{
+  "source": "User-provided Marigold photograph",
+  "sourceFilename": "4bf0ae30-27e8-4d8f-82da-8b1fc94bba06.png",
+  "createdAt": "2026-11-15",
+  "prompt": "Use case: background-extraction. Asset: transparent product cutout for an existing botanical shop hero slider. Edit the attached user's photograph: isolate ONLY the single large foreground terracotta pot full of yellow, warm orange, and red-orange marigold blossoms with its green foliage. Remove all background patio, other plants, blurred flowers, floor and background shadows. Keep the flower colors, complex petal shapes, leaf detail and weathered terracotta pot texture faithful to the reference. Complete the tiny cropped bottom rim of the foreground pot naturally so the entire pot is visible, without inventing a different pot or rearranging the flowers. Place the complete foreground plant and pot centered on a genuinely transparent background, with a small consistent transparent margin on all sides (about 3%); no text, no added shapes, no colored backdrop, no pedestal, no floor, no cast shadow outside the object. Photorealistic e-commerce cutout, straight-on view and original proportions. This is an edit of the supplied plant, not a new flower arrangement.",
+  "transformation": "Imagegen isolated the foreground Marigold and terracotta pot, removed the patio/background plants, and completed the cropped bottom rim. Converted the transparent PNG to WebP at quality 0.93 without resizing or cropping.",
+  "intent": "Illustrative homepage hero, not a claim about current product availability",
+  "dimensions": { "width": 1186, "height": 1327 },
+  "transparent": true
+}

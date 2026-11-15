@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Keranjang | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/payment.css">
+  <script src="/assets/js/storefront/cart-preview-data.js" defer></script>
+  <style>
+    main
+    {
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+
+    ul
+    {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    a
+    {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--primary-light);
+      border-radius: 8px;
+      color: var(--primary-dark);
+    }
+
+    a:focus-visible
+    {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body class="payment-page">
+  <main>
+    <h1>Workbench Keranjang</h1>
+    <p>Kontrol pengembangan. Seluruh data adalah contoh; tidak ada pesanan atau reservasi stok yang dibuat.</p>
+    <p>State khusus hanya aktif pada localhost dengan parameter preview=cart. Halaman normal tidak menampilkan kontrol ini.</p>
+    <ul id="cart-state-links"></ul>
+    <h2>Interaksi yang diperiksa langsung</h2>
+    <p>Pilih semua/sebagian, batas jumlah, input tidak valid, simpan/hapus pending, dialog Batal/Escape,
+      penghapusan terakhir, perubahan belum disimpan, kegagalan gambar, keyboard, dan pemulihan konflik.</p>
+    <p>Untuk offline nyata, putuskan koneksi melalui alat pengembangan browser.
+      Untuk konflik nyata, buka dua tab Keranjang normal dan ubah salah satunya.</p>
+  </main>
+  <script>
+    window.addEventListener("DOMContentLoaded", () =>
+    {
+      const list = document.getElementById("cart-state-links");
+      for (const [state, label] of Object.entries(window.RylvaCartPreviewData.scenarios))
+      {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "/pages/customer/cart.html?preview=cart&state=" + encodeURIComponent(state);
+        link.textContent = label;
+        item.append(link);
+        list.append(item);
+      }
+    });
+  </script>
+</body>
+</html>

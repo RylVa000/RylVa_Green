@@ -1,0 +1,15 @@
+{
+  "source": "Figma LcUKB3k9C38G0g6KWo5zIU, inspected 2026-11-14",
+  "assets": {
+    "login-garden.png": "428:266; original source contains prior UI, only the Figma-defined garden crop is rendered",
+    "login-panel.svg": "428:267 organic panel, unmodified original SVG",
+    "register-garden.png": "72:141 garden image",
+    "register-panel.svg": "72:138 organic panel, unmodified original SVG",
+    "verify-background.png": "430:257 background artwork",
+    "forgot-background.png": "426:254 background artwork",
+    "reset-background.png": "431:258 background artwork",
+    "eye.svg": "128:217 password visibility icon",
+    "google.png": "83:154 exported Google icon, reused for both Google buttons"
+  },
+  "use": "Decorative artwork and logos only; forms, controls and copy remain native HTML"
+}

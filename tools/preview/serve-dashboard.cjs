@@ -46,14 +46,29 @@ const server = http.createServer((request, response) =>
   {
     response.writeHead(302,
     {
-      Location: `/${legacy || routes["admin-dashboard.html"]}${url.search}`,
+      Location: `/${legacy || routes["home.html"]}${url.search}`,
       "Cache-Control": "no-store"
     });
     response.end();
     return;
   }
-  const target = path.resolve(root, `.${pathname}`);
-  if (!target.startsWith(`${root}${path.sep}`) || pathname.split("/").some((part) => part.startsWith(".")))
+  const isPaymentWorkbench = pathname === "/__preview/payment";
+  const isOrderWorkbench = pathname === "/__preview/order-detail";
+  const isMyOrdersWorkbench = pathname === "/__preview/my-orders";
+  const isAccountWorkbench = pathname === "/__preview/account";
+  const isCartWorkbench = pathname === "/__preview/cart";
+  const isCheckoutWorkbench = pathname === "/__preview/checkout";
+  const isAuthWorkbench = pathname === "/__preview/customer-auth";
+  const isHomeWorkbench = pathname === "/__preview/homepage";
+  const isWorkbench = isPaymentWorkbench || isOrderWorkbench || isMyOrdersWorkbench
+    || isAccountWorkbench || isCartWorkbench || isCheckoutWorkbench || isAuthWorkbench || isHomeWorkbench;
+  const target = isWorkbench
+    ? path.resolve(__dirname, isHomeWorkbench ? "homepage-states.html" : isAuthWorkbench ? "customer-auth-states.html" : isCheckoutWorkbench ? "checkout-states.html" : isPaymentWorkbench ? "payment-states.html"
+      : (isOrderWorkbench ? "order-detail-states.html"
+        : (isMyOrdersWorkbench ? "my-orders-states.html" : (isCartWorkbench ? "cart-states.html" : "account-states.html"))))
+    : path.resolve(root, `.${pathname}`);
+  if ((!isWorkbench && !target.startsWith(`${root}${path.sep}`))
+    || pathname.split("/").some((part) => part.startsWith(".")))
   {
     response.writeHead(403);
     response.end("Access denied");

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>State Homepage · Pengembangan</title>
+  <link rel="stylesheet" href="/assets/css/shared/tokens.css">
+</head>
+<body>
+  <h1>State Homepage</h1>
+  <p>Halaman pengembangan lokal. Skenario tidak mengubah keranjang contoh tersimpan.</p>
+  <ul id="home-states"></ul>
+  <script src="/assets/js/storefront/storefront-product-preview-data.js"></script>
+  <script src="/assets/js/storefront/cart-preview-data.js"></script>
+  <script src="/assets/js/storefront/cart-preview-repository.js"></script>
+  <script src="/assets/js/storefront/homepage-preview-repository.js"></script>
+  <script>
+    window.RylvaHomepagePreviewRepository.scenarios.forEach((state) =>
+    {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "/pages/public/home.html?preview=home&state=" + state;
+      link.textContent = state;
+      item.append(link);
+      document.getElementById("home-states").append(item);
+    });
+  </script>
+</body>
+</html>
