@@ -412,7 +412,9 @@ body.cart-page
 .cart-summary
 {
   position: sticky;
-  top: 24px;
+  top: calc(var(--storefront-sticky-height, 0px) + 24px);
+  max-height: calc(100dvh - var(--storefront-sticky-height, 0px) - 48px);
+  overflow-y: auto;
   display: grid;
   gap: var(--space-md);
   min-width: 0;
@@ -615,6 +617,8 @@ body.cart-page
   .cart-summary
   {
     position: static;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 

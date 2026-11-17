@@ -133,13 +133,13 @@ async function verifyRefinements()
     checks.push("Cart/account hover overlays, pointer bridge, totals, available account routes, ArrowDown and Escape focus restoration");
 
     await page.click(cartTrigger);
-    await page.waitForSelector(".home-mini-cart-item");
+    await page.waitForSelector("#home-cart-panel .home-mini-cart-item");
     await page.click("[data-header-remove]");
     await page.click("[data-header-cancel]");
-    assert.equal(await page.$$(".home-mini-cart-item").then((nodes) => nodes.length), 2);
+    assert.equal(await page.$$("#home-cart-panel .home-mini-cart-item").then((nodes) => nodes.length), 2);
     await page.click("[data-header-remove]");
     await page.click("[data-header-confirm]");
-    await page.waitForFunction(() => document.querySelectorAll(".home-mini-cart-item").length === 1);
+    await page.waitForFunction(() => document.querySelectorAll("#home-cart-panel .home-mini-cart-item").length === 1);
     assert.match(await page.$eval("#home-cart-panel-feedback", (node) => node.textContent), /dihapus/);
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem("rylva-cart-preview-guest-v1")).items.length), 1);
     await page.keyboard.press("Escape");
@@ -147,10 +147,11 @@ async function verifyRefinements()
     await page.waitForFunction(() => document.getElementById("home-toast").textContent.includes("ditambahkan"));
     await page.evaluate(() => scrollTo(0, 0));
     await page.click(cartTrigger);
-    await page.waitForFunction(() => document.querySelectorAll(".home-mini-cart-item").length === 2);
+    await page.waitForFunction(() => document.querySelectorAll("#home-cart-panel .home-mini-cart-item").length === 2);
     await page.keyboard.press("Escape");
     checks.push("Removal cancellation, confirmed persistence, refreshed header count, and product-add synchronization");
 
+    await page.focus('[data-home-save="monstera"]');
     await page.$eval('[data-home-save="monstera"]', (button) => button.click());
     assert.equal(await page.$eval('[data-home-save="monstera"]', (button) => button.getAttribute("aria-pressed")), "true");
     assert.equal(await page.$eval('[data-home-save="monstera"] svg', (icon) => getComputedStyle(icon).fill), "rgb(150, 63, 92)");
@@ -162,13 +163,12 @@ async function verifyRefinements()
     await capture("wishlist-filled");
     assert.equal(await page.$("#home-toast a[href='/pages/customer/cart.html']"), null);
     await page.click("#home-toast [data-home-collection=saved]");
-    assert.match(await page.$eval("#home-dialog-title", (node) => node.textContent), /Wishlist Contoh/);
-    assert.equal(await page.$$("#home-collection-results .home-product").then((nodes) => nodes.length), 1);
-    await page.keyboard.press("Escape");
-    await page.evaluate(() => scrollTo(0, 0));
+    await page.waitForFunction(() => document.getElementById("wishlist-products")?.getAttribute("aria-busy") === "false");
+    assert.equal(await page.$$("#wishlist-products .home-product").then((nodes) => nodes.length), 1);
+    await open();
     await page.click('header [data-storefront-page="Wishlist"]');
-    assert.match(await page.$eval("#home-dialog-title", (node) => node.textContent), /Wishlist Contoh/);
-    assert.equal(await page.$$("#home-collection-results .home-product").then((nodes) => nodes.length), 1);
+    await page.waitForSelector("#home-wishlist-panel:not([hidden])");
+    assert.equal(await page.$$("#home-wishlist-panel article").then((nodes) => nodes.length), 1);
     await page.keyboard.press("Escape");
     await page.evaluate(() => sessionStorage.setItem("rylva-account-preview-access-v1", "signed-out"));
     await page.click(accountTrigger);
@@ -176,7 +176,7 @@ async function verifyRefinements()
     await capture("account-signed-out");
     await page.keyboard.press("Escape");
     await page.evaluate(() => sessionStorage.removeItem("rylva-account-preview-access-v1"));
-    checks.push("In-memory preview wishlist is functional and labeled; signed-out account panel provides login/register");
+    checks.push("Shared Wishlist and hover preview are linked; signed-out account panel provides login/register");
 
     for (const width of [1440, 1366, 1024, 768, 390, 320])
     {
@@ -300,21 +300,31 @@ async function verifyRefinements()
     }
     await open(390);
     await (await page.$(".home-product--monstera .home-product-picture")).tap();
-    await page.waitForFunction(() => document.getElementById("home-dialog").open);
-    assert.equal(await page.$eval("#home-dialog-title", (node) => node.textContent), "Monstera");
-    await page.keyboard.press("Escape");
-    assert.equal(await page.evaluate(() => document.activeElement.dataset.homeDetail), "monstera");
+    await page.waitForSelector("#product-title");
+    assert.match(await page.$eval("#product-title", (node) => node.textContent), /Monstera/);
+    await page.goBack({ waitUntil: "domcontentloaded" });
+    await page.waitForSelector('[data-home-save="monstera"]');
+    await page.waitForFunction(() =>
+    {
+      const control = document.querySelector('[data-home-save="monstera"]');
+      return window.RylvaWishlistStore.snapshot().status === "ready" && !control.disabled;
+    });
+    const wasSaved = await page.$eval('[data-home-save="monstera"]', (node) => node.getAttribute("aria-pressed"));
+    const expectedSaved = wasSaved === "true" ? "false" : "true";
     await (await page.$('[data-home-save="monstera"]')).tap();
+    await page.waitForFunction((expected) =>
+      document.querySelector('[data-home-save="monstera"]').getAttribute("aria-pressed") === expected,
+    {}, expectedSaved);
     assert.equal(await page.$eval("#home-dialog", (node) => node.open), false);
-    assert.equal(await page.$eval('[data-home-save="monstera"]', (node) => node.getAttribute("aria-pressed")), "true");
+    assert.equal(await page.$eval('[data-home-save="monstera"]', (node) => node.getAttribute("aria-pressed")), expectedSaved);
     await (await page.$('.home-product--monstera [data-home-add]')).tap();
     await page.waitForFunction(() => document.getElementById("home-toast").textContent.includes("ditambahkan"));
     assert.equal(await page.$eval("#home-dialog", (node) => node.open), false);
     await page.focus('[data-home-detail="monstera"]');
     await page.keyboard.press("Enter");
-    await page.waitForFunction(() => document.getElementById("home-dialog").open);
-    await page.keyboard.press("Escape");
-    await page.click('[data-home-action="dismiss"]');
+    await page.waitForSelector("#product-title");
+    await page.goBack({ waitUntil: "domcontentloaded" });
+    await page.waitForSelector("#home-trending .home-product");
     await page.$eval("#home-trending", (node) => node.scrollIntoView({ block: "start" }));
     await capture("mobile-products");
     await page.evaluate(() => scrollTo(0, 0));
@@ -335,7 +345,7 @@ async function verifyRefinements()
     await page.waitForFunction(() => document.getElementById("home-cart-panel-body").textContent.includes("belum dapat dimuat"));
     await page.setOfflineMode(false);
     await page.click("[data-header-retry]");
-    await page.waitForSelector(".home-mini-cart-item");
+    await page.waitForSelector("#home-cart-panel .home-mini-cart-item");
     await page.keyboard.press("Escape");
     checks.push("Tablet/mobile panels stay within viewport; reduced motion stops autoplay but keeps manual selection; offline recovery works");
     assert.deepEqual(errors, []);

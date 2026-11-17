@@ -95,9 +95,10 @@ async function verifyOrderDetail()
     const stickyGeometry = await page.$eval(".detail-action-rail", (element) =>
     {
       const bounds = element.getBoundingClientRect();
-      return { top: bounds.top, bottom: bounds.bottom, viewport: window.innerHeight };
+      return { top: bounds.top, bottom: bounds.bottom, viewport: window.innerHeight,
+        headerBottom: document.querySelector(".storefront-header").getBoundingClientRect().bottom };
     });
-    assert.ok(stickyGeometry.top >= 0 && stickyGeometry.top <= 25);
+    assert.ok(Math.abs(stickyGeometry.top - stickyGeometry.headerBottom - 24) <= 2);
     assert.ok(stickyGeometry.bottom < stickyGeometry.viewport);
     await capture("payment-sticky", false);
     await page.click('.detail-action-rail [data-order-action="track"]');

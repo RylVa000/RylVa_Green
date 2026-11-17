@@ -1,4 +1,39 @@
 /* Header panels are opt-in for Homepage; the shared shell geometry stays intact. */
+.home-header-panel.home-wishlist-panel
+{
+  width: min(520px, calc(100% - 32px));
+}
+
+.home-mini-wishlist-item .home-panel-product-link
+{
+  min-height: 44px;
+}
+
+.home-mini-wishlist-item .home-mini-cart-copy
+{
+  min-width: 0;
+}
+
+.home-mini-wishlist-item .home-mini-cart-price small
+{
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.home-wishlist-panel-footer
+{
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-md) 20px;
+  border-top: 1px solid var(--neutral-soft);
+}
+
+.home-wishlist-panel-footer .home-button
+{
+  min-height: 44px;
+  text-decoration: none;
+}
+
 .home-header-backdrop
 {
   position: fixed;
@@ -393,6 +428,29 @@
   {
     grid-column: 2;
     justify-content: space-between;
+  }
+
+  .home-mini-cart-item.home-mini-wishlist-item
+  {
+    grid-template-columns: 56px minmax(0, 1fr) 44px;
+  }
+
+  .home-mini-wishlist-item .home-mini-cart-image
+  {
+    grid-row: auto;
+    align-self: center;
+    width: 56px;
+    height: 72px;
+  }
+
+  .home-mini-wishlist-item .home-panel-remove
+  {
+    align-self: center;
+  }
+
+  .home-mini-wishlist-item .home-mini-cart-price
+  {
+    overflow-wrap: anywhere;
   }
 
   .home-panel-product-link

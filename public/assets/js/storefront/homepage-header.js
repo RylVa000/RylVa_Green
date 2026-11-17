@@ -3,9 +3,38 @@
 // Homepage header extension. Other storefront pages keep their current shell.
 window.RylvaHomepageHeader = (() =>
 {
-  function init({ readCart, removeItem, onCartChange, openDetail, openSaved })
+  function init({ readCart, removeItem, onCartChange, openDetail, openSaved, browseCollection = null })
   {
     const backdrop = document.getElementById("home-header-backdrop");
+    const wishlistStore = window.RylvaWishlistStore;
+    const wishlistTrigger = document.querySelector('header [data-storefront-page="Wishlist"]');
+    let wishlistPanel = null;
+    if (wishlistStore && wishlistTrigger)
+    {
+      wishlistPanel = document.createElement("section");
+      wishlistPanel.className = "home-header-panel home-wishlist-panel";
+      wishlistPanel.id = "home-wishlist-panel";
+      wishlistPanel.hidden = true;
+      wishlistPanel.setAttribute("role", "dialog");
+      wishlistPanel.setAttribute("aria-labelledby", "home-wishlist-panel-title");
+      wishlistPanel.innerHTML = `
+        <div class="home-header-panel-top">
+          <h2 id="home-wishlist-panel-title">Wishlist</h2>
+          <button class="home-panel-close" type="button" data-header-close aria-label="Tutup Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M6 18 18 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="home-cart-panel-body" id="home-wishlist-panel-body" aria-live="polite"></div>
+        <div class="home-panel-feedback" id="home-wishlist-panel-feedback" role="status" hidden></div>
+        <div class="home-wishlist-panel-footer">
+          <p class="home-panel-muted" id="home-wishlist-panel-count"></p>
+          <a class="home-button" data-header-wishlist-all href="${wishlistStore.pageUrl()}">Lihat Semua Wishlist</a>
+        </div>`;
+      document.getElementById("home-cart-panel").after(wishlistPanel);
+      wishlistTrigger.setAttribute("data-header-wishlist-trigger", "");
+    }
     const panels =
     {
       cart: document.getElementById("home-cart-panel"),
@@ -16,6 +45,11 @@ window.RylvaHomepageHeader = (() =>
       cart: document.querySelector('header [data-storefront-page="Keranjang"]'),
       account: document.querySelector('header [data-storefront-page="Akun"]')
     };
+    if (wishlistPanel)
+    {
+      panels.wishlist = wishlistPanel;
+      triggers.wishlist = wishlistTrigger;
+    }
     const cartBody = document.getElementById("home-cart-panel-body");
     const total = document.getElementById("home-cart-panel-total");
     const feedback = document.getElementById("home-cart-panel-feedback");
@@ -28,6 +62,81 @@ window.RylvaHomepageHeader = (() =>
     let requestVersion = 0;
     let pendingRemoval = null;
     let openedByClick = false;
+
+    function renderWishlist()
+    {
+      const state = wishlistStore.snapshot();
+      const body = document.getElementById("home-wishlist-panel-body");
+      const count = document.getElementById("home-wishlist-panel-count");
+      const title = document.getElementById("home-wishlist-panel-title");
+      const items = [...state.items].sort((first, second) => second.savedAt - first.savedAt);
+      const products = new Map(wishlistStore.products().map((product) => [product.productId, product]));
+      title.textContent = state.status === "ready" ? `Wishlist (${items.length})` : "Wishlist";
+      wishlistTrigger.setAttribute("aria-label", state.status === "ready" ? `Wishlist, ${items.length} produk tersimpan` : "Wishlist");
+      body.setAttribute("aria-busy", String(state.status === "loading"));
+      count.textContent = "";
+      if (state.status === "loading")
+      {
+        body.innerHTML = '<p class="home-panel-loading" role="status">Memuat Wishlist…</p>';
+      }
+      else if (state.status !== "ready")
+      {
+        body.innerHTML = `
+          <div class="home-panel-empty">
+            <h3>Wishlist belum dapat ditampilkan</h3>
+            <p>${escapeHtml(state.error?.message || "Coba muat kembali atau buka halaman Wishlist.")}</p>
+            <button class="home-button" type="button" data-header-wishlist-retry>Coba Lagi</button>
+          </div>`;
+      }
+      else if (!items.length)
+      {
+        body.innerHTML = `
+          <div class="home-panel-empty">
+            <h3>Wishlist masih kosong</h3>
+            <p>Simpan produk yang Anda suka lewat ikon hati.</p>
+            <a class="home-panel-secondary" href="/pages/public/catalog.html">Jelajahi Katalog</a>
+          </div>`;
+      }
+      else
+      {
+        body.innerHTML = items.slice(0, 5).map((item) =>
+        {
+          const product = products.get(item.productId);
+          const variant = product?.variants?.[0];
+          const price = product && Object.hasOwn(product, "price") ? product.price : variant?.price;
+          const image = product?.image || product?.gallery?.[0]?.src;
+          const name = product?.name || "Produk tidak ditemukan";
+          const unit = product?.unit || variant?.unit;
+          const busy = state.pending.includes(item.productId) || state.uncertain.includes(item.productId)
+            || state.mergeProductIds.includes(item.productId);
+          return `
+            <article class="home-mini-cart-item home-mini-wishlist-item">
+              <div class="home-mini-cart-image">
+                ${image ? `<img src="${escapeHtml(image)}" width="72" height="90" alt="${escapeHtml(name)}">` : '<span>Foto belum tersedia</span>'}
+              </div>
+              <div class="home-mini-cart-copy">
+                ${product?.slug ? `<button class="home-panel-product-link" type="button" data-header-detail="${escapeHtml(product.slug)}">${escapeHtml(name)}</button>` : `<h3>${escapeHtml(name)}</h3>`}
+                <p class="home-mini-cart-price">${money(price)}${Number.isSafeInteger(price) && unit ? ` <small>/ ${escapeHtml(unit)}</small>` : ""}</p>
+              </div>
+              <button class="home-panel-remove" type="button" data-header-wishlist-remove="${escapeHtml(item.productId)}"
+                aria-label="Hapus ${escapeHtml(name)} dari Wishlist" aria-busy="${busy}" ${busy ? "disabled" : ""}>
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </article>`;
+        }).join("\n");
+        count.textContent = `Menampilkan ${Math.min(5, items.length)} dari ${items.length} produk tersimpan.`;
+      }
+      if (state.uncertain.length)
+      {
+        body.insertAdjacentHTML("beforeend", `
+          <div class="home-panel-empty">
+            <p>Respons perubahan terputus. Periksa hasil sebelum mengulangi tindakan.</p>
+            <button class="home-panel-secondary" type="button" data-header-wishlist-reconcile="${escapeHtml(state.uncertain[0])}">Periksa Hasil</button>
+          </div>`);
+      }
+    }
 
     function escapeHtml(value)
     {
@@ -188,7 +297,7 @@ window.RylvaHomepageHeader = (() =>
           <a href="/pages/customer/account.html?section=profile">Profil Saya</a>
           <a href="/pages/customer/my-orders.html">Daftar Pesanan</a>
           <a href="/pages/customer/account.html?section=addresses">Daftar Alamat</a>
-          <button type="button" data-header-saved>Wishlist Contoh</button>
+          <button type="button" data-header-saved>Wishlist</button>
           <a href="/pages/customer/account.html?section=security">Keamanan Akun</a>
           <a href="/pages/customer/account.html?section=privacy">Privasi &amp; Akun</a>
         </nav>`;
@@ -209,6 +318,10 @@ window.RylvaHomepageHeader = (() =>
       if (type === "cart")
       {
         refreshCart();
+      }
+      else if (type === "wishlist")
+      {
+        renderWishlist();
       }
       else
       {
@@ -349,6 +462,18 @@ window.RylvaHomepageHeader = (() =>
         close(true);
         openDetail(control.dataset.headerDetail);
       }
+      else if (control.hasAttribute("data-header-wishlist-retry"))
+      {
+        wishlistStore.refresh();
+      }
+      else if (control.dataset.headerWishlistReconcile)
+      {
+        wishlistStore.reconcile(control.dataset.headerWishlistReconcile);
+      }
+      else if (control.dataset.headerWishlistRemove)
+      {
+        removeSavedProduct(control);
+      }
       else if (control.hasAttribute("data-header-saved"))
       {
         close(true);
@@ -357,8 +482,15 @@ window.RylvaHomepageHeader = (() =>
       else if (control.hasAttribute("data-header-browse"))
       {
         close();
-        document.getElementById("home-categories-title").scrollIntoView({ behavior: "instant" });
-        document.querySelector("[data-home-collection=all]").focus({ preventScroll: true });
+        if (browseCollection)
+        {
+          browseCollection();
+        }
+        else
+        {
+          document.getElementById("home-categories-title")?.scrollIntoView({ behavior: "instant" });
+          document.querySelector("[data-home-collection=all]")?.focus({ preventScroll: true });
+        }
       }
     });
     document.addEventListener("keydown", (event) =>
@@ -378,6 +510,7 @@ window.RylvaHomepageHeader = (() =>
     });
     backdrop.addEventListener("click", () => close(true));
     window.addEventListener("resize", position);
+    document.addEventListener("rylva:header-visibility", position);
     window.addEventListener("scroll", () =>
     {
       if (active && triggers[active].getBoundingClientRect().bottom < 0)
@@ -397,6 +530,57 @@ window.RylvaHomepageHeader = (() =>
         event.target.parentElement.textContent = "Foto belum tersedia";
       }
     }, true);
+    async function removeSavedProduct(control)
+    {
+      const id = control.dataset.headerWishlistRemove;
+      const index = [...wishlistPanel.querySelectorAll("[data-header-wishlist-remove]")].indexOf(control);
+      const owner = wishlistStore.snapshot().owner;
+      const message = document.getElementById("home-wishlist-panel-feedback");
+      let failure = null;
+      try
+      {
+        await wishlistStore.setSaved(id, false);
+      }
+      catch (error)
+      {
+        failure = error;
+      }
+      if (wishlistStore.snapshot().owner !== owner)
+      {
+        return;
+      }
+      message.setAttribute("role", failure ? "alert" : "status");
+      message.textContent = failure
+        ? failure.message || "Produk belum dihapus. Coba lagi."
+        : "Produk dihapus dari Wishlist.";
+      message.hidden = false;
+      const buttons = [...wishlistPanel.querySelectorAll("[data-header-wishlist-remove]")];
+      (buttons[Math.min(index, buttons.length - 1)] || wishlistPanel.querySelector("[data-header-wishlist-all]"))
+        ?.focus({ preventScroll: true });
+    }
+    if (wishlistPanel)
+    {
+      let previousOwner = wishlistStore.snapshot().owner;
+      wishlistStore.subscribe((state) =>
+      {
+        if (state.owner !== previousOwner || state.status === "loading")
+        {
+          const message = document.getElementById("home-wishlist-panel-feedback");
+          message.hidden = true;
+          message.textContent = "";
+          previousOwner = state.owner;
+        }
+        renderWishlist();
+      });
+      renderWishlist();
+      wishlistPanel.addEventListener("error", (event) =>
+      {
+        if (event.target instanceof HTMLImageElement)
+        {
+          event.target.parentElement.textContent = "Foto belum tersedia";
+        }
+      }, true);
+    }
     return { close };
   }
 

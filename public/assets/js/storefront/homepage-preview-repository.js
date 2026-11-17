@@ -5,7 +5,7 @@ window.RylvaHomepagePreviewRepository = (() =>
 {
   const query = new URLSearchParams(location.search);
   const development = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
-  const workbench = development && query.get("preview") === "home";
+  const workbench = development && ["home", "catalog"].includes(query.get("preview"));
   const scenarios = ["normal", "loading", "empty", "loadError", "partial", "offline", "timeout",
     "maintenance", "unavailable", "invalidPrice", "brokenImage", "longContent", "addError", "conflict", "rateLimited"];
   const scenario = workbench && scenarios.includes(query.get("state")) ? query.get("state") : "normal";
@@ -19,7 +19,7 @@ window.RylvaHomepagePreviewRepository = (() =>
     return Object.assign(new Error(message), { code });
   }
 
-  async function load({ recover = false } = {})
+  async function load({ recover = false, view = "home" } = {})
   {
     recovered ||= recover;
     await new Promise((resolve) => setTimeout(resolve, scenario === "loading" && !recovered ? 1800 : 240));
@@ -34,6 +34,11 @@ window.RylvaHomepagePreviewRepository = (() =>
       ...structuredClone(product),
       price: catalog.find((item) => item.productId === product.productId)?.price ?? null
     }));
+    if (view === "catalog")
+    {
+      products = products.map((product) => product.slug === "sirih-gading"
+        ? { ...product, image: "/assets/images/catalog/sirih-gading.png" } : product);
+    }
     if (scenario === "empty")
     {
       products = [];

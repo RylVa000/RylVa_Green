@@ -5,6 +5,7 @@ window.RylvaCartPreviewRepository = (() =>
 {
   const guestKey = "rylva-cart-preview-guest-v1";
   const source = window.RylvaCartPreviewData;
+  const bouquetCart = window.RylvaBouquetCartPreview;
   const parameters = new URLSearchParams(window.location.search);
   const isDevelopment = ["127.0.0.1", "localhost", "[::1]"].includes(window.location.hostname);
   const workbench = isDevelopment && parameters.get("preview") === "cart";
@@ -31,7 +32,7 @@ window.RylvaCartPreviewRepository = (() =>
       items,
       revision,
       storageWarning,
-      mode: ["account", "merging", "mergeAdjusted", "mergeError"].includes(scenario) ? "account" : "guest",
+      mode: bouquetCart?.active() || ["account", "merging", "mergeAdjusted", "mergeError"].includes(scenario) ? "account" : "guest",
       limits: source.limits
     });
   }
@@ -128,7 +129,7 @@ window.RylvaCartPreviewRepository = (() =>
       {
         version: 1,
         expiresAt,
-        items: items.map((item) =>
+        items: items.filter((item) => !item.configurationDraft).map((item) =>
         ({
           productId: item.productId,
           variantId: item.variantId,
@@ -136,12 +137,13 @@ window.RylvaCartPreviewRepository = (() =>
         }))
       };
       const nextStoredRevision = JSON.stringify(stored);
+      bouquetCart?.write(items);
       window.localStorage.setItem(guestKey, nextStoredRevision);
       storedRevision = nextStoredRevision;
     }
     catch (error)
     {
-      if (error.code === "conflict")
+      if (["conflict", "storage", "session"].includes(error.code))
       {
         throw error;
       }
@@ -161,7 +163,13 @@ window.RylvaCartPreviewRepository = (() =>
     }
     if (!initialized || recover)
     {
+      items = source.createItems(scenario);
       readGuest();
+      if (!isolated && bouquetCart)
+      {
+        items.push(...bouquetCart.read());
+        storageWarning = [storageWarning, bouquetCart.getWarning()].filter(Boolean).join(" ");
+      }
       try
       {
         const changes = JSON.parse(window.sessionStorage.getItem("rylva-cart-checkout-updates-v1"));
@@ -257,6 +265,11 @@ window.RylvaCartPreviewRepository = (() =>
     else
     {
       item.quantity = quantity;
+      if (item.configurationDraft)
+      {
+        item.configurationDraft.quantity = quantity;
+        item.configurationRevision = crypto.randomUUID();
+      }
     }
     try
     {
@@ -276,7 +289,7 @@ window.RylvaCartPreviewRepository = (() =>
     return snapshot();
   }
 
-  async function add(productId, expectedRevision)
+  async function add(productId, expectedRevision, quantity = 1)
   {
     if (!navigator.onLine)
     {
@@ -292,22 +305,26 @@ window.RylvaCartPreviewRepository = (() =>
     {
       throw failure("unavailable", "Produk tidak tersedia. Pilih produk lain.");
     }
+    if (!Number.isInteger(quantity) || quantity < 1)
+    {
+      throw failure("validation", "Masukkan jumlah produk yang valid.");
+    }
     const existing = items.find((item) => item.productId === productId && item.variantId === product.variantId);
     const productQuantity = items.filter((item) => item.productId === productId)
       .reduce((total, item) => total + item.quantity, 0);
-    if (productQuantity >= Math.min(source.limits.perProduct, product.availableStock)
-      || items.reduce((total, item) => total + item.quantity, 0) >= source.limits.perOrder)
+    if (productQuantity + quantity > Math.min(source.limits.perProduct, product.availableStock)
+      || items.reduce((total, item) => total + item.quantity, 0) + quantity > source.limits.perOrder)
     {
       throw failure("limit", "Batas jumlah tercapai. Sesuaikan jumlah di Keranjang.");
     }
     const previousItems = structuredClone(items);
     if (existing)
     {
-      existing.quantity++;
+      existing.quantity += quantity;
     }
     else
     {
-      items.push({ ...product, quantity: 1, selected: true });
+      items.push({ ...product, quantity, selected: true });
     }
     try
     {
@@ -336,5 +353,58 @@ window.RylvaCartPreviewRepository = (() =>
     return { changed: false, cart: snapshot() };
   }
 
-  return { load, mutate, add, prepareCheckout, scenario, workbench, guestKey };
+  async function saveConfiguration(draft, expectedRevision, editLineId = null, editRevision = null)
+  {
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    if (!navigator.onLine)
+    {
+      throw failure("offline", "Koneksi terputus. Sambungkan kembali, lalu coba lagi.");
+    }
+    if (!bouquetCart?.active())
+    {
+      throw failure("session", "Masuk kembali untuk menyimpan rakitan.");
+    }
+    const errors = window.RylvaBouquetPreviewData.validate(draft);
+    if (errors.length)
+    {
+      throw failure("validation", errors.join(" "));
+    }
+    const lineId = await bouquetCart.identity(draft);
+    if (expectedRevision !== revision)
+    {
+      throw failure("conflict", "Keranjang berubah. Perbarui keranjang sebelum menyimpan lagi.");
+    }
+    const previous = items.find((item) => item.lineId === editLineId);
+    if (editLineId && (!previous || previous.configurationRevision !== editRevision))
+    {
+      throw failure("conflict", "Rakitan yang diedit telah berubah atau dihapus. Pilihan Anda tetap ada.");
+    }
+    const remaining = items.filter((item) => item.lineId !== editLineId);
+    const productQuantity = remaining.filter((item) => item.productId === draft.productId)
+      .reduce((sum, item) => sum + item.quantity, 0);
+    if (productQuantity + draft.quantity > source.limits.perProduct
+      || remaining.reduce((sum, item) => sum + item.quantity, 0) + draft.quantity > source.limits.perOrder)
+    {
+      throw failure("limit", "Batas 20 buket per produk atau 50 produk per pesanan tercapai. Kurangi jumlah atau ubah isi keranjang.");
+    }
+    const duplicate = remaining.find((item) => item.lineId === lineId);
+    const nextDraft = structuredClone(draft);
+    nextDraft.quantity += duplicate?.quantity || 0;
+    const nextLine = window.RylvaBouquetPreviewData.line(nextDraft, lineId, crypto.randomUUID());
+    const previousItems = items;
+    items = [...remaining.filter((item) => item.lineId !== lineId), nextLine];
+    try
+    {
+      persistGuest();
+    }
+    catch (error)
+    {
+      items = previousItems;
+      throw error;
+    }
+    revision++;
+    return { cart: snapshot(), lineId, merged: Boolean(duplicate) };
+  }
+
+  return { load, mutate, add, saveConfiguration, prepareCheckout, scenario, workbench, guestKey };
 })();

@@ -1,0 +1,718 @@
+/* Imported Contact, FAQ and PrivacyPolicy content; existing RylVa shell and tokens. */
+.information-main
+{
+  padding-bottom: 64px;
+  color: var(--primary-dark);
+}
+
+.information-main :is(input, textarea, button)
+{
+  font: inherit;
+}
+
+.information-main :focus-visible
+{
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.information-main :is(.info-herokontak, .info-headerfaq, .info-headerprivasi)
+{
+  padding: 56px 24px 104px;
+  background: var(--home-offer-light);
+  color: var(--primary-dark);
+  text-align: center;
+}
+
+.information-main h1
+{
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.information-main :is(.info-subkontak, .info-subjudulatas)
+{
+  max-width: 60ch;
+  margin: 16px auto 0;
+  line-height: 1.7;
+}
+
+.info-infokartu,
+.info-detailkontak
+{
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.info-infokartu
+{
+  position: relative;
+  margin-top: -48px;
+}
+
+.info-bungkuskartu
+{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.info-itemkartu
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+  padding: 28px;
+  border-radius: 20px;
+}
+
+.info-kartuterang
+{
+  border: 1px dashed var(--primary-light);
+  background: var(--background);
+}
+
+.info-kartugelap
+{
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+.info-ikonkartu
+{
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+}
+
+.info-ikonputih
+{
+  border: 1px solid currentColor;
+  background: transparent;
+}
+
+.info-itemkartu h2
+{
+  font-size: 20px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.info-itemkartu p
+{
+  line-height: 1.7;
+}
+
+.information-main :is(.info-linkkartu, .info-tombolutama, .info-tombolsekunder, .info-tombolsubmit)
+{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.information-main .info-linkkartu
+{
+  margin-top: auto;
+}
+
+.information-main :is(.info-linkputih, .info-tombolsekunder)
+{
+  background: #fff;
+  color: var(--primary);
+}
+
+.information-main .info-linkputih
+{
+  border-color: #fff;
+}
+
+.information-main :is(.info-linkkartu, .info-tombolutama, .info-tombolsubmit):hover
+{
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+.information-main .info-linkputih:focus-visible
+{
+  outline-color: #fff;
+}
+
+.info-detailkontak
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 64px;
+  margin-top: 64px;
+}
+
+.info-judulkolom,
+.info-judulform
+{
+  margin-bottom: 16px;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.info-contact-location-heading
+{
+  margin-top: 32px;
+}
+
+.info-teksdeskripsi
+{
+  line-height: 1.7;
+}
+
+.info-daftarkerja
+{
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.info-daftarkerja li
+{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.information-main svg
+{
+  flex-shrink: 0;
+}
+
+.info-bungkuspeta
+{
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--neutral-soft);
+}
+
+.info-bungkuspeta iframe
+{
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+.info-map-link
+{
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.info-bungkusform
+{
+  padding: 32px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.info-formkontak,
+.info-grupinput
+{
+  display: grid;
+  gap: 20px;
+}
+
+.info-grupinput
+{
+  gap: 8px;
+}
+
+.info-grupinput label
+{
+  font-weight: 600;
+}
+
+.info-grupinput :is(input, textarea)
+{
+  min-width: 0;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--primary-light);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--primary-dark);
+  caret-color: var(--primary);
+}
+
+.info-grupinput textarea
+{
+  min-height: 160px;
+  resize: vertical;
+}
+
+.info-grupinput input
+{
+  min-height: 48px;
+}
+
+#contact-form-status
+{
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--home-offer-light);
+}
+
+#contact-handoff-help,
+#contact-email-fallback
+{
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.information-main .info-tombolsubmit:disabled
+{
+  background: var(--home-disabled);
+  color: var(--primary);
+  cursor: not-allowed;
+}
+
+.info-wadahutama
+{
+  position: relative;
+  width: min(900px, calc(100% - 48px));
+  margin: -48px auto 0;
+}
+
+.info-kartufaq
+{
+  display: grid;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.info-itemfaq
+{
+  min-width: 0;
+  border: 1px dashed var(--primary-light);
+  border-radius: 12px;
+  background: var(--background);
+  scroll-margin-top: 24px;
+}
+
+.info-tombolfaq
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  list-style: none;
+  cursor: pointer;
+}
+
+.info-tombolfaq::-webkit-details-marker
+{
+  display: none;
+}
+
+.info-ikonfaq
+{
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+}
+
+.info-ikonfaq::before,
+.info-ikonfaq::after
+{
+  position: absolute;
+  top: 13px;
+  left: 7px;
+  width: 14px;
+  height: 2px;
+  background: currentColor;
+  content: "";
+}
+
+.info-ikonfaq::after
+{
+  transform: rotate(90deg);
+}
+
+.info-itemfaq[open]
+{
+  border-style: solid;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.info-itemfaq[open] .info-ikonfaq
+{
+  background: #fff;
+  color: var(--primary);
+}
+
+.info-itemfaq[open] .info-ikonfaq::after
+{
+  transform: rotate(0deg);
+}
+
+.info-itemfaq[open] :focus-visible
+{
+  outline-color: #fff;
+}
+
+.info-isijawaban
+{
+  margin-inline: 24px;
+  padding: 16px 0 24px;
+  border-top: 1px dashed currentColor;
+  line-height: 1.8;
+}
+
+.info-kartubantuan
+{
+  margin-top: 32px;
+  padding: 32px;
+  border: 1px dashed var(--primary-light);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.info-kartubantuan h2
+{
+  margin-bottom: 16px;
+  font-size: 26px;
+}
+
+.info-kartubantuan p
+{
+  line-height: 1.7;
+}
+
+.info-grupaksi
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.information-main .info-headerprivasi
+{
+  padding-bottom: 48px;
+}
+
+.info-tanggalupdate
+{
+  margin-top: 16px;
+}
+
+.info-kontenprivasi
+{
+  max-width: 80ch;
+  margin-inline: auto;
+  padding: 48px 24px 0;
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.info-judulbagian
+{
+  margin-block: 40px 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--neutral-soft);
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+.info-subjudul
+{
+  margin-block: 24px 12px;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.info-daftarkebijakan
+{
+  padding-left: 24px;
+}
+
+.info-daftarkebijakan li
+{
+  margin-bottom: 12px;
+}
+
+/* Contact uses the palette and proportions supplied in Contact.html / tanaman.css. */
+.information-contact .information-main
+{
+  --primary: #4e694b;
+  --primary-light: #4e694b;
+  --primary-dark: #3e573b;
+  --background: #fdfaf5;
+  background: #fff;
+  color: #4f504b;
+}
+
+.information-contact .info-herokontak
+{
+  display: grid;
+  place-items: center;
+  min-height: 400px;
+  background: linear-gradient(rgba(15, 42, 29, 0.7), rgba(47, 79, 47, 0.8)), #fff;
+  color: #fff;
+}
+
+.information-contact .information-main h1
+{
+  font-size: clamp(32px, 4vw, 56px);
+}
+
+.information-contact .info-subkontak
+{
+  max-width: 500px;
+  font-size: 15px;
+}
+
+.information-contact :is(.info-infokartu, .info-detailkontak)
+{
+  width: min(1100px, calc(100% - 48px));
+}
+
+.information-contact .info-infokartu
+{
+  margin-top: -80px;
+}
+
+.information-contact .info-bungkuskartu
+{
+  gap: 30px;
+}
+
+.information-contact .info-itemkartu
+{
+  padding: 40px 30px;
+  border-radius: 16px;
+}
+
+.information-contact .info-kartuterang
+{
+  border: 2px dashed var(--primary);
+}
+
+.information-contact .info-kartugelap
+{
+  background: var(--primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.information-contact :is(.info-itemkartu h2, .info-judulkolom, .info-judulform, .info-grupinput label)
+{
+  color: var(--primary);
+}
+
+.information-contact .info-kartugelap h2
+{
+  color: #fff;
+}
+
+.information-contact .info-itemkartu p
+{
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.information-contact .info-kartugelap p
+{
+  color: #e0eae0;
+}
+
+.information-contact .info-ikonkartu
+{
+  width: 50px;
+  height: 50px;
+}
+
+.information-contact .info-ikonputih
+{
+  border-width: 2px;
+}
+
+.information-contact .info-linkkartu
+{
+  padding: 15px;
+}
+
+.information-contact .info-bungkusform
+{
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.information-contact .info-grupinput :is(input, textarea)
+{
+  border: 2px dashed var(--primary);
+}
+
+.information-contact .info-grupinput :is(input, textarea):focus
+{
+  border-style: solid;
+}
+
+@media (max-width: 1000px)
+{
+  .info-bungkuskartu
+  {
+    gap: 16px;
+  }
+
+  .info-itemkartu
+  {
+    padding: 24px;
+  }
+
+  .info-detailkontak
+  {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 760px)
+{
+  .info-bungkuskartu,
+  .info-detailkontak
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .info-detailkontak
+  {
+    margin-top: 40px;
+  }
+
+  .info-itemkartu h2
+  {
+    overflow-wrap: normal;
+  }
+}
+
+@media (max-width: 600px)
+{
+  .information-contact .info-herokontak
+  {
+    min-height: 300px;
+  }
+
+  .information-contact :is(.info-infokartu, .info-detailkontak)
+  {
+    width: calc(100% - 32px);
+  }
+
+  .information-contact .info-infokartu
+  {
+    margin-top: -48px;
+  }
+
+  .information-contact .info-itemkartu
+  {
+    padding: 28px 24px;
+  }
+
+  .information-main
+  {
+    padding-bottom: 40px;
+  }
+
+  .information-main :is(.info-herokontak, .info-headerfaq, .info-headerprivasi)
+  {
+    padding: 40px 20px 80px;
+  }
+
+  .info-infokartu,
+  .info-detailkontak,
+  .info-wadahutama
+  {
+    width: calc(100% - 32px);
+  }
+
+  .info-infokartu,
+  .info-wadahutama
+  {
+    margin-top: -32px;
+  }
+
+  .info-bungkusform,
+  .info-kartubantuan
+  {
+    padding: 24px;
+  }
+
+  .info-kartufaq
+  {
+    padding: 16px;
+  }
+
+  .info-tombolfaq
+  {
+    padding: 16px;
+  }
+
+  .info-isijawaban
+  {
+    margin-inline: 16px;
+  }
+
+  .info-grupaksi
+  {
+    flex-direction: column;
+  }
+
+  .info-kontenprivasi
+  {
+    padding: 32px 20px 0;
+  }
+
+  .information-main .info-headerprivasi
+  {
+    padding-bottom: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+  .information-main *
+  {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

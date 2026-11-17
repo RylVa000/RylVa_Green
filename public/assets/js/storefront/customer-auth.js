@@ -42,7 +42,7 @@
     try
     {
       const target = new URL(candidate || fallback, location.origin);
-      const paths = ["cart", "checkout", "account", "my-orders", "order-detail", "payment"];
+      const paths = ["cart", "checkout", "account", "my-orders", "order-detail", "payment", "bouquet-customizer", "buket-kustom", "wishlist"];
       const allowed = paths.some((name) => target.pathname === "/pages/customer/" + name + ".html" || target.pathname === "/" + name + ".html");
       return target.origin === location.origin && !target.username && !target.password && allowed
         ? target.pathname + target.search : fallback;
@@ -691,6 +691,11 @@
       try
       {
         sessionStorage.removeItem("rylva-account-preview-access-v1");
+        sessionStorage.setItem("rylva-bouquet-preview-access-v1", "customer-example");
+        if (repository === window.RylvaCustomerAuthPreview)
+        {
+          sessionStorage.setItem("rylva-wishlist-preview-owner-v1", "customer-example");
+        }
       }
       catch
       {

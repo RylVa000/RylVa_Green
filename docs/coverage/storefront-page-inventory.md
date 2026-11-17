@@ -13,8 +13,8 @@ berisi komentar tidak dihitung sebagai implementasi halaman yang berfungsi.
 | Halaman/alur | Bukti Figma | Kondisi kode aktif |
 | --- | --- | --- |
 | Beranda | Home page rev `466:386` dipilih pengguna; sumber diperiksa ulang 15 November | `public/pages/public/home.html` tersedia sebagai pratinjau interaktif. [Cakupan Homepage](homepage-ui.md); backend PHP masih scaffold. |
-| Katalog | Katalog `267:297`; filter dan kartu produk terlihat | `templates/public/catalog.php` masih scaffold. |
-| Detail produk | Detail Produk `282:838`; galeri, pilihan ukuran, ongkir, perawatan dan tombol beli terlihat | `templates/public/product_detail.php` masih scaffold. |
+| Katalog | Katalog `267:297`; diperiksa ulang 16 November | `public/pages/public/catalog.html` tersedia sebagai frontend interaktif dengan kartu homepage. [Cakupan Katalog](catalog-ui.md); backend PHP masih scaffold. |
+| Detail produk | Detail Produk `282:838`; diperiksa ulang 17 November | `public/pages/public/product-detail.html` tersedia dengan galeri, perawatan, jumlah, keranjang dan handoff Checkout. [Cakupan Detail Produk](product-detail-ui.md); backend PHP masih scaffold. |
 | Keranjang | Keranjang `335:251` dan Keranjang kosong `360:372` | Pembaruan 14 November: `public/pages/customer/cart.html` tersedia sebagai pratinjau interaktif. [Cakupan dan batas integrasi](cart-ui.md); template/backend PHP masih scaffold. |
 | Checkout | Checkout `375:108`; alamat, produk, kurir, pembayaran dan ringkasan | Pembaruan 14 November: `public/pages/customer/checkout.html` tersedia sebagai frontend pratinjau interaktif. [Cakupan UI Checkout](checkout-ui.md); template/backend PHP masih scaffold. |
 | Login pelanggan | Login page — RylVa Green `428:264` | Pembaruan 15 November: `public/pages/auth/customer-login.html` tersedia sebagai UI pratinjau; login staf terpisah. [Cakupan autentikasi](customer-auth-ui.md). |
@@ -22,10 +22,12 @@ berisi komentar tidak dihitung sebagai implementasi halaman yang berfungsi.
 | Verifikasi email | OTP `90:220` | `public/pages/auth/verify-email.html` tersedia dengan OTP contoh, resend dan pemulihan; pengiriman email belum terhubung. |
 | Lupa kata sandi | Forget Pass `126:114` | `public/pages/auth/forgot-password.html` tersedia sebagai pratinjau dengan respons generik. |
 | Kata sandi baru | New Pass `126:155` | `public/pages/auth/reset-password.html` tersedia sebagai pratinjau token sekali pakai; password produksi tidak diubah. |
-| Kontak | Contact Page `137:311`; diperiksa visual | Belum ada halaman storefront aktif. |
+| Kontak | Contact Page `137:311`; pengguna juga memberikan `Contact.html` pada 17 November | `public/pages/public/contact.html` mengintegrasikan isi file pengguna dengan shell aktif. Formulir membuka draf email; tidak ada endpoint pengiriman formulir. [Cakupan halaman informasi](information-pages-ui.md). |
+| Pusat Bantuan / FAQ | Pengguna memberikan `FAQ.html`, `tanaman.css` dan `tanaman.js` pada 17 November | `public/pages/public/faq.html` tersedia dengan delapan pertanyaan asli, accordion keyboard dan tautan Kontak. |
+| Kebijakan Privasi | Pengguna memberikan `PrivacyPolicy.html` pada 17 November | `public/pages/public/privacy-policy.html` mempertahankan delapan bagian dan tanggal dokumen sumber. Ini impor konten; bukan bukti layanan yang disebut telah terintegrasi. |
 | Pilih alamat | Pilih Alamat Page `409:107`; berupa dialog/panel | Buku alamat/form tersedia pada Akun; pemilih, formulir dan peta juga tersedia pada pratinjau Checkout. Persistence produksi belum terhubung. |
 | Tambah alamat | Tambah Alamat #1 `435:105` untuk lokasi dan #2 `435:130` untuk formulir | `templates/customer/profile_addresses.php` masih scaffold. |
-| Kustomisasi buket | Section Costum Buket `454:1347`, frame 1920w light `454:1201` | `templates/customer/bouquet_customizer.php` masih scaffold. Prototipe Konva lama di `tools/archive/prototypes/tes.html` merupakan arsip, bukan route pelanggan aktif. |
+| Kustomisasi buket | Section Costum Buket `454:1347`, frame 1920w light `454:1201` | [Spesifikasi tertulis Buket Kustom](../design/surfaces/bouquet-customizer-surface.md) tersedia, termasuk keputusan preview otomatis. UI pelanggan kini tersedia pada `/pages/customer/bouquet-customizer.html`, dengan preview otomatis, editor, keranjang dan checkout contoh. Lihat [cakupan implementasi](bouquet-customizer-ui.md). Backend tetap scaffold; Konva arsip bukan route aktif. |
 | Pembayaran | Tidak ditemukan frame halaman pelanggan tersendiri pada file yang diperiksa | `public/pages/customer/payment.html` tersedia sebagai pratinjau data contoh. |
 | Detail Pesanan | Tidak ditemukan frame pelanggan lengkap. Node `356:349` bernama Detail Pesanan hanya bertipe TEXT; bukan halaman | `public/pages/customer/order-detail.html` tersedia sebagai pratinjau, termasuk Lacak, komplain, pembatalan dan penerimaan. |
 | Pesanan Saya | Tidak ditemukan frame halaman pelanggan tersendiri | `public/pages/customer/my-orders.html` tersedia sebagai pratinjau; identitas/konteks terhubung ke Detail/Pembayaran. |
@@ -44,12 +46,19 @@ render Figma; interaksi prototipe tidak diuji sebagai aplikasi.
   setelah inventaris ini; berikutnya frontend pratinjau diimplementasikan pada
   `public/pages/customer/account.html`. [Cakupan UI akun](customer-account-ui.md)
   memisahkan hasil implementasi dari desain Figma dan layanan produksi.
-- Wishlist; pengerjaannya tetap mengikuti aktivasi fitur pada spesifikasi.
+- Wishlist belum ditemukan sebagai frame khusus Figma. Implementasi frontend
+  pratinjau kini tersedia pada `public/pages/customer/wishlist.html`, mengikuti
+  [spesifikasi Wishlist](../design/surfaces/wishlist-surface.md) dan keputusan
+  guest sementara serta akun permanen. [Cakupan UI](wishlist-ui.md) mencatat
+  store hati bersama, penggabungan akun pratinjau, state dan pemeriksaannya;
+  layanan persistence akun produksi belum terhubung.
 - Halaman kategori khusus. Katalog sudah mempunyai filter kategori, namun
   belum ditemukan frame halaman kategori dengan nama/deskripsi kategorinya.
   Kebutuhan ini dapat dipenuhi sebagai varian katalog, tanpa layout baru total.
-- Pusat bantuan/FAQ, Cara Memesan, Informasi Pengiriman, Pembatalan & Refund.
-- Tentang Kami, Kebijakan Privasi serta Syarat & Ketentuan.
+- Frame Figma Pusat Bantuan/FAQ dan Kebijakan Privasi belum ditemukan, tetapi
+  HTML pengguna kini diintegrasikan ke route aktif. Cara Memesan, Informasi
+  Pengiriman dan Pembatalan & Refund sebagai halaman lengkap masih belum tersedia.
+- Tentang Kami serta Syarat & Ketentuan.
 - Kondisi 403/404/500/maintenance khusus storefront. Frame kondisi sistem yang
   ditemukan pada halaman `04` memakai area staf; keberadaannya tidak dianggap
   otomatis memenuhi desain pelanggan.
@@ -94,15 +103,20 @@ dalam modul. Bukti pemeriksaan struktur Figma tersimpan lokal di
 
 ## Arah pekerjaan berikutnya
 
-- **Jika menambah desain yang belum ada:** halaman bantuan dan kebijakan yang
-  sudah ditautkan navbar/footer; Wishlist bila diaktifkan. Profil & Pengaturan
+- **Jika menambah desain yang belum ada:** Cara Memesan, Informasi Pengiriman,
+  Pembatalan & Refund, Tentang Kami serta Syarat & Ketentuan. Kontak, FAQ dan
+  Kebijakan Privasi kini memakai file pengguna pada route aktif;
+  frame Wishlist tersendiri bila diperlukan.
+  Frontend Wishlist sudah tersedia sebagai pratinjau. Profil & Pengaturan
   Akun sekarang tersedia di kode sebagai pratinjau; frame lengkap Figma masih
   merupakan pekerjaan tersendiri.
-- **Jika melengkapi desain yang sudah ada:** kustomisasi buket, konsistensi
-  kontak/shell, serta kelengkapan state dan responsif halaman belanja.
-- **Jika melanjutkan implementasi:** Keranjang, Checkout dan autentikasi pelanggan
-  sudah tersedia sebagai UI pratinjau. Berikutnya halaman publik/katalog/detail
-  produk atau integrasi backend sesuai prioritas baseline.
+- **Jika melengkapi desain yang sudah ada:** pemeriksaan kelengkapan konten,
+  state dan responsif halaman belanja. Kustomisasi buket dan konsistensi shell
+  Kontak sudah diimplementasikan sebagai frontend pratinjau.
+- **Jika melanjutkan implementasi:** halaman belanja utama, autentikasi,
+  Wishlist dan tiga halaman informasi sudah tersedia sebagai UI pratinjau.
+  Berikutnya halaman pendukung yang masih kosong atau integrasi backend sesuai
+  prioritas baseline.
 - **Jika menyelaraskan Figma dan kode:** tiga halaman transaksi serta Akun pelanggan yang
   sudah diimplementasikan belum tercatat sebagai frame pelanggan pada Figma
   yang diperiksa. Menambahkannya ke Figma merupakan pekerjaan tersendiri;

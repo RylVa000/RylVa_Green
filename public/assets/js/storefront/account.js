@@ -136,6 +136,8 @@
         }
       }
       sessionStorage.setItem("rylva-account-preview-access-v1", "signed-out");
+      sessionStorage.removeItem("rylva-wishlist-preview-owner-v1");
+      window.dispatchEvent(new Event("rylva:customer-session"));
     }
     catch
     {
@@ -1356,6 +1358,19 @@
       }
     }
   }, true);
+
+  document.addEventListener("rylva:before-search", (event) =>
+  {
+    if (dialog.open && isDirty())
+    {
+      event.preventDefault();
+      askDiscard(() =>
+      {
+        closeDialog(true);
+        event.detail.proceed();
+      });
+    }
+  });
 
   document.addEventListener("input", (event) =>
   {

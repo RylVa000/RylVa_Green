@@ -30,12 +30,7 @@ window.RylvaCheckoutPreviewData = (() =>
     alreadyCreated: "Order sudah dibuat di tab lain"
   };
 
-  const services =
-  [
-    { id: "instant", name: "Gosend Instant", kind: "instant", price: 25000, eta: "Estimasi tiba 2–4 jam", cod: true },
-    { id: "sameDay", name: "Kurir same-day", kind: "sameDay", price: 20000, eta: "Dikirim pada jadwal yang dipilih", cod: true },
-    { id: "regular", name: "Ekspedisi reguler", kind: "regular", price: 15000, eta: "Estimasi mengikuti layanan pengiriman", cod: false }
-  ];
+  const services = window.RylvaShippingPreviewData.createServices();
   const methods =
   [
     { id: "qris", name: "QRIS", detail: "Pindai melalui aplikasi pembayaran", image: "qris.svg" },

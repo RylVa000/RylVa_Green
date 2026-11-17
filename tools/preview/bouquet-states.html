@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Buket Kustom</title>
+  <link rel="stylesheet" href="../../assets/css/storefront/storefront-shell.css">
+  <style>
+    body
+    {
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 24px;
+      font-family: var(--font-body);
+      color: var(--primary-dark);
+      background: var(--background);
+    }
+    ul
+    {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+    a
+    {
+      display: block;
+      padding: 12px;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-input);
+      color: var(--primary);
+      text-underline-offset: 4px;
+    }
+    a:focus-visible
+    {
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Workbench Buket Kustom</h1>
+  <p>Kontrol pengembangan ini hanya aktif di localhost. Skenario terisolasi dari keranjang pratinjau biasa.</p>
+  <p>Untuk kegagalan simpan, klik Tambah ke Keranjang. Untuk menguji harga berubah, tutup dialog lalu coba lagi; persetujuan harus tetap diminta. Timeout dipulihkan lewat Periksa hasil.</p>
+  <ul id="bouquet-scenarios"></ul>
+  <script src="../../assets/js/storefront/bouquet-preview-data.js"></script>
+  <script src="../../assets/js/storefront/bouquet-customizer-preview.js"></script>
+  <script>
+    "use strict";
+
+    const list = document.getElementById("bouquet-scenarios");
+    for (const [key, label] of Object.entries(window.RylvaBouquetPreviewRepository.scenarios))
+    {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "/pages/customer/bouquet-customizer.html?preview=bouquet&state=" + key;
+      link.textContent = label;
+      item.append(link);
+      list.append(item);
+    }
+  </script>
+</body>
+</html>

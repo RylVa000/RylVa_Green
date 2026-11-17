@@ -201,3 +201,16 @@ penyimpanan data pelanggan produksi yang aman atau pengganti backend.
 
 Belum ada pengujian API, database, reservasi stok, uang atau integrasi gateway
 produksi. Tidak dilakukan commit, push, publikasi atau deployment.
+
+## Koreksi 17 November 2026
+
+- Kelompok tombol pada state halaman (termasuk Masuk untuk Checkout) dipusatkan pada desktop dan tetap bertumpuk penuh pada mobile. Perubahan dibatasi pada .checkout-page-state > .checkout-dialog-actions; tindakan dialog/form tetap mengikuti layout sebelumnya.
+- Fixture tiga layanan pengiriman dipindahkan ke storefront-shipping-preview-data.js agar Detail Produk dapat menampilkan tarif contoh tanpa akun/alamat. Nilai, urutan, ETA dan aturan COD fixture Checkout tetap sama; API layanan produksi tidak ditambahkan.
+- verify-product-shipping.cjs memeriksa alignment1440/390/320px dan navigasi tombol masuk dengan returnTo Checkout. Bukti lokal: storage/reports/product-shipping.
+
+Regresi Checkout17 kelompok/34 state lulus setelah fixture dipisahkan. Workbench59 tautan ikut memuat dependensi tarif bersama dan diuji tanpa error. Screenshot alur guest sebenarnya tersedia pada storage/reports/product-shipping/checkout-guest-login-centered.png.
+
+
+## Integrasi pratinjau Buket Kustom — 17 November 2026
+
+Checkout kini menyelesaikan referensi baris buket dari resolver konfigurasi sesi contoh, menampilkan ringkasan pilihan sebagai daftar, dan meneruskan referensi/revisi konfigurasi. Pesan kartu buket tidak disalin otomatis ke kartu pesanan; penjelasan ditampilkan bila rakitan memiliki pesan. Jadwal produk mudah layu dan guard pelanggan yang ada dipertahankan. Regresi17 kelompok/34 state lulus. Cakupan dan batas backend dicatat di bouquet-customizer-ui.md.

@@ -158,3 +158,18 @@ ikut tersembunyi oleh CSS Pembayaran. Override dibatasi pada target; uji area
 44 × 44 px, ikon terlihat, nama aksesibel serta klik refresh ditambahkan pada
 pemeriksaan responsif. Suite dan capture diulang. Peninjau yang sama menilai
 temuan tersebut **resolved**, disposition **ship** khusus perbaikan itu.
+
+## Perbaikan menu tiga titik — 17 November 2026
+
+Tombol menu kartu sebelumnya mewarisi `min-height: 52px` dan alignment summary
+dari komponen Pembayaran, sehingga lebih tinggi dari tombol aksi dan ikon tidak
+berada tepat di tengah. Override khusus Pesanan Saya kini menetapkan 44 × 44 px,
+tanpa padding, serta alignment flex di tengah. Menu tidak menyusut di baris aksi;
+style summary halaman lain tidak diubah.
+
+Regresi aktual: 29 skenario, 22 pemeriksaan, 22 capture, tanpa pageerror. Assertion
+layout memeriksa ukuran kotak dan pusat ikon pada desktop serta 1024/768/390/320 px.
+Pemeriksaan menu tambahan pada 1440/390/320 px memastikan posisi ikon saat terbuka,
+batas panel di dalam layar, penutupan Escape dan pengembalian fokus. Capture berada
+pada `storage/reports/my-orders/menu-closed-<width>.png` dan
+`menu-open-<width>.png`.

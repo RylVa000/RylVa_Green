@@ -31,5 +31,18 @@
   "payment-reconciliation.html": "pages/superadmin/payment-reconciliation.html",
   "sensitive-approvals.html": "pages/superadmin/sensitive-approvals.html",
   "staff-accounts.html": "pages/superadmin/staff-accounts.html",
-  "system-parameters.html": "pages/superadmin/system-parameters.html"
+  "system-parameters.html": "pages/superadmin/system-parameters.html",
+  "catalog.html": "pages/public/catalog.html",
+  "katalog.html": "pages/public/catalog.html",
+  "product-detail.html": "pages/public/product-detail.html",
+  "detail-produk.html": "pages/public/product-detail.html",
+  "bouquet-customizer.html": "pages/customer/bouquet-customizer.html",
+  "buket-kustom.html": "pages/customer/bouquet-customizer.html",
+  "wishlist.html": "pages/customer/wishlist.html",
+  "Contact.html": "pages/public/contact.html",
+  "contact.html": "pages/public/contact.html",
+  "FAQ.html": "pages/public/faq.html",
+  "faq.html": "pages/public/faq.html",
+  "PrivacyPolicy.html": "pages/public/privacy-policy.html",
+  "privacy-policy.html": "pages/public/privacy-policy.html"
 }

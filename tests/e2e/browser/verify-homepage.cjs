@@ -89,23 +89,20 @@ async function verifyHomepage()
     await page.focus("#storefront-search-input");
     await page.type("#storefront-search-input", "Monstera");
     await page.keyboard.press("Enter");
-    await page.waitForSelector("#home-dialog[open]");
-    assert.equal(await page.$$eval("#home-collection-results .home-product", (items) => items.length), 1);
+    await page.waitForFunction(() => document.getElementById("catalog-products")?.getAttribute("aria-busy") === "false");
+    assert.equal(await page.$$eval("#catalog-products .home-product", (items) => items.length), 1);
+    assert.equal(new URL(page.url()).searchParams.get("q"), "Monstera");
     await settleAssets();
     await page.screenshot({ path: path.join(OUTPUT_DIRECTORY, "collection-desktop.png") });
-    await page.click("#home-dialog [data-home-detail=monstera]");
-    assert.match(await page.$eval("#home-dialog-body", (element) => element.textContent), /Rp289.000/);
+    await page.click('[data-home-detail="monstera"]');
+    await page.waitForSelector("#product-title");
+    assert.match(await page.$eval("#product-title", (element) => element.textContent), /Monstera/);
     await settleAssets();
     await page.screenshot({ path: path.join(OUTPUT_DIRECTORY, "detail-desktop.png") });
-    await page.click("[data-home-action=back-collection]");
-    assert.equal(await page.$eval("#home-collection-search", (element) => element.value), "Monstera");
-    await page.keyboard.press("Escape");
-    assert.equal(await page.evaluate(() => document.activeElement.id), "storefront-search-input");
-    await page.$eval("#storefront-search-input", (input) => input.value = "Tanaman Indoor");
-    await page.focus("#storefront-search-input");
-    await page.keyboard.press("Enter");
-    assert.equal(await page.$$eval("#home-collection-results .home-product", (items) => items.length), 7);
-    await page.keyboard.press("Escape");
+    await page.goBack({ waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => document.getElementById("catalog-products")?.getAttribute("aria-busy") === "false");
+    assert.equal(new URL(page.url()).searchParams.get("q"), "Monstera");
+    await open();
     await page.focus(".home-offer-terrarium .home-button");
     assert.equal(await page.$eval(".home-offer-terrarium .home-button", (button) =>
     {
@@ -113,7 +110,7 @@ async function verifyHomepage()
       return button.matches(":focus-visible") && style.outlineColor === "rgb(255, 255, 255)"
         && parseFloat(style.outlineWidth) >= 3;
     }), true);
-    checks.push("Header search filters actual preview products; detail preserves collection search on return; Escape restores focus");
+    checks.push("Header search opens Catalog; real Product Detail preserves the catalog query on return");
 
     await page.click("[data-home-filter=pet]");
     assert.equal(await page.$eval("[data-home-filter=pet]", (element) => element.getAttribute("aria-pressed")), "true");
@@ -128,8 +125,10 @@ async function verifyHomepage()
     await page.click("[data-home-slide='0']");
     await page.waitForFunction(() => document.getElementById("home-title").textContent === "MONSTERA");
     await page.click("[data-home-collection=seeds]");
-    assert.match(await page.$eval("#home-dialog-body", (element) => element.textContent), /Koleksi belum tersedia/);
-    await page.keyboard.press("Escape");
+    await page.waitForFunction(() => document.getElementById("catalog-products")?.getAttribute("aria-busy") === "false");
+    assert.equal(new URL(page.url()).searchParams.get("category"), "seeds");
+    assert.match(await page.$eval("#catalog-products", (element) => element.textContent), /sesuai/);
+    await open();
     checks.push("Recommendation filters update immediately, retain URL context and reset; manual hero selection and empty category recovery work");
 
     await page.evaluate(() => localStorage.removeItem("rylva-cart-preview-guest-v1"));

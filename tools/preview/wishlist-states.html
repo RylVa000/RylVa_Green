@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Workbench Wishlist | RylVa Green</title>
+  <link rel="stylesheet" href="/assets/css/storefront/storefront-shell.css">
+  <link rel="stylesheet" href="/assets/css/storefront/customer-status.css">
+</head>
+<body>
+  <main class="customer-status-page">
+    <h1>Workbench Wishlist</h1>
+    <p>Kontrol pengembangan lokal. Skenario tidak mengubah Wishlist guest atau akun produksi.</p>
+    <p><a href="/pages/customer/wishlist.html">Buka Wishlist tanpa fixture</a></p>
+    <ul id="wishlist-scenarios"></ul>
+  </main>
+  <script>
+    "use strict";
+
+    const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
+    if (local)
+    {
+      const scenarios =
+      {
+        ready: "Guest dengan delapan produk", empty: "Wishlist kosong", loading: "Pemuatan awal",
+        account: "Akun pratinjau", merge: "Penggabungan selesai", mergePartial: "Sebagian belum digabung",
+        mergeError: "Penggabungan gagal", mergeTimeout: "Respons penggabungan terputus", loadError: "Gagal memuat produk",
+        offline: "Offline", timeout: "Pemuatan timeout", maintenance: "Maintenance", denied: "Akses ditolak",
+        session: "Sesi berakhir", verification: "Perlu verifikasi", partial: "Metadata sebagian tersedia",
+        notFound: "Referensi produk tidak ditemukan", outOfStock: "Stok habis", unavailable: "Produk nonaktif",
+        invalidPrice: "Harga belum tersedia", brokenImage: "Gambar gagal", longContent: "Nama dan harga panjang",
+        storageBlocked: "Storage guest diblokir", storageCorrupt: "Storage guest rusak", saveError: "Simpan/hapus gagal",
+        saveTimeout: "Respons mutasi terputus", rateLimited: "Pembatasan percobaan", addError: "Tambah ke keranjang gagal",
+        conflict: "Keranjang berubah", appendError: "Batch berikut gagal", stale: "Metadata belum diperbarui"
+      };
+      const list = document.getElementById("wishlist-scenarios");
+      for (const [state, label] of Object.entries(scenarios))
+      {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "/pages/customer/wishlist.html?preview=wishlist&state=" + state;
+        link.textContent = label;
+        item.append(link);
+        list.append(item);
+      }
+    }
+    else
+    {
+      document.querySelector("main").textContent = "Workbench hanya tersedia pada lingkungan pengembangan lokal.";
+    }
+  </script>
+</body>
+</html>

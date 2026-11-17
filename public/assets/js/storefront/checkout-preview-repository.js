@@ -97,7 +97,8 @@ window.RylvaCheckoutPreviewRepository = (() =>
           state.items = handoff.items.map((reference) =>
           {
             const item = state.items.find((candidate) => candidate.lineId === reference.lineId)
-              || window.RylvaCartPreviewData.createCatalog().find((candidate) => candidate.lineId === reference.lineId);
+              || window.RylvaCartPreviewData.createCatalog().find((candidate) => candidate.lineId === reference.lineId)
+              || window.RylvaBouquetCartPreview?.read().find((candidate) => candidate.lineId === reference.lineId);
             return item && Number.isInteger(reference.quantity) && reference.quantity > 0
               ? { ...item, handling: item.handling || "durable", note: item.note || "", quantity: reference.quantity } : null;
           }).filter(Boolean);
@@ -227,7 +228,8 @@ window.RylvaCheckoutPreviewRepository = (() =>
       items: context.items.map((item) =>
       ({ name: item.name, variant: [item.variant, item.attributes].filter(Boolean).join(", "),
         unit: item.unit, quantity: item.quantity, amount: item.price, image: item.image,
-        lineId: item.lineId, note: item.note, configuration: item.configuration || null })),
+        lineId: item.lineId, note: item.note, configuration: item.configuration || null, configurationRef: item.configurationRef || null,
+        configurationRevision: item.configurationRevision || null, hasBouquetCard: Boolean(item.hasBouquetCard) })),
       recipient: { name: address.recipient, phone: address.recipientPhone,
         address: [address.street, address.village, address.district, address.city, address.province, address.postcode].join(", ") },
       greeting: context.gift.enabled ? { message: context.gift.message,

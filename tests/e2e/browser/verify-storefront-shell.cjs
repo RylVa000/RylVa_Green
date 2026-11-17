@@ -183,9 +183,14 @@ async function verifyStorefrontShell()
 
     const originalAmount = await page.$eval(".payment-amount", (element) => element.textContent);
     await page.type("#storefront-search-input", "Monstera");
-    await page.click(".storefront-search-action");
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: "networkidle0" }),
+      page.click(".storefront-search-action")
+    ]);
+    assert.equal(new URL(page.url()).pathname, "/pages/public/catalog.html");
+    assert.equal(new URL(page.url()).searchParams.get("q"), "Monstera");
+    await page.goBack({ waitUntil: "networkidle0" });
     assert.equal(await page.$eval("#storefront-search-input", (element) => element.value), "Monstera");
-    assert.match(await page.$eval("#storefront-preview-note", (element) => element.textContent), /Pencarian produk belum terhubung/);
     await page.click('[data-storefront-page="Tanaman Hias"]');
     assert.match(await page.$eval("#storefront-preview-note", (element) => element.textContent), /Tanaman Hias belum terhubung/);
     assert.equal(await page.$eval(".payment-amount", (element) => element.textContent), originalAmount);
@@ -198,10 +203,14 @@ async function verifyStorefrontShell()
         toggle.click();
       }
     });
-    await page.click('[data-storefront-page="Hubungi Kami"]');
-    assert.equal(await page.$eval("#storefront-footer-notice", (element) => element.hidden), false);
-    assert.match(await page.$eval("#storefront-footer-notice", (element) => element.textContent), /Hubungi Kami belum terhubung/);
-    checks.push("Unavailable preview destinations are explicit; search and payment context remain intact");
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: "networkidle0" }),
+      page.click('a[data-storefront-page="Hubungi Kami"]')
+    ]);
+    assert.equal(new URL(page.url()).pathname, "/pages/public/contact.html");
+    await page.goBack({ waitUntil: "networkidle0" });
+    assert.equal(await page.$eval(".payment-amount", (element) => element.textContent), originalAmount);
+    checks.push("Unavailable destinations remain explicit; Contact opens its integrated route and Back retains payment context");
     assert.deepEqual(browserErrors, []);
     fs.writeFileSync(path.join(OUTPUT_DIRECTORY, "verification.json"), JSON.stringify(
       { result: "PASS", referenceGeometry, assets, checks, browserErrors },

@@ -53,6 +53,34 @@ asli. Ukuran intrinsik SVG dan slot tampilannya diperiksa.
 
 ## Responsif dan interaksi
 
+Pembaruan 17 November 2026: pengguna meminta navbar sticky di semua halaman
+storefront. Header bersama (utility, pencarian/akun, dan kategori) menempel pada
+atas viewport melalui CSS sticky, sehingga tinggi alur halaman tetap stabil.
+Tinggi aktual header diukur ulang saat resize/perubahan ukuran melalui
+`ResizeObserver` dan disediakan sebagai `--storefront-header-height`.
+Saat menggulir turun setidaknya 24 px, header bergeser keluar; saat menggulir
+naik setidaknya 12 px, header muncul kembali. Transisi 360 ms memakai ease-out,
+dan dinonaktifkan ketika pengguna memilih reduced motion. Gerakan gulir pendek
+tidak membuat navbar berkedip. Dekat atas halaman navbar selalu terlihat.
+Pencarian yang sedang fokus, fokus keyboard pada header, dan dropdown terbuka
+mempertahankan navbar. Resize, kembali melalui riwayat, dan fokus keyboard
+memulihkan header tanpa transisi yang menghalangi kontrol.
+`--storefront-sticky-height` berisi tinggi yang terlihat, atau 0 saat tersembunyi.
+Filter Katalog, toolbar filter mobile, ringkasan Keranjang, panel aksi Detail
+Pesanan dan kategori Buket menggunakan offset ini. Panel samping desktop
+mempunyai batas tinggi dan scroll ketika diperlukan; susunan mobile tetap
+mengalir seperti sebelumnya. Scroll ke anchor menyisakan ruang di bawah navbar.
+Dropdown header dan dialog native mempertahankan lapisan serta penutupan/fokusnya.
+Offset panel mengikuti transisi header. Scroll-padding anchor tetap memakai
+tinggi penuh agar tujuan terbaca ketika navbar muncul kembali. Perilaku navbar
+staf dan autentikasi yang memakai shell berbeda tetap mengikuti shell masing-masing.
+
+Pemeriksaan khusus: `tests/e2e/browser/verify-storefront-sticky.cjs` dan capture
+pada `storage/reports/storefront-sticky/`. Tujuh kelompok pemeriksaan lulus pada
+14 halaman storefront di desktop dan mobile, termasuk arah gulir, sidebar,
+dropdown, fokus pencarian, resize 320 px, sheet, anchor, dan reduced motion.
+Pemeriksaan ini tidak mengubah data pesanan atau aturan akses.
+
 Figma yang diberikan berupa desktop. Pada lebar lebih kecil, isi dan aset tetap
 dipertahankan: pencarian turun ke baris berikutnya, kategori dapat digulir
 horizontal, dan kelompok footer tersusun ulang tanpa terpotong.
@@ -60,10 +88,17 @@ Pada ponsel, target utility dan footer dibuat setinggi minimal 44 px.
 Pada desktop, utility dan tautan footer mempertahankan ritme referensi dengan
 target minimal 24 px; pengecualian uji ini dibatasi pada kedua kelompok tersebut.
 
-Halaman katalog, wishlist, keranjang dan tujuan footer belum tersedia
-sebagai implementasi storefront. Menekan kontrolnya menyampaikan tujuan yang
-belum terhubung melalui pemberitahuan pratinjau, mempertahankan konteks pesanan.
-Form pencarian mempertahankan kata kunci dan tidak berpura-pura memuat hasil.
+Beranda, Katalog, Wishlist, Keranjang, Akun, Pesanan dan halaman informasi kini
+tersedia sebagai frontend pratinjau. Tujuan footer yang belum tersedia tetap
+memberikan pemberitahuan yang jelas. Pencarian dari halaman non-Katalog membuka
+Katalog dengan parameter `q` setelah Enter/tombol Cari; mengetik saja tidak
+memindahkan halaman. Katalog mempertahankan pencarian langsung yang sudah ada.
+Badge Wishlist memakai store yang sama di seluruh 14 halaman, diperbarui pada
+save/remove dan disembunyikan saat kosong atau data belum dapat dipastikan.
+Angka besar diringkas `99+`, sedangkan nama aksesibel menyebut jumlah lengkap.
+Badge Wishlist desktop berada sedikit ke kanan dari ikon hati; offset mobile
+tetap sejajar dengan badge Keranjang.
+Draf Keranjang, Checkout dan Buket tetap melalui konfirmasi sebelum ditinggalkan.
 Tidak ada URL profil sosial atau endpoint produksi yang dikarang.
 
 Pada perluasan Pesanan Saya, tombol utility “Lacak Pesanan” membuka

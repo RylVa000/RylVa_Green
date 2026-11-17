@@ -1,0 +1,26 @@
+[
+  {
+    "file": "rose-heads.png",
+    "tool": "built-in image_gen",
+    "transparentBackground": true,
+    "prompt": "Use case: product-mockup. Create ONE production sprite atlas on a fully transparent background, exactly THREE equal square columns and TWO equal square rows. Six individually isolated photorealistic rose flower HEADS only, NO long stems and NO leaves, every head completely contained within its own square cell with transparent margins. TOP ROW: deep crimson red rose heads in three distinct natural camera poses: front-left three-quarter overhead view, nearly overhead view, front-right three-quarter view. BOTTOM ROW: warm ivory-white rose heads in the same three camera poses. Lush, freshly opened, naturally irregular layered petals, believable three-dimensional cupped volume. Each head fills about 85 percent of its cell, not flattened or cut off. Consistent studio soft light from upper left, delicate inherent petal shading, no white outline and no background or external cast shadow. These heads will be composited into a dense Korean-style flower bouquet. Real macro flower photography, never painted, plastic or vector. No text, no grid lines, no pots, no paper, no arrangement already assembled."
+  },
+  {
+    "file": "back-wrapper.png",
+    "tool": "built-in image_gen",
+    "transparentBackground": true,
+    "prompt": "Use case: product-mockup. Single isolated professional florist asset on truly transparent background: ONLY the BACK wrapping-paper structure of a premium Korean hand-tied bouquet, empty of flowers. Tall broad irregular FAN of three overlapping sage-green florist paper sheets, paper color muted botanical sage, with slightly staggered angular peaks rising at the top left and right, softly curved folds and fine paper grain. Wide open upper silhouette, tall flared side wings, lower paper gathered inward to a narrow hand-tied neck near the lower center. Front side is OPEN and ABSENT: no closed cone or front panel across the middle. The center above the narrow neck is genuinely transparent, with only the rear paper wall visible along back edges and sides, so flowers can be layered in front. Straight-on product view with a slight overhead perspective, consistent soft light upper left, realistic photograph of physical folded paper. Entire structure visible with clear transparent margins, portrait-oriented composition. No flowers, foliage, hands, vase, ribbon, props, floor, background, text, logos or external cast shadows."
+  },
+  {
+    "file": "front-collar.png",
+    "tool": "built-in image_gen",
+    "transparentBackground": true,
+    "prompt": "Use case: product-mockup. Single isolated realistic florist packaging FRONT COLLAR asset on a completely transparent background. This is ONLY the FRONT lower wrapping of a Korean-style hand-tied bouquet. Broad flared upper mouth made of softly crinkled white tissue paper with an irregular scalloped and folded edge, layered immediately behind overlapping sage-green florist paper folds. The white tissue edge rises slightly at the outer corners and dips lower through the center, a natural wide shallow U-shaped collar, ready to overlap and hide the BASES of flowers inserted behind it. Sage paper has beautiful dimensional overlapping diagonal pleats and gathers down toward a narrow tying point at the lower center. The whole piece is wide at the top and tapers below, very short neck, not a long empty cone. Front view with a slight overhead perspective, photoreal paper grain, gentle upper-left studio illumination, soft fold shading. Entire object within the frame, plenty of transparent margin. No flowers, no leaves, no back wrapper, no ribbon, no hands, no container, no text or logo, no floor shadow. This is an editable transparent compositing layer rather than a complete bouquet photograph."
+  },
+  {
+    "file": "ribbon.png",
+    "tool": "built-in image_gen",
+    "transparentBackground": true,
+    "prompt": "Use case: product-mockup. One isolated realistic ivory-cream satin bow for the neck of a premium Korean-style hand-tied bouquet, against a genuinely transparent background. A naturally tied small central bow with irregular graceful loops and TWO LONG satin ribbon tails falling downward with subtle twists, one slightly longer than the other, softly V-cut ends. The upper loops fill the upper third and the tails occupy the lower two-thirds, no symmetry. Front view, real satin sheen and dimensional fabric folds, consistent soft light from upper left, complete object fully visible with transparent margins. No paper, flowers, foliage, hands, vase, text, logo, background or external cast shadows. Professional product photo, not illustration."
+  }
+]

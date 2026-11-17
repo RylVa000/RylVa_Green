@@ -1,0 +1,59 @@
+/* Shared native checkbox skin. Local form rules keep their existing dimensions. */
+:where(input[type="checkbox"])
+{
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+:root input[type="checkbox"]:not([role="switch"], [hidden], .visually-hidden, .sr-only)
+{
+  appearance: none;
+  box-sizing: border-box;
+  padding: 0;
+  border: 1.5px solid var(--primary-light);
+  border-radius: 6px;
+  background-color: var(--card-background);
+  background-position: center;
+  background-size: 82% 82%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+:root input[type="checkbox"]:not([role="switch"]):checked
+{
+  border-color: var(--primary);
+  background-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 12 4 4 8-8' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+:root input[type="checkbox"]:not([role="switch"]):indeterminate
+{
+  border-color: var(--primary);
+  background-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12h12' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+:root input[type="checkbox"]:not([role="switch"]):focus-visible
+{
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+:root input[type="checkbox"]:not([role="switch"]):disabled
+{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active)
+{
+  :root input[type="checkbox"]:not([role="switch"]),
+  :root input[type="checkbox"]:not([role="switch"]):checked,
+  :root input[type="checkbox"]:not([role="switch"]):indeterminate
+  {
+    appearance: auto;
+    background-image: none;
+  }
+}

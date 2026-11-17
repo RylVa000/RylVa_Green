@@ -59,11 +59,15 @@ const server = http.createServer((request, response) =>
   const isCartWorkbench = pathname === "/__preview/cart";
   const isCheckoutWorkbench = pathname === "/__preview/checkout";
   const isAuthWorkbench = pathname === "/__preview/customer-auth";
+  const isCatalogWorkbench = pathname === "/__preview/catalog";
+  const isProductWorkbench = pathname === "/__preview/product-detail";
   const isHomeWorkbench = pathname === "/__preview/homepage";
+  const isBouquetWorkbench = pathname === "/__preview/bouquet";
+  const isWishlistWorkbench = pathname === "/__preview/wishlist";
   const isWorkbench = isPaymentWorkbench || isOrderWorkbench || isMyOrdersWorkbench
-    || isAccountWorkbench || isCartWorkbench || isCheckoutWorkbench || isAuthWorkbench || isHomeWorkbench;
+    || isAccountWorkbench || isCartWorkbench || isCheckoutWorkbench || isAuthWorkbench || isHomeWorkbench || isCatalogWorkbench || isProductWorkbench || isBouquetWorkbench || isWishlistWorkbench;
   const target = isWorkbench
-    ? path.resolve(__dirname, isHomeWorkbench ? "homepage-states.html" : isAuthWorkbench ? "customer-auth-states.html" : isCheckoutWorkbench ? "checkout-states.html" : isPaymentWorkbench ? "payment-states.html"
+    ? path.resolve(__dirname, isWishlistWorkbench ? "wishlist-states.html" : isBouquetWorkbench ? "bouquet-states.html" : isProductWorkbench ? "product-detail-states.html" : isCatalogWorkbench ? "catalog-states.html" : isHomeWorkbench ? "homepage-states.html" : isAuthWorkbench ? "customer-auth-states.html" : isCheckoutWorkbench ? "checkout-states.html" : isPaymentWorkbench ? "payment-states.html"
       : (isOrderWorkbench ? "order-detail-states.html"
         : (isMyOrdersWorkbench ? "my-orders-states.html" : (isCartWorkbench ? "cart-states.html" : "account-states.html"))))
     : path.resolve(root, `.${pathname}`);

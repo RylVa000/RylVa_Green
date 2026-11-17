@@ -82,6 +82,22 @@ async function verifyMyOrders()
 
     async function layout(name)
     {
+      const menuGeometry = await page.$$eval(".order-card-menu > summary", (triggers) =>
+      {
+        return triggers.map((trigger) =>
+        {
+          const button = trigger.getBoundingClientRect();
+          const icon = trigger.querySelector(".icon").getBoundingClientRect();
+          return {
+            width: button.width,
+            height: button.height,
+            horizontalOffset: Math.abs(button.left + button.width / 2 - icon.left - icon.width / 2),
+            verticalOffset: Math.abs(button.top + button.height / 2 - icon.top - icon.height / 2)
+          };
+        });
+      });
+      assert.ok(menuGeometry.every((item) => item.width === 44 && item.height === 44), name + ": menu trigger must stay square");
+      assert.ok(menuGeometry.every((item) => item.horizontalOffset < 1 && item.verticalOffset < 1), name + ": dots must be centered");
       const violations = await page.evaluate(() =>
       {
         const viewport = document.documentElement.clientWidth;

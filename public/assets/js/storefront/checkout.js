@@ -443,7 +443,14 @@
               <div class="checkout-product-copy">
                 <h3>${escapeHtml(item.name)}</h3>
                 <p class="checkout-helper">${escapeHtml([item.variant, item.attributes].filter(Boolean).join(", "))}</p>
-                ${item.configuration ? `<details><summary>Konfigurasi buket</summary><p>${escapeHtml(item.configuration)}</p>${button("cart", "Ubah di Keranjang")}</details>` : ""}
+                ${item.configuration ? `
+                  <details>
+                    <summary>Konfigurasi buket</summary>
+                    ${Array.isArray(item.configuration)
+                      ? `<ul>${item.configuration.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul>`
+                      : `<p>${escapeHtml(item.configuration)}</p>`}
+                    ${button("cart", "Ubah di Keranjang")}
+                  </details>` : ""}
                 <p class="checkout-unit-price">${money(item.price)}<span> / ${escapeHtml(item.unit)}</span></p>
                 ${!item.available || item.configurationValid === false ? '<p class="checkout-error">Tidak tersedia. Hapus atau sesuaikan di Keranjang.</p>' : ""}
               </div>
@@ -471,6 +478,8 @@
             </details>
           </article>`).join("")}
         <div class="checkout-gift">
+          ${context.items.some((item) => item.hasBouquetCard)
+            ? '<p class="checkout-helper">Pesan kartu buket sudah tercantum pada rincian rakitan. Kartu pesanan di bawah terpisah dan bersifat opsional.</p>' : ""}
           <label class="checkout-check"><input id="gift-enabled" type="checkbox" ${context.gift.enabled ? "checked" : ""}>Tambahkan kartu ucapan</label>
           <div id="checkout-gift-fields" ${context.gift.enabled ? "" : "hidden"}>
             <div class="checkout-gift-grid">
@@ -1347,6 +1356,24 @@
       requestQuote(true);
     }
   });
+  document.addEventListener("rylva:before-search", (event) =>
+  {
+    if (submitting || uncertain)
+    {
+      event.preventDefault();
+      feedback("Tunggu hingga proses pesanan selesai sebelum membuka pencarian.", "warning");
+    }
+    else if (!order && context && (draftSignature() !== originalDraft || addressDialog.dirty()))
+    {
+      event.preventDefault();
+      confirm("Buka pencarian produk?", "Perubahan Checkout yang belum menjadi pesanan akan ditinggalkan.", () =>
+      {
+        bypassLeave = true;
+        event.detail.proceed();
+      });
+    }
+  });
+
   window.addEventListener("beforeunload", (event) =>
   {
     if (!bypassLeave && !order && context && (draftSignature() !== originalDraft || addressDialog.dirty()))

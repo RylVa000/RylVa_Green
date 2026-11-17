@@ -242,7 +242,9 @@
               <ul>${item.configuration.map((value) => `
                 <li>${escapeHtml(value)}</li>`).join("")}
               </ul>
-            </details>` : ""}
+            </details>
+            ${item.configurationDraft ? `
+              <a href="/pages/customer/bouquet-customizer.html?edit=${encodeURIComponent(item.lineId)}">Ubah rakitan</a>` : ""}` : ""}
         </div>
         <div class="cart-price-actions">
           <div class="cart-pricing">
@@ -774,6 +776,24 @@
     });
   }, true);
 
+  document.addEventListener("rylva:before-search", (event) =>
+  {
+    if (pending)
+    {
+      event.preventDefault();
+      announcement.textContent = "Perubahan keranjang sedang disimpan. Coba pencarian setelah selesai.";
+    }
+    else if (drafts.size)
+    {
+      event.preventDefault();
+      requestLeave(() =>
+      {
+        bypassLeave = true;
+        event.detail.proceed();
+      });
+    }
+  });
+
   document.addEventListener("click", (event) =>
   {
     const button = event.target.closest("[data-cart-action]");
@@ -834,6 +854,11 @@
       }
       leaveAction?.();
       leaveAction = null;
+    }
+    else if (action === "product" && item?.configurationDraft)
+    {
+      saveContext();
+      window.location.assign("/pages/customer/bouquet-customizer.html?edit=" + encodeURIComponent(item.lineId));
     }
     else if (["shop", "home", "product", "auth", "orders"].includes(action))
     {

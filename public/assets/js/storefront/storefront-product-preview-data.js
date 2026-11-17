@@ -23,7 +23,7 @@ window.RylvaStorefrontProductPreviewData = (() =>
     variantId: slug === "monstera" ? "example-large" : slug === "calathea" ? "example-small" : "example-standard",
     name,
     description,
-    image: imageRoot + image + ".webp",
+    image: slug === "sirih-gading" ? "/assets/images/catalog/sirih-gading.png" : imageRoot + image + ".webp",
     imageKey: slug,
     price,
     basePrice,
