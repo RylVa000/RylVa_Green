@@ -101,6 +101,10 @@ window.RylvaPaymentPreview = (() =>
   function createSnapshot(scenario, anchorTime)
   {
     const createdAt = new Date(anchorTime).toISOString();
+    const deliveryDate = new Intl.DateTimeFormat("sv-SE",
+    {
+      timeZone: "Asia/Jakarta", year: "numeric", month: "2-digit", day: "2-digit"
+    }).format(new Date(anchorTime + 24 * 60 * 60 * 1000));
     const expiresAt = new Date(anchorTime + 10 * 60 * 1000).toISOString();
     const snapshot =
     {
@@ -119,7 +123,7 @@ window.RylvaPaymentPreview = (() =>
       expiresAt,
       snapshotAt: createdAt,
       serverNow: new Date().toISOString(),
-      deliveryDate: "2026-11-14",
+      deliveryDate,
       deliverySlot: "08.00–12.00 WIB",
       courierName: "Kurir instan",
       items:

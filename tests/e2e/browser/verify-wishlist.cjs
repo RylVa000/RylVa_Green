@@ -103,6 +103,13 @@ async function verifyWishlist()
     await page.click('[data-home-save="peace-lily"]');
     await page.click('[data-home-save="monstera"]');
     await page.waitForFunction(() => window.RylvaWishlistStore.snapshot().items.length === 2);
+    await page.focus('header [data-storefront-page="Wishlist"]');
+    await page.waitForFunction(() =>
+    {
+      const header = document.querySelector(".storefront-header");
+      return !document.documentElement.classList.contains("storefront-nav-hidden")
+        && Math.abs(header.getBoundingClientRect().top) < 1;
+    });
     await page.click('header [data-storefront-page="Wishlist"]');
     await page.waitForSelector("#home-wishlist-panel:not([hidden])");
     await page.click("[data-header-wishlist-all]");
@@ -126,6 +133,13 @@ async function verifyWishlist()
     assert.equal(await page.$eval('[data-home-save="monstera"]', (button) => button.getAttribute("aria-pressed")), "true");
     await page.click('[data-home-save="peace-lily"]');
     await page.waitForFunction(() => window.RylvaWishlistStore.has("example-peace-lily"));
+    await page.focus('header [data-storefront-page="Wishlist"]');
+    await page.waitForFunction(() =>
+    {
+      const header = document.querySelector(".storefront-header");
+      return !document.documentElement.classList.contains("storefront-nav-hidden")
+        && Math.abs(header.getBoundingClientRect().top) < 1;
+    });
     await page.click('header [data-storefront-page="Wishlist"]');
     await page.waitForSelector("#home-wishlist-panel:not([hidden])");
     await page.click("[data-header-wishlist-all]");

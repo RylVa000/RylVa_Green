@@ -40,7 +40,7 @@
   function money(value)
   {
     return Number.isSafeInteger(value) && value >= 0
-      ? "Rp " + new Intl.NumberFormat("id-ID").format(value) : "Belum dihitung";
+      ? window.RylvaStorefrontFormat.money(value) : "Belum dihitung";
   }
 
   function icon(name)
@@ -568,6 +568,13 @@
       <details class="checkout-policy-details"><summary>Risiko pengiriman dan kebijakan lengkap</summary>
         <p>Alamat salah atau penerima tidak tersedia pada produk Mudah Layu dapat memengaruhi refund atas biaya atau kerusakan yang wajar, setelah bukti upaya pengiriman dicatat.</p>
         <p>Kesalahan toko atau kurir tetap ditangani melalui investigasi dan penyelesaian yang proporsional. Refund tidak ditolak otomatis hanya karena jenis produk.</p>
+        <p>
+          Baca
+          <a class="checkout-policy-link" href="/pages/public/terms-conditions.html" target="_blank" rel="noopener">Syarat dan Ketentuan</a>
+          serta
+          <a class="checkout-policy-link" href="/pages/public/cancellation-refund.html" target="_blank" rel="noopener">Pembatalan &amp; Refund</a>
+          di tab baru agar rincian Checkout tetap tersedia.
+        </p>
       </details>`;
   }
 

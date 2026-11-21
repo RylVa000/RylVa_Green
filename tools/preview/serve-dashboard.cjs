@@ -13,11 +13,46 @@ const types =
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".ttf": "font/ttf",
+  ".woff2": "font/woff2",
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".webp": "image/webp",
   ".svg": "image/svg+xml"
 };
+
+const publicErrorPages =
+{
+  "/pages/public/error-403.html": 403,
+  "/pages/public/error-404.html": 404,
+  "/pages/public/error-500.html": 500,
+  "/pages/public/maintenance.html": 503
+};
+
+function sendPublicError(request, response, status, pathname)
+{
+  const isDocument = request.headers.accept?.includes("text/html")
+    || !path.extname(pathname) || path.extname(pathname) === ".html";
+  const isStaff = pathname.startsWith("/pages/staff/")
+    || pathname.startsWith("/pages/superadmin/");
+  if (!isDocument || isStaff || pathname.startsWith("/assets/")
+    || pathname.startsWith("/__preview/"))
+  {
+    response.writeHead(status, { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" });
+    response.end(request.method === "HEAD" ? undefined
+      : (status === 403 ? "Access denied" : "Page not found"));
+    return;
+  }
+  const errorPath = Object.keys(publicErrorPages).find((route) => publicErrorPages[route] === status);
+  fs.readFile(path.join(root, errorPath), (error, data) =>
+  {
+    response.writeHead(status,
+    {
+      "Content-Type": error ? "text/plain; charset=utf-8" : "text/html; charset=utf-8",
+      "Cache-Control": "no-store"
+    });
+    response.end(request.method === "HEAD" ? undefined : (error ? "Page unavailable" : data));
+  });
+}
 
 const server = http.createServer((request, response) =>
 {
@@ -52,47 +87,57 @@ const server = http.createServer((request, response) =>
     response.end();
     return;
   }
-  const isPaymentWorkbench = pathname === "/__preview/payment";
-  const isOrderWorkbench = pathname === "/__preview/order-detail";
-  const isMyOrdersWorkbench = pathname === "/__preview/my-orders";
-  const isAccountWorkbench = pathname === "/__preview/account";
-  const isCartWorkbench = pathname === "/__preview/cart";
-  const isCheckoutWorkbench = pathname === "/__preview/checkout";
-  const isAuthWorkbench = pathname === "/__preview/customer-auth";
-  const isCatalogWorkbench = pathname === "/__preview/catalog";
-  const isProductWorkbench = pathname === "/__preview/product-detail";
-  const isHomeWorkbench = pathname === "/__preview/homepage";
-  const isBouquetWorkbench = pathname === "/__preview/bouquet";
-  const isWishlistWorkbench = pathname === "/__preview/wishlist";
-  const isWorkbench = isPaymentWorkbench || isOrderWorkbench || isMyOrdersWorkbench
-    || isAccountWorkbench || isCartWorkbench || isCheckoutWorkbench || isAuthWorkbench || isHomeWorkbench || isCatalogWorkbench || isProductWorkbench || isBouquetWorkbench || isWishlistWorkbench;
+  const workbenchPages =
+  {
+    "/__preview/payment": "payment-states.html",
+    "/__preview/order-detail": "order-detail-states.html",
+    "/__preview/my-orders": "my-orders-states.html",
+    "/__preview/account": "account-states.html",
+    "/__preview/cart": "cart-states.html",
+    "/__preview/checkout": "checkout-states.html",
+    "/__preview/customer-auth": "customer-auth-states.html",
+    "/__preview/catalog": "catalog-states.html",
+    "/__preview/product-detail": "product-detail-states.html",
+    "/__preview/homepage": "homepage-states.html",
+    "/__preview/bouquet": "bouquet-states.html",
+    "/__preview/wishlist": "wishlist-states.html",
+    "/__preview/shipping-information": "shipping-information-states.html",
+    "/__preview/cancellation-refund": "cancellation-refund-states.html",
+    "/__preview/terms-conditions": "terms-conditions-states.html",
+    "/__preview/how-to-order": "how-to-order-states.html",
+    "/__preview/about": "about-states.html",
+    "/__preview/public-errors": "public-error-states.html",
+    "/__preview/category-products": "category-products-states.html",
+    "/__preview/care-guides": "care-guides-states.html",
+    "/__preview/care-guide-detail": "care-guide-detail-states.html",
+    "/__preview/collections": "collections-states.html"
+  };
+  const workbenchFile = Object.hasOwn(workbenchPages, pathname) ? workbenchPages[pathname] : null;
+  const isWorkbench = Boolean(workbenchFile);
   const target = isWorkbench
-    ? path.resolve(__dirname, isWishlistWorkbench ? "wishlist-states.html" : isBouquetWorkbench ? "bouquet-states.html" : isProductWorkbench ? "product-detail-states.html" : isCatalogWorkbench ? "catalog-states.html" : isHomeWorkbench ? "homepage-states.html" : isAuthWorkbench ? "customer-auth-states.html" : isCheckoutWorkbench ? "checkout-states.html" : isPaymentWorkbench ? "payment-states.html"
-      : (isOrderWorkbench ? "order-detail-states.html"
-        : (isMyOrdersWorkbench ? "my-orders-states.html" : (isCartWorkbench ? "cart-states.html" : "account-states.html"))))
+    ? path.resolve(__dirname, workbenchFile)
     : path.resolve(root, `.${pathname}`);
   if ((!isWorkbench && !target.startsWith(`${root}${path.sep}`))
     || pathname.split("/").some((part) => part.startsWith(".")))
   {
-    response.writeHead(403);
-    response.end("Access denied");
+    sendPublicError(request, response, 403, pathname);
     return;
   }
   if (!Object.hasOwn(types, path.extname(target)))
   {
-    response.writeHead(404);
-    response.end("Page not found");
+    sendPublicError(request, response, 404, pathname);
     return;
   }
   fs.readFile(target, (error, data) =>
   {
     if (error)
     {
-      response.writeHead(404);
-      response.end("Page not found");
+      const status = error.code === "EACCES" ? 403
+        : (["ENOENT", "ENOTDIR", "EISDIR"].includes(error.code) ? 404 : 500);
+      sendPublicError(request, response, status, pathname);
       return;
     }
-    response.writeHead(200,
+    response.writeHead(publicErrorPages[pathname] || 200,
     {
       "Content-Type": types[path.extname(target)],
       "Cache-Control": "no-store"

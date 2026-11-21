@@ -675,7 +675,28 @@
     }
     else if (action === "policy")
     {
-      openDialog(target.dataset.policy, "Dokumen kebijakan belum dipublikasikan pada pratinjau ini. Persetujuan formulir tidak membuat akun atau perjanjian produksi.");
+      const policyPaths =
+      {
+        "Syarat dan Ketentuan": "/pages/public/terms-conditions.html",
+        "Kebijakan Privasi": "/pages/public/privacy-policy.html"
+      };
+      const policyTitle = target.dataset.policy;
+      if (!Object.hasOwn(policyPaths, policyTitle))
+      {
+        return;
+      }
+      openDialog(policyTitle,
+        "Baca dokumen di tab baru agar isian formulir tetap tersedia. Membuka dokumen tidak mencentang persetujuan. Alur ini masih berupa pratinjau.");
+      const paragraph = document.createElement("p");
+      const policyLink = document.createElement("a");
+      policyLink.className = "auth-policy-link";
+      policyLink.href = policyPaths[policyTitle];
+      policyLink.target = "_blank";
+      policyLink.rel = "noopener";
+      policyLink.textContent = "Baca dokumen (tab baru)";
+      policyLink.setAttribute("aria-label", "Baca " + policyTitle + " (tab baru)");
+      paragraph.append(policyLink);
+      dialog.querySelector(".auth-dialog-actions").before(paragraph);
     }
     else if (action === "close")
     {

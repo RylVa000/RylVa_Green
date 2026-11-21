@@ -5,17 +5,18 @@
 
 :root
 {
-  --storefront-sage: var(--primary-light);
+  --storefront-sage: #4d725c;
   --storefront-green: var(--primary);
   --storefront-cream: var(--background);
   --storefront-white: var(--color-accent-ink);
   --storefront-utility-background: var(--card-background);
-  --storefront-muted: #77838d;
+  --storefront-muted: #526452;
   --storefront-search-background: #f3f4f6;
   --storefront-action: #19352a;
-  --storefront-promo: #f44949;
+  --storefront-promo: #fff;
+  --storefront-promo-badge: #b33232;
   --storefront-rule: #e9ecef;
-  --storefront-heading-font: "Inter", var(--font-body);
+  --storefront-heading-font: var(--font-body);
   --storefront-max-width: 1776px;
   --storefront-gutter: 72px;
   --storefront-footer-gutter: 99px;
@@ -58,15 +59,6 @@
 .storefront-nav-instant :is(.storefront-header, .catalog-filter-panel, .catalog-mobile-tools, .cart-summary, .detail-action-rail, .bq-categories)
 {
   transition: none;
-}
-
-@font-face
-{
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("../../fonts/inter/inter-variable.ttf") format("truetype");
 }
 
 .storefront-shell
@@ -320,7 +312,8 @@
   scroll-padding-inline: 12px;
 }
 
-.storefront-category-links button
+.storefront-category-links button,
+.storefront-category-links .storefront-page-link
 {
   min-height: 51px;
   flex-shrink: 0;
@@ -339,9 +332,9 @@
 .storefront-hot
 {
   padding: 4px;
-  background: var(--storefront-promo);
+  background: var(--storefront-promo-badge);
   color: var(--storefront-white);
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -904,7 +897,8 @@
     gap: 20px;
   }
 
-  .storefront-category-links button
+  .storefront-category-links button,
+  .storefront-category-links .storefront-page-link
   {
     min-height: 44px;
     font-size: 12px;

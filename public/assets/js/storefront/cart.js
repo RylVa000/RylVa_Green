@@ -28,12 +28,6 @@
   let activeNotice = null;
   let retryAt = 0;
 
-  const currency = new Intl.NumberFormat("id-ID",
-  {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0
-  });
 
   function escapeHtml(value)
   {
@@ -43,7 +37,7 @@
 
   function money(value)
   {
-    return currency.format(value);
+    return window.RylvaStorefrontFormat.money(value);
   }
 
   function validPrice(item)
@@ -254,7 +248,7 @@
                 <span class="cart-discount">Hemat ${money(item.basePrice - item.price)}</span>
               </div>` : ""}
             <p class="cart-unit-price">
-              ${validPrice(item) ? `${money(item.price)}<small>/${escapeHtml(item.unit)}</small>` : "Harga belum tersedia"}
+              ${validPrice(item) ? `${money(item.price)}<small> / ${escapeHtml(item.unit)}</small>` : "Harga belum tersedia"}
             </p>
           </div>
           <div class="cart-row-actions">

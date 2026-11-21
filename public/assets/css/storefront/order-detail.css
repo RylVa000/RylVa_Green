@@ -900,3 +900,9 @@
 
 }
 
+/* Policy guidance links use the existing botanical link style. */
+.detail-policy-link
+{
+  color: var(--primary);
+  text-underline-offset: 4px;
+}

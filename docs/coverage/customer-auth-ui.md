@@ -117,8 +117,12 @@ Pratinjau selalu berlabel data contoh. Tidak ada email atau autentikasi nyata,
 tidak ada token produksi, tidak ada kredensial dicatat/dipersistenkan. Tombol
 Lanjutkan Pratinjau membuka data contoh secara eksplisit. ReturnTo dibatasi
 route pelanggan pada origin yang sama; URL luar dan route staf ditolak.
-Pemulihan/reset tidak memasukkan password ke URL. Kebijakan hukum belum
-dipublikasikan; kontrol kebijakan menjelaskan ketersediaannya tanpa mengarang isi.
+Pemulihan/reset tidak memasukkan password ke URL. Dokumen hukum produksi belum
+diterbitkan. Pembaruan 19 November: dialog kebijakan registrasi menautkan
+pratinjau Syarat dan Ketentuan dan halaman Kebijakan Privasi yang sudah ada di
+tab baru dengan `noopener`. Isian tetap di formulir asal; tidak ada password
+yang disalin ke storage dan membaca dokumen tidak mencentang persetujuan.
+Dialog, Escape dan pengembalian fokus existing dipertahankan.
 
 Keranjang tamu dan kontrak merge autentikasi masih memerlukan backend.
 Masuk dari Checkout tidak mengubah keranjang tamu menjadi akun terverifikasi.

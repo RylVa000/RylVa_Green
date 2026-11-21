@@ -346,7 +346,7 @@ window.RylvaCartPreviewRepository = (() =>
     {
       faultUsed = true;
       items[0].price = 300000;
-      items[0].changeMessage = "Harga berubah dari Rp289.000 menjadi Rp300.000 per pot. Tinjau total terbaru.";
+      items[0].changeMessage = "Harga berubah dari Rp 289.000 menjadi Rp 300.000 per pot. Tinjau total terbaru.";
       revision++;
       return { changed: true, cart: snapshot() };
     }

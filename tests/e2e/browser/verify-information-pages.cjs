@@ -65,7 +65,7 @@ async function verifyPages()
         const layout = await page.evaluate(() =>
         {
           const main = document.getElementById("information-main");
-          const banner = getComputedStyle(main.querySelector(".info-herokontak, .info-headerfaq, .info-headerprivasi"));
+          const banner = getComputedStyle(main.querySelector(".info-herokontak, .info-headerfaq, .policy-banner"));
           const luminance = (channels) =>
           {
             const linear = channels.map((value) =>
@@ -112,16 +112,12 @@ async function verifyPages()
         assert.equal(layout.overflow, false, slug + " overflow at " + width);
         assert.equal(layout.clipped, false, slug + " clipped controls at " + width);
         assert.match(layout.font, /Poppins/);
+        assert.equal(layout.bannerColor, "rgb(255, 255, 255)");
         if (slug === "contact")
         {
-          assert.equal(layout.bannerColor, "rgb(255, 255, 255)");
           assert.equal(layout.middleCardColor, "rgb(78, 105, 75)");
           assert.equal(layout.cardBorderWidth, "2px");
           assert.equal(layout.cardBorderStyle, "dashed");
-        }
-        else
-        {
-          assert.ok(layout.bannerLuminance > 0.7, slug + " banner should use a light surface");
         }
         assert.ok(layout.bannerContrast >= 4.5, slug + " banner text contrast");
         if ([1440, 390, 320].includes(width))
@@ -135,6 +131,60 @@ async function verifyPages()
       }
     }
     checks.push("Three imported pages render at five widths with local assets, Poppins, one main heading and no horizontal clipping");
+
+    await open("privacy-policy");
+    const privacyStart = await page.evaluate(() => ({ url: location.href, entries: history.length }));
+    const privacyIds = Array.from({ length: 8 }, (_, index) => "privacy-section-" + (index + 1));
+    for (const id of [...privacyIds, ...privacyIds.toReversed()])
+    {
+      await page.evaluate((headingId) =>
+      {
+        const heading = document.getElementById(headingId);
+        window.scrollTo(
+        {
+          top: scrollY + heading.getBoundingClientRect().top
+            - document.querySelector(".storefront-header").offsetHeight - 20,
+          behavior: "instant"
+        });
+      }, id);
+      await page.waitForFunction((hash) =>
+        document.querySelector('#privacy-toc [aria-current="location"]')?.hash === hash,
+      {}, "#" + id);
+      assert.equal(await page.$$eval('#privacy-toc [aria-current="location"]', (links) => links.length), 1);
+    }
+    assert.deepEqual(await page.evaluate(() => ({ url: location.href, entries: history.length })), privacyStart);
+    await page.focus('#privacy-toc a[href="#privacy-section-4"]');
+    await page.keyboard.press("Enter");
+    assert.equal(await page.evaluate(() => document.activeElement.id), "privacy-section-4");
+    await page.screenshot({ path: path.join(OUTPUT_DIRECTORY, "privacy-reader-1440.png") });
+    await open("privacy-policy", 390);
+    assert.equal(await page.$eval("#privacy-toc", (toc) => toc.open), false);
+    await page.focus("#privacy-toc summary");
+    await page.keyboard.press("Enter");
+    await page.click('#privacy-toc a[href="#privacy-section-5"]');
+    assert.equal(await page.evaluate(() => document.activeElement.id), "privacy-section-5");
+    await page.screenshot({ path: path.join(OUTPUT_DIRECTORY, "privacy-reader-390.png") });
+    await page.$eval('footer [data-storefront-page="Hubungi Kami"]', (link) =>
+      link.closest("nav").querySelector(".storefront-footer-toggle").click());
+    await page.focus('footer [data-storefront-page="Hubungi Kami"]');
+    const privacyPosition = await page.evaluate(() => scrollY);
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: "networkidle0" }),
+      page.click('footer [data-storefront-page="Hubungi Kami"]')
+    ]);
+    await page.goBack({ waitUntil: "networkidle0" });
+    await page.waitForFunction(() => document.getElementById("privacy-toc").open);
+    assert.ok(Math.abs(await page.evaluate(() => scrollY) - privacyPosition) < 200);
+    await page.setJavaScriptEnabled(false);
+    await open("privacy-policy", 390);
+    await page.click('#privacy-toc a[href="#privacy-section-5"]');
+    const privacyClearance = await page.evaluate(() =>
+      document.getElementById("privacy-section-5").getBoundingClientRect().top
+        - document.querySelector(".storefront-header").getBoundingClientRect().bottom);
+    assert.ok(privacyClearance >= 8);
+    await page.screenshot({ path: path.join(OUTPUT_DIRECTORY, "privacy-no-script-390.png") });
+    await page.setJavaScriptEnabled(true);
+    checks.push("Privacy breadcrumb, eight-section scroll spy, keyboard/mobile disclosure, reading restoration and no-JS anchors");
 
     await open("faq");
     assert.equal(await page.$$(".info-itemfaq").then((items) => items.length), 8);
@@ -224,9 +274,11 @@ async function verifyPages()
     await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
     await page.focus("#faq-1 summary");
     assert.notEqual(await page.$eval("#faq-1 summary", (element) => getComputedStyle(element).outlineStyle), "none");
-    await page.click('[data-storefront-page="Mitra Florist"]');
-    assert.equal(await page.$eval("#storefront-preview-note", (element) => element.hidden), false);
-    assert.match(await page.$eval("#storefront-preview-note", (element) => element.textContent), /Mitra Florist belum terhubung/);
+    await Promise.all([
+      page.waitForNavigation(),
+      page.click('[data-storefront-destination="Mitra Florist"]')
+    ]);
+    assert.equal(new URL(page.url()).pathname, "/pages/public/florist-partners.html");
     checks.push("Imported pages retain Catalog search, Cart and Wishlist panels, Escape focus return and visible keyboard focus with reduced motion");
 
     for (const [alias, destination] of [["Contact.html", "contact"], ["FAQ.html", "faq"], ["PrivacyPolicy.html", "privacy-policy"]])

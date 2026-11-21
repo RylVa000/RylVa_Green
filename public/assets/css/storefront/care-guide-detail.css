@@ -1,0 +1,173 @@
+/* Hallmark: RylVa Green / inherited botanical Read article. */
+/* Critique: summary first, bounded reading measure, native section navigation. */
+.care-detail-content
+{
+  padding-top: var(--space-lg);
+}
+
+.care-detail-main h1,
+.care-detail-main h2,
+.care-detail-main h3
+{
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.care-detail-overview
+{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: center;
+  gap: var(--space-xl);
+  margin-block: var(--space-lg) var(--space-2xl);
+}
+
+.care-detail-photo
+{
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 260px;
+  aspect-ratio: 1;
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background: var(--card-background);
+}
+
+.care-detail-photo img
+{
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-lg);
+  object-fit: contain;
+}
+
+.care-detail-photo span
+{
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.care-detail-overview h2
+{
+  font-size: 28px;
+  line-height: 1.35;
+}
+
+.care-detail-overview .care-scientific
+{
+  margin-block: var(--space-xs) var(--space-lg);
+}
+
+.care-detail-needs
+{
+  margin: 0;
+}
+
+.care-detail-needs > div
+{
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: var(--space-md);
+  padding-block: var(--space-sm);
+  border-top: 1px solid var(--color-rule);
+}
+
+.care-detail-needs dt
+{
+  font-weight: 600;
+}
+
+.care-detail-needs dd
+{
+  margin: 0;
+}
+
+.care-detail-main .shipping-reading-layout
+{
+  margin-bottom: var(--space-xl);
+}
+
+.care-detail-main .shipping-section
+{
+  scroll-margin-top: calc(var(--storefront-header-height) + 24px);
+}
+
+.care-detail-main .shipping-section p,
+.care-detail-main .shipping-help p
+{
+  max-width: 70ch;
+}
+
+.care-detail-main .care-source-link
+{
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.care-detail-main .care-state
+{
+  margin-block: var(--space-xl);
+}
+
+.care-detail-loading
+{
+  min-height: 340px;
+  margin-top: var(--space-lg);
+  padding: var(--space-xl);
+  border-radius: var(--radius-card);
+  background: var(--card-background);
+}
+
+.care-detail-main .care-help
+{
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 760px)
+{
+  .care-detail-overview
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .care-detail-photo
+  {
+    width: min(100%, 320px);
+    margin-inline: auto;
+  }
+
+  .care-detail-overview h2
+  {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px)
+{
+  .care-detail-needs > div
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xs);
+  }
+
+  .care-detail-main .care-state-actions a,
+  .care-detail-main .care-state-actions button,
+  .care-detail-main .care-help a
+  {
+    width: 100%;
+    text-align: center;
+  }
+}

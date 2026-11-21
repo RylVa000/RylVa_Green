@@ -71,16 +71,16 @@ async function verify()
     await click('[data-bq-group="ribbon"]');
     await click('[data-bq-option="cream-ribbon"]');
     await ready();
-    assert.equal(await page.$eval("#bouquet-subtotal", (element) => element.textContent), "Rp80.000");
+    assert.equal(await page.$eval("#bouquet-subtotal", (element) => element.textContent), "Rp 80.000");
     assert.equal(await page.$$(".bq-stem").then((items) => items.length), 5);
     await click('[data-bq-group="flowers"]');
     await click('[data-bq-option-step="red-rose"][data-step="1"]');
     await ready();
-    assert.equal(await page.$eval("#bouquet-subtotal", (element) => element.textContent), "Rp140.000");
+    assert.equal(await page.$eval("#bouquet-subtotal", (element) => element.textContent), "Rp 140.000");
     assert.equal(await page.$$(".bq-stem").then((items) => items.length), 10);
     await click('[data-bq-action="more-bouquets"]');
     await ready();
-    assert.equal(await page.$eval("#bouquet-subtotal", (element) => element.textContent), "Rp280.000");
+    assert.equal(await page.$eval("#bouquet-subtotal", (element) => element.textContent), "Rp 280.000");
     checks.push("Required groups, pack quantities, bouquet quantities and automatic composition");
 
     await input("#bouquet-filter", "Tidak ada bunga ini");
@@ -125,8 +125,10 @@ async function verify()
 
     await open("brokenImage");
     assert.match(await page.$eval("#bouquet-stage", (element) => element.innerText), /Pratinjau gambar/);
+    await page.waitForFunction(() => document.getElementById("bouquet-stage")?.getAttribute("aria-busy") === "false");
     await click('[data-bq-action="retry-image"]');
-    await page.waitForSelector(".bq-composition");
+    await page.waitForFunction(() => document.getElementById("bouquet-stage")?.getAttribute("aria-busy") === "false"
+      && document.querySelector(".bq-composition"));
     await open("emptyOptions");
     assert.match(await page.$eval("#bouquet-options", (element) => element.textContent), /belum tersedia/);
     await open("quoteError");
@@ -162,7 +164,7 @@ async function verify()
     await ready();
     await click('[data-bq-action="save"]');
     await page.waitForSelector("#home-dialog[open]");
-    assert.match(await page.$eval("#home-dialog-body", (element) => element.textContent), /Rp120.000/);
+    assert.match(await page.$eval("#home-dialog-body", (element) => element.textContent), /Rp 120.000/);
     await page.keyboard.press("Escape");
     await click('[data-bq-action="save"]');
     await page.waitForSelector("#home-dialog[open]");

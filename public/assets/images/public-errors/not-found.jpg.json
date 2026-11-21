@@ -1,0 +1,9 @@
+{
+  "encoding": "JPEG quality 90; no crop, resize or composition changes during encoding",
+  "origin": "User-supplied 404 artwork; digits removed and pot centered using built-in image_gen.",
+  "source": "exec-700aacf6-9b43-4a8c-8050-ee47651030fc.png",
+  "promptRecord": "docs/design/assets/public-error-illustrations.json",
+  "height": 1084,
+  "width": 1451,
+  "sourceSha256": "35F43FDF3CFCC6FE143488AAA9945B401B605D57E41D142275B58EF3654A8FE4"
+}

@@ -1,0 +1,115 @@
+name: Backend foundation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  foundation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.3']
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          # Disposable CI fixture credentials. No repository/production secrets are used.
+          MYSQL_ROOT_PASSWORD: ci-root-fixture-only
+          MYSQL_ROOT_HOST: '%'
+          MYSQL_DATABASE: rylva_green_ci_test
+          MYSQL_USER: rylva_ci
+          MYSQL_PASSWORD: ci-app-fixture-only
+        ports:
+          - 13367:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: '13367'
+      DB_NAME: rylva_green_ci_test
+      DB_USER: rylva_ci
+      DB_PASSWORD: ci-app-fixture-only
+      RYLVA_TEST_ENV_FILE: ${{ github.workspace }}/storage/cache/ci/.env.testing
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_mysql, mbstring, json, curl
+          coverage: none
+          tools: composer:v2
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: tools/testing/package-lock.json
+      - name: Install test MySQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes mysql-client
+      - name: Configure triggers on the disposable MySQL service
+        env:
+          MYSQL_PWD: ci-root-fixture-only
+        run: mysql --host=127.0.0.1 --port=13367 --user=root --execute='SET GLOBAL log_bin_trust_function_creators = 1'
+      - name: Install locked PHP dependencies
+        run: |
+          composer validate --no-check-publish
+          composer install --no-interaction --prefer-dist --no-progress
+          composer check-platform-reqs
+          composer dump-autoload --optimize --strict-psr --no-scripts
+      - name: Install locked browser tools
+        run: npm ci --prefix tools/testing --ignore-scripts --no-fund
+      - name: Check workflow and PHP syntax
+        run: |
+          node tools/testing/verify-ci-workflow.cjs
+          php tools/testing/php-lint.php
+      - name: Audit locked dependencies
+        run: |
+          composer audit --locked
+          npm audit --prefix tools/testing --audit-level=moderate
+      - name: Initialize and recheck isolated database
+        run: |
+          php tools/testing/prepare-ci.php
+          php bin/database.php migrate "$RYLVA_TEST_ENV_FILE"
+          php bin/database.php migrate "$RYLVA_TEST_ENV_FILE"
+      - name: Run foundation and adapter tests
+        run: |
+          php tests/foundation.php
+          php tests/integration/provider-contracts.php
+          php tests/integration/deployment-readiness.php
+          php tools/maintenance/audit-testing-schema.php
+      - name: Run real HTTP and browser regression
+        run: |
+          export RYLVA_PHP_BIN="$(command -v php)"
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          node tools/testing/verify-foundation-http.cjs
+      - name: Preserve test evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: backend-php-${{ matrix.php }}
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            storage/reports/ci/*.json
+            storage/reports/foundation/php-tests.json
+            storage/reports/foundation/http-tests.json
+            storage/reports/foundation/provider-contracts.json
+            storage/reports/foundation/deployment-readiness.json
+            storage/reports/foundation/screenshots/*.png

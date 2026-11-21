@@ -189,8 +189,8 @@ window.RylvaCartPreviewData = (() =>
     {
       firstItem.price = scenario === "promoExpired" ? 350000 : 300000;
       firstItem.changeMessage = scenario === "promoExpired"
-        ? "Promo berakhir. Harga terbaru Rp350.000 per pot."
-        : "Harga berubah dari Rp289.000 menjadi Rp300.000 per pot.";
+        ? "Promo berakhir. Harga terbaru Rp 350.000 per pot."
+        : "Harga berubah dari Rp 289.000 menjadi Rp 300.000 per pot.";
     }
     return items;
   }

@@ -128,7 +128,7 @@ async function verifyProductDetail()
     await page.click('#product-shipping button');
     await page.waitForFunction(() => !document.querySelector("#product-shipping button").disabled);
     assert.equal(await page.$$eval(".product-shipping-services li", (items) => items.length), 3);
-    assert.match(await page.$eval("#product-shipping-result", (element) => element.textContent), /Rp15.000/);
+    assert.match(await page.$eval("#product-shipping-result", (element) => element.textContent), /Rp 15.000/);
     assert.match(await page.$eval("#product-shipping-result", (element) => element.textContent), /Tarif contoh/);
     assert.equal(await page.$eval("#product-postcode", (element) => element.value), "40123");
     checks.push("Postcode-only guest rate estimates, validation, pending state and retained input without address creation");

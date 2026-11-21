@@ -1,0 +1,121 @@
+/* Hallmark: RylVa Green / inherited catalog and information surfaces. */
+/* Critique: clear collection scope and readable cooperation contact, no new visual world. */
+.collection-banner-inner
+{
+  width: min(calc(100% - var(--home-gutter) * 2), var(--home-width));
+}
+
+.collections-main :focus-visible
+{
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.collections-main .policy-banner :focus-visible
+{
+  outline-color: var(--color-accent-ink);
+}
+
+.collections-main .collection-results-heading
+{
+  min-width: 0;
+  font-size: 24px;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.collections-page .storefront-page-link[aria-current="page"],
+.partner-page .storefront-page-link[aria-current="page"]
+{
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+.collections-page [hidden]
+{
+  display: none;
+}
+
+.partner-content
+{
+  padding-top: var(--space-xl);
+}
+
+.partner-main
+{
+  padding-bottom: var(--space-2xl);
+}
+
+.partner-main h1,
+.partner-main h2,
+.partner-main h3
+{
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.partner-preparation
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.partner-preparation > div
+{
+  min-width: 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-rule);
+}
+
+.partner-preparation dt
+{
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+}
+
+.partner-preparation dd
+{
+  margin: 0;
+}
+
+.partner-contact
+{
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background: var(--home-offer-light);
+}
+
+.partner-contact a:not(.info-tombolutama)
+{
+  color: var(--primary);
+  overflow-wrap: anywhere;
+}
+
+.partner-main .shipping-help
+{
+  margin-top: var(--space-xl);
+  text-align: center;
+}
+
+.partner-main .shipping-help p
+{
+  max-width: 65ch;
+  margin-inline: auto;
+}
+
+.partner-main .shipping-help-actions
+{
+  justify-content: center;
+}
+
+@media (max-width: 600px)
+{
+  .partner-preparation
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

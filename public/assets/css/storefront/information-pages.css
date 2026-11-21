@@ -399,6 +399,12 @@
   line-height: 1.8;
 }
 
+.info-isijawaban a
+{
+  color: inherit;
+  text-underline-offset: 4px;
+}
+
 .info-kartubantuan
 {
   margin-top: 32px;
@@ -490,6 +496,20 @@
   display: grid;
   place-items: center;
   min-height: 400px;
+}
+
+.information-contact .info-herokontak,
+.information-faq .info-headerfaq,
+.information-cancellation-refund .refund-banner,
+.information-terms .policy-banner,
+.information-shipping .policy-banner,
+.information-privacy-policy .policy-banner,
+.information-ordering .policy-banner,
+.information-about .policy-banner,
+.information-care .policy-banner,
+.information-collections .policy-banner,
+.information-partners .policy-banner
+{
   background: linear-gradient(rgba(15, 42, 29, 0.7), rgba(47, 79, 47, 0.8)), #fff;
   color: #fff;
 }

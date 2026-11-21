@@ -1,0 +1,7 @@
+# Staging review gateway. All existing files are served through the authenticated PHP entry point.
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine On
+RewriteRule ^\.well-known/acme-challenge/ - [L]
+RewriteRule ^index\.php$ - [L]
+RewriteRule ^ index.php [QSA,L]

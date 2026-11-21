@@ -20,6 +20,7 @@ RewriteRule ^(admin-dashboard|orders-queue|products|categories-attributes|produc
 RewriteRule ^(audit-log|financial-report|payment-reconciliation|sensitive-approvals|staff-accounts|system-parameters)\.html$ pages/superadmin/$1.html [R=302,L,NE]
 
 # Rute aplikasi PHP tetap melalui front controller
+RewriteRule ^pages/public/(error-403|error-404|error-500|maintenance)\.html$ index.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]

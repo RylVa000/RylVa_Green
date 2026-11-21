@@ -1,5 +1,15 @@
 # Dokumentasi RylVa Green
 
+[Rencana pengerjaan setelah audit UI](implementation-schedule.md) memuat jadwal awal M0–M8, ketergantungan, sasaran antara, dan rincian pekan pertama mulai 23 November 2026.
+
+Kemajuan awal 21 November: [audit dan fondasi backend M0](coverage/backend-foundation-m0.md), [runbook PHP/MySQL lokal](runbook/local-foundation.md), serta [keputusan teknis ADR-002](adr/ADR-002-local-backend-foundation.md). Fondasi lokal terverifikasi; CI/adapter/staging dan integrasi bisnis tetap dicatat terpisah.
+
+Lanjutan hari yang sama: [CI, kontrak/mock adapter dan Apache staging lokal](coverage/m0-ci-adapters-staging.md), [kontrak integrasi](architecture/integration-contracts.md), [runbook CI/staging](runbook/ci-and-staging.md), serta [backlog implementasi](implementation-backlog.md). Workflow remote dan hosting online tetap memerlukan bukti eksekusi tersendiri.
+
+Hosting PHP 8.2: [hasil kompatibilitas yang dijalankan](coverage/php82-hosting-compatibility.md), [pemasangan langsung melalui FTP](runbook/hosting-installation-plan.md), dan [routing query Dza Software](runbook/dza-nginx-routing.md). Akses folder privat dan entry point PHP sudah berjalan; mode query mengatasi larangan perubahan Nginx. Installer/probe sementara tidak digunakan.
+
+[Staging online siap ditinjau](coverage/hosting-staging-online.md): 54 dokumen dan 19 kelompok pemeriksaan HTTP/render/navigasi lulus pada domain HTTPS. Database hosting dan modul transaksi tetap belum diintegrasikan.
+
 | Direktori | Isi |
 | --- | --- |
 | `specifications/` | Spesifikasi bisnis dan batas v2.6 |

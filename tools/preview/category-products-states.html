@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kategori Produk, pengembangan</title>
+  <link rel="stylesheet" href="/assets/css/shared/tokens.css">
+</head>
+<body>
+  <main>
+    <h1>State Kategori Produk</h1>
+    <p>Skenario pengembangan lokal memakai adapter Katalog existing dan tidak mengubah keranjang tersimpan.</p>
+    <label for="category-state-choice">Kategori</label>
+    <select id="category-state-choice"></select>
+    <ul id="category-states"></ul>
+    <p><a href="/pages/public/category.html">Direktori kategori</a></p>
+    <p><a href="/pages/public/category.html?category=unknown">Kategori tidak ditemukan</a></p>
+  </main>
+  <script src="/assets/js/storefront/storefront-shell.js"></script>
+  <script src="/assets/js/storefront/storefront-product-preview-data.js"></script>
+  <script src="/assets/js/storefront/cart-preview-data.js"></script>
+  <script src="/assets/js/storefront/cart-preview-repository.js"></script>
+  <script src="/assets/js/storefront/homepage-preview-repository.js"></script>
+  <script>
+    "use strict";
+
+    const chooser = document.getElementById("category-state-choice");
+    window.RylvaStorefrontCategories.categories.forEach((category) =>
+    {
+      const option = document.createElement("option");
+      option.value = category.id;
+      option.textContent = category.name;
+      chooser.append(option);
+    });
+
+    function renderStates()
+    {
+      const list = document.getElementById("category-states");
+      list.replaceChildren();
+      window.RylvaHomepagePreviewRepository.scenarios.forEach((state) =>
+      {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = window.RylvaStorefrontCategories.url(chooser.value) + "&preview=catalog&state=" + state;
+        link.textContent = state;
+        item.append(link);
+        list.append(item);
+      });
+    }
+
+    chooser.addEventListener("change", renderStates);
+    renderStates();
+  </script>
+</body>
+</html>

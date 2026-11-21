@@ -110,3 +110,14 @@ Revisi gestur: tests/e2e/browser/verify-catalog-gestures.cjs lulus 9 kelompok
 menggunakan input touch/mouse CDP Chrome; regresi Katalog 19 kelompok juga lulus.
 Bukti: storage/reports/catalog-gestures. Bukan pengujian perangkat iOS fisik.
 [Laporan gestur](../design/reviews/catalog-sheet-gesture-review-2026-11-16.md).
+
+## Ekstensi kategori, 19 November 2026
+
+Kategori Produk memakai ulang filter, kartu, sheet dan adapter Katalog pada
+`/pages/public/category.html?category=plants`. Pembatasan satu kategori hanya
+berlaku ketika konteks halaman kategori tersedia; Katalog umum mempertahankan
+filter multi-kategori. Tautan kategori di navigasi kini membuka route kategori,
+sedangkan filter checkbox di Katalog tetap bekerja seperti sebelumnya.
+Regresi `verify-catalog.cjs` kembali lulus 19 kelompok setelah selector navigasi
+disesuaikan dengan tautan native dan tujuan baru yang disepakati.
+[Cakupan Kategori Produk](category-products-ui.md).

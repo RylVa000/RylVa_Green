@@ -12,7 +12,7 @@ window.RylvaProductCard = (() =>
   function money(value)
   {
     return Number.isSafeInteger(value) && value >= 0
-      ? "Rp" + new Intl.NumberFormat("id-ID").format(value) : "Harga belum tersedia";
+      ? window.RylvaStorefrontFormat.money(value) : "Harga belum tersedia";
   }
 
   function canBuy(product)

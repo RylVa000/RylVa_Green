@@ -14,6 +14,11 @@ berisi komentar tidak dihitung sebagai implementasi halaman yang berfungsi.
 | --- | --- | --- |
 | Beranda | Home page rev `466:386` dipilih pengguna; sumber diperiksa ulang 15 November | `public/pages/public/home.html` tersedia sebagai pratinjau interaktif. [Cakupan Homepage](homepage-ui.md); backend PHP masih scaffold. |
 | Katalog | Katalog `267:297`; diperiksa ulang 16 November | `public/pages/public/catalog.html` tersedia sebagai frontend interaktif dengan kartu homepage. [Cakupan Katalog](catalog-ui.md); backend PHP masih scaffold. |
+| Kategori Produk | Tidak ditemukan frame khusus; pengembangan Katalog disepakati pengguna pada 19 November | `public/pages/public/category.html?category=plants` tersedia untuk sembilan kategori existing, dengan judul/deskripsi, pilihan aktif, filter yang mempertahankan kategori dan Detail/Back. Tanpa query tampil direktori kategori. [Cakupan UI](category-products-ui.md); koleksi selain tanaman masih kosong dalam fixture dan layanan kategori produksi belum terhubung. |
+| Koleksi Baru / Promo Spesial | Ekstensi Katalog diminta pengguna pada 20 November | `/pages/public/new-collection.html` dan `/pages/public/special-offers.html` memakai renderer/filter/shopping existing dengan scope daftar tetap. [Cakupan UI](commercial-pages-ui.md); metadata koleksi dan periode promo produksi belum terhubung. |
+| Mitra Florist | Pengguna memilih informasi kerja sama dan kontak pada 20 November | `/pages/public/florist-partners.html` tersedia dengan informasi, email/Kontak dan FAQ; bukan direktori atau formulir pengajuan. [Cakupan UI](commercial-pages-ui.md). |
+| Daftar Panduan Perawatan | Ekstensi publik diminta pengguna pada 19 November; mengikuti sistem storefront existing | `public/pages/public/care-guides.html` tersedia dengan enam ringkasan bersumber, pencarian nama/topik, filter jenis, urutan, disclosure inline dan produk terkait. [Cakupan UI](care-guides-ui.md); CMS belum tersedia. |
+| Detail Panduan Perawatan | Ekstensi daftar diminta pengguna pada 20 November | `public/pages/public/care-guide-detail.html?guide=monstera` tersedia untuk enam tanaman, ringkasan bergambar, daftar isi otomatis, artikel bersumber, produk terkait dan pemulihan konteks daftar. [Cakupan UI](care-guide-detail-ui.md); penerbitan/CMS produksi belum terhubung. |
 | Detail produk | Detail Produk `282:838`; diperiksa ulang 17 November | `public/pages/public/product-detail.html` tersedia dengan galeri, perawatan, jumlah, keranjang dan handoff Checkout. [Cakupan Detail Produk](product-detail-ui.md); backend PHP masih scaffold. |
 | Keranjang | Keranjang `335:251` dan Keranjang kosong `360:372` | Pembaruan 14 November: `public/pages/customer/cart.html` tersedia sebagai pratinjau interaktif. [Cakupan dan batas integrasi](cart-ui.md); template/backend PHP masih scaffold. |
 | Checkout | Checkout `375:108`; alamat, produk, kurir, pembayaran dan ringkasan | Pembaruan 14 November: `public/pages/customer/checkout.html` tersedia sebagai frontend pratinjau interaktif. [Cakupan UI Checkout](checkout-ui.md); template/backend PHP masih scaffold. |
@@ -25,6 +30,12 @@ berisi komentar tidak dihitung sebagai implementasi halaman yang berfungsi.
 | Kontak | Contact Page `137:311`; pengguna juga memberikan `Contact.html` pada 17 November | `public/pages/public/contact.html` mengintegrasikan isi file pengguna dengan shell aktif. Formulir membuka draf email; tidak ada endpoint pengiriman formulir. [Cakupan halaman informasi](information-pages-ui.md). |
 | Pusat Bantuan / FAQ | Pengguna memberikan `FAQ.html`, `tanaman.css` dan `tanaman.js` pada 17 November | `public/pages/public/faq.html` tersedia dengan delapan pertanyaan asli, accordion keyboard dan tautan Kontak. |
 | Kebijakan Privasi | Pengguna memberikan `PrivacyPolicy.html` pada 17 November | `public/pages/public/privacy-policy.html` mempertahankan delapan bagian dan tanggal dokumen sumber. Ini impor konten; bukan bukti layanan yang disebut telah terintegrasi. |
+| Informasi Pengiriman | Belum ditemukan frame pelanggan khusus; mengikuti spesifikasi halaman dan sistem storefront | `public/pages/public/shipping-information.html` tersedia sebagai panduan publik, dengan daftar isi responsif, layanan/jadwal, kendala, FAQ dan tautan ke alur produk/pesanan. [Cakupan UI](shipping-information-ui.md); tarif dan provider produksi belum terhubung. |
+| Pembatalan & Refund | Mengikuti spesifikasi halaman dan sistem informasi existing; belum ditemukan frame khusus | `public/pages/public/cancellation-refund.html` tersedia sebagai panduan publik dengan ketentuan, nominal/ongkir, metode/waktu, status, komplain, FAQ dan tautan kontekstual pesanan. [Cakupan UI](cancellation-refund-ui.md); eksekusi finansial produksi belum terhubung. |
+| Syarat dan Ketentuan | Belum ditemukan frame/naskah legal khusus; mengikuti baseline dan sistem informasi existing | `public/pages/public/terms-conditions.html` tersedia sebagai artikel publik dengan daftar isi otomatis dan tautan dari footer, registrasi serta Checkout. [Cakupan UI](terms-conditions-ui.md); naskah legal produksi, versi/tanggal berlaku dan pencatatan persetujuan server belum diterbitkan. |
+| Cara Memesan | Tidak ditemukan frame khusus; mengikuti baseline alur belanja dan halaman informasi existing | `public/pages/public/how-to-order.html` tersedia dengan enam langkah, jalur Buket Kustom, daftar isi otomatis, empat FAQ dan tautan kontekstual ke alur belanja. [Cakupan UI](how-to-order-ui.md); transaksi produksi belum terhubung. |
+| Tentang Kami | Tidak ditemukan frame/naskah khusus; mengikuti PRODUCT.md dan sistem informasi existing | `public/pages/public/about.html` tersedia sebagai profil publik dengan lima bagian, enam tautan koleksi, daftar isi responsif dan jalur bantuan. [Cakupan UI](about-ui.md); sejarah/tim serta bukti operasional tidak dibuat-buat. |
+| Error publik: 403, 404, 500 dan maintenance/503 | Empat ilustrasi botanical diberikan pengguna pada 19 November; pot 404 dipusatkan dan angka pada gambar dihapus sesuai koreksi | `public/pages/public/error-403.html`, `error-404.html`, `error-500.html` dan `maintenance.html` tersedia dengan penjelasan serta tautan pemulihan. [Cakupan UI](public-errors-ui.md); status HTTP dan fallback dokumen publik terhubung pada server preview. Binding handler produksi belum tersedia. |
 | Pilih alamat | Pilih Alamat Page `409:107`; berupa dialog/panel | Buku alamat/form tersedia pada Akun; pemilih, formulir dan peta juga tersedia pada pratinjau Checkout. Persistence produksi belum terhubung. |
 | Tambah alamat | Tambah Alamat #1 `435:105` untuk lokasi dan #2 `435:130` untuk formulir | `templates/customer/profile_addresses.php` masih scaffold. |
 | Kustomisasi buket | Section Costum Buket `454:1347`, frame 1920w light `454:1201` | [Spesifikasi tertulis Buket Kustom](../design/surfaces/bouquet-customizer-surface.md) tersedia, termasuk keputusan preview otomatis. UI pelanggan kini tersedia pada `/pages/customer/bouquet-customizer.html`, dengan preview otomatis, editor, keranjang dan checkout contoh. Lihat [cakupan implementasi](bouquet-customizer-ui.md). Backend tetap scaffold; Konva arsip bukan route aktif. |
@@ -52,16 +63,19 @@ render Figma; interaksi prototipe tidak diuji sebagai aplikasi.
   guest sementara serta akun permanen. [Cakupan UI](wishlist-ui.md) mencatat
   store hati bersama, penggabungan akun pratinjau, state dan pemeriksaannya;
   layanan persistence akun produksi belum terhubung.
-- Halaman kategori khusus. Katalog sudah mempunyai filter kategori, namun
-  belum ditemukan frame halaman kategori dengan nama/deskripsi kategorinya.
-  Kebutuhan ini dapat dipenuhi sebagai varian katalog, tanpa layout baru total.
+- Frame Figma halaman kategori khusus belum ditemukan. UI kategori kini tersedia
+  sebagai pengembangan Katalog dengan nama/deskripsi kategori, pilihan aktif,
+  filter kontekstual dan direktori native. Tidak membuat ulang layout belanja.
 - Frame Figma Pusat Bantuan/FAQ dan Kebijakan Privasi belum ditemukan, tetapi
-  HTML pengguna kini diintegrasikan ke route aktif. Cara Memesan, Informasi
-  Pengiriman dan Pembatalan & Refund sebagai halaman lengkap masih belum tersedia.
-- Tentang Kami serta Syarat & Ketentuan.
-- Kondisi 403/404/500/maintenance khusus storefront. Frame kondisi sistem yang
-  ditemukan pada halaman `04` memakai area staf; keberadaannya tidak dianggap
-  otomatis memenuhi desain pelanggan.
+  HTML pengguna kini diintegrasikan ke route aktif. Informasi Pengiriman kini
+  tersedia berdasarkan spesifikasi halaman; Pembatalan & Refund juga tersedia
+  sebagai panduan publik. Cara Memesan kini tersedia dengan enam langkah sesuai alur belanja dan FAQ pemulihan.
+- Tentang Kami kini tersedia sebagai profil publik berbasis PRODUCT.md dan pola
+  informasi existing. Syarat dan Ketentuan juga tersedia sebagai UI pratinjau berbasis
+  baseline; frame Figma tersendiri dan naskah legal produksi belum diterbitkan.
+- Frame Figma kondisi 403/404/500/maintenance pelanggan belum ditemukan.
+  UI storefront kini tersedia berdasarkan empat ilustrasi pengguna; frame kondisi
+  sistem pada halaman `04` tetap merupakan area staf yang terpisah.
 
 Nama menu/footer yang menyebut tujuan di atas tidak dihitung sebagai desain
 halamannya. Form komplain dan pelacakan sudah ada pada kode Detail Pesanan;
@@ -103,9 +117,13 @@ dalam modul. Bukti pemeriksaan struktur Figma tersimpan lokal di
 
 ## Arah pekerjaan berikutnya
 
-- **Jika menambah desain yang belum ada:** Cara Memesan, Informasi Pengiriman,
-  Pembatalan & Refund, Tentang Kami serta Syarat & Ketentuan. Kontak, FAQ dan
-  Kebijakan Privasi kini memakai file pengguna pada route aktif;
+- **Jika menambah halaman yang belum ada:** tentukan prioritas dari kebutuhan
+  produk berikutnya; empat kondisi error publik kini sudah tersedia sebagai UI.
+  Tentang Kami kini tersedia sebagai profil publik; materi sejarah/tim nyata dapat
+  melengkapinya jika diberikan.
+  Informasi Pengiriman, Pembatalan & Refund serta Syarat dan Ketentuan sudah tersedia
+  sebagai UI pratinjau; frame Figma tersendiri belum ditemukan pada inventaris.
+  Kontak, FAQ dan Kebijakan Privasi kini memakai file pengguna pada route aktif;
   frame Wishlist tersendiri bila diperlukan.
   Frontend Wishlist sudah tersedia sebagai pratinjau. Profil & Pengaturan
   Akun sekarang tersedia di kode sebagai pratinjau; frame lengkap Figma masih
@@ -114,9 +132,9 @@ dalam modul. Bukti pemeriksaan struktur Figma tersimpan lokal di
   state dan responsif halaman belanja. Kustomisasi buket dan konsistensi shell
   Kontak sudah diimplementasikan sebagai frontend pratinjau.
 - **Jika melanjutkan implementasi:** halaman belanja utama, autentikasi,
-  Wishlist dan tiga halaman informasi sudah tersedia sebagai UI pratinjau.
-  Berikutnya halaman pendukung yang masih kosong atau integrasi backend sesuai
-  prioritas baseline.
+  Kategori Produk, Wishlist, delapan halaman informasi serta empat kondisi error publik sudah
+  tersedia sebagai UI pratinjau. Berikutnya integrasi backend dan binding handler
+  error produksi sesuai prioritas baseline.
 - **Jika menyelaraskan Figma dan kode:** tiga halaman transaksi serta Akun pelanggan yang
   sudah diimplementasikan belum tercatat sebagai frame pelanggan pada Figma
   yang diperiksa. Menambahkannya ke Figma merupakan pekerjaan tersendiri;

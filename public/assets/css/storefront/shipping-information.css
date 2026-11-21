@@ -1,0 +1,631 @@
+/* Hallmark: RylVa Green / established botanical system / Read. */
+/* Critique: clear reading hierarchy, compact navigation, native disclosure and no decorative media. */
+/* Scope: article density follows the approved shipping specification; shared shell remains unchanged. */
+.shipping-main
+{
+  padding-top: 32px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.shipping-main ::selection
+{
+  background: var(--color-selection);
+  color: var(--primary-dark);
+}
+
+.shipping-main :focus-visible
+{
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.shipping-main :is(.info-tombolutama, .info-tombolsekunder):active
+{
+  background: var(--primary-dark);
+  color: var(--color-accent-ink);
+}
+
+.shipping-container
+{
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.shipping-breadcrumb
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.shipping-breadcrumb a,
+.shipping-text-link,
+.shipping-return
+{
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.shipping-main a:hover
+{
+  text-decoration-thickness: 2px;
+}
+
+.shipping-intro h1
+{
+  min-width: 0;
+  font-size: 36px;
+  line-height: 1.25;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.shipping-intro p
+{
+  max-width: 68ch;
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.shipping-handling
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-block: 32px 48px;
+  padding: 28px 32px;
+  border-radius: 20px;
+  background: var(--home-offer-light);
+}
+
+.shipping-handling-type + .shipping-handling-type
+{
+  padding-left: 32px;
+  border-left: 1px solid var(--neutral-soft);
+}
+
+.shipping-handling h2
+{
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.shipping-handling p
+{
+  margin-block: 8px 12px;
+}
+
+.shipping-handling-label
+{
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.shipping-reading-layout
+{
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  align-items: start;
+  gap: 64px;
+}
+
+.shipping-sidebar
+{
+  position: sticky;
+  top: calc(var(--storefront-sticky-height, 176px) + 24px);
+  max-height: calc(100dvh - var(--storefront-sticky-height, 176px) - 48px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-soft) var(--background);
+}
+
+.shipping-toc summary
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  font-size: 16px;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.shipping-toc summary::-webkit-details-marker
+{
+  display: none;
+}
+
+.shipping-toc summary::after
+{
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.shipping-toc[open] summary::after
+{
+  transform: rotate(225deg);
+}
+
+.shipping-toc nav
+{
+  display: grid;
+  gap: 4px;
+  padding-top: 12px;
+}
+
+.shipping-toc a
+{
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--primary);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.shipping-toc a:hover
+{
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.shipping-toc a[aria-current="location"]
+{
+  background: var(--home-offer-light);
+}
+
+.shipping-toc a[aria-current="location"]
+{
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.shipping-return
+{
+  margin-top: 16px;
+  padding-inline: 12px;
+  font-size: 14px;
+}
+
+.shipping-return[hidden]
+{
+  display: none;
+}
+
+.shipping-article
+{
+  min-width: 0;
+  max-width: 76ch;
+}
+
+.shipping-section
+{
+  padding-block: 40px;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.shipping-section:first-child
+{
+  padding-top: 0;
+}
+
+.shipping-article h2
+{
+  margin-bottom: 16px;
+  font-size: 28px;
+  line-height: 1.35;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.shipping-article h3
+{
+  margin-block: 28px 12px;
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.shipping-article p + p
+{
+  margin-top: 16px;
+}
+
+.shipping-article :is(.info-tombolutama, .info-tombolsekunder)
+{
+  margin-top: 24px;
+}
+
+.shipping-note
+{
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.shipping-service-table
+{
+  width: 100%;
+  margin-block: 24px 16px;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+}
+
+.shipping-service-table :is(th, td)
+{
+  padding: 16px;
+  border-bottom: 1px solid var(--color-rule);
+  vertical-align: top;
+}
+
+.shipping-service-table thead
+{
+  background: var(--home-offer-light);
+}
+
+.shipping-service-table th
+{
+  font-weight: 600;
+}
+
+.shipping-service-table th:first-child
+{
+  padding-left: 12px;
+}
+
+.shipping-steps,
+.shipping-list
+{
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
+  padding-left: 24px;
+}
+
+.shipping-slots
+{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-block: 24px;
+  padding: 20px 0;
+  border-block: 1px solid var(--color-rule);
+  list-style: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.shipping-slots li
+{
+  display: grid;
+  gap: 4px;
+}
+
+.shipping-slots span
+{
+  font-size: 14px;
+}
+
+.shipping-process
+{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin-block: 24px;
+  padding-left: 24px;
+  font-size: 14px;
+}
+
+.shipping-process li::marker
+{
+  color: var(--primary);
+}
+
+.shipping-statuses
+{
+  display: grid;
+  margin-block: 16px 0;
+  font-size: 14px;
+}
+
+.shipping-statuses > div
+{
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 24px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.shipping-statuses dt
+{
+  font-weight: 600;
+}
+
+.shipping-statuses dd
+{
+  margin: 0;
+}
+
+.shipping-callout
+{
+  margin-block: 24px;
+  padding: 24px;
+  border: 1px dashed var(--primary-light);
+  border-radius: 12px;
+}
+
+.shipping-callout h4
+{
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.shipping-faq .info-itemfaq
+{
+  margin-top: 12px;
+}
+
+.shipping-faq .info-tombolfaq
+{
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+.shipping-faq .info-isijawaban
+{
+  margin-inline: 20px;
+  padding-top: 16px;
+  font-size: 15px;
+}
+
+.shipping-faq .info-isijawaban a
+{
+  color: inherit;
+  text-underline-offset: 4px;
+}
+
+.shipping-help
+{
+  padding-top: 40px;
+}
+
+.shipping-help-actions
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 24px;
+}
+
+.shipping-help-actions :is(.info-tombolutama, .info-tombolsekunder)
+{
+  margin: 0;
+}
+
+@media (max-width: 1024px)
+{
+  .shipping-reading-layout
+  {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .shipping-service-table :is(th, td)
+  {
+    padding-inline: 12px;
+  }
+}
+
+@media (max-width: 760px)
+{
+  .shipping-reading-layout
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .shipping-sidebar
+  {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-block: 12px;
+    border-block: 1px solid var(--color-rule);
+  }
+
+  .shipping-article
+  {
+    max-width: none;
+  }
+
+  .shipping-handling
+  {
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .shipping-handling-type + .shipping-handling-type
+  {
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 600px)
+{
+  .shipping-main
+  {
+    padding-top: 20px;
+  }
+
+  .shipping-container
+  {
+    width: calc(100% - 32px);
+  }
+
+  .shipping-breadcrumb
+  {
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .shipping-intro h1
+  {
+    font-size: 28px;
+  }
+
+  .shipping-intro p
+  {
+    font-size: 16px;
+  }
+
+  .shipping-handling
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    margin-block: 24px 32px;
+  }
+
+  .shipping-handling-type + .shipping-handling-type
+  {
+    padding-top: 20px;
+    padding-left: 0;
+    border-top: 1px solid var(--neutral-soft);
+    border-left: 0;
+  }
+
+  .shipping-section
+  {
+    padding-block: 32px;
+  }
+
+  .shipping-article h2
+  {
+    font-size: 22px;
+  }
+
+  .shipping-article h3
+  {
+    font-size: 18px;
+  }
+
+  .shipping-service-table thead
+  {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .shipping-service-table,
+  .shipping-service-table tbody,
+  .shipping-service-table tr,
+  .shipping-service-table :is(th, td)
+  {
+    display: block;
+  }
+
+  .shipping-service-table tr
+  {
+    padding-block: 16px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .shipping-service-table :is(th, td)
+  {
+    padding: 4px 0;
+    border: 0;
+  }
+
+  .shipping-service-table th:first-child
+  {
+    padding-left: 0;
+    font-size: 18px;
+  }
+
+  .shipping-service-table td::before
+  {
+    display: block;
+    color: var(--color-muted);
+    font-size: 12px;
+    content: attr(data-label);
+  }
+
+  .shipping-slots
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .shipping-slots li
+  {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+  }
+
+  .shipping-process
+  {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shipping-statuses > div
+  {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .shipping-callout
+  {
+    padding: 20px;
+  }
+
+  .shipping-faq .info-tombolfaq
+  {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .shipping-faq .info-isijawaban
+  {
+    margin-inline: 16px;
+  }
+
+  .shipping-article :is(.info-tombolutama, .info-tombolsekunder)
+  {
+    width: 100%;
+  }
+
+  .shipping-help-actions
+  {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shipping-help-actions .shipping-text-link
+  {
+    justify-content: center;
+  }
+}

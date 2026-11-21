@@ -158,7 +158,9 @@
     }
     const aliases = { indoor: "plants", outdoor: "plants", bouquet: "bouquet", terrarium: "terrarium",
       pots: "pots", nutrients: "media", media: "media", seeds: "seeds" };
-    const target = new URL("/pages/public/catalog.html", location.origin);
+    const categoryId = aliases[category];
+    const destination = categoryId ? window.RylvaStorefrontCategories.url(categoryId) : null;
+    const target = new URL(destination || "/pages/public/catalog.html", location.origin);
     if (aliases[category])
     {
       target.searchParams.set("category", aliases[category]);
@@ -338,9 +340,9 @@
     {
       const offers =
       {
-        kit: ["Urban Jungle Starter Kit", "Rp245.000", "promo-kit.webp"],
+        kit: ["Urban Jungle Starter Kit", "Rp 245.000", "promo-kit.webp"],
         bouquet: ["Buket Musim Gugur Eksklusif", "Harga mengikuti pilihan buket", "promo-bouquet.webp"],
-        terrarium: ["Terrarium Art DIY Capsule", "Rp180.000", "promo-terrarium.webp"]
+        terrarium: ["Terrarium Art DIY Capsule", "Rp 180.000", "promo-terrarium.webp"]
       };
       const offer = offers[control.dataset.homeOffer];
       openDialog(offer[0], `

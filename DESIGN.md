@@ -72,6 +72,8 @@ Delapan nilai ini adalah token warna brand yang mengikat. Gunakan nama token, bu
 ### Component & State Colors
 
 - CTA utama: `primary` dengan teks putih; hover menggunakan `primary-dark`. Status aktif memakai `primary-dark` atau penanda lain yang jelas.
+- Header dan footer storefront memakai sage aksesibel `#4D725C`, dengan teks putih; token brand `primary-light` tetap tersedia untuk aksen dan aset yang sudah ada. Label kecil pada shell harus memenuhi kontras 4,5:1.
+- Tautan Promo Spesial pada navbar menggunakan putih. Badge HOT memakai latar `#B33232` dengan teks putih; warna teks tautan dan latar badge memakai token terpisah.
 - Badge tersedia: permukaan `primary` dengan teks putih. Warna `primary-light` dapat digunakan sebagai batas atau aksen, bukan sebagai pengganti teks status.
 - Badge diskon: merah pada referensi (`#FF0000`) dibatasi untuk promosi. Teks putih pada merah ini hanya sekitar 4:1, sehingga gunakan teks besar minimal 18pt normal atau 14pt tebal dan uji kontras; untuk teks kecil pilih kombinasi yang memenuhi 4,5:1 setelah ditetapkan. Harga lama dicoret dan tetap dapat dibaca.
 - Untuk pesan semantik, gunakan pola dan kombinasi warna terbatas pada bagian Feedback & Empty State. Warna diskon tetap khusus promosi.
@@ -86,6 +88,8 @@ Tidak ada gradien brand yang ditetapkan. Foto hero boleh memakai overlay bila di
 ### Font Family
 
 Gunakan `font-family: "Poppins", Arial, sans-serif` untuk seluruh teks, termasuk form, tombol, label, harga, navigasi, dan footer. Poppins adalah satu-satunya keluarga desain; Arial dan `sans-serif` hanya fallback saat font gagal dimuat. Sediakan Poppins dengan dukungan karakter Bahasa Indonesia dan bobot 400, 500, 600, serta 700. Hindari Inter dan Plus Jakarta Sans.
+
+Font disajikan sebagai WOFF2 dengan peta karakter lengkap dari sumber TTF yang sama. Format harga storefront adalah `Rp 128.999`; satuan seperti `/ pot` dapat turun ke baris berikutnya di kartu sempit. Gunakan caption 12px untuk satuan, status stok, dan badge HOT; harga panjang tetap minimal 14px pada kartu ponsel.
 
 ### Hierarchy
 

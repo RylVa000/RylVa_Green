@@ -22,7 +22,10 @@
   let opener = null;
   let quoteVersion = 0;
   let shippingQuoteContext = null;
-  let shippingPostcode = repository.workbench && repository.scenario === "shippingRates" ? "40526" : "";
+  const savedShipping = history.state?.productShipping;
+  const savedPostcode = savedShipping?.slug === slug && typeof savedShipping.postcode === "string"
+    ? savedShipping.postcode.slice(0, 5) : "";
+  let shippingPostcode = repository.workbench && repository.scenario === "shippingRates" ? "40526" : savedPostcode;
   let actionBarObserver = null;
   const hoverZoomMedia = matchMedia("(min-width: 768px) and (hover: hover) and (pointer: fine)");
   const header = window.RylvaHomepageHeader.init(
@@ -115,6 +118,7 @@
             <img
               id="product-main-image"
               src="${escapeHtml(product.gallery[0].src)}"
+              ${product.gallery[0].srcSet ? `srcset="${escapeHtml(product.gallery[0].srcSet)}" sizes="(max-width: 600px) calc(100vw - 48px), 540px"` : ""}
               alt="${escapeHtml(product.gallery[0].alt)}"
               width="540"
               height="580"
@@ -136,7 +140,14 @@
               aria-pressed="${index === 0}"
               aria-label="Lihat foto ${index + 1}: ${escapeHtml(image.alt)}"
             >
-              <img src="${escapeHtml(image.src)}" alt="" width="76" height="88">
+              <img
+                src="${escapeHtml(image.thumbnail || image.src)}"
+                alt=""
+                width="76"
+                height="88"
+                loading="lazy"
+                decoding="async"
+              >
               <span class="product-thumbnail-fallback" aria-hidden="true">${index + 1}</span>
             </button>`).join("")}
         </div>
@@ -218,7 +229,10 @@
               <input id="product-postcode" name="postcode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="Kode pos (5 angka)" value="${escapeHtml(shippingPostcode)}" aria-describedby="product-shipping-help product-shipping-result">
               <button class="product-button product-button-secondary" type="submit">Cek Ongkir</button>
             </div>
-            <p class="product-field-hint" id="product-shipping-help">Cek dengan kode pos tujuan, tanpa perlu masuk.</p>
+            <p class="product-field-hint" id="product-shipping-help">
+              Cek dengan kode pos tujuan, tanpa perlu masuk.
+              <a href="/pages/public/shipping-information.html#ongkir" data-product-shipping-guide>Informasi Pengiriman</a>
+            </p>
             <div class="product-shipping-result" id="product-shipping-result" aria-live="polite" hidden></div>
           </form>
           <div class="product-purchase" aria-label="Pembelian">
@@ -329,6 +343,7 @@
     frame.querySelector(".product-photo-button").hidden = false;
     const mainImage = document.getElementById("product-main-image");
     mainImage.style.transformOrigin = "50% 50%";
+    mainImage.srcset = image.srcSet || "";
     mainImage.src = image.src;
     mainImage.alt = image.alt;
     document.querySelectorAll("[data-product-image]").forEach((button) =>
@@ -671,8 +686,42 @@
   });
 
   document.getElementById("product-back").href = navigation.returnUrl().pathname + navigation.returnUrl().search;
+  const collectionLabels =
+  {
+    "/pages/public/new-collection.html": "Koleksi Baru",
+    "/pages/public/special-offers.html": "Promo Spesial"
+  };
+  if (collectionLabels[navigation.returnUrl().pathname])
+  {
+    document.getElementById("product-back").textContent = collectionLabels[navigation.returnUrl().pathname];
+  }
+  if (["/pages/public/care-guides.html", "/pages/public/care-guide-detail.html"].includes(navigation.returnUrl().pathname))
+  {
+    document.getElementById("product-back").textContent = "Panduan Perawatan";
+  }
+  if (navigation.returnUrl().pathname === "/pages/public/category.html")
+  {
+    const category = window.RylvaStorefrontCategories.find(navigation.returnUrl().searchParams.get("category"));
+    document.getElementById("product-back").textContent = category?.name || "Kategori";
+  }
   document.addEventListener("click", (event) =>
   {
+    if (event.target.closest("[data-product-shipping-guide]"))
+    {
+      try
+      {
+        history.replaceState(
+        {
+          ...history.state,
+          productShipping: { slug, postcode: shippingPostcode }
+        }, "", location.href);
+      }
+      catch
+      {
+        // The guide link remains usable when history state cannot be updated.
+      }
+      return;
+    }
     const back = event.target.closest("[data-product-back]");
     if (back && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey)
     {

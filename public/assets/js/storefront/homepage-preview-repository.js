@@ -5,7 +5,7 @@ window.RylvaHomepagePreviewRepository = (() =>
 {
   const query = new URLSearchParams(location.search);
   const development = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
-  const workbench = development && ["home", "catalog"].includes(query.get("preview"));
+  const workbench = development && ["home", "catalog", "collections"].includes(query.get("preview"));
   const scenarios = ["normal", "loading", "empty", "loadError", "partial", "offline", "timeout",
     "maintenance", "unavailable", "invalidPrice", "brokenImage", "longContent", "addError", "conflict", "rateLimited"];
   const scenario = workbench && scenarios.includes(query.get("state")) ? query.get("state") : "normal";

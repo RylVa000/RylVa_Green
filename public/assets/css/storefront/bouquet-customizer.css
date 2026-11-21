@@ -234,6 +234,11 @@
   cursor: pointer;
 }
 
+.bq-options-body .bq-text-button
+{
+  color: var(--primary-dark);
+}
+
 .bq-stage
 {
   position: relative;

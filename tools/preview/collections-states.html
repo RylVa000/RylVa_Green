@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Workbench Koleksi Baru dan Promo Spesial</title>
+  </head>
+  <body>
+    <h1>State Daftar Koleksi Baru dan Promo Spesial</h1>
+    <p>Workbench pengembangan lokal. Seluruh skenario memakai adapter pratinjau, tanpa layanan publikasi.</p>
+    <ul id="scenarios"></ul>
+    <script>
+      "use strict";
+
+      const scenarios = ["normal", "loading", "empty", "loadError", "offline", "timeout",
+        "maintenance", "partial", "invalidPrice", "brokenImage", "longContent", "unavailable", "addError", "conflict", "rateLimited", "ended"];
+      const list = document.getElementById("scenarios");
+      ["new-collection", "special-offers"].forEach((route) =>
+      {
+        scenarios.forEach((state) =>
+        {
+          const item = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = "/pages/public/" + route + ".html?preview=collections&state=" + state;
+          link.textContent = route + ": " + state;
+          item.append(link);
+          list.append(item);
+        });
+      });
+    </script>
+  </body>
+</html>

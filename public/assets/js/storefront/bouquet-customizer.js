@@ -29,6 +29,7 @@
   let selectionObserver = null;
   let imageFailed = repository.scenario === "brokenImage";
   let compositionLoading = true;
+  let imageRecoveryPending = false;
   let compositionImages = null;
   const spriteUrl = "/assets/images/bouquet/components.png";
   const header = window.RylvaHomepageHeader.init(
@@ -847,7 +848,20 @@
     }
     else if (actionName === "retry-image")
     {
-      await loadCompositionImages(true);
+      if (imageRecoveryPending)
+      {
+        return;
+      }
+      imageRecoveryPending = true;
+      document.querySelector('[data-bq-action="retry-image"]')?.setAttribute("disabled", "");
+      try
+      {
+        await loadCompositionImages(true);
+      }
+      finally
+      {
+        imageRecoveryPending = false;
+      }
     }
     else if (actionName === "quote")
     {
@@ -925,7 +939,7 @@
     {
       return;
     }
-    if (link && (link.hash && link.pathname === location.pathname || link.target === "_blank"))
+    if (link && (link.hash && new URL(link.href, location.href).pathname === location.pathname || link.target === "_blank"))
     {
       return;
     }
@@ -960,11 +974,16 @@
 
   async function loadCompositionImages(recover = false)
   {
+    if (recover && compositionLoading && compositionImages)
+    {
+      await compositionImages;
+    }
     if (compositionImages && !recover)
     {
       return compositionImages;
     }
     compositionLoading = true;
+    document.querySelector('[data-bq-action="retry-image"]')?.setAttribute("disabled", "");
     const urls = [spriteUrl, ...window.RylvaBouquetComposition.assetUrls];
     compositionImages = Promise.all(urls.map((url) => new Promise((resolve, reject) =>
     {

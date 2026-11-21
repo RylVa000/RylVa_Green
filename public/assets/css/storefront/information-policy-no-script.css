@@ -1,0 +1,22 @@
+/* Hallmark: RylVa Green policy reader / Read. */
+/* Critique: native anchors clear the measured responsive header when JS cannot measure it. */
+:root
+{
+  scroll-padding-top: calc(var(--storefront-header-height) + var(--space-lg));
+}
+
+@media (max-width: 850px)
+{
+  :root
+  {
+    --storefront-header-height: 260px;
+  }
+}
+
+@media (max-width: 600px)
+{
+  :root
+  {
+    --storefront-header-height: 210px;
+  }
+}

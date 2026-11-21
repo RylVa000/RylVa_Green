@@ -1,5 +1,19 @@
 "use strict";
 
+// Display only: amounts stay integer rupiah in adapters and calculations.
+window.RylvaStorefrontFormat = (() =>
+{
+  const integerFormatter = new Intl.NumberFormat("id-ID");
+
+  function money(value, unavailable = "Belum tersedia")
+  {
+    return Number.isSafeInteger(value) && value >= 0
+      ? "Rp " + integerFormatter.format(value) : unavailable;
+  }
+
+  return { money };
+})();
+
 // Shared only by synthetic customer adapters; production authorization remains server-side.
 window.RylvaCustomerPreviewAccess =
 {
@@ -15,6 +29,64 @@ window.RylvaCustomerPreviewAccess =
     }
   }
 };
+
+// Category IDs and aliases follow the existing public catalog contract.
+window.RylvaStorefrontCategories = (() =>
+{
+  const imageRoot = "/assets/images/homepage/";
+  const categories =
+  [
+    { id: "plants", name: "Tanaman Hias", image: "category-indoor.webp",
+      description: "Jelajahi pilihan tanaman hias dan periksa informasi produk sebelum memilih untuk rumah atau taman Anda." },
+    { id: "bouquet", name: "Buket Bunga", image: "category-bouquet.webp",
+      description: "Temukan pilihan buket bunga dan periksa rincian rangkaian serta ketersediaannya." },
+    { id: "custom", name: "Buket Kustom", image: "category-bouquet.webp",
+      description: "Jelajahi pilihan buket kustom atau buka peracik untuk menyusun rangkaian Anda." },
+    { id: "pots", name: "Pot & Vas", image: "category-pots.webp",
+      description: "Jelajahi pot dan vas, lalu sesuaikan pilihan dengan ukuran serta kebutuhan Anda." },
+    { id: "media", name: "Media Tanam & Pupuk", image: "category-media.webp",
+      description: "Temukan media tanam dan pupuk. Periksa jenis, satuan, serta petunjuk penggunaan pada rincian produk." },
+    { id: "tools", name: "Alat Berkebun", image: "category-seeds.webp",
+      description: "Jelajahi alat berkebun dan periksa fungsi serta rincian produk sebelum memilih." },
+    { id: "seeds", name: "Benih & Bibit", image: "category-seeds.webp",
+      description: "Temukan pilihan benih dan bibit untuk kebutuhan menanam Anda." },
+    { id: "accessories", name: "Aksesori Berkebun", image: "category-pots.webp",
+      description: "Jelajahi aksesori pelengkap untuk tanaman dan kegiatan berkebun Anda." },
+    { id: "terrarium", name: "Terrarium & Moss", image: "category-terrarium.webp",
+      description: "Jelajahi pilihan terrarium dan moss, lalu periksa isi serta informasi produknya." }
+  ].map((category) => ({ ...category, image: imageRoot + category.image }));
+  const aliases = { plants: ["indoor", "outdoor"], media: ["media", "nutrients"] };
+  const navigation =
+  {
+    "Tanaman Hias": "plants",
+    "Buket Bunga": "bouquet",
+    "Pot & Vas": "pots",
+    "Media Tanam": "media",
+    "Pupuk & Nutrisi": "media",
+    "Alat Berkebun": "tools",
+    "Perlengkapan Berkebun": "tools",
+    "Benih & Bibit": "seeds",
+    "Aksesori Berkebun": "accessories",
+    "Terrarium & Moss": "terrarium"
+  };
+
+  function find(id)
+  {
+    return categories.find((category) => category.id === id) || null;
+  }
+
+  function url(id)
+  {
+    return find(id) ? "/pages/public/category.html?category=" + encodeURIComponent(id) : null;
+  }
+
+  function matches(product, id)
+  {
+    return (aliases[id] || [id]).some((value) => product.categories?.includes(value));
+  }
+
+  return { categories, navigation, find, url, matches };
+})();
 
 // Preview navigation stays explicit until the related storefront routes exist.
 (() =>
@@ -137,11 +209,36 @@ window.RylvaCustomerPreviewAccess =
     "FAQ": "/pages/public/faq.html",
     "Hubungi Kami": "/pages/public/contact.html",
     "Kontak": "/pages/public/contact.html",
-    "Kebijakan Privasi": "/pages/public/privacy-policy.html"
+    "Informasi Pengiriman": "/pages/public/shipping-information.html",
+    "Pembatalan & Refund": "/pages/public/cancellation-refund.html",
+    "Syarat & Ketentuan": "/pages/public/terms-conditions.html",
+    "Kebijakan Privasi": "/pages/public/privacy-policy.html",
+    "Cara Memesan": "/pages/public/how-to-order.html",
+    "Tentang Kami": "/pages/public/about.html",
+    "Panduan Perawatan": "/pages/public/care-guides.html",
+    "Koleksi Baru": "/pages/public/new-collection.html",
+    "Promo Spesial": "/pages/public/special-offers.html",
+    "Mitra Florist": "/pages/public/florist-partners.html"
   };
+  const exploreLinks = document.querySelector('[aria-labelledby="footer-explore"] .storefront-footer-links');
+  if (exploreLinks && !exploreLinks.querySelector('[data-storefront-page="Panduan Perawatan"]'))
+  {
+    const link = document.createElement("a");
+    link.className = "storefront-page-link";
+    link.dataset.storefrontPage = "Panduan Perawatan";
+    link.href = informationPages["Panduan Perawatan"];
+    link.textContent = "Panduan Perawatan";
+    if (location.pathname === new URL(link.href, location.href).pathname)
+    {
+      link.setAttribute("aria-current", "page");
+    }
+    exploreLinks.append(link);
+  }
   document.querySelectorAll("button[data-storefront-page]").forEach((button) =>
   {
-    const destination = informationPages[button.dataset.storefrontPage];
+    const categoryId = window.RylvaStorefrontCategories.navigation[button.dataset.storefrontPage];
+    const destination = categoryId ? window.RylvaStorefrontCategories.url(categoryId)
+      : informationPages[button.dataset.storefrontPage];
     if (!destination)
     {
       return;
@@ -153,6 +250,20 @@ window.RylvaCustomerPreviewAccess =
     });
     link.classList.add("storefront-page-link");
     link.href = destination;
+    if (["Koleksi Baru", "Promo Spesial", "Mitra Florist"].includes(button.dataset.storefrontPage))
+    {
+      link.dataset.storefrontDestination = button.dataset.storefrontPage;
+      link.removeAttribute("data-storefront-page");
+      if (location.pathname === destination)
+      {
+        link.setAttribute("aria-current", "page");
+      }
+    }
+    if (categoryId)
+    {
+      link.removeAttribute("data-storefront-page");
+      link.dataset.storefrontCategory = categoryId;
+    }
     link.replaceChildren(...button.childNodes);
     button.replaceWith(link);
   });

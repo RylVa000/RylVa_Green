@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Informasi Pengiriman — pemeriksaan tampilan</title>
+    <link rel="stylesheet" href="/assets/css/shared/tokens.css">
+    <style>
+      body
+      {
+        margin: 24px;
+        background: var(--background);
+        color: var(--primary-dark);
+        font-family: var(--font-body);
+      }
+
+      h1
+      {
+        font-size: 24px;
+      }
+
+      .preview-controls
+      {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-block: 24px;
+      }
+
+      label
+      {
+        display: grid;
+        gap: 8px;
+      }
+
+      select,
+      a
+      {
+        min-height: 44px;
+        color: var(--primary-dark);
+        font: inherit;
+      }
+
+      select
+      {
+        padding: 8px;
+        border: 1px solid var(--primary);
+        border-radius: 8px;
+        background: var(--card-background);
+      }
+
+      :focus-visible
+      {
+        outline: 3px solid var(--primary);
+        outline-offset: 4px;
+      }
+
+      .preview-viewport
+      {
+        overflow: auto;
+      }
+
+      iframe
+      {
+        display: block;
+        width: 1440px;
+        height: 1000px;
+        border: 1px solid var(--neutral-soft);
+        background: var(--background);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Informasi Pengiriman — pemeriksaan tampilan</h1>
+    <p>
+      Kontrol pengembangan hanya mengubah tampilan frame di bawah. Halaman menggunakan artikel statis;
+      tidak ada permintaan kurir, tarif, atau kegagalan layanan yang disimulasikan.
+    </p>
+    <div class="preview-controls">
+      <label for="preview-state">
+        Kondisi
+        <select id="preview-state">
+          <option value="ready">Normal</option>
+          <option value="anchor">Tautan langsung ke jadwal</option>
+          <option value="unknown">Fragmen tidak dikenal</option>
+          <option value="faq">FAQ terbuka</option>
+          <option value="no-script">JavaScript dinonaktifkan</option>
+          <option value="long-text">Teks panjang</option>
+        </select>
+      </label>
+      <label for="preview-width">
+        Lebar layar
+        <select id="preview-width">
+          <option value="1440">Desktop 1440 px</option>
+          <option value="1024">Tablet 1024 px</option>
+          <option value="768">Tablet 768 px</option>
+          <option value="390">Mobile 390 px</option>
+          <option value="320">Mobile 320 px</option>
+        </select>
+      </label>
+    </div>
+    <p><a href="/pages/public/shipping-information.html">Buka halaman Informasi Pengiriman</a></p>
+    <div class="preview-viewport">
+      <iframe id="preview-frame" title="Pratinjau Informasi Pengiriman"></iframe>
+    </div>
+    <script>
+      "use strict";
+
+      (() =>
+      {
+        const frame = document.getElementById("preview-frame");
+        const state = document.getElementById("preview-state");
+        const width = document.getElementById("preview-width");
+
+        function refresh()
+        {
+          if (state.value === "no-script")
+          {
+            frame.setAttribute("sandbox", "allow-same-origin");
+          }
+          else
+          {
+            frame.removeAttribute("sandbox");
+          }
+          frame.style.width = width.value + "px";
+          const fragment = state.value === "anchor" ? "#jadwal"
+            : state.value === "unknown" ? "#bagian-lama" : "";
+          frame.src = "/pages/public/shipping-information.html" + fragment;
+        }
+
+        frame.addEventListener("load", () =>
+        {
+          const preview = frame.contentDocument;
+          if (state.value === "faq")
+          {
+            const question = preview.getElementById("pengiriman-faq-guest");
+            question.open = true;
+            question.scrollIntoView();
+          }
+          if (state.value === "long-text")
+          {
+            preview.getElementById("layanan").textContent =
+              "Pilihan layanan pengiriman untuk pesanan dengan kebutuhan penanganan yang berbeda";
+            preview.querySelector(".info-tombolfaq span").textContent =
+              "Bagaimana cara memeriksa estimasi ongkir tanpa menambah atau mengubah alamat utama pada akun?";
+          }
+        });
+        state.addEventListener("change", refresh);
+        width.addEventListener("change", refresh);
+        refresh();
+      })();
+    </script>
+  </body>
+</html>

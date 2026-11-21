@@ -7,12 +7,13 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Pusat Bantuan | RylVa Green</title>
     <link rel="icon" href="../../assets/images/storefront/favicon.svg" type="image/svg+xml">
-    <link rel="preload" href="../../assets/fonts/poppins/poppins-600.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="../../assets/css/storefront/storefront-shell.css">
     <link rel="stylesheet" href="../../assets/css/storefront/customer-status.css">
     <link rel="stylesheet" href="../../assets/css/storefront/homepage.css">
     <link rel="stylesheet" href="../../assets/css/storefront/homepage-header.css">
     <link rel="stylesheet" href="../../assets/css/storefront/information-pages.css">
+    <link rel="stylesheet" href="../../assets/css/storefront/shipping-information.css">
+    <link rel="stylesheet" href="../../assets/css/storefront/information-policy.css">
     <script src="../../assets/js/storefront/storefront-shell.js" defer></script>
     <script src="../../assets/js/storefront/storefront-product-preview-data.js" defer></script>
     <script src="../../assets/js/storefront/cart-preview-data.js" defer></script>
@@ -146,12 +147,19 @@
     </section>
     <p class="home-preview-note" id="storefront-preview-note" role="status" hidden></p>
     <main class="information-main" id="information-main" tabindex="-1" lang="id">
-      <section class="info-headerfaq">
-        <h1>Frequently Asked Questions</h1>
-        <p class="info-subjudulatas">
-          Temukan jawaban cepat seputar perawatan tanaman, pemesanan buket, dan layanan pengiriman kami.
-        </p>
-      </section>
+      <header class="info-headerfaq policy-banner">
+        <div class="shipping-container">
+          <nav class="shipping-breadcrumb" aria-label="Breadcrumb">
+            <a href="/pages/public/home.html">Beranda</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Pertanyaan Umum</span>
+          </nav>
+          <h1>Pertanyaan Umum</h1>
+          <p class="info-subjudulatas">
+            Temukan jawaban cepat seputar perawatan tanaman, pemesanan buket, dan layanan pengiriman kami.
+          </p>
+        </div>
+      </header>
       <div class="info-wadahutama">
         <section class="info-kartufaq" aria-label="Pertanyaan yang sering diajukan">
           <details class="info-itemfaq" name="rylva-faq" id="faq-1">
@@ -217,10 +225,10 @@
             </summary>
             <div class="info-isijawaban">
               <p>
-                Untuk menjaga kesegaran buket bunga dan keutuhan daun, pengiriman dalam kota (area Bandung dan
-                sekitarnya) wajib menggunakan kurir instan atau <i>same-day</i>. Untuk pengiriman tanaman ke
-                luar kota, kami menggunakan kotak kardus berventilasi tebal dengan pengaman <i>bubble wrap</i>
-                pada pot agar media tanam tidak tumpah.
+                Layanan mengikuti jenis penanganan pada produk. Produk Mudah Layu hanya menggunakan instan
+                atau <i>same-day</i>, dengan tanggal dan slot kirim wajib. Produk Tahan Lama dapat memakai
+                reguler sesuai ketersediaan. Pilihan layanan dan biaya akhir diperiksa di Checkout sesuai
+                alamat serta isi pesanan. <a href="/pages/public/shipping-information.html">Baca Informasi Pengiriman</a>.
               </p>
             </div>
           </details>
@@ -257,10 +265,13 @@
             </summary>
             <div class="info-isijawaban">
               <p>
-                Kami memberikan garansi penggantian 100% atau pengembalian dana (<i>refund</i>) jika tanaman
-                mati atau pot pecah akibat kendala pengiriman. Anda hanya perlu mengirimkan video buka paket
-                (<i>unboxing</i>) maksimal 1x24 jam setelah paket diterima ke WhatsApp layanan pelanggan kami di
-                (+62) 896 5611 0902.
+                Ajukan komplain dari Detail Pesanan maksimal 24 jam sejak status Terkirim. Sertakan kategori,
+                deskripsi, dan 2–5 foto; foto tidak diwajibkan untuk kategori Tidak diterima. Video buka paket
+                bukan syarat wajib. Penyelesaian berupa penggantian, pengiriman ulang, atau <i>refund</i>
+                ditinjau berdasarkan penyebab dan bukti, sehingga tidak otomatis disetujui.
+                <a href="/pages/public/shipping-information.html#kendala">Baca ketentuan kendala pengiriman</a>
+                dan periksa barang sebelum mengonfirmasi penerimaan.
+                <a href="/pages/public/cancellation-refund.html">Baca Pembatalan &amp; Refund</a>.
               </p>
             </div>
           </details>

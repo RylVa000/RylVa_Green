@@ -1,0 +1,23 @@
+{
+  "provider": "Dza Software",
+  "domain": "rylvagreen.biz.id",
+  "stagingUrl": "https://rylvagreen.biz.id",
+  "ftp": {
+    "protocol": "sftp",
+    "host": "",
+    "port": 22,
+    "username": "",
+    "password": ""
+  },
+  "paths": {
+    "publicRoot": "",
+    "privateRoot": ""
+  },
+  "database": {
+    "host": "",
+    "port": 3306,
+    "name": "",
+    "username": "",
+    "password": ""
+  }
+}

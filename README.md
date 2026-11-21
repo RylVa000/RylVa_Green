@@ -2,6 +2,10 @@
 
 Proyek PHP Native untuk florist, tanaman hias dan gardening goods. Desain staf/Admin/SuperAdmin tersedia sebagai prototipe HTML interaktif. Backend dan layanan produksi masih memerlukan implementasi/integrasi; keberadaan folder PHP bukan bukti fitur sudah berfungsi.
 
+Fondasi PHP lokal sudah berjalan: bootstrap/routing, respons error dan koneksi database uji tersedia. Lihat [hasil M0](docs/coverage/backend-foundation-m0.md) dan [runbook lokal](docs/runbook/local-foundation.md); alur transaksi UI masih memakai data contoh.
+
+Lanjutan M0 menyediakan [workflow CI, kontrak/mock adapter dan staging Apache lokal](docs/coverage/m0-ci-adapters-staging.md). [Staging online](docs/coverage/hosting-staging-online.md) sudah dipasang di domain HTTPS dan lulus pemeriksaan UI/routing query. [Runbook CI/staging](docs/runbook/ci-and-staging.md) menjelaskan pengujian dan deployment; [backlog](docs/implementation-backlog.md) memisahkan pekerjaan berikutnya. Eksekusi CI GitHub, database online dan integrasi bisnis belum diklaim selesai.
+
 ## Mulai dari sini
 
 - [Spesifikasi proyek v2.6](docs/specifications/spesifikasi-proyek-v2.6.md): acuan aturan bisnis.
@@ -61,6 +65,19 @@ Folder tersembunyi `.agents`, `.hallmark`, `.impeccable` dan `.taste-skill` dipe
 - Isi lokal `.impeccable/` dikecualikan, kecuali `config.json` dan `design.json` bila tersedia, karena keduanya dapat menjadi konfigurasi/otoritas bersama.
 - `storage/reports/`, log pengembangan, `vendor/` dan `node_modules/` tidak ikut commit. Berkas lokal tetap tersedia saat bekerja.
 - `.git/` merupakan metadata Git lokal dan otomatis bukan bagian isi repository yang diunggah; jangan dipindahkan ke folder skill.
+
+## Aplikasi PHP lokal
+
+Dengan instalasi Laragon yang diperiksa pada mesin ini:
+
+```powershell
+$phpPath = 'C:/laragon/bin/php/php-8.3.36-Win32-vs16-x64/php.exe'
+pwsh -NoProfile -File tools/testing/start-foundation-mysql.ps1
+& $phpPath bin/database.php migrate
+pwsh -NoProfile -File tools/preview/serve-php.ps1
+```
+
+Buka [aplikasi PHP](http://127.0.0.1:4186/) dan [diagnosis koneksi lokal](http://127.0.0.1:4186/health). MySQL uji memakai port 13367 dan konfigurasi privat `config/.env.testing`; database/config pengguna tidak ditimpa. Migrasi dapat diulang tanpa mengimpor dua kali. Rincian jalur alternatif, tes dan pemulihan ada pada [runbook](docs/runbook/local-foundation.md).
 
 ## Pratinjau UI statis
 
@@ -162,7 +179,7 @@ $env:RYLVA_ACCOUNT_URL = 'http://127.0.0.1:4178/pages/customer/account.html'
 node tests/e2e/browser/verify-account.cjs
 ```
 
-Pemeriksaan browser membutuhkan server pratinjau, Chrome serta `puppeteer-core`. Penghubung `tools/testing/browser-runtime.cjs` menggunakan runtime lokal yang sudah tersedia di `.hallmark/runtime`; lokasi alternatif dapat diberikan melalui `RYLVA_PUPPETEER_PATH`. Jalankan skrip uji dari root proyek.
+Pemeriksaan browser membutuhkan server pratinjau, Edge/Chrome serta `puppeteer-core`. Penghubung `tools/testing/browser-runtime.cjs` menggunakan runtime lokal yang sudah tersedia di `.hallmark/runtime`; lokasi alternatif dapat diberikan melalui `RYLVA_PUPPETEER_PATH`. Jalankan skrip uji dari root proyek.
 
 Hasil pemeriksaan disimpan di `storage/reports/` atau direktori bukti alat yang sudah digunakan sebelumnya. Skrip di `tools/archive/` merupakan arsip pengerjaan; jangan menjalankannya untuk membangun ulang aplikasi saat ini.
 

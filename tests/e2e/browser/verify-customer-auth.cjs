@@ -35,9 +35,14 @@ async function verifyCustomerAuth()
   async function open(view, state = "normal", width = 1440, height = 1024)
   {
     await page.setViewport({ width, height });
+    await page.evaluate((origin) =>
+    {
+      if (location.origin === origin)
+      {
+        sessionStorage.removeItem("rylva-customer-auth-preview-v1");
+      }
+    }, new URL(BASE_URL).origin);
     await page.goto(BASE_URL + "/pages/auth/" + routes[view] + ".html?preview=auth&state=" + state);
-    await page.evaluate(() => sessionStorage.removeItem("rylva-customer-auth-preview-v1"));
-    await page.reload();
     await page.waitForFunction(() => document.getElementById("customer-auth-root").getAttribute("aria-busy") === "false");
     await page.evaluate(() => document.fonts.ready);
   }

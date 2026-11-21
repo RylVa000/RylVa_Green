@@ -588,6 +588,13 @@ body.checkout-page .checkout-quantity input[type="text"]
   margin-top: var(--space-xs);
 }
 
+.checkout-policy-link
+{
+  color: var(--primary);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
 .checkout-page .checkout-consent
 {
   margin: var(--space-md) 0;

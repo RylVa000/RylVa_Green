@@ -250,7 +250,18 @@ async function verifyAccount()
     await open("googleOnly", "security");
     assert.equal(await page.$('[data-account-action="password"]'), null);
     await action("recovery");
-    assert.match(await page.$eval("#account-dialog-content", (element) => element.textContent), /belum terhubung/);
+    await page.waitForFunction(() => location.pathname.endsWith("forgot-password.html")
+      && document.getElementById("customer-auth-root")?.getAttribute("aria-busy") === "false");
+    const recoveryUrl = new URL(page.url());
+    assert.match(recoveryUrl.searchParams.get("returnTo"), /account.html.*state=googleOnly/);
+    assert.ok(await page.$("#auth-form #auth-email"));
+    await page.click(".auth-back");
+    await page.waitForFunction(() => location.pathname.endsWith("customer-login.html")
+      && document.getElementById("customer-auth-root")?.getAttribute("aria-busy") === "false");
+    assert.equal(new URL(page.url()).searchParams.get("returnTo"), recoveryUrl.searchParams.get("returnTo"));
+    await page.click(".auth-brand");
+    await ready();
+    assert.equal(new URL(page.url()).searchParams.get("state"), "googleOnly");
     checks.push("Google-only menggunakan jalur pemulihan dan tidak meminta sandi lama");
 
     await open("emailExpired");
@@ -389,6 +400,7 @@ async function verifyAccount()
     assert.ok((await page.$eval("#account-back", (element) => element.getAttribute("href"))).startsWith("/pages/customer/my-orders.html"));
     await page.goto(new URL("/pages/customer/my-orders.html?status=Dikirim&q=Monstera", BASE_URL).href);
     await page.waitForFunction(() => document.getElementById("orders-root")?.getAttribute("aria-busy") === "false");
+    await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 500));
     const previousScroll = await page.evaluate(() => window.scrollY);
     await page.$eval('[data-storefront-page="Akun"]', (button) => button.click());

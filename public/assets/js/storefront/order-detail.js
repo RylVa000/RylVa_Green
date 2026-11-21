@@ -14,10 +14,6 @@
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
     timeZone: "Asia/Jakarta"
   });
-  const moneyFormatter = new Intl.NumberFormat("id-ID",
-  {
-    style: "currency", currency: "IDR", maximumFractionDigits: 0
-  });
   const deliveryDateFormatter = new Intl.DateTimeFormat("id-ID",
   {
     day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Jakarta"
@@ -84,7 +80,7 @@
 
   function money(value)
   {
-    return Number.isSafeInteger(value) && value >= 0 ? moneyFormatter.format(value) : "Belum tersedia";
+    return Number.isSafeInteger(value) && value >= 0 ? window.RylvaStorefrontFormat.money(value) : "Belum tersedia";
   }
 
   function date(value)
@@ -608,7 +604,11 @@
       <p>Gunakan akun pelanggan yang membuat pesanan. Periksa nomor pesanan saat meminta bantuan melalui kanal toko yang tersedia.</p>
       <p>Pembatalan sebelum persiapan berbeda dengan permintaan saat disiapkan atau dikirim. Permintaan belum berarti disetujui.</p>
       <p>Komplain dapat diajukan 24 jam sejak Terkirim, sebelum Anda mengonfirmasi penerimaan. Refund mengikuti keputusan dan konfirmasi penyedia.</p>
-      <p>Dalam pratinjau ini, daftar pesanan, login pelanggan dan kanal kontak toko belum terhubung. Tidak ada pesan yang dikirim ke toko.</p>
+      <p>
+        <a class="detail-policy-link" href="/pages/public/cancellation-refund.html">Baca Pembatalan &amp; Refund</a>
+        atau <a class="detail-policy-link" href="/pages/public/contact.html">Hubungi Kami</a> untuk penjelasan.
+        Tindakan pada pratinjau tidak memindahkan dana atau mengirim pengajuan ke toko.
+      </p>
     </div>
     <div class="dialog-actions">${button("Tutup Panduan", "close")}</div>`);
   }

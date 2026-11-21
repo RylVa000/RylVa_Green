@@ -1,0 +1,12 @@
+# Integrate into the EXISTING HTTPS server block for rylvagreen.biz.id.
+# Keep its certificate, document root, ACME and PHP-FPM configuration.
+# Replace the existing location / rule; do not add a duplicate location.
+location /
+{
+  try_files $uri $uri/ /index.php?$query_string;
+}
+
+# If a separate regex location handles .html, its missing-file fallback
+# must also reach /index.php, rather than returning =404 directly.
+# Keep existing dotfile restrictions and ACME exceptions.
+# Validate with nginx -t, then reload using the hosting's normal procedure.

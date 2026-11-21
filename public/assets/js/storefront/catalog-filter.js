@@ -23,23 +23,11 @@
   const dialogBody = document.getElementById("home-dialog-body");
   const toast = document.getElementById("home-toast");
   const batchSize = 6;
-  const categoryNames =
-  {
-    plants: "Tanaman Hias",
-    bouquet: "Buket Bunga",
-    custom: "Buket Kustom",
-    pots: "Pot & Vas",
-    media: "Media Tanam & Pupuk",
-    tools: "Alat Berkebun",
-    seeds: "Benih & Bibit",
-    accessories: "Aksesori Berkebun",
-    terrarium: "Terrarium & Moss"
-  };
-  const categoryAliases =
-  {
-    plants: ["indoor", "outdoor"],
-    media: ["media", "nutrients"]
-  };
+  const categoryPage = window.RylvaCategoryPage || null;
+  const collectionPage = window.RylvaCollectionPage || null;
+  const fixedCategory = categoryPage?.category?.id || null;
+  const categories = window.RylvaStorefrontCategories;
+  const categoryNames = Object.fromEntries(categories.categories.map((category) => [category.id, category.name]));
   const curatedOrder = ["peace-lily", "monstera", "snake-plant", "aglaonema", "calathea", "sirih-gading"];
   const savedProducts = new Set();
   let products = [];
@@ -75,6 +63,11 @@
     openSaved: () => selectSaved(),
     browseCollection: () =>
     {
+      if (categoryPage && !fixedCategory)
+      {
+        location.assign("/pages/public/catalog.html");
+        return;
+      }
       reset();
       resultCount.tabIndex = -1;
       resultCount.focus({ preventScroll: true });
@@ -122,7 +115,8 @@
     const limit = Number(params.get("loaded")) || Number(params.get("page")) * batchSize;
     return {
       search: (params.get("q") || "").slice(0, 100),
-      categories: [...new Set(params.getAll("category").filter((category) => Object.hasOwn(categoryNames, category)))],
+      categories: fixedCategory ? [fixedCategory]
+        : [...new Set(params.getAll("category").filter((category) => Object.hasOwn(categoryNames, category)))],
       minPrice: minimum !== null && maximum !== null && minimum > maximum ? null : minimum,
       maxPrice: minimum !== null && maximum !== null && minimum > maximum ? null : maximum,
       discount: [5, 10, 25, 50, 75].includes(Number(params.get("discount"))) ? Number(params.get("discount")) : 0,
@@ -198,7 +192,7 @@
 
   function matchesCategory(product, category)
   {
-    return (categoryAliases[category] || [category]).some((value) => product.categories?.includes(value));
+    return categories.matches(product, category);
   }
 
   function filteredProducts()
@@ -249,7 +243,8 @@
 
   function renderChips()
   {
-    const chips = selection.categories.map((category) => ({ key: "category", value: category, label: categoryNames[category] }));
+    const chips = fixedCategory ? []
+      : selection.categories.map((category) => ({ key: "category", value: category, label: categoryNames[category] }));
     if (selection.search)
     {
       chips.push({ key: "search", label: `Pencarian: ${selection.search}` });
@@ -352,6 +347,27 @@
         grid.innerHTML = content;
       }
     }
+    else if (fixedCategory && !products.some((product) => matchesCategory(product, fixedCategory)))
+    {
+      grid.innerHTML = `
+        <div class="home-empty">
+          <h2>Belum ada produk di kategori ini</h2>
+          <p>Koleksi ${escapeHtml(categoryNames[fixedCategory])} belum tersedia pada pratinjau ini. Pilih kategori lain atau jelajahi semua produk.</p>
+          <div class="category-empty-actions">
+            <a class="home-button" href="/pages/public/catalog.html">Jelajahi Semua Produk</a>
+            ${fixedCategory === "custom" ? '<a class="home-text-button" href="/pages/customer/bouquet-customizer.html">Racik Buket Kustom</a>' : ""}
+          </div>
+        </div>`;
+    }
+    else if (!products.length && collectionPage)
+    {
+      grid.innerHTML = `
+        <div class="home-empty">
+          <h2>${escapeHtml(collectionPage.emptyTitle)}</h2>
+          <p>${escapeHtml(collectionPage.emptyDescription)}</p>
+          <a class="home-button" href="/pages/public/catalog.html">Jelajahi Semua Produk</a>
+        </div>`;
+    }
     else if (!products.length)
     {
       grid.innerHTML = emptyState("Koleksi belum tersedia", "Produk akan tampil setelah koleksi tersedia. Silakan coba lagi nanti.", "retry");
@@ -408,10 +424,15 @@
 
   function readControls()
   {
+    if (categoryPage && !fixedCategory)
+    {
+      return;
+    }
     appendVersion++;
     loadingMore = false;
     selection.search = search.value.slice(0, 100);
-    selection.categories = [...form.querySelectorAll('[name="category"]:checked')].map((input) => input.value);
+    selection.categories = fixedCategory ? [fixedCategory]
+      : [...form.querySelectorAll('[name="category"]:checked')].map((input) => input.value);
     selection.discount = Number(form.querySelector('[name="discount"]:checked')?.value || 0);
     selection.available = form.elements.available.checked;
     selection.sort = sort.value;
@@ -442,7 +463,7 @@
     clearTimeout(urlTimer);
     appendVersion++;
     loadingMore = false;
-    selection = { search: "", categories: [], minPrice: null, maxPrice: null, discount: 0,
+    selection = { search: "", categories: fixedCategory ? [fixedCategory] : [], minPrice: null, maxPrice: null, discount: 0,
       available: false, saved: false, sort: "featured", limit: batchSize };
     synchronizeControls();
     if (writeHistory)
@@ -480,6 +501,11 @@
       if (products.some((product) => !Number.isSafeInteger(product.price) || product.price < 0))
       {
         feedback.textContent = "Sebagian informasi harga belum tersedia. Produk tersebut belum dapat ditambahkan ke keranjang.";
+        feedback.hidden = false;
+      }
+      else if (collectionPage && result.partial)
+      {
+        feedback.textContent = "Sebagian informasi produk belum dapat ditampilkan. Produk yang tersedia tetap dapat dijelajahi.";
         feedback.hidden = false;
       }
     }
@@ -741,6 +767,16 @@
   {
     event.preventDefault();
     event.stopImmediatePropagation();
+    if (categoryPage && !fixedCategory)
+    {
+      const target = new URL("/pages/public/catalog.html", location.origin);
+      if (search.value.trim())
+      {
+        target.searchParams.set("q", search.value.trim().slice(0, 100));
+      }
+      location.assign(target.pathname + target.search);
+      return;
+    }
     readControls();
     writeUrl();
     resultCount.scrollIntoView({ block: "center" });
@@ -817,6 +853,15 @@
     },
     onMessage: (message, isError) => showMessage(message, isError, "saved")
   });
+  if (categoryPage && !fixedCategory)
+  {
+    repository.readCart().then((snapshot) =>
+    {
+      cart = snapshot;
+      updateCartCount();
+    }).catch(() => document.querySelector(".storefront-cart-count").hidden = true);
+    return;
+  }
   synchronizeControls();
   writeUrl(true);
   load();

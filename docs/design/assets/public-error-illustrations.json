@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-19",
+  "method": "User-supplied illustrations; built-in image_gen edits only on 404",
+  "mapping": {
+    "403": "Gemini_Generated_Image_5alv7q5alv7q5alv.jpg",
+    "404": "Gemini_Generated_Image.jpeg; remove digits and center pot",
+    "500": "Gemini_Generated_Image (2).jpeg",
+    "503": "Gemini_Generated_Image (1).jpeg"
+  },
+  "edits404": [
+    "Edit this exact supplied botanical illustration. Remove ONLY the large black numerals '404' on the left/middle. Cleanly reconstruct the warm-cream, sage green, terracotta abstract background shapes and white background underneath the removed numerals. Keep the potted monstera plant, all leaves and stems, cracked terracotta pot, broken pottery pieces, outlines, grain texture, color palette, overall composition and white margins unchanged. Do not add any lettering, replacement numerals, symbols, logo or watermark. The final image must contain only the original botanical illustration and abstract background shapes, no text or numbers anywhere.",
+    "Edit this botanical illustration with one composition correction: move the entire cracked terracotta pot and its monstera plant so the pot is centered horizontally INSIDE the large organic cream/sage/terracotta background shape, rather than on the right side. Center the pot at the horizontal midpoint of that abstract shape and arrange the stems and leaves naturally above that central pot. Rebalance the existing backdrop around the centered plant. Keep the same plant, cracked pot, small broken pottery pieces at the base, thin charcoal outlines, original sage/terracotta/cream palette, subtle grain, isolated white background and generous margins. Keep all objects fully visible. Do not add new objects, lettering, numerals, logos or watermarks. No '404' digits or other text anywhere."
+  ],
+  "encoding": "404 and access-denied encoded as JPEG quality 90 without crop or resizing. Maintenance and 500 retain the original JPEG image payload without re-encoding. Every shipping JPEG includes a provenance COM marker; embedding metadata changes file bytes without changing pixels.",
+  "unused": "Earlier assistant-generated illustration set was superseded by the user's four images and is not shipped."
+}

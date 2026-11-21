@@ -1,0 +1,9 @@
+{
+  "encoding": "Original supplied JPEG image payload without re-encoding; provenance embedded as JPEG COM metadata",
+  "origin": "User-supplied 500 illustration, copied unchanged.",
+  "source": "Gemini_Generated_Image (2).jpeg",
+  "promptRecord": "docs/design/assets/public-error-illustrations.json",
+  "height": 896,
+  "width": 1200,
+  "sourceSha256": "EA82731B1E3F115D25AD1AF730B52AD83337E927228BB4648DAB9802E41E3CA6"
+}

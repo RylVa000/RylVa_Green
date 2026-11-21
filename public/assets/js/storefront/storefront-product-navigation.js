@@ -2,7 +2,10 @@
 
 window.RylvaProductNavigation = (() =>
 {
-  const allowedPaths = ["/pages/public/catalog.html", "/pages/public/home.html", "/pages/customer/wishlist.html"];
+  const allowedPaths = ["/pages/public/catalog.html", "/pages/public/category.html", "/pages/public/care-guides.html",
+    "/pages/public/care-guide-detail.html",
+    "/pages/public/new-collection.html", "/pages/public/special-offers.html",
+    "/pages/public/home.html", "/pages/customer/wishlist.html"];
   const parameters = new URLSearchParams(location.search);
 
   function safeList(value)

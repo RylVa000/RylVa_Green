@@ -42,9 +42,27 @@ window.RylvaProductDetailPreviewData = (() =>
         unit: item.unit
       }],
       gallery: monstera ? [
-        { src: imageRoot + "monstera-main.png", alt: "Monstera Deliciosa dengan daun terbelah di atas penyangga pot" },
-        { src: imageRoot + "monstera-room.png", alt: "Pilihan tampilan Monstera Deliciosa dalam pot putih" },
-        { src: imageRoot + "monstera-close.png", alt: "Tampilan lain bentuk daun Monstera Deliciosa" }
+        {
+          src: imageRoot + "monstera-main.webp",
+          thumbnail: imageRoot + "monstera-main-thumb.webp",
+          srcSet: imageRoot + "monstera-main-360.webp 360w, "
+            + imageRoot + "monstera-main.webp 594w",
+          alt: "Monstera Deliciosa dengan daun terbelah di atas penyangga pot"
+        },
+        {
+          src: imageRoot + "monstera-room.webp",
+          thumbnail: imageRoot + "monstera-room-thumb.webp",
+          srcSet: imageRoot + "monstera-room-360.webp 360w, "
+            + imageRoot + "monstera-room.webp 594w",
+          alt: "Pilihan tampilan Monstera Deliciosa dalam pot putih"
+        },
+        {
+          src: imageRoot + "monstera-close.webp",
+          thumbnail: imageRoot + "monstera-close-thumb.webp",
+          srcSet: imageRoot + "monstera-close-360.webp 360w, "
+            + imageRoot + "monstera-close.webp 594w",
+          alt: "Tampilan lain bentuk daun Monstera Deliciosa"
+        }
       ] : [{ src: image, alt: summary.name }],
       care: monstera ? [
         { icon: "water", title: "Periksa media sebelum menyiram", text: "Siram hingga merata, lalu biarkan media sedikit mengering sebelum penyiraman berikutnya. Sesuaikan dengan kondisi media dan ruangan.", source: careSource, sourceName: "UW–Madison Extension" },

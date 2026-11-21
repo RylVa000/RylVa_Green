@@ -214,3 +214,7 @@ Regresi Checkout17 kelompok/34 state lulus setelah fixture dipisahkan. Workbench
 ## Integrasi pratinjau Buket Kustom — 17 November 2026
 
 Checkout kini menyelesaikan referensi baris buket dari resolver konfigurasi sesi contoh, menampilkan ringkasan pilihan sebagai daftar, dan meneruskan referensi/revisi konfigurasi. Pesan kartu buket tidak disalin otomatis ke kartu pesanan; penjelasan ditampilkan bila rakitan memiliki pesan. Jadwal produk mudah layu dan guard pelanggan yang ada dipertahankan. Regresi17 kelompok/34 state lulus. Cakupan dan batas backend dicatat di bouquet-customizer-ui.md.
+
+## Tautan kebijakan — 19 November 2026
+
+Disclosure risiko existing menautkan Syarat dan Ketentuan serta Pembatalan & Refund yang kini tersedia. Dokumen dibuka di tab baru dengan `noopener` dan penjelasan terlihat agar isian tetap pada tab Checkout. Membaca tidak mencentang consent. Refresh quote ketika tab kembali terlihat, invalidasi persetujuan, validasi, total, submit dan pencegahan pesanan ganda tidak diubah. Lihat [cakupan Syarat dan Ketentuan](terms-conditions-ui.md) untuk naskah dan batas publikasi produksi.

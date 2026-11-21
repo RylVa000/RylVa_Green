@@ -127,7 +127,9 @@ async function verifyHomepage()
     await page.click("[data-home-collection=seeds]");
     await page.waitForFunction(() => document.getElementById("catalog-products")?.getAttribute("aria-busy") === "false");
     assert.equal(new URL(page.url()).searchParams.get("category"), "seeds");
-    assert.match(await page.$eval("#catalog-products", (element) => element.textContent), /sesuai/);
+    assert.match(await page.$eval("#catalog-products", (element) => element.textContent), /Belum ada produk di kategori ini/);
+    assert.match(await page.$eval("#catalog-products", (element) => element.textContent), /Benih.*Bibit/);
+    assert.ok(await page.$('#catalog-products a[href*="catalog.html"]'));
     await open();
     checks.push("Recommendation filters update immediately, retain URL context and reset; manual hero selection and empty category recovery work");
 

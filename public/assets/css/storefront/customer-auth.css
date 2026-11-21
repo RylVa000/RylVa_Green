@@ -243,6 +243,7 @@ html[data-auth-arrival]::after
 .auth-brand
 {
   position: absolute;
+  z-index: 1;
   top: 5.57%;
   left: max(7.36%, calc((100% - 1440px) / 2 + 106px));
   display: inline-flex;

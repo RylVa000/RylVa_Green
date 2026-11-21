@@ -24,6 +24,19 @@ async function verifyStorefrontShell()
   try
   {
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on("request", (request) =>
+    {
+      const localOrigin = new URL(PREVIEW_URL).origin;
+      if (request.url().startsWith(localOrigin) || request.url().startsWith("data:"))
+      {
+        request.continue();
+      }
+      else
+      {
+        request.abort();
+      }
+    });
     page.on("pageerror", (error) =>
     {
       browserErrors.push(error.message);
@@ -53,9 +66,9 @@ async function verifyStorefrontShell()
         headerColor: getComputedStyle(document.querySelector(".storefront-main")).backgroundColor,
         footerColor: getComputedStyle(document.querySelector(".storefront-footer")).backgroundColor,
         headingFont: getComputedStyle(document.getElementById("footer-explore")).fontFamily,
-        interLoaded: Array.from(document.fonts).some((font) =>
+        poppinsLoaded: Array.from(document.fonts).some((font) =>
         {
-          return font.family.replace(/"/g, "") === "Inter" && font.status === "loaded";
+          return font.family.replace(/"/g, "") === "Poppins" && font.status === "loaded";
         })
       };
     });
@@ -81,16 +94,16 @@ async function verifyStorefrontShell()
     near(referenceGeometry.navbarLogo.x, 102, "Original navbar logo position");
     near(referenceGeometry.navbarLogo.width, 162, "Original navbar logo width");
     near(referenceGeometry.navbarLogo.height, 162 / logoAspect("logo-navbar.svg"), "Requested Figma logo aspect");
-    assert.ok(referenceGeometry.footerHeight <= 220, "Compact desktop footer height");
+    assert.ok(referenceGeometry.footerHeight <= 240, "Compact desktop footer includes all five navigation links");
     near(referenceGeometry.footerLogo.x, 102, "Original footer logo position");
     near(referenceGeometry.footerLogo.y, 16, "Compact footer logo top");
     near(referenceGeometry.footerLogo.width, 152, "Compact footer logo width");
     assert.ok(Math.abs(referenceGeometry.footerLogo.width / referenceGeometry.footerLogo.height - logoAspect("logo-footer.svg")) < 0.02);
-    assert.equal(referenceGeometry.headerColor, "rgb(107, 144, 113)");
-    assert.equal(referenceGeometry.footerColor, "rgb(107, 144, 113)");
-    assert.equal(referenceGeometry.interLoaded, true);
-    assert.match(referenceGeometry.headingFont, /Inter/);
-    checks.push("User-requested compact geometry preserves Figma colors, logo aspect and footer heading font at 1920px");
+    assert.equal(referenceGeometry.headerColor, "rgb(77, 114, 92)");
+    assert.equal(referenceGeometry.footerColor, "rgb(77, 114, 92)");
+    assert.equal(referenceGeometry.poppinsLoaded, true);
+    assert.match(referenceGeometry.headingFont, /Poppins/);
+    checks.push("User-requested compact geometry preserves the compact shell, logo aspect, accessible sage and Poppins headings at 1920px");
 
     const assets = await page.$$eval(".storefront-shell img", (images) =>
     {
@@ -137,7 +150,7 @@ async function verifyStorefrontShell()
     await (await page.$(".storefront-footer")).screenshot(
       { path: path.join(OUTPUT_DIRECTORY, "footer-1920.png") }
     );
-    const categoryLabels = await page.$$eval(".storefront-category-links button", (buttons) =>
+    const categoryLabels = await page.$$eval(".storefront-category-links :is(button, a)", (buttons) =>
     {
       return buttons.map((button) => button.textContent.replace(/\s+/g, " ").trim());
     });
@@ -191,8 +204,14 @@ async function verifyStorefrontShell()
     assert.equal(new URL(page.url()).searchParams.get("q"), "Monstera");
     await page.goBack({ waitUntil: "networkidle0" });
     assert.equal(await page.$eval("#storefront-search-input", (element) => element.value), "Monstera");
-    await page.click('[data-storefront-page="Tanaman Hias"]');
-    assert.match(await page.$eval("#storefront-preview-note", (element) => element.textContent), /Tanaman Hias belum terhubung/);
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: "networkidle0" }),
+      page.click('.storefront-category-links a[href="/pages/public/category.html?category=plants"]')
+    ]);
+    assert.equal(new URL(page.url()).pathname, "/pages/public/category.html");
+    assert.equal(new URL(page.url()).searchParams.get("category"), "plants");
+    await page.goBack({ waitUntil: "networkidle0" });
+    await page.waitForFunction(() => document.getElementById("payment-root")?.getAttribute("aria-busy") === "false");
     assert.equal(await page.$eval(".payment-amount", (element) => element.textContent), originalAmount);
     assert.equal(page.url(), PREVIEW_URL);
     await page.$eval('[data-storefront-page="Hubungi Kami"]', (element) =>
@@ -210,7 +229,7 @@ async function verifyStorefrontShell()
     assert.equal(new URL(page.url()).pathname, "/pages/public/contact.html");
     await page.goBack({ waitUntil: "networkidle0" });
     assert.equal(await page.$eval(".payment-amount", (element) => element.textContent), originalAmount);
-    checks.push("Unavailable destinations remain explicit; Contact opens its integrated route and Back retains payment context");
+    checks.push("Category and Contact open their integrated routes; Back retains payment context");
     assert.deepEqual(browserErrors, []);
     fs.writeFileSync(path.join(OUTPUT_DIRECTORY, "verification.json"), JSON.stringify(
       { result: "PASS", referenceGeometry, assets, checks, browserErrors },

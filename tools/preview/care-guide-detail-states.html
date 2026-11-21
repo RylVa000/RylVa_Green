@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Workbench Detail Panduan Perawatan</title>
+  </head>
+  <body>
+    <h1>State Detail Panduan Perawatan</h1>
+    <p>Workbench pengembangan lokal. Seluruh skenario memakai adapter pratinjau, tanpa layanan publikasi.</p>
+    <ul id="scenarios"></ul>
+    <script>
+      "use strict";
+
+      const scenarios = ["normal", "loading", "empty", "loadError", "offline", "timeout",
+        "maintenance", "partial", "invalidData", "brokenImage", "longContent", "notFound", "missingSection"];
+      const list = document.getElementById("scenarios");
+      scenarios.forEach((state) =>
+      {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "/pages/public/care-guide-detail.html?guide=monstera&preview=care-guide-detail&state=" + state;
+        link.textContent = state;
+        item.append(link);
+        list.append(item);
+      });
+    </script>
+  </body>
+</html>

@@ -34,7 +34,6 @@
     offline: "Koneksi terputus. Sambungkan kembali lalu perbarui daftar.",
     invalid: "Informasi daftar belum dapat dipastikan. Coba muat lagi."
   };
-  const moneyFormatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 });
   const dateFormatter = new Intl.DateTimeFormat("id-ID",
   {
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Jakarta"
@@ -79,7 +78,7 @@
 
   function money(value)
   {
-    return Number.isSafeInteger(value) && value >= 0 ? moneyFormatter.format(value) : "Belum tersedia";
+    return Number.isSafeInteger(value) && value >= 0 ? window.RylvaStorefrontFormat.money(value) : "Belum tersedia";
   }
 
   function validDate(value)
@@ -532,11 +531,14 @@
         restoredUrl.searchParams.delete("restoreKey");
         window.history.replaceState({}, "", restoredUrl.pathname + restoredUrl.search);
         await document.fonts.ready;
+        const card = document.getElementById("order-" + context.orderId);
+        const link = card?.querySelector("a");
+        if (context.orderId && !link)
+        {
+          feedback.textContent = "Status pesanan diperbarui; hasil daftar disesuaikan.";
+        }
         window.requestAnimationFrame(() =>
         {
-          window.scrollTo(0, context.scrollY || 0);
-          const card = document.getElementById("order-" + context.orderId);
-          const link = card?.querySelector("a");
           if (link)
           {
             link.focus({ preventScroll: true });
@@ -544,8 +546,8 @@
           else
           {
             summary.focus({ preventScroll: true });
-            feedback.textContent = "Status pesanan diperbarui; hasil daftar disesuaikan.";
           }
+          window.scrollTo(0, context.scrollY || 0);
         });
       }
       else

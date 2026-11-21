@@ -116,7 +116,7 @@ async function verifyRefinements()
     await page.hover("#home-cart-panel-title");
     await new Promise((resolve) => setTimeout(resolve, 350));
     assert.equal(await page.$eval("#home-cart-panel", (node) => node.hidden), false);
-    assert.match(await page.$eval("#home-cart-panel-total", (node) => node.textContent), /Rp364.000/);
+    assert.match(await page.$eval("#home-cart-panel-total", (node) => node.textContent), /Rp 364.000/);
     await capture("cart-hover");
     await page.keyboard.press("Escape");
     assert.equal(await page.evaluate(() => document.activeElement.dataset.storefrontPage), "Keranjang");

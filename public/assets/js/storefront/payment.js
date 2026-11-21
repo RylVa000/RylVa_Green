@@ -8,12 +8,6 @@
   const announcement = document.getElementById("payment-announcement");
   const notice = document.getElementById("connection-notice");
   const adapter = window.RylvaPaymentAdapter || window.RylvaPaymentPreview?.createAdapter();
-  const currencyFormatter = new Intl.NumberFormat("id-ID",
-  {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0
-  });
   const dateFormatter = new Intl.DateTimeFormat("id-ID",
   {
     day: "numeric",
@@ -101,7 +95,7 @@
 
   function money(amount)
   {
-    return Number.isSafeInteger(amount) ? currencyFormatter.format(amount).replace(/\s/g, "") : "Belum tersedia";
+    return Number.isSafeInteger(amount) ? window.RylvaStorefrontFormat.money(amount) : "Belum tersedia";
   }
 
   function dateTime(value)

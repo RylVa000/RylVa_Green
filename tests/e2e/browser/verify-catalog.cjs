@@ -297,7 +297,11 @@ async function verifyCatalog()
     checks.push("Cart failure, revision conflict and rate limit expose recovery and allow a successful retry");
 
     await open();
-    await page.click('header [data-storefront-page="Tanaman Hias"]');
+    await Promise.all([
+      page.waitForNavigation({ waitUntil: "domcontentloaded" }),
+      page.click('header [data-storefront-category="plants"]')
+    ]);
+    assert.equal(new URL(page.url()).pathname, "/pages/public/category.html");
     assert.match(page.url(), /category=plants/);
     await page.goBack({ waitUntil: "domcontentloaded" });
     assert.equal(await page.$eval('[name="category"][value="plants"]', (input) => input.checked), false);

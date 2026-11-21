@@ -67,8 +67,8 @@ Ini merupakan posisi produk yang ingin diwujudkan. Jangan mengubahnya menjadi kl
 - `composer.json` menetapkan PHP `^8.2` dan autoload PSR-4 `RylvaGreen\\` ke `src/`.
 - Validasi dan otorisasi wajib ditegakkan di server. Staf wajib MFA; keamanan, privasi, sesi, dan kontrol tindakan sensitif mengikuti baseline v2.6.
 - Document root adalah `public/`; konfigurasi, rahasia, dan kode internal tidak boleh diekspos melalui document root.
-- Pada pemeriksaan init, `src/Bootstrap.php` kosong; `config/routes.php` dan template storefront masih berupa placeholder. Struktur direktori bukan bukti fitur telah berfungsi.
-- Ekstensi skema database memerlukan rekonsiliasi, migrasi, dan pengujian sesuai spesifikasi; keberadaan berkas SQL tidak membuktikan impor atau integrasi telah lulus.
+- Pada pemeriksaan init, bootstrap/routing masih kerangka. Per 21 November 2026, fondasi PHP, konfigurasi, routing, respons error dan PDO sudah berjalan secara lokal; storefront serta modul staf tetap prototipe yang belum terhubung dengan layanan bisnis. Lihat [bukti M0](docs/coverage/backend-foundation-m0.md).
+- SQL baseline telah berhasil diimpor ke database uji terisolasi, dengan migrasi awal bernomor dan pengujian ulang. Pemetaan nama kanonis tersedia pada bukti M0; sinkronisasi stok, layanan bisnis dan migrasi upgrade/produksi masih memerlukan implementasi serta tes.
 
 ## Brand Commitments
 

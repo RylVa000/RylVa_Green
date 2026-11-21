@@ -81,7 +81,7 @@ async function verifyShipping()
     await success();
     assert.deepEqual(await storageSnapshot(), before, "A guest quote writes neither account addresses nor any other browser storage");
     const prices = await page.$$eval(".product-shipping-price", (items) => items.map((item) => item.textContent));
-    assert.deepEqual(prices, ["Rp15.000", "Rp20.000", "Rp25.000"]);
+    assert.deepEqual(prices, ["Rp 15.000", "Rp 20.000", "Rp 25.000"]);
     assert.match(await page.$eval("#product-shipping-result", (element) => element.textContent), /40526, untuk 1 pot/);
     assert.match(await page.$eval(".product-shipping-preview", (element) => element.textContent), /Tarif contoh/);
     assert.match(await page.$eval(".product-shipping-note", (element) => element.textContent), /tidak menambah atau mengubah alamat/);
@@ -129,7 +129,7 @@ async function verifyShipping()
     await page.waitForFunction(() => document.getElementById("product-shipping-result").dataset.state === "partial");
     assert.equal(await page.$$eval(".product-shipping-services li", (items) => items.length), 2);
     assert.match(await page.$eval("#product-shipping-result", (element) => element.textContent), /Sebagian tarif belum tersedia/);
-    assert.doesNotMatch(await page.$eval("#product-shipping-result", (element) => element.textContent), /NaN|Rp0/);
+    assert.doesNotMatch(await page.$eval("#product-shipping-result", (element) => element.textContent), /NaN|Rp 0/);
     checks.push("Service errors/timeouts retry with retained input; empty/partial results show clear recovery without fabricated missing prices");
 
     await open("shippingLoading");
