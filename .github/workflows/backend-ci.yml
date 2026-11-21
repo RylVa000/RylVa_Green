@@ -91,6 +91,7 @@ jobs:
       - name: Run foundation and adapter tests
         run: |
           php tests/foundation.php
+          php tests/integration/schema-checksum.php
           php tests/integration/provider-contracts.php
           php tests/integration/deployment-readiness.php
           php tools/maintenance/audit-testing-schema.php

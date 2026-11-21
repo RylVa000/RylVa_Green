@@ -20,8 +20,7 @@ final class TestingSchemaMigration
     $this->assertTestingDatabase();
     $manifest = require $this->projectRoot . '/database/migrations/0001_initial_schema.php';
     $sourcePath = $this->projectRoot . '/' . $manifest['source'];
-    $checksum = hash_file('sha256', $sourcePath);
-    if ($checksum !== $manifest['checksum'])
+    if (!SchemaChecksum::matches(file_get_contents($sourcePath), $manifest))
     {
       throw new RuntimeException('The baseline source changed. Reconcile it in a new migration before applying it.');
     }
