@@ -114,3 +114,53 @@ jobs:
             storage/reports/foundation/provider-contracts.json
             storage/reports/foundation/deployment-readiness.json
             storage/reports/foundation/screenshots/*.png
+
+  schema-compatibility:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        database: ['mysql:8.4', 'mariadb:11.8.6']
+    services:
+      database:
+        image: ${{ matrix.database }}
+        env:
+          MYSQL_ROOT_PASSWORD: ci-schema-fixture-only
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - 13367:3306
+        options: >-
+          --health-cmd="mariadb-admin ping --silent || mysqladmin ping --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, mbstring, json
+          coverage: none
+          tools: composer:v2
+      - name: Install client and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes mysql-client
+          composer install --no-interaction --prefer-dist --no-progress
+      - name: Build and verify an empty hosting schema
+        env:
+          MYSQL_PWD: ci-schema-fixture-only
+        run: |
+          php tools/maintenance/build-hosting-schema.php
+          php tools/testing/verify-hosting-schema.php "${{ startsWith(matrix.database, 'mariadb:') && 'mariadb' || 'mysql' }}"
+      - name: Preserve schema evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: schema-${{ strategy.job-index }}
+          retention-days: 7
+          if-no-files-found: warn
+          path: storage/reports/staging/schema-*.json
